@@ -51,17 +51,18 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         panelRutaFabricacion = new PanelRutaFabricacion();
         panelCentroTrabajo = new PanelCentroTrabajo();
 
-        jTabbedPane1.add("   Materia Prima   ", panelMateriaPrima);
-        jTabbedPane1.add("Producto Componente", panelProductoComponente);
-        jTabbedPane1.add("Producto Terminado ", panelProductoTerminado);
-        jTabbedPane1.add("     Personal      ", panelEmpleado);
-        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
-        jTabbedPane1.add(" Orden Producción  ", panelOrdenProduccion);
-        jTabbedPane1.add("    Maquinaria     ", panelMaquina);
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
-        jTabbedPane1.add("    Estructura     ", panelEstructuraDeProducto);
-        jTabbedPane1.add("       Ruta        ", panelRutaFabricacion);
-        jTabbedPane1.add("  Centro Trabajo   ", panelCentroTrabajo);
+        jTabbedPane1.add("      Producto     ", panelProductoComponente);
+        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
+//        jTabbedPane1.add("   Materia Prima   ", panelMateriaPrima);
+//        jTabbedPane1.add("Producto Componente", panelProductoComponente);
+//        jTabbedPane1.add("Producto Terminado ", panelProductoTerminado);
+//        jTabbedPane1.add("     Personal      ", panelEmpleado);
+//        jTabbedPane1.add(" Orden Producción  ", panelOrdenProduccion);
+//        jTabbedPane1.add("    Maquinaria     ", panelMaquina);
+//        jTabbedPane1.add("    Estructura     ", panelEstructuraDeProducto);
+//        jTabbedPane1.add("       Ruta        ", panelRutaFabricacion);
+//        jTabbedPane1.add("  Centro Trabajo   ", panelCentroTrabajo);
     }
 
     /** This method is called from within the constructor to
