@@ -20,14 +20,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private static final long serialVersionUID = 0;
     private int tabVieja = 0;
     private int tabNueva;
-    private PanelMateriaPrima panelMateriaPrima;
-    private PanelProductoComponente panelProductoComponente;
-    private PanelProductoTerminado panelProductoTerminado;
-    private PanelEmpleado panelEmpleado;
-    private PanelOrdenCompra panelOrdenCompra;
-    private PanelOrdenProduccion panelOrdenProduccion;
-    private PanelMaquina panelMaquina;
     private PanelProveedor panelProveedor;
+    private PanelProductoComponente panelProductoComponente;
+    private PanelOrdenCompra panelOrdenCompra;
+    private PanelMateriaPrima panelMateriaPrima;
+    private PanelProductoTerminado panelProductoTerminado;
+    private PanelEmpleado panelEmpleado;   
+    private PanelOrdenProduccion panelOrdenProduccion;
+    private PanelMaquina panelMaquina; 
     private PanelEstructuraDeProducto panelEstructuraDeProducto;
     private PanelRutaFabricacion panelRutaFabricacion;
     private PanelCentroTrabajo panelCentroTrabajo;
@@ -39,17 +39,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     }
 
     private void inicializar() {
-        panelMateriaPrima = new PanelMateriaPrima();
-        panelProductoComponente = new PanelProductoComponente();
-        panelProductoTerminado = new PanelProductoTerminado();
-        panelEmpleado = new PanelEmpleado();
-        panelOrdenCompra = new PanelOrdenCompra();
-        panelOrdenProduccion = new PanelOrdenProduccion();
-        panelMaquina = new PanelMaquina();
         panelProveedor = new PanelProveedor();
-        panelEstructuraDeProducto = new PanelEstructuraDeProducto();
-        panelRutaFabricacion = new PanelRutaFabricacion();
-        panelCentroTrabajo = new PanelCentroTrabajo();
+        panelProductoComponente = new PanelProductoComponente();
+        panelOrdenCompra = new PanelOrdenCompra();
+//        panelMateriaPrima = new PanelMateriaPrima();
+//        panelProductoTerminado = new PanelProductoTerminado();
+//        panelEmpleado = new PanelEmpleado();        
+//        panelOrdenProduccion = new PanelOrdenProduccion();
+//        panelMaquina = new PanelMaquina();
+//        panelEstructuraDeProducto = new PanelEstructuraDeProducto();
+//        panelRutaFabricacion = new PanelRutaFabricacion();
+//        panelCentroTrabajo = new PanelCentroTrabajo();
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
