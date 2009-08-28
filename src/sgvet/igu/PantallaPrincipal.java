@@ -42,14 +42,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         panelProveedor = new PanelProveedor();
         panelProductoComponente = new PanelProductoComponente();
         panelOrdenCompra = new PanelOrdenCompra();
-//        panelMateriaPrima = new PanelMateriaPrima();
-//        panelProductoTerminado = new PanelProductoTerminado();
-//        panelEmpleado = new PanelEmpleado();        
-//        panelOrdenProduccion = new PanelOrdenProduccion();
-//        panelMaquina = new PanelMaquina();
-//        panelEstructuraDeProducto = new PanelEstructuraDeProducto();
-//        panelRutaFabricacion = new PanelRutaFabricacion();
-//        panelCentroTrabajo = new PanelCentroTrabajo();
+        panelMateriaPrima = new PanelMateriaPrima();
+        panelProductoTerminado = new PanelProductoTerminado();
+        panelEmpleado = new PanelEmpleado();        
+        panelOrdenProduccion = new PanelOrdenProduccion();
+        panelMaquina = new PanelMaquina();
+        panelEstructuraDeProducto = new PanelEstructuraDeProducto();
+        panelRutaFabricacion = new PanelRutaFabricacion();
+        panelCentroTrabajo = new PanelCentroTrabajo();
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
