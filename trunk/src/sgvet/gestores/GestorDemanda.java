@@ -151,4 +151,33 @@ public class GestorDemanda {
         }
         return errores;
     }
+
+     //..................realiza el suavizamiento exponencial simple.................................
+  
+    public void suavizarES(){
+        double alfa=0.3;
+        double vectorXDemandas[]={125,162,154};
+
+        inicializarES(alfa,vectorXDemandas);
+    }
+
+    //------------------------------------------------------------------------------------------------
+
+    public double inicializarES(double alfa, double vectorXDemandas[]){
+        int n=0;
+        double promActual = 0;
+        double promAnterior = 0;
+        for(int i=0;i<vectorXDemandas.length;i++){
+            promActual += alfa * vectorXDemandas[i] + (1-alfa) * promAnterior;
+            promAnterior = promActual;
+        }
+        return promActual;
+    }
+
+    //------------------------------------------------------------------------------------------------
+
+    public double actualizarES(float alfa, double promDemanda, double demandaActual){ ////esto hay que pulirlo.......
+        double promedio = alfa * demandaActual + (1-alfa) * promDemanda;
+        return promedio;
+    }
 }
