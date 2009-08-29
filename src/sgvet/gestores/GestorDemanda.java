@@ -154,11 +154,11 @@ public class GestorDemanda {
 
      //..................realiza el suavizamiento exponencial simple.................................
   
-    public void suavizarES(){
-        double alfa=0.3;
-        double vectorXDemandas[]={125,162,154};
-
-        inicializarES(alfa,vectorXDemandas);
+    public void suavizarES(double alfa, int periodo, int demandaActual){
+        double vectorXDemandas[]={125,162,154};//esto hay que reemplazarlo con una busqueda de datos históricos o la última media en la base de datos según el periodo especificado....
+        
+        double promedio = inicializarES(alfa,vectorXDemandas);
+        actualizarES((float) alfa,promedio,demandaActual);
     }
 
     //------------------------------------------------------------------------------------------------
@@ -176,8 +176,12 @@ public class GestorDemanda {
 
     //------------------------------------------------------------------------------------------------
 
-    public double actualizarES(float alfa, double promDemanda, double demandaActual){ ////esto hay que pulirlo.......
+    public void actualizarES(float alfa, double promDemanda, double demandaActual){ ////esto hay que pulirlo y debe guardar los datos en la base de datos.......
         double promedio = alfa * demandaActual + (1-alfa) * promDemanda;
-        return promedio;
+        //return promedio;
     }
+
+    //------------------------------------------------------------------------------------------------
+   
+
 }
