@@ -4,7 +4,7 @@
  */
 
 package sgvet.gestores;
-
+import java.io.PrintStream;
 import java.util.List;
 import sgvet.entidades.Demanda;
 import sgvet.igu.PanelDemanda;
@@ -155,20 +155,31 @@ public class GestorDemanda {
      //..................realiza el suavizamiento exponencial simple.................................
   
     public void suavizarES(double alfa, int periodo, int demandaActual){
-        double vectorXDemandas[]={125,162,154};//esto hay que reemplazarlo con una busqueda de datos históricos o la última media en la base de datos según el periodo especificado....
-        
-        double promedio = inicializarES(alfa,vectorXDemandas);
-        actualizarES((float) alfa,promedio,demandaActual);
+
+        double [] vectorXDemanda = null;
+        //busqueda de datos históricos o la última media en la base de datos según el periodo especificado....
+        double promActual = inicializarES(alfa,vectorXDemanda);
+        System.out.println("El promedio actual es: "+ promActual);
+       
     }
+
+    public void suavizarES(float alfa, double promDemanda, double demandaActual){
+        
+        double promActual=actualizarES((float) alfa,promDemanda,demandaActual);
+        System.out.println("El promedio actual es: "+ promActual);
+
+
+    }
+
 
     //------------------------------------------------------------------------------------------------
 
-    public double inicializarES(double alfa, double vectorXDemandas[]){
-        int n=0;
+    public double inicializarES(double alfa, double vectorXDemanda[]){
+        //Este método calcula el nuevo promedio de distintos valores de Xn para un mismo periodo............
         double promActual = 0;
         double promAnterior = 0;
-        for(int i=0;i<vectorXDemandas.length;i++){
-            promActual += alfa * vectorXDemandas[i] + (1-alfa) * promAnterior;
+        for(int i=0;i<vectorXDemanda.length;i++){
+            promActual += alfa * vectorXDemanda[i] + (1-alfa) * promAnterior;
             promAnterior = promActual;
         }
         return promActual;
@@ -176,9 +187,10 @@ public class GestorDemanda {
 
     //------------------------------------------------------------------------------------------------
 
-    public void actualizarES(float alfa, double promDemanda, double demandaActual){ ////esto hay que pulirlo y debe guardar los datos en la base de datos.......
-        double promedio = alfa * demandaActual + (1-alfa) * promDemanda;
-        //return promedio;
+    public double actualizarES(float alfa, double promDemanda, double demandaActual){
+        //este método calcula el nuevo promedio a partir del ultimo promedio
+        double promActual = alfa * demandaActual + (1-alfa) * promDemanda;
+        return promActual;
     }
 
     //------------------------------------------------------------------------------------------------
