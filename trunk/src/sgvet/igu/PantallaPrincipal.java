@@ -92,7 +92,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Fabrica Radiadores");
+        setTitle("Veterinaria");
         setMinimumSize(new java.awt.Dimension(800, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
