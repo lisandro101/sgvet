@@ -98,10 +98,12 @@ public class ParteDeNodo implements Serializable, IPersistente {
         return borrado;
     }
 
+    @Override
     public void setBorrado(boolean borrado) {
         this.borrado = borrado;
     }
 
+    @Override
     public List<String> getCamposUnicos() {
         return CAMPOS_UNICOS;
     }
