@@ -5,6 +5,7 @@
 
 package sgvet.gestores;
 import java.util.List;
+import javax.swing.table.TableModel;
 import sgvet.entidades.Demanda;
 import sgvet.igu.PanelDemanda;
 
@@ -184,6 +185,18 @@ public class GestorDemanda {
         return promActual;
     }
 
+
+    //------------------------------------------------------------------------------------------------
+
+    public double actualizarES(float alfa, double promDemanda, double demandaActual){
+        //este método calcula el nuevo promedio a partir del ultimo promedio
+        double promActual = alfa * demandaActual + (1-alfa) * promDemanda;
+        return promActual;
+    }
+
+    //------------------------------------------------------------------------------------------------
+   
+
     // Calcula el suavizamiento exponencial simple para un arreglo de demandas a predecir
 
     public List<Demanda> calcularES(double alfa, List<Demanda> demandas){
@@ -203,7 +216,7 @@ public class GestorDemanda {
             if(temp<=1){
                 demandaPre= (int) demandas.get(i - 1).getPrediccionSES();
             }
-             
+
             demandas.get(i).setPrediccionSES((int)(alfa * demandaReal + (1 - alfa)
                     * demandaPre));
         }
@@ -211,15 +224,44 @@ public class GestorDemanda {
         return demandas;
     }
 
-    //------------------------------------------------------------------------------------------------
+    public void calcularDemandaConEstacionalidad(TableModel tModel, double alfa, double gamma){
+        double indiceEsta1[] = new double[tModel.getRowCount()];
+        double demanPromedio1[] = new double[tModel.getRowCount()];
+        double indiceEsta2[] = new double[tModel.getRowCount()];
+        double demanPromedio2[] = new double[tModel.getRowCount()];
+        int totaldemanPromedio1=0;
+        double temp=0;
+        double ultimoReal=0;
 
-    public double actualizarES(float alfa, double promDemanda, double demandaActual){
-        //este método calcula el nuevo promedio a partir del ultimo promedio
-        double promActual = alfa * demandaActual + (1-alfa) * promDemanda;
-        return promActual;
+
+        for (int i = 0; i < tModel.getRowCount(); i++) {
+            for (int j = 1; j < tModel.getColumnCount()-1; j++) {
+                demanPromedio1[i] += Double.parseDouble(tModel.getValueAt(i, j).toString());
+            }
+            demanPromedio1[i]= demanPromedio1[i]/ (tModel.getColumnCount()-2);
+
+            totaldemanPromedio1 += demanPromedio1[i];    //tipos incompatibles
+        }
+        totaldemanPromedio1 = totaldemanPromedio1/tModel.getRowCount();
+
+        for (int i = 0; i < tModel.getRowCount(); i++) {
+            indiceEsta1[i]=demanPromedio1[i]/totaldemanPromedio1;
+        }
+
+        for (int i = 0; i < tModel.getRowCount(); i++) {
+            if(tModel.getValueAt(i,tModel.getColumnCount()-1 ) != null){
+
+                temp = Double.parseDouble(tModel.getValueAt(i,tModel.getColumnCount()-1).toString());
+                ultimoReal= temp/indiceEsta1[i]*alfa+ (1-alfa)*demanPromedio1[i];
+                demanPromedio2[i]= ultimoReal;
+            }else{
+
+                demanPromedio2[i]= ultimoReal* indiceEsta1[i];
+                tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
+
+            }
+        }
+
+        
     }
-
-    //------------------------------------------------------------------------------------------------
-   
-
 }
