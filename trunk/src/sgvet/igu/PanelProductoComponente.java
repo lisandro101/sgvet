@@ -539,10 +539,16 @@ private void cbTipoPrediccionActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_cbTipoPrediccionActionPerformed
 
 private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDemandaActionPerformed
-   PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple();
-   panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
-   panel.setVisible(true);
-//   panel.setModal(true);
+   if (productoComponente.getTipoPrediccion().equalsIgnoreCase("SE Simple")) {
+       PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
+       panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+       panel.setVisible(true);
+   }
+   else { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+       PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
+       panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+       panel.setVisible(true);
+   }
 }//GEN-LAST:event_btDemandaActionPerformed
 
 

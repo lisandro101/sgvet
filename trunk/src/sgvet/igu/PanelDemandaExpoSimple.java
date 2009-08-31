@@ -36,9 +36,21 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
 
     }
 
+    public PanelDemandaExpoSimple(ProductoComponente producto) {
+        initComponents();
+
+        this.producto = producto;
+
+        inicializar();
+        inicializarBotones();
+
+    }
+
     private void inicializar() {
         tmDemanda = new DemandaSESTableModel(0);
         tDemandaSES.setModel(tmDemanda);
+        tfCodigoProducto.setText(producto.getCodigo());
+        tfNombreProducto.setText(producto.getNombre());
         
     }
 
@@ -60,8 +72,8 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
         pProductoTerminado = new javax.swing.JPanel();
         lbCodigo = new javax.swing.JLabel();
         lbNombre = new javax.swing.JLabel();
-        tfCodigo = new javax.swing.JTextField();
-        tfNombre = new javax.swing.JTextField();
+        tfCodigoProducto = new javax.swing.JTextField();
+        tfNombreProducto = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         scPanel = new javax.swing.JScrollPane();
         tDemandaSES = new org.jdesktop.swingx.JXTable();
@@ -107,9 +119,9 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
 
         lbNombre.setText("Nombre:");
 
-        tfCodigo.setEnabled(false);
+        tfCodigoProducto.setEnabled(false);
 
-        tfNombre.setEnabled(false);
+        tfNombreProducto.setEnabled(false);
 
         javax.swing.GroupLayout pProductoTerminadoLayout = new javax.swing.GroupLayout(pProductoTerminado);
         pProductoTerminado.setLayout(pProductoTerminadoLayout);
@@ -122,8 +134,8 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
                     .addComponent(lbNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
+                    .addComponent(tfCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                    .addComponent(tfNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminadoLayout.setVerticalGroup(
@@ -131,11 +143,11 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
             .addGroup(pProductoTerminadoLayout.createSequentialGroup()
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lbCodigo)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbNombre)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
 
@@ -212,7 +224,7 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(scPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                        .addComponent(scPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -223,9 +235,9 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
                                     .addComponent(lbPeriodoInicial5))
                                 .addGap(20, 20, 20)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(tfCantPeriodos, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(dpPeriodoIni, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
+                                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                    .addComponent(tfCantPeriodos, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                                    .addComponent(dpPeriodoIni, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(149, 149, 149)
                                 .addComponent(btCargar)))
@@ -257,7 +269,7 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+            .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -359,8 +371,8 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private org.jdesktop.swingx.JXTable tDemandaSES;
     private javax.swing.JTextField tfAlfa;
     private javax.swing.JTextField tfCantPeriodos;
-    private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfNombre;
+    private javax.swing.JTextField tfCodigoProducto;
+    private javax.swing.JTextField tfNombreProducto;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -379,8 +391,8 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     
     private void cargarPantalla(){
         sgvet.utils.Util.getInstancia().limpiarCampos(this);
-        tfCodigo.setText(producto.getCodigo());
-        tfNombre.setText(producto.getNombre());
+        tfCodigoProducto.setText(producto.getCodigo());
+        tfNombreProducto.setText(producto.getNombre());
         
     }
 
