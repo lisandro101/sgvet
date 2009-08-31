@@ -49,8 +49,10 @@ public class PanelDemandaExpoSimple extends javax.swing.JDialog implements IVali
     private void inicializar() {
         tmDemanda = new DemandaSESTableModel(0);
         tDemandaSES.setModel(tmDemanda);
-        tfCodigoProducto.setText(producto.getCodigo());
-        tfNombreProducto.setText(producto.getNombre());
+        cargarPantalla();
+        btLimpiar.setEnabled(false);
+//        tfCodigoProducto.setText(producto.getCodigo());
+//        tfNombreProducto.setText(producto.getNombre());
         
     }
 
@@ -308,7 +310,7 @@ private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
  sgvet.utils.Util.getInstancia().limpiarCampos(this);
- producto=null;
+ //producto=null;
  btCalcular.setEnabled(false);
 }//GEN-LAST:event_btLimpiarActionPerformed
 
@@ -390,7 +392,7 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }
     
     private void cargarPantalla(){
-        sgvet.utils.Util.getInstancia().limpiarCampos(this);
+//        sgvet.utils.Util.getInstancia().limpiarCampos(this);
         tfCodigoProducto.setText(producto.getCodigo());
         tfNombreProducto.setText(producto.getNombre());
         

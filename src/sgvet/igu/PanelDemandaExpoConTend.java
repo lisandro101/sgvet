@@ -1,11 +1,14 @@
 package sgvet.igu;
 
 import java.awt.Component;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.DefaultTableModel;
 import sgvet.entidades.Demanda;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
@@ -19,27 +22,42 @@ import sgvet.utils.*;
 public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IValidable {
     private static final long serialVersionUID = 1L;
 
-    private DemandaSESTableModel tmDemanda;
+//    private DemandaSESTableModel tmDemanda;
+    private DefaultTableModel tModel;
     private ProductoComponente producto;
     private List<Demanda> demandas;
 
-    private int cantPeriodos;
-    private Date fechaInicial;
+    private int cantAnios;
+    private Date anioInicial;
     private double alfa;
+    private double gamma;
 
 
     /** Creates new form PanelCargoEmpleado */
+    public PanelDemandaExpoConTend(ProductoComponente productoNuevo) {
+
+        producto = productoNuevo;
+
+        initComponents();
+        inicializar();
+        
+        inicializarBotones();
+
+    }
+
     public PanelDemandaExpoConTend() {
         initComponents();
         inicializar();
+
         inicializarBotones();
 
     }
 
     private void inicializar() {
-        tmDemanda = new DemandaSESTableModel(0);
-        tDemandaSES.setModel(tmDemanda);
-        
+        tModel = new DefaultTableModel();
+        tDemanda.setModel(tModel);
+        cargarPantalla();
+        btLimpiar.setEnabled(false);
     }
 
     private void inicializarBotones(){
@@ -64,14 +82,16 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
         tfNombre = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         scPanel = new javax.swing.JScrollPane();
-        tDemandaSES = new org.jdesktop.swingx.JXTable();
-        lbAlfa5 = new javax.swing.JLabel();
+        tDemanda = new org.jdesktop.swingx.JXTable();
+        lbAlfa = new javax.swing.JLabel();
         tfAlfa = new javax.swing.JTextField();
-        lbPeriodoInicial5 = new javax.swing.JLabel();
-        tfCantPeriodos = new javax.swing.JTextField();
+        lbAnioInicial = new javax.swing.JLabel();
+        tfCantAnios = new javax.swing.JTextField();
         lbCantidadPeriodos = new javax.swing.JLabel();
-        dpPeriodoIni = new org.jdesktop.swingx.JXDatePicker();
         btCargar = new javax.swing.JButton();
+        dpAnioInicio = new org.jdesktop.swingx.JXDatePicker();
+        tfGamma = new javax.swing.JTextField();
+        lbGamma = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -152,32 +172,17 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
             .addComponent(pProductoTerminado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tDemandaSES.setModel(new javax.swing.table.DefaultTableModel(
+        tDemanda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
-                "Periodo", "Predicción"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
+        ));
+        scPanel.setViewportView(tDemanda);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        scPanel.setViewportView(tDemandaSES);
-
-        lbAlfa5.setText("ALfa:");
+        lbAlfa.setText("ALfa:");
 
         tfAlfa.setText("0.3");
         tfAlfa.addActionListener(new java.awt.event.ActionListener() {
@@ -186,16 +191,9 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
             }
         });
 
-        lbPeriodoInicial5.setText("Periodo Inicial:");
+        lbAnioInicial.setText("Año Inicial:");
 
-        lbCantidadPeriodos.setText("Cant Periodos:");
-
-        dpPeriodoIni.setFormats("MMMM yyyy");
-        dpPeriodoIni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dpPeriodoIniActionPerformed(evt);
-            }
-        });
+        lbCantidadPeriodos.setText("Cant Años:");
 
         btCargar.setText("Cargar");
         btCargar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +201,17 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
                 btCargarActionPerformed(evt);
             }
         });
+
+        dpAnioInicio.setFormats("yyyy");
+
+        tfGamma.setText("0.3");
+        tfGamma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfGammaActionPerformed(evt);
+            }
+        });
+
+        lbGamma.setText("Gamma:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,45 +221,51 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(scPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lbCantidadPeriodos)
-                                    .addComponent(lbAlfa5)
-                                    .addComponent(lbPeriodoInicial5))
-                                .addGap(20, 20, 20)
+                                    .addComponent(lbAlfa)
+                                    .addComponent(lbAnioInicial)
+                                    .addComponent(lbGamma))
+                                .addGap(5, 5, 5)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(tfCantPeriodos, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                    .addComponent(dpPeriodoIni, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(tfGamma, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(tfCantAnios, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(dpAnioInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(149, 149, 149)
                                 .addComponent(btCargar)))
-                        .addGap(187, 187, 187))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(scPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(187, 187, 187))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dpPeriodoIni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbPeriodoInicial5, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbAnioInicial)
+                    .addComponent(dpAnioInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCantPeriodos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCantAnios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbCantidadPeriodos, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfAlfa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbAlfa5, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addComponent(btCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbAlfa, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfGamma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbGamma, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(scPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -273,8 +288,8 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
                 .addContainerGap()
                 .addComponent(pProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -286,57 +301,96 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_btCerrarActionPerformed
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-//    demandas = tmDemanda.getFilas();
-    alfa = Double.parseDouble(tfAlfa.getText());
-    demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
-    tmDemanda.limpiarTableModel();
-    tmDemanda.agregarFilas(demandas);
+    tModel.fireTableDataChanged();
+    GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma);
+
+//    tDemanda.repaint();
+//    alfa = Double.parseDouble(tfAlfa.getText());
+//    demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
+//    tmDemanda.limpiarTableModel();
+//    tmDemanda.agregarFilas(demandas);
 
 }//GEN-LAST:event_btCalcularActionPerformed
 
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
  sgvet.utils.Util.getInstancia().limpiarCampos(this);
- producto=null;
+ //producto=null;
  btCalcular.setEnabled(false);
 }//GEN-LAST:event_btLimpiarActionPerformed
 
-private void dpPeriodoIniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpPeriodoIniActionPerformed
-    // buscar si el producto ya tiene una demanda para el periodo q se cargo en pantalla
-    // si tiene demanda ponerla en el texfield
-}//GEN-LAST:event_dpPeriodoIniActionPerformed
-
 private void btCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCargarActionPerformed
+
+    List<String> nombreAnios = new ArrayList<String>();
+    String meses[] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio",
+                    "Agosto","Setiembre","Octubre","Noviembre","Diciembre"};
+    Calendar cal = Calendar.getInstance();
+
+    
+    
+
     if(validarDatosPantalla()){
-        demandas= new ArrayList<Demanda>();
-        Demanda demandaPredecida;
+        anioInicial = convertirFecha(anioInicial);
+        cal.setTime(anioInicial);
 
-        Calendar cal = Calendar.getInstance();
+        nombreAnios.add("Periodo");
 
-        fechaInicial = convertirFecha(fechaInicial);
-        cal.setTime(fechaInicial);
 
-        for (int i = 0; i < cantPeriodos; i++) {
-            demandaPredecida= new Demanda();
 
-            if(i>0){
-                cal.add(Calendar.DAY_OF_MONTH, 31);
-            }
-            
-            demandaPredecida.setPeriodo(cal.getTime());
+        for (int i = 1; i < cantAnios+1; i++) {
+            nombreAnios.add(formatearFecha(cal.getTime()));
+            cal.add(Calendar.DAY_OF_YEAR, 365);
+        }
+        tModel.setColumnIdentifiers(nombreAnios.toArray());
 
-            demandas.add(demandaPredecida);
+        tModel.setRowCount(12);
+        for (int i = 0; i < meses.length; i++) {
+            tModel.setValueAt(meses[i], i, 0);
+
 
         }
 
-        tmDemanda.agregarFilas(demandas);
-        btCalcular.setEnabled(true);
-    }
+//        tModel.setColumnCount(cantAnios);
+//        tModel.setRowCount(12
+        
+//        tModel.setColumnIdentifiers(nombreAnios.toArray());
 
+        
+    }
+//        demandas= new ArrayList<Demanda>();
+//        Demanda demandaPredecida;
+//
+//        Calendar cal = Calendar.getInstance();
+//
+//        fechaInicial = convertirFecha(fechaInicial);
+//        cal.setTime(fechaInicial);
+//
+//        for (int i = 0; i < cantPeriodos; i++) {
+//            demandaPredecida= new Demanda();
+//
+//            if(i>0){
+//                cal.add(Calendar.DAY_OF_MONTH, 31);
+//            }
+//
+//            demandaPredecida.setPeriodo(cal.getTime());
+//
+//            demandas.add(demandaPredecida);
+//
+//        }
+//
+//        tmDemanda.agregarFilas(demandas);
+//        btCalcular.setEnabled(true);
+//    }
+    cargarDatosEnTabla();
+    btCalcular.setEnabled(true);
 }//GEN-LAST:event_btCargarActionPerformed
 
 private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfAlfaActionPerformed
     // TODO add your handling code here:
 }//GEN-LAST:event_tfAlfaActionPerformed
+
+private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfGammaActionPerformed
+    // TODO add your handling code here:
+}//GEN-LAST:event_tfGammaActionPerformed
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -344,22 +398,24 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JButton btCargar;
     private javax.swing.JButton btCerrar;
     private javax.swing.JButton btLimpiar;
-    private org.jdesktop.swingx.JXDatePicker dpPeriodoIni;
+    private org.jdesktop.swingx.JXDatePicker dpAnioInicio;
     private javax.swing.ButtonGroup errores;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbAlfa5;
+    private javax.swing.JLabel lbAlfa;
+    private javax.swing.JLabel lbAnioInicial;
     private javax.swing.JLabel lbCantidadPeriodos;
     private javax.swing.JLabel lbCodigo;
+    private javax.swing.JLabel lbGamma;
     private javax.swing.JLabel lbNombre;
-    private javax.swing.JLabel lbPeriodoInicial5;
     private javax.swing.JPanel pBotones;
     private javax.swing.JPanel pProducto;
     private javax.swing.JPanel pProductoTerminado;
     private javax.swing.JScrollPane scPanel;
-    private org.jdesktop.swingx.JXTable tDemandaSES;
+    private org.jdesktop.swingx.JXTable tDemanda;
     private javax.swing.JTextField tfAlfa;
-    private javax.swing.JTextField tfCantPeriodos;
+    private javax.swing.JTextField tfCantAnios;
     private javax.swing.JTextField tfCodigo;
+    private javax.swing.JTextField tfGamma;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
 
@@ -372,13 +428,14 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         return producto;
     }
 
-    public void setProductoTerminado(ProductoComponente producto) {
-        this.producto = producto;
+    public void setProductoTerminado(ProductoComponente producton) {
+        producto = producton;
         cargarPantalla();
     }
     
     private void cargarPantalla(){
-        sgvet.utils.Util.getInstancia().limpiarCampos(this);
+//        sgvet.utils.Util.getInstancia().limpiarCampos(this);
+       
         tfCodigo.setText(producto.getCodigo());
         tfNombre.setText(producto.getNombre());
         
@@ -400,15 +457,36 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private boolean validarDatosPantalla(){
         boolean resul= true;
 
-        if(tfCantPeriodos.getText().equals("") || dpPeriodoIni.getDate()==null
-                || tfAlfa.getText().equals("")){
+        if(tfCantAnios.getText().equals("") || dpAnioInicio.getDate()==null
+                || tfAlfa.getText().equals("") || tfGamma.getText().equals("")){
             resul=false;
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         }else{
-            cantPeriodos= Integer.parseInt(tfCantPeriodos.getText());
-            fechaInicial = dpPeriodoIni.getDate();
+            cantAnios= Integer.parseInt(tfCantAnios.getText());
+            anioInicial = dpAnioInicio.getDate();
             alfa = Double.parseDouble(tfAlfa.getText());
+            gamma = Double.parseDouble(tfGamma.getText());
         }
         return resul;
+    }
+
+    private String formatearFecha(Date fecha){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+
+        return sdf.format(fecha);
+    }
+
+    private void cargarDatosEnTabla(){
+          for (int i = 0; i < tModel.getRowCount(); i++) {
+            for (int j = 1; j < tModel.getColumnCount(); j++) {
+                if(i > tModel.getRowCount()-3 && j == tModel.getColumnCount()-1){
+
+                }else{
+
+                    tModel.setValueAt(345+i*2, i, j);
+                }
+            }
+        }
     }
 }
