@@ -1,6 +1,7 @@
 package sgvet.igu;
 
 import java.awt.Component;
+import java.awt.Dialog;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -538,9 +539,10 @@ private void cbTipoPrediccionActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_cbTipoPrediccionActionPerformed
 
 private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDemandaActionPerformed
-     PanelDemandaTemporal panel = new PanelDemandaTemporal();
-     panel.setVisible(true);
-//     panel.setModal(true);
+   PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple();
+   panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+   panel.setVisible(true);
+//   panel.setModal(true);
 }//GEN-LAST:event_btDemandaActionPerformed
 
 

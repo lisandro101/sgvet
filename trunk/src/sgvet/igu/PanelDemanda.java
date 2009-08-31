@@ -54,7 +54,7 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         initComponents();
         inicializar();
         inicializarBotones();
-        inicializarPaneles();
+
     }
 
     private void inicializar() {
@@ -68,13 +68,6 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         dpPeriodoFinal.setEnabled(false);
         dpPeriodoInicial.setEnabled(false);
         btCargarPeriodos.setEnabled(false);
-    }
-
-    private void inicializarPaneles(){
-        PanelDemandaSES paneldemanda = new PanelDemandaSES();
-        
-        this.add(paneldemanda);
-        paneldemanda.setVisible(true);
     }
 
     /** This method is called from within the constructor to
