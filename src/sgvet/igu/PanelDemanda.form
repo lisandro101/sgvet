@@ -81,7 +81,7 @@
                           <Component id="btCargarPeriodos" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="128" max="32767" attributes="0"/>
+                  <EmptySpace pref="186" max="32767" attributes="0"/>
               </Group>
               <Component id="jPanel1" alignment="1" pref="598" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
