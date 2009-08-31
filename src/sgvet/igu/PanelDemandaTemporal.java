@@ -287,6 +287,7 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
 //    demandas = tmDemanda.getFilas();
+    alfa = Double.parseDouble(tfAlfa.getText());
     demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
     tmDemanda.limpiarTableModel();
     tmDemanda.agregarFilas(demandas);
