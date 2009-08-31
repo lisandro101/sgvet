@@ -4,7 +4,6 @@
  */
 
 package sgvet.gestores;
-import java.io.PrintStream;
 import java.util.List;
 import sgvet.entidades.Demanda;
 import sgvet.igu.PanelDemanda;
@@ -188,17 +187,25 @@ public class GestorDemanda {
     // Calcula el suavizamiento exponencial simple para un arreglo de demandas a predecir
 
     public List<Demanda> calcularES(double alfa, List<Demanda> demandas){
-
+        int temp=0;
         int demandaReal=0;
+        int demandaPre=0;
         //demandas.get(0).setPrediccionSES(demandaEspActual);
         demandas.get(0).setPrediccionSES(demandas.get(0).getDemandaReal());
 
         for (int i = 1; i < demandas.size(); i++) {
             if(demandas.get(i).getDemandaReal() != 0){
-            demandaReal= demandas.get(i).getDemandaReal();
+                demandaReal= demandas.get(i).getDemandaReal();
+
+            }else if(demandas.get(i).getDemandaReal() == 0){
+                ++temp;
             }
+            if(temp<=1){
+                demandaPre= (int) demandas.get(i - 1).getPrediccionSES();
+            }
+             
             demandas.get(i).setPrediccionSES((int)(alfa * demandaReal + (1 - alfa)
-                    * demandas.get(i - 1).getPrediccionSES()));
+                    * demandaPre));
         }
 
         return demandas;
