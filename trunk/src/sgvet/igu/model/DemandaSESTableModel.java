@@ -11,12 +11,12 @@ import sgvet.entidades.Demanda;
  *
  * @author Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
-public class DemandaTableModel extends AbstractTableModel implements IModeloReiniciable {
+public class DemandaSESTableModel extends AbstractTableModel implements IModeloReiniciable {
     private static final long serialVersionUID = 1L;
-    private static final String[] NOMBRE_COLUMNAS = {"Periodo", "Demanda Real", "Ponderación PMP", "PMSE"};
-    private static final boolean[] COLUMNAS_EDITABLES = {false, true, true, false};
+    private static final String[] NOMBRE_COLUMNAS = {"Periodo", "Demanda","Predicción"};
+    private static final boolean[] COLUMNAS_EDITABLES = {false, true, false};
     private static final Class[] CLASE_COLUMNAS =
-        {String.class, Double.class, Object.class, Double.class};
+        {String.class, Integer.class , Integer.class};
     
     private List<Demanda> demandas;
     
@@ -26,7 +26,7 @@ public class DemandaTableModel extends AbstractTableModel implements IModeloRein
      * 
      * @param filas Cantidad de filas iniciales
      */
-    public DemandaTableModel(int filas) {
+    public DemandaSESTableModel(int filas) {
         this.demandas = new ArrayList<Demanda>(filas > 0 ? filas : 0);
     }
 
@@ -105,9 +105,6 @@ public class DemandaTableModel extends AbstractTableModel implements IModeloRein
             case 2:
                 resultado = demandas.get(fila).getPrediccionSES();
                 break;
-            case 3:
-                resultado = demandas.get(fila).getPMSE();
-                break;    
         }
         return resultado;
     }
@@ -184,8 +181,8 @@ public class DemandaTableModel extends AbstractTableModel implements IModeloRein
     public void setValueAt(Object valor, int fila, int columna) {
         if(columna == 1) {
             demandas.get(fila).setDemandaReal((Integer)valor);
-        }else if(columna == 2) {
-            //demandas.get(fila).setPonderacionPMP(Double.valueOf((String)valor));
+        }else if(columna ==2){
+            demandas.get(fila).setPrediccionSES((Integer)valor);
         }
     }
 

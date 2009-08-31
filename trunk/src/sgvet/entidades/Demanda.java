@@ -15,17 +15,17 @@ public class Demanda {
 
     private ProductoTerminado productoTerminado;
     private Date periodo;
-    private double demandaReal;
+    private int demandaReal;
     private double pM;
     private double PMP;
     private double pMSE;
-    private double ponderacionPMP;
+    private int prediccionSES;
 
-    public double getDemandaReal() {
+    public int getDemandaReal() {
         return demandaReal;
     }
 
-    public void setDemandaReal(double demandaReal) {
+    public void setDemandaReal(int demandaReal) {
         this.demandaReal = demandaReal;
     }
 
@@ -37,12 +37,12 @@ public class Demanda {
         this.pM = pM;
     }
 
-    public double getPonderacionPMP() {
-        return ponderacionPMP;
+    public double getPrediccionSES() {
+        return prediccionSES;
     }
 
-    public void setPonderacionPMP(double pMP) {
-        this.ponderacionPMP = pMP;
+    public void setPrediccionSES(int pMP) {
+        this.prediccionSES = pMP;
     }
 
     public double getPMSE() {

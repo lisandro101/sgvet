@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.Demanda;
+import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.ProductoTerminado;
 import sgvet.gestores.GestorDemanda;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
@@ -21,7 +22,7 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
     private static final long serialVersionUID = 1L;
 
     private DemandaTableModel tmBuscar;
-    private ProductoTerminado productoTerminado;
+    private ProductoComponente productoTerminado;
     List<Demanda> demandas;
 
     public enum Error {
@@ -53,6 +54,7 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         initComponents();
         inicializar();
         inicializarBotones();
+        inicializarPaneles();
     }
 
     private void inicializar() {
@@ -68,6 +70,13 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         btCargarPeriodos.setEnabled(false);
     }
 
+    private void inicializarPaneles(){
+        PanelDemandaSES paneldemanda = new PanelDemandaSES();
+        
+        this.add(paneldemanda);
+        paneldemanda.setVisible(true);
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -81,12 +90,6 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         pTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tCargos = new org.jdesktop.swingx.JXTable();
-        pProductoTerminado = new javax.swing.JPanel();
-        lbCodigo = new javax.swing.JLabel();
-        lbNombre = new javax.swing.JLabel();
-        tfCodigo = new javax.swing.JTextField();
-        tfNombre = new javax.swing.JTextField();
-        btBuscarProdTerminado = new javax.swing.JButton();
         dpPeriodoInicial = new org.jdesktop.swingx.JXDatePicker();
         dpPeriodoFinal = new org.jdesktop.swingx.JXDatePicker();
         jLabel1 = new javax.swing.JLabel();
@@ -115,9 +118,17 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         btCalcular = new javax.swing.JButton();
         btCerrar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
+        pProducto = new javax.swing.JPanel();
+        pProductoTerminado = new javax.swing.JPanel();
+        lbCodigo = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
+        tfCodigo = new javax.swing.JTextField();
+        tfNombre = new javax.swing.JTextField();
+        btBuscarProdTerminado = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         pTabla.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -148,57 +159,19 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         });
         jScrollPane1.setViewportView(tCargos);
 
-        pProductoTerminado.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto Terminado"));
-
-        lbCodigo.setText("Código:");
-
-        lbNombre.setText("Nombre:");
-
-        tfCodigo.setEnabled(false);
-
-        tfNombre.setEnabled(false);
-
-        btBuscarProdTerminado.setText("Buscar");
-        btBuscarProdTerminado.addActionListener(new java.awt.event.ActionListener() {
+        dpPeriodoInicial.setFormats("MMMM yyyy");
+        dpPeriodoInicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBuscarProdTerminadoActionPerformed(evt);
+                dpPeriodoInicialActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout pProductoTerminadoLayout = new javax.swing.GroupLayout(pProductoTerminado);
-        pProductoTerminado.setLayout(pProductoTerminadoLayout);
-        pProductoTerminadoLayout.setHorizontalGroup(
-            pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pProductoTerminadoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbCodigo)
-                    .addComponent(lbNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-                    .addGroup(pProductoTerminadoLayout.createSequentialGroup()
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btBuscarProdTerminado)))
-                .addContainerGap())
-        );
-        pProductoTerminadoLayout.setVerticalGroup(
-            pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pProductoTerminadoLayout.createSequentialGroup()
-                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbCodigo)
-                    .addComponent(btBuscarProdTerminado)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNombre)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-
-        dpPeriodoInicial.setFormats("MMMM yyyy");
-
         dpPeriodoFinal.setFormats("MMMM yyyy");
+        dpPeriodoFinal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dpPeriodoFinalActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Periodo inicial");
 
@@ -285,9 +258,9 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
                     .addComponent(tfPM, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pPrediccionDemandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfErrorPM, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(tfErrorPMP, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(tfErrorPMSE, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
+                    .addComponent(tfErrorPM, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(tfErrorPMP, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                    .addComponent(tfErrorPMSE, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,8 +293,7 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         pTabla.setLayout(pTablaLayout);
         pTablaLayout.setHorizontalGroup(
             pTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pProductoTerminado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
             .addGroup(pTablaLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(pTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,21 +306,20 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
                         .addComponent(dpPeriodoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(btCargarPeriodos)))
-                .addContainerGap(118, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+                .addContainerGap(128, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
             .addGroup(pTablaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfconstanteAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(419, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
             .addComponent(pPrediccionDemanda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pTablaLayout.setVerticalGroup(
             pTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pTablaLayout.createSequentialGroup()
-                .addComponent(pProductoTerminado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(pTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
@@ -366,8 +337,7 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
                     .addComponent(jLabel6)
                     .addComponent(tfconstanteAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(pPrediccionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(pPrediccionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         btCalcular.setText("Calcular");
@@ -394,16 +364,85 @@ public class PanelDemanda extends javax.swing.JDialog implements IValidable {
         });
         pBotones.add(btLimpiar);
 
+        pProductoTerminado.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto Terminado"));
+
+        lbCodigo.setText("Código:");
+
+        lbNombre.setText("Nombre:");
+
+        tfCodigo.setEnabled(false);
+
+        tfNombre.setEnabled(false);
+
+        btBuscarProdTerminado.setText("Buscar");
+        btBuscarProdTerminado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarProdTerminadoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pProductoTerminadoLayout = new javax.swing.GroupLayout(pProductoTerminado);
+        pProductoTerminado.setLayout(pProductoTerminadoLayout);
+        pProductoTerminadoLayout.setHorizontalGroup(
+            pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pProductoTerminadoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbCodigo)
+                    .addComponent(lbNombre))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                    .addGroup(pProductoTerminadoLayout.createSequentialGroup()
+                        .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btBuscarProdTerminado)))
+                .addContainerGap())
+        );
+        pProductoTerminadoLayout.setVerticalGroup(
+            pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pProductoTerminadoLayout.createSequentialGroup()
+                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(lbCodigo)
+                    .addComponent(btBuscarProdTerminado)
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbNombre)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pProductoLayout = new javax.swing.GroupLayout(pProducto);
+        pProducto.setLayout(pProductoLayout);
+        pProductoLayout.setHorizontalGroup(
+            pProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pProductoTerminado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pProductoLayout.setVerticalGroup(
+            pProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pProductoTerminado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addComponent(pTabla, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -456,12 +495,6 @@ private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
     }
 }//GEN-LAST:event_btCalcularActionPerformed
-
-private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdTerminadoActionPerformed
-    PanelBuscarProductoGral buscarProv = new PanelBuscarProductoGral(this);
-    buscarProv.setModal(true);
-    buscarProv.setVisible(true);
-}//GEN-LAST:event_btBuscarProdTerminadoActionPerformed
 
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
  sgvet.utils.Util.getInstancia().limpiarCampos(this);
@@ -529,6 +562,20 @@ private void rbCuadradoMedioActionPerformed(java.awt.event.ActionEvent evt) {//G
 private void tfPMSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPMSEActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_tfPMSEActionPerformed
+
+private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdTerminadoActionPerformed
+    PanelBuscarProductoGral buscarProv = new PanelBuscarProductoGral(this);
+    buscarProv.setModal(true);
+    buscarProv.setVisible(true);
+}//GEN-LAST:event_btBuscarProdTerminadoActionPerformed
+
+private void dpPeriodoFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpPeriodoFinalActionPerformed
+    // TODO add your handling code here:
+}//GEN-LAST:event_dpPeriodoFinalActionPerformed
+
+private void dpPeriodoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpPeriodoInicialActionPerformed
+    // TODO add your handling code here:
+}//GEN-LAST:event_dpPeriodoInicialActionPerformed
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -553,6 +600,7 @@ private void tfPMSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JLabel lbNombre;
     private javax.swing.JPanel pBotones;
     private javax.swing.JPanel pPrediccionDemanda;
+    private javax.swing.JPanel pProducto;
     private javax.swing.JPanel pProductoTerminado;
     private javax.swing.JPanel pTabla;
     private javax.swing.JRadioButton rbCuadradoMedio;
@@ -577,12 +625,12 @@ private void tfPMSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public ProductoTerminado getProductoTerminado() {
+    public ProductoComponente getProductoTerminado() {
         return productoTerminado;
     }
 
-    public void setProductoTerminado(ProductoTerminado productoTerminado) {
-        this.productoTerminado = productoTerminado;
+    public void setProductoTerminado(ProductoComponente producto) {
+        this.productoTerminado = producto;
         cargarPantalla();
     }
     

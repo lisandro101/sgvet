@@ -58,7 +58,7 @@ public class GestorDemanda {
         demandas.get(0).setPM(demandas.get(0).getDemandaReal());
         for (int i = 1; i < demandas.size(); i++) {
             for (int j = 1; j <= i; j++) {
-                total += demandas.get(j).getDemandaReal()* demandas.get(j).getPonderacionPMP();
+                total += demandas.get(j).getDemandaReal()* demandas.get(j).getPrediccionSES();
             }
             demandas.get(i).setPMP(total);
             if(i != (demandas.size()-1)){
@@ -100,7 +100,7 @@ public class GestorDemanda {
     public boolean validarPonderaciones(List<Demanda> demandas) {
         double total = 0.0;
         for (Demanda demanda : demandas) {
-            total += demanda.getPonderacionPMP();
+            total += demanda.getPrediccionSES();
         }
         if (total == 1) {
             return true;
@@ -183,6 +183,25 @@ public class GestorDemanda {
             promAnterior = promActual;
         }
         return promActual;
+    }
+
+    // Calcula el suavizamiento exponencial simple para un arreglo de demandas a predecir
+
+    public List<Demanda> calcularES(double alfa, List<Demanda> demandas){
+
+        int demandaReal=0;
+        //demandas.get(0).setPrediccionSES(demandaEspActual);
+        demandas.get(0).setPrediccionSES(demandas.get(0).getDemandaReal());
+
+        for (int i = 1; i < demandas.size(); i++) {
+            if(demandas.get(i).getDemandaReal() != 0){
+            demandaReal= demandas.get(i).getDemandaReal();
+            }
+            demandas.get(i).setPrediccionSES((int)(alfa * demandaReal + (1 - alfa)
+                    * demandas.get(i - 1).getPrediccionSES()));
+        }
+
+        return demandas;
     }
 
     //------------------------------------------------------------------------------------------------
