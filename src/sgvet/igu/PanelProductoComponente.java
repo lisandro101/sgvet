@@ -90,6 +90,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         cbEstado = new javax.swing.JComboBox();
         cbCategoria = new javax.swing.JComboBox();
         cbUnidadMedida = new javax.swing.JComboBox();
+        btDemanda = new javax.swing.JButton();
         pTablaProveedores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tProveedor = new org.jdesktop.swingx.JXTable();
@@ -164,7 +165,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                     .addComponent(lbCostoPedio)
                     .addComponent(lbCostoAlmacenamiento)
                     .addComponent(lbStockReserva)
-                    .addComponent(lbDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                    .addComponent(lbDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfDemandaAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
@@ -314,13 +315,25 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                     .addComponent(cbUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        btDemanda.setText("Demanda");
+        btDemanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDemandaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pCamposLayout = new javax.swing.GroupLayout(pCampos);
         pCampos.setLayout(pCamposLayout);
         pCamposLayout.setHorizontalGroup(
             pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCamposLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pCamposLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pCamposLayout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(btDemanda)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pProductoTerminado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -329,7 +342,9 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCamposLayout.createSequentialGroup()
                 .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btDemanda)
+                .addGap(3, 3, 3))
             .addGroup(pCamposLayout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addComponent(pProductoTerminado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -337,24 +352,6 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
 
         pTablaProveedores.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedores"));
 
-        tProveedor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Nombre", "Teléfono", "Contacto"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tProveedor.setEditable(false);
         jScrollPane1.setViewportView(tProveedor);
 
         btAsignarProveedor.setText("Asignar Proveedor");
@@ -380,8 +377,8 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pTablaProveedoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTablaProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pTablaProveedoresLayout.setVerticalGroup(
@@ -406,13 +403,13 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                             .addComponent(pTablaProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pBotones, javax.swing.GroupLayout.DEFAULT_SIZE, 674, Short.MAX_VALUE)
+                        .addComponent(pBotones, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
                         .addGap(10, 10, 10))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pTablaProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -506,12 +503,19 @@ private void cbUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GE
 // TODO add your handling code here:
 }//GEN-LAST:event_cbUnidadMedidaActionPerformed
 
+private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDemandaActionPerformed
+   PanelDemandaTemporal panel = new PanelDemandaTemporal();
+   panel.setVisible(true);
+//   panel.setModal(true);
+}//GEN-LAST:event_btDemandaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoProd;
     private javax.swing.JButton btAgregar;
     private javax.swing.JButton btAsignarProveedor;
     private javax.swing.JButton btBuscar;
+    private javax.swing.JButton btDemanda;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEliminarProv;
     private javax.swing.JButton btModificar;
