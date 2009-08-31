@@ -393,7 +393,7 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             panelPuntoEquilibrio.setProductoTerminado((ProductoTerminado)resultado);
             dispose();
         }else if(tipo== Tipo.PANEL_DEMANDA){
-            panelDemanda.setProductoTerminado((ProductoTerminado)resultado);
+            panelDemanda.setProductoTerminado((ProductoComponente)resultado);
             dispose();
         }else if(tipo== Tipo.PANEL_ESTRUCTURA){
             Query consulta = FachadaPersistencia.getInstancia().crearConsulta("" +
@@ -516,7 +516,7 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
           // TODO: aca depende de q necesitamos para el TableModel  
         }else if(tipo== Tipo.PANEL_MATERIA_PRIMA){
             consulta.setParameter("tipo", 'M');
-        }else if(tipo== Tipo.PANEL_PROD_COMPONENTE){
+        }else if(tipo== Tipo.PANEL_PROD_COMPONENTE || tipo== Tipo.PANEL_DEMANDA){
             consulta.setParameter("tipo", 'C');
         }else{
             consulta.setParameter("tipo", 'T');
