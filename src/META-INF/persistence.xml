@@ -26,6 +26,7 @@
     <class>sgvet.entidades.NodoRuta</class>
     <class>sgvet.entidades.DetalleOrdenCompra</class>
     <class>sgvet.entidades.Empleado</class>
+    <class>sgvet.entidades.Demanda</class>
     <properties>
       <property name="eclipselink.jdbc.password" value="radiadores"/>
       <property name="eclipselink.jdbc.user" value="radiadores"/>
