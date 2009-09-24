@@ -59,6 +59,16 @@ public class Componente implements Serializable, IPersistente {
     public Componente() {
         setId(UUID.randomUUID().toString());
     }
+
+    public Componente(String cod, String nom, String uni, List<Proveedor> prov, double dem) {
+        setId(UUID.randomUUID().toString());
+        borrado = false;
+        codigo = cod;
+        nombre = nom;
+        unidadMedida = uni;
+        proveedores = prov;
+        demandaAnual = dem;
+    }
     
     /**
      * Devuelve el identificador único de la clase

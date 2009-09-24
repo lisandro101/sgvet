@@ -1,6 +1,7 @@
 package sgvet.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -26,6 +27,17 @@ public abstract class Producto extends Componente implements Serializable {
     private String estado;
     
     private boolean borrado;
+
+    public Producto() {
+        super();
+    }
+
+    public Producto(String cod, String nom, List<Proveedor> prov, double dem){
+        super(cod, nom, "uni", prov, dem);
+        estado = "Activo";
+        borrado = false;
+        unidadMedida = "unid";
+    }
 
     @Column(name="categoria", length=100)
     public String getCategoria() {
