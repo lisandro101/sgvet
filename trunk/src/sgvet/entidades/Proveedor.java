@@ -49,6 +49,12 @@ public class Proveedor implements Serializable, IPersistente {
     public Proveedor(){
         setId(UUID.randomUUID().toString());
     }
+
+    public Proveedor(String nom){
+        setId(UUID.randomUUID().toString());
+        borrado = false;
+        nombre = nom;
+    }
     
     /**
      * Devuelve el identificador único de la clase

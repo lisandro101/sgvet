@@ -1,11 +1,16 @@
 package sgvet;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import sgvet.entidades.Cargo;
+import sgvet.entidades.Demanda;
 import sgvet.entidades.ItemIndice;
+import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.ProductoTerminado;
+import sgvet.entidades.Proveedor;
 import sgvet.igu.PantallaPrincipal;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.persistencia.IPersistente;
@@ -51,6 +56,17 @@ public class Main {
 
     private static void cargarValoresIniciales() {
         List<IPersistente> objetos = new ArrayList<IPersistente>();
+
+        Demanda d = new Demanda();
+        List<Demanda> dem = new ArrayList<Demanda>();
+        dem.add(d);
+
+        Proveedor p = new Proveedor("Eukanuba");
+        List<Proveedor> prov = new ArrayList<Proveedor>();
+        prov.add(p);
+
+        ProductoComponente temp = new ProductoComponente("22-22-22-222-22", "Purina Dog Chow 2Kg", prov, 100,78.5, "SE Simple", dem);
+        objetos.add(temp);
 
         objetos.add(new ItemIndice("Disponibilidad", 20000));
         objetos.add(new ItemIndice("Realizable a corto plazo", 5000));
