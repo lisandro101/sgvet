@@ -28,17 +28,6 @@ public abstract class Producto extends Componente implements Serializable {
     
     private boolean borrado;
 
-    public Producto() {
-        super();
-    }
-
-    public Producto(String cod, String nom, List<Proveedor> prov, double dem){
-        super(cod, nom, "uni", prov, dem);
-        estado = "Activo";
-        borrado = false;
-        unidadMedida = "unid";
-    }
-
     @Column(name="categoria", length=100)
     public String getCategoria() {
         return categoria;

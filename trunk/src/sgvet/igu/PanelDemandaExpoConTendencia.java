@@ -19,7 +19,7 @@ import sgvet.utils.*;
  *
  * @author  Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
-public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IValidable {
+public class PanelDemandaExpoConTendencia extends javax.swing.JDialog implements IValidable {
     private static final long serialVersionUID = 1L;
 
 //    private DemandaSESTableModel tmDemanda;
@@ -30,11 +30,11 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
     private int cantAnios;
     private Date anioInicial;
     private double alfa;
-    private double gamma;
+    private double beta;
 
 
     /** Creates new form PanelCargoEmpleado */
-    public PanelDemandaExpoConTend(ProductoComponente productoNuevo) {
+    public PanelDemandaExpoConTendencia(ProductoComponente productoNuevo) {
 
         producto = productoNuevo;
 
@@ -45,7 +45,7 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
 
     }
 
-    public PanelDemandaExpoConTend() {
+    public PanelDemandaExpoConTendencia() {
         initComponents();
         inicializar();
 
@@ -90,8 +90,8 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
         lbCantidadPeriodos = new javax.swing.JLabel();
         btCargar = new javax.swing.JButton();
         dpAnioInicio = new org.jdesktop.swingx.JXDatePicker();
-        tfGamma = new javax.swing.JTextField();
-        lbGamma = new javax.swing.JLabel();
+        tfBeta = new javax.swing.JTextField();
+        lbBeta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -184,7 +184,7 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
 
         lbAlfa.setText("ALfa:");
 
-        tfAlfa.setText("0.3");
+        tfAlfa.setText("0.4");
         tfAlfa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAlfaActionPerformed(evt);
@@ -204,14 +204,14 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
 
         dpAnioInicio.setFormats("yyyy");
 
-        tfGamma.setText("0.3");
-        tfGamma.addActionListener(new java.awt.event.ActionListener() {
+        tfBeta.setText("0.2");
+        tfBeta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfGammaActionPerformed(evt);
+                tfBetaActionPerformed(evt);
             }
         });
 
-        lbGamma.setText("Gamma:");
+        lbBeta.setText("Beta:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -230,10 +230,10 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
                                     .addComponent(lbCantidadPeriodos)
                                     .addComponent(lbAlfa)
                                     .addComponent(lbAnioInicial)
-                                    .addComponent(lbGamma))
+                                    .addComponent(lbBeta))
                                 .addGap(5, 5, 5)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(tfGamma, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                                    .addComponent(tfBeta, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                                     .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                                     .addComponent(tfCantAnios, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
                                     .addComponent(dpAnioInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
@@ -259,8 +259,8 @@ public class PanelDemandaExpoConTend extends javax.swing.JDialog implements IVal
                     .addComponent(lbAlfa, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfGamma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbGamma, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(tfBeta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbBeta, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -302,7 +302,7 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
     tModel.fireTableDataChanged();
-    GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma);
+    GestorDemanda.getInstancia().calcularDemandaConTendencia(tModel, alfa, beta);
 
 //    tDemanda.repaint();
 //    alfa = Double.parseDouble(tfAlfa.getText());
@@ -388,9 +388,9 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     // TODO add your handling code here:
 }//GEN-LAST:event_tfAlfaActionPerformed
 
-private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfGammaActionPerformed
+private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBetaActionPerformed
     // TODO add your handling code here:
-}//GEN-LAST:event_tfGammaActionPerformed
+}//GEN-LAST:event_tfBetaActionPerformed
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -403,9 +403,9 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAlfa;
     private javax.swing.JLabel lbAnioInicial;
+    private javax.swing.JLabel lbBeta;
     private javax.swing.JLabel lbCantidadPeriodos;
     private javax.swing.JLabel lbCodigo;
-    private javax.swing.JLabel lbGamma;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JPanel pBotones;
     private javax.swing.JPanel pProducto;
@@ -413,9 +413,9 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JScrollPane scPanel;
     private org.jdesktop.swingx.JXTable tDemanda;
     private javax.swing.JTextField tfAlfa;
+    private javax.swing.JTextField tfBeta;
     private javax.swing.JTextField tfCantAnios;
     private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfGamma;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
 
@@ -458,14 +458,14 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         boolean resul= true;
 
         if(tfCantAnios.getText().equals("") || dpAnioInicio.getDate()==null
-                || tfAlfa.getText().equals("") || tfGamma.getText().equals("")){
+                || tfAlfa.getText().equals("") || tfBeta.getText().equals("")){
             resul=false;
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         }else{
             cantAnios= Integer.parseInt(tfCantAnios.getText());
             anioInicial = dpAnioInicio.getDate();
             alfa = Double.parseDouble(tfAlfa.getText());
-            gamma = Double.parseDouble(tfGamma.getText());
+            beta = Double.parseDouble(tfBeta.getText());
         }
         return resul;
     }
@@ -478,15 +478,9 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
 
     private void cargarDatosEnTabla(){
-          for (int i = 0; i < tModel.getRowCount(); i++) {
-            for (int j = 1; j < tModel.getColumnCount(); j++) {
-                if(i > tModel.getRowCount()-3 && j == tModel.getColumnCount()-1){
-
-                }else{
-
-                    tModel.setValueAt(345+i*2, i, j);
-                }
-            }
+        for (int i = 0; i < tModel.getRowCount(); i++) {
+            tModel.setValueAt((123+i*4), i, 1);
+           
         }
     }
 }

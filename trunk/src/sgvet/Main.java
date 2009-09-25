@@ -57,17 +57,6 @@ public class Main {
     private static void cargarValoresIniciales() {
         List<IPersistente> objetos = new ArrayList<IPersistente>();
 
-        Demanda d = new Demanda();
-        List<Demanda> dem = new ArrayList<Demanda>();
-        dem.add(d);
-
-        Proveedor p = new Proveedor("Eukanuba");
-        List<Proveedor> prov = new ArrayList<Proveedor>();
-        prov.add(p);
-
-        ProductoComponente temp = new ProductoComponente("22-22-22-222-22", "Purina Dog Chow 2Kg", prov, 100,78.5, "SE Simple", dem);
-        objetos.add(temp);
-
         objetos.add(new ItemIndice("Disponibilidad", 20000));
         objetos.add(new ItemIndice("Realizable a corto plazo", 5000));
         objetos.add(new ItemIndice("Pasivo corriente", 1500));
