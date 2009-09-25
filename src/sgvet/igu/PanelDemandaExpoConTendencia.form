@@ -194,11 +194,11 @@
                                       <Component id="lbCantidadPeriodos" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbAlfa" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="lbAnioInicial" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lbGamma" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lbBeta" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="tfGamma" alignment="0" pref="155" max="32767" attributes="3"/>
+                                      <Component id="tfBeta" alignment="0" pref="155" max="32767" attributes="3"/>
                                       <Component id="tfAlfa" alignment="0" pref="155" max="32767" attributes="3"/>
                                       <Component id="tfCantAnios" alignment="0" pref="155" max="32767" attributes="3"/>
                                       <Component id="dpAnioInicio" alignment="0" pref="155" max="32767" attributes="0"/>
@@ -235,8 +235,8 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tfGamma" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="lbGamma" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfBeta" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbBeta" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btCargar" min="-2" pref="23" max="-2" attributes="0"/>
@@ -271,7 +271,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="tfAlfa">
           <Properties>
-            <Property name="text" type="java.lang.String" value="0.3"/>
+            <Property name="text" type="java.lang.String" value="0.4"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAlfaActionPerformed"/>
@@ -304,17 +304,17 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfGamma">
+        <Component class="javax.swing.JTextField" name="tfBeta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="0.3"/>
+            <Property name="text" type="java.lang.String" value="0.2"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfGammaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBetaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbGamma">
+        <Component class="javax.swing.JLabel" name="lbBeta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Gamma:"/>
+            <Property name="text" type="java.lang.String" value="Beta:"/>
           </Properties>
         </Component>
       </SubComponents>

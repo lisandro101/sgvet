@@ -261,7 +261,41 @@ public class GestorDemanda {
 
             }
         }
+ 
+    }
 
-        
+    public void calcularDemandaConTendencia(TableModel tModel, double alfa, double beta){
+        double indiceTend1[] = new double[tModel.getRowCount()];
+        double indiceTend2[] = new double[tModel.getRowCount()];
+        double demanPromedio1[] = new double[tModel.getRowCount()];
+        double demanPromedio2[] = new double[tModel.getRowCount()];
+        double temp;
+
+        //inicializar tendencia en cero y la demanda promedio en con la demanda real actual
+        for (int i = 0; i < tModel.getRowCount(); i++) {
+            indiceTend1[i]=0;
+            demanPromedio1[i]=Double.parseDouble(tModel.getValueAt(i,1).toString());
+        }
+
+        for (int j = 1; j < tModel.getColumnCount()-1; j++) {
+            for (int i = 0; i < tModel.getRowCount(); i++) {
+
+                if(tModel.getValueAt(i,j ) != null){
+                    demanPromedio2[i]= (alfa*Double.parseDouble(tModel.getValueAt(i,j).toString())+(1-alfa)*(demanPromedio1[i] + indiceTend2[i]));
+                    indiceTend2[i]= beta *(demanPromedio2[i]- demanPromedio1[i])+(1-beta)*indiceTend1[i];
+
+                }else{
+
+                }
+            }
+            for (int s = 0; s < tModel.getRowCount(); s++) {
+                temp= demanPromedio2[s]+indiceTend2[s];
+                tModel.setValueAt((int)temp, s, j+1);
+                
+                indiceTend1[s]=indiceTend2[s];
+                demanPromedio1[s]= demanPromedio2[s];
+            }
+            
+        }
     }
 }

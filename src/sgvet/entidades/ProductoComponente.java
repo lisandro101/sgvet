@@ -24,19 +24,6 @@ public class ProductoComponente extends Producto implements Serializable {
     private double precioVenta;
     private String tipoPrediccion;
 
-    public ProductoComponente(){
-        super();
-    }
-
-    public ProductoComponente(String cod, String nom, List<Proveedor> prov, double dem, double precio, String tipo, List<Demanda> demandas){
-        
-        super(cod, nom, prov, dem);
-
-        this.precioVenta = precio;
-        this.tipoPrediccion = tipo;
-        this.demandas = demandas;
-    }
-
     @Column(name="precio_venta")
     public double getPrecioVenta() {
         return precioVenta;
