@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.OrdenProduccion;
+import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.ProductoTerminado;
 import sgvet.gestores.GestorOrdenProduccion;
 import sgvet.igu.buscar.PanelBuscarOrdenProduccion;
@@ -29,7 +30,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
     
     private OrdenProduccion ordenProduccion;
     private OrdenProduccionTableModel tm;
-    private ProductoTerminado productoTerminado;
+    private ProductoComponente producto;
     private DetalleOrdenProduccion detalleOrdenProduccion;
     
     
@@ -428,12 +429,12 @@ private void btBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void btAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarProductoActionPerformed
     int cantidad = (Integer)spCantidad.getValue();
-        if(productoTerminado == null ||cantidad ==0){
+        if(producto == null ||cantidad ==0){
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         }else{ 
             
                 detalleOrdenProduccion = new DetalleOrdenProduccion();
-                detalleOrdenProduccion.setProductoTerminado(productoTerminado);
+                detalleOrdenProduccion.setProducto(producto);
                 detalleOrdenProduccion.setCantidad(cantidad);
                 
                 if(ValidacionBuscar.getInstancia().componenteEstaCargadoOrdenProdEnTabla(tm, detalleOrdenProduccion)){
@@ -570,8 +571,8 @@ private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         ordenProduccion.setFechaEstimadaEntrega(jdFechaEntrega.getDate());
     }
     
-    public void setProductoTerminado(ProductoTerminado prod){
-        productoTerminado= prod;
+    public void setProductoTerminado(ProductoComponente prod){
+        producto= prod;
         tfProducto.setText(prod.getNombre());
         
     }

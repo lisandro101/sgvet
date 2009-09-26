@@ -80,7 +80,7 @@ public class GestorOrdenProduccion {
 
         for (DetalleOrdenProduccion detalle : orden.getDetallesOrdenProduccion()) {
             consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from EstructuraDeProducto a where a.productoTerminado = :producto and a.borrado=false");
-            consulta.setParameter("producto", detalle.getProductoTerminado());
+            consulta.setParameter("producto", detalle.getProducto());
             List<EstructuraDeProducto> estructuras = FachadaPersistencia.getInstancia().buscar(EstructuraDeProducto.class, consulta);
 
             if (estructuras.size() == 0) {
@@ -153,13 +153,13 @@ public class GestorOrdenProduccion {
     
     private void sumarProductoTerminado(OrdenProduccion orden){
         List<DetalleOrdenProduccion> detalle= orden.getDetallesOrdenProduccion();
-        ProductoTerminado terminado;
+        ProductoComponente producto;
         double stockAnterior;
         for (DetalleOrdenProduccion detalleOrdenProduccion : detalle) {
-            terminado= detalleOrdenProduccion.getProductoTerminado();
-            stockAnterior= terminado.getStock();
-            terminado.setStock(stockAnterior+ detalleOrdenProduccion.getCantidad());
-            FachadaPersistencia.getInstancia().actualizar(terminado, true);
+            producto= detalleOrdenProduccion.getProducto();
+            stockAnterior= producto.getStock();
+            producto.setStock(stockAnterior+ detalleOrdenProduccion.getCantidad());
+            FachadaPersistencia.getInstancia().actualizar(producto, true);
                     
         }
         

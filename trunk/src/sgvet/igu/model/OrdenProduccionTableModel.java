@@ -97,16 +97,16 @@ public class OrdenProduccionTableModel extends AbstractTableModel implements IMo
         
         switch(columna) {
             case 0:
-                resultado = detallesOrdenProduccion.get(fila).getProductoTerminado().getCodigo();
+                resultado = detallesOrdenProduccion.get(fila).getProducto().getCodigo();
                 break;
             case 1:
-                resultado = detallesOrdenProduccion.get(fila).getProductoTerminado().getNombre();
+                resultado = detallesOrdenProduccion.get(fila).getProducto().getNombre();
                 break;
             case 2:
                 resultado = detallesOrdenProduccion.get(fila).getCantidad();
                 break;
             case 3:
-                resultado = detallesOrdenProduccion.get(fila).getProductoTerminado().getPrecioVenta();
+                resultado = detallesOrdenProduccion.get(fila).getProducto().getPrecioVenta();
                 break;    
         }
         return resultado;
@@ -182,7 +182,7 @@ public class OrdenProduccionTableModel extends AbstractTableModel implements IMo
     @Override
     public void setValueAt(Object valor, int fila, int columna) {
         if(columna == 3) {
-            detallesOrdenProduccion.get(fila).getProductoTerminado().setPrecioVenta((Double)valor);
+            detallesOrdenProduccion.get(fila).getProducto().setPrecioVenta((Double)valor);
         }else if(columna == 2) {
             detallesOrdenProduccion.get(fila).setCantidad((Integer)valor);
         }

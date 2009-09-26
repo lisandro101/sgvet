@@ -417,7 +417,7 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             panelOrdenCompra.setComponente(resultado);
             dispose();
         }else if(tipo==Tipo.PANEL_ORDEN_PRODUCCION){
-            panelOrdenProduccion.setProductoTerminado((ProductoTerminado)resultado);
+            panelOrdenProduccion.setProductoTerminado((ProductoComponente)resultado);
             dispose();
         }else if(tipo== Tipo.PANEL_RUTA_FABRICACION){
             panelRutaFabricacion.setComponente(resultado);
