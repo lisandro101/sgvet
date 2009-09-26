@@ -118,7 +118,7 @@ public class ValidacionBuscar {
         List<DetalleOrdenProduccion> detallesOrdenProduccion= tm.getFilas();
         
         for (int i = 0; i < detallesOrdenProduccion.size(); i++) {
-            if(detallesOrdenProduccion.get(i).getProductoTerminado().getNombre().equals(valor.getProductoTerminado().getNombre())){
+            if(detallesOrdenProduccion.get(i).getProducto().getNombre().equals(valor.getProducto().getNombre())){
                 resultado=true;
                 
             }

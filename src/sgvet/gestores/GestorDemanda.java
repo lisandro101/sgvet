@@ -4,10 +4,19 @@
  */
 
 package sgvet.gestores;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.Query;
 import javax.swing.table.TableModel;
 import sgvet.entidades.Demanda;
+import sgvet.entidades.DemandaXPeriodo;
+import sgvet.entidades.DetalleOrdenProduccion;
+import sgvet.entidades.OrdenProduccion;
+import sgvet.entidades.ProductoComponente;
 import sgvet.igu.PanelDemanda;
+import sgvet.persistencia.FachadaPersistencia;
 
 /**
  *
@@ -298,4 +307,59 @@ public class GestorDemanda {
             
         }
     }
+
+    public int CalcularDemandaAcumulada(ProductoComponente producto){
+        int total=0;
+        List <DetalleOrdenProduccion> detallesOrdenes;
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false" );
+        consulta.setParameter("nombre",producto );
+        detallesOrdenes = FachadaPersistencia.getInstancia().buscar(DetalleOrdenProduccion.class, consulta);
+
+        for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
+            total+= detalleOrdenProduccion.getCantidad();
+        }
+
+        return total;
+    }
+
+    public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto){
+        int total=0;
+        List <OrdenProduccion> ordenes;
+        List<DemandaXPeriodo> demandasXPeriodo;
+        Date fechaIni;
+        Date fechaFin;
+
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.detalleOrdenProduccion.producto = :nombre and a.borrado=false ORDER BY a.fecha ASC" );
+        consulta.setParameter("nombre",producto );
+        ordenes = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+
+        fechaIni= primerDia(ordenes.get(0).getFecha());
+        fechaFin= ultimoDia(ordenes.get(0).getFecha());
+
+        for (OrdenProduccion ordenProduccion : ordenes) {
+//            fechaT = ordenProduccion.getFecha();
+//            fechaT.
+//            if(fechaT.){
+
+//            }
+        }
+        demandasXPeriodo=null;
+
+        return demandasXPeriodo;
+    }
+
+    private Date primerDia(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        cal.set(cal.get(0), cal.get(1), 1);
+        return cal.getTime();
+    }
+
+    private Date ultimoDia(Date fecha){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        cal.set(cal.get(0), cal.get(1), 28);
+        return cal.getTime();
+    }
+
 }

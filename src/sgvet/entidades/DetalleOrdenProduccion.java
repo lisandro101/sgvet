@@ -27,7 +27,7 @@ public class DetalleOrdenProduccion implements Serializable, IPersistente {
     
     private String id;
     private int cantidad;
-    private ProductoTerminado productoTerminado;
+    private ProductoComponente producto;
     private boolean borrado;
     private OrdenProduccion ordenProduccion;
     
@@ -67,14 +67,14 @@ public class DetalleOrdenProduccion implements Serializable, IPersistente {
         this.cantidad = cantidad;
     }
 
-    @JoinColumn(name="producto_terminado_id")
-    @ManyToOne(targetEntity=ProductoTerminado.class, cascade=CascadeType.ALL)
-    public ProductoTerminado getProductoTerminado() {
-        return productoTerminado;
+    @JoinColumn(name="producto_componente_id")
+    @ManyToOne(targetEntity=ProductoComponente.class, cascade=CascadeType.ALL)
+    public ProductoComponente getProducto() {
+        return producto;
     }
 
-    public void setProductoTerminado(ProductoTerminado productoTerminado) {
-        this.productoTerminado = productoTerminado;
+    public void setProducto(ProductoComponente productoComponente) {
+        this.producto = productoComponente;
     }
 
     @Column(name="borrado")
