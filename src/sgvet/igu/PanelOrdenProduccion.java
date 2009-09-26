@@ -509,7 +509,7 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         ordenProduccion.setFecha(jdFecha.getDate());
     }
     
-    public void setProductoTerminado(ProductoComponente prod){
+    public void setProducto(ProductoComponente prod){
         producto= prod;
         tfProducto.setText(prod.getNombre());
         

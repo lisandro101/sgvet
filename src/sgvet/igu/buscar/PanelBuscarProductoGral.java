@@ -266,7 +266,7 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     if(indice ==-1 ){
         JOptionPane.showMessageDialog(this, "No se ha seleccionado Componente");
     }else{
-        resultado=tmBuscar.getFila(indice);
+        resultado = tmBuscar.getFila(indice);
         if(tipo== Tipo.TABLE_MODEL){
             if(tmOrigen.getRowCount()<1){
                 tmOrigen.agregarFila(resultado);   
@@ -294,7 +294,7 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             panelOrdenCompra.setComponente(resultado);
             dispose();
         }else if(tipo==Tipo.PANEL_ORDEN_PRODUCCION){
-            panelOrdenProduccion.setProductoTerminado((ProductoComponente)resultado);
+            panelOrdenProduccion.setProducto((ProductoComponente)resultado);
             dispose();
         }
     }
@@ -323,14 +323,9 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
 
     }else if(tipo==Tipo.PANEL_ORDEN_PRODUCCION){
         
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from RutaFabricacion a where a.borrado=false");
-        
-//        List<RutaFabricacion> rutas = FachadaPersistencia.getInstancia().buscar(RutaFabricacion.class, consulta);
-        componentes= new ArrayList<Componente>();
-        
-//        for (RutaFabricacion rutaFabricacion : rutas) {
-//            componentes.add(rutaFabricacion.getProductoTerminado());
-//        }
+        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Componente a where a.borrado=false");
+       
+        componentes = FachadaPersistencia.getInstancia().buscar(Componente.class, consulta);
         
     }else{
         consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Componente a where ( (a.nombre) LIKE :nombre or (a.codigo) LIKE :codigo ) and a.borrado=false and a.tipo= :tipo" );
