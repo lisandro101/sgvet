@@ -506,28 +506,20 @@ private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_btBuscarActionPerformed
 
 private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
-    if(productoComponente != null && ValidacionEliminar.getInstancia().productoComponenteEstaRelacionada(productoComponente)){
-        JOptionPane.showMessageDialog(this, "No puede eliminar el Producto Componente " +
-                "se utiliza en alguna estructura");
-    } else {
-//        if(productoComponente != null &&
-//                productoComponente.getProveedores().size() > 0) {
-//            JOptionPane.showMessageDialog(this, "No puede eliminar un producto " +
-//                    "que tiene proveedores asociados");
-//        } else {
-            int opcion = JOptionPane.showConfirmDialog(this,
-                        "¿Seguro desea eliminar el Producto Componente?", "Aceptar",
-                        JOptionPane.YES_NO_OPTION);
 
-            if(opcion == JOptionPane.YES_OPTION) {
-                productoComponente.setBorrado(true);
-                FachadaPersistencia.getInstancia().actualizar(productoComponente, true);
-                Util.getInstancia().limpiarCampos(this);
-                productoComponente=null;
-                inicializarBotones();
-            }  
-//        }
+    int opcion = JOptionPane.showConfirmDialog(this,
+                "¿Seguro desea eliminar el Producto Componente?", "Aceptar",
+                JOptionPane.YES_NO_OPTION);
+
+    if(opcion == JOptionPane.YES_OPTION) {
+        productoComponente.setBorrado(true);
+        FachadaPersistencia.getInstancia().actualizar(productoComponente, true);
+        Util.getInstancia().limpiarCampos(this);
+        productoComponente=null;
+        inicializarBotones();
     }
+
+    
 }//GEN-LAST:event_btEliminarActionPerformed
 
 private void cbUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadMedidaActionPerformed

@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,7 +39,6 @@ public class Empleado implements Serializable, IPersistente {
     private String nombre;
     private String telefono;
     private Cargo cargo;
-    private List<HoraLaboral> horasTrabajadas;
     private String estado;
     private boolean borrado;
 
@@ -145,17 +143,7 @@ public class Empleado implements Serializable, IPersistente {
 
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
-    }
-    
-    @OneToMany(targetEntity=HoraLaboral.class, cascade=CascadeType.ALL,
-    mappedBy="empleado")
-    public List<HoraLaboral> getHorasTrabajadas() {
-        return horasTrabajadas;
-    }
-
-    public void setHorasTrabajadas(List<HoraLaboral> horasTrabajadas) {
-        this.horasTrabajadas = horasTrabajadas;
-    }
+    }    
     
     @Column(name="estado", length=20)
     public String getEstado() {

@@ -23,13 +23,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private PanelProveedor panelProveedor;
     private PanelProductoComponente panelProductoComponente;
     private PanelOrdenCompra panelOrdenCompra;
-    private PanelMateriaPrima panelMateriaPrima;
-    private PanelProductoTerminado panelProductoTerminado;
     private PanelEmpleado panelEmpleado;   
     private PanelOrdenProduccion panelOrdenProduccion;
     private PanelMaquina panelMaquina; 
-    private PanelEstructuraDeProducto panelEstructuraDeProducto;
-    private PanelRutaFabricacion panelRutaFabricacion;
     private PanelCentroTrabajo panelCentroTrabajo;
 
     /** Creates new form PantallaPrincipal */
@@ -42,26 +38,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         panelProveedor = new PanelProveedor();
         panelProductoComponente = new PanelProductoComponente();
         panelOrdenCompra = new PanelOrdenCompra();
-        panelMateriaPrima = new PanelMateriaPrima();
-        panelProductoTerminado = new PanelProductoTerminado();
         panelEmpleado = new PanelEmpleado();        
         panelOrdenProduccion = new PanelOrdenProduccion();
         panelMaquina = new PanelMaquina();
-        panelEstructuraDeProducto = new PanelEstructuraDeProducto();
-        panelRutaFabricacion = new PanelRutaFabricacion();
         panelCentroTrabajo = new PanelCentroTrabajo();
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
-        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
-//        jTabbedPane1.add("   Materia Prima   ", panelMateriaPrima);
-//        jTabbedPane1.add("Producto Componente", panelProductoComponente);
-//        jTabbedPane1.add("Producto Terminado ", panelProductoTerminado);
+//        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
 //        jTabbedPane1.add("     Personal      ", panelEmpleado);
-//        jTabbedPane1.add(" Orden Producción  ", panelOrdenProduccion);
+        jTabbedPane1.add(" Orden Producción  ", panelOrdenProduccion);
 //        jTabbedPane1.add("    Maquinaria     ", panelMaquina);
-//        jTabbedPane1.add("    Estructura     ", panelEstructuraDeProducto);
-//        jTabbedPane1.add("       Ruta        ", panelRutaFabricacion);
 //        jTabbedPane1.add("  Centro Trabajo   ", panelCentroTrabajo);
     }
 
@@ -79,8 +66,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         archivo = new javax.swing.JMenu();
         costos = new javax.swing.JMenu();
         costoFijo = new javax.swing.JMenuItem();
-        costoVariable = new javax.swing.JMenuItem();
-        puntoEquilibrio = new javax.swing.JMenuItem();
         inventario = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         indices = new javax.swing.JMenu();
@@ -121,24 +106,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         costos.add(costoFijo);
-
-        costoVariable.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        costoVariable.setText("Costo Variable");
-        costoVariable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                costoVariableActionPerformed(evt);
-            }
-        });
-        costos.add(costoVariable);
-
-        puntoEquilibrio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        puntoEquilibrio.setText("Punto Equilibrio");
-        puntoEquilibrio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                puntoEquilibrioActionPerformed(evt);
-            }
-        });
-        costos.add(puntoEquilibrio);
 
         menu.add(costos);
 
@@ -220,29 +187,12 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
     if (tabVieja != tabNueva) {
 
         switch (tabVieja) {
-            case 0:
-                if (panelMateriaPrima.getMateriaPrima() == null) {
-                    limpiarCampos(panelMateriaPrima);
-                } else {
-//                    avisoPanelCargado(panelMateriaPrima);
-                    guardarInfoPanel(panelMateriaPrima);
-                    limpiarCampos(panelMateriaPrima);
-                }
-                break;
             case 1:
                 if (panelProductoComponente.getProductoComponente() == null) {
                     limpiarCampos(panelProductoComponente);
                 } else {
                     guardarInfoPanel(panelProductoComponente);
                     limpiarCampos(panelProductoComponente);
-                }
-                break;
-            case 2:
-                if (panelProductoTerminado.getProductoTerminado() == null) {
-                    limpiarCampos(panelProductoTerminado);
-                } else {
-                    guardarInfoPanel(panelProductoTerminado);
-                    limpiarCampos(panelProductoTerminado);
                 }
                 break;
             case 3:
@@ -284,23 +234,7 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
                     guardarInfoPanel(panelProveedor);
                     limpiarCampos(panelProveedor);
                 }
-                break;
-            case 8:
-                if (panelEstructuraDeProducto.getEstructuraDeProducto() == null) {
-                    limpiarCampos(panelEstructuraDeProducto);
-                } else {
-                    guardarInfoPanel(panelEstructuraDeProducto);
-                    limpiarCampos(panelEstructuraDeProducto);
-                }
-                break;
-            case 9:
-                if (panelRutaFabricacion.getRutaFabricacion() == null) {
-                    limpiarCampos(panelRutaFabricacion);
-                } else {
-                    guardarInfoPanel(panelRutaFabricacion);
-                    limpiarCampos(panelRutaFabricacion);
-                }
-                break;
+                break;        
             case 10:
                 if (panelCentroTrabajo.getCentroDeTrabajo() == null) {
                     limpiarCampos(panelCentroTrabajo);
@@ -322,18 +256,6 @@ private void costoFijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     panelCostoFijo.setModal(true);
     panelCostoFijo.setVisible(true);
 }//GEN-LAST:event_costoFijoActionPerformed
-
-private void costoVariableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoVariableActionPerformed
-    PanelCostoVariable panelCostoVariable = new PanelCostoVariable();
-    panelCostoVariable.setModal(true);
-    panelCostoVariable.setVisible(true);
-}//GEN-LAST:event_costoVariableActionPerformed
-
-private void puntoEquilibrioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_puntoEquilibrioActionPerformed
-    PanelPuntoEquilibrio panelCostoVariable = new PanelPuntoEquilibrio();
-    panelCostoVariable.setModal(true);
-    panelCostoVariable.setVisible(true);
-}//GEN-LAST:event_puntoEquilibrioActionPerformed
 
 private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
     PanelInventario panelInventario = new PanelInventario();
@@ -367,7 +289,6 @@ private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JMenu ayuda;
     private javax.swing.JMenuItem calcularIndices;
     private javax.swing.JMenuItem costoFijo;
-    private javax.swing.JMenuItem costoVariable;
     private javax.swing.JMenu costos;
     private javax.swing.JMenu demanda;
     private javax.swing.JMenu indices;
@@ -376,7 +297,6 @@ private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem prediccionDemanda;
-    private javax.swing.JMenuItem puntoEquilibrio;
     private javax.swing.JMenu reportes;
     private javax.swing.JMenuItem verReportes;
     // End of variables declaration//GEN-END:variables

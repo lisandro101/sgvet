@@ -11,7 +11,6 @@ import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import sgvet.entidades.Empleado;
-import sgvet.igu.PanelDetalleRuta;
 import sgvet.igu.PanelEmpleado;
 import sgvet.igu.model.EmpleadoTableModel;
 import sgvet.persistencia.FachadaPersistencia;
@@ -25,7 +24,6 @@ public class PanelBuscarEmpleado extends javax.swing.JDialog {
 
     private List<Empleado> empleados;
     private PanelEmpleado panelEmpleado;
-    private PanelDetalleRuta panelDetalleRuta;
     private EmpleadoTableModel tmBuscar;
     private Tipo tipo;
    
@@ -34,12 +32,6 @@ public class PanelBuscarEmpleado extends javax.swing.JDialog {
         initComponents();
         panelEmpleado= panel;
         tipo= Tipo.PANEL_EMPLEADO;
-        inicializar();
-    }
-    public PanelBuscarEmpleado(PanelDetalleRuta panel) {
-        initComponents();
-        panelDetalleRuta= panel;
-        tipo= Tipo.PANEL_DETALLE_RUTA;
         inicializar();
     }
 
@@ -250,8 +242,6 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         
         if(tipo==Tipo.PANEL_EMPLEADO){
             panelEmpleado.setEmpleado(resultado);
-        }else{
-            panelDetalleRuta.setEmpleado(resultado);
         }
 
         dispose();

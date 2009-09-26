@@ -8,12 +8,7 @@ package sgvet.gestores;
 
 import java.util.List;
 import javax.persistence.Query;
-import sgvet.entidades.Componente;
 import sgvet.entidades.CostoFijo;
-import sgvet.entidades.MateriaPrima;
-import sgvet.entidades.OrdenCompra;
-import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.Proveedor;
 import sgvet.igu.model.CostoFijoTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 

@@ -16,7 +16,6 @@
     <class>sgvet.entidades.ItemIndice</class>
     <class>sgvet.entidades.RutaFabricacion</class>
     <class>sgvet.entidades.Edificio</class>
-    <class>sgvet.entidades.Producto</class>
     <class>sgvet.entidades.DetalleOrdenProduccion</class>
     <class>sgvet.entidades.CostoFijo</class>
     <class>sgvet.entidades.EstructuraDeProducto</class>
@@ -27,6 +26,7 @@
     <class>sgvet.entidades.DetalleOrdenCompra</class>
     <class>sgvet.entidades.Empleado</class>
     <class>sgvet.entidades.Demanda</class>
+    <class>sgvet.entidades.Intermedio</class>
     <properties>
       <property name="eclipselink.jdbc.password" value="radiadores"/>
       <property name="eclipselink.jdbc.user" value="radiadores"/>

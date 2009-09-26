@@ -11,8 +11,6 @@ import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import sgvet.entidades.Componente;
-import sgvet.entidades.EstructuraDeProducto;
-import sgvet.entidades.ParteDeEstructura;
 import sgvet.igu.model.ProductoGralTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -26,8 +24,6 @@ public class PanelBuscarComponente extends javax.swing.JDialog {
 
     
     private ProductoGralTableModel tmBuscar;
-    List<EstructuraDeProducto> estructuras;
-    List<ParteDeEstructura> partes;
     private static Componente componente;
 
     //Constructor

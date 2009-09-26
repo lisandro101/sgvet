@@ -43,8 +43,8 @@ public class Cargo implements Serializable, IPersistente {
      * 
      * @return El identificador único de la clase
      */
-    @Id
     @Column(name="id", length=36)
+    @Id
     public String getId() {
         return id;
     }
