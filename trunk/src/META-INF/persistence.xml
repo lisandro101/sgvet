@@ -2,31 +2,23 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="radiadoresPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>sgvet.entidades.Componente</class>
-    <class>sgvet.entidades.OrdenProduccion</class>
-    <class>sgvet.entidades.OrdenCompra</class>
-    <class>sgvet.entidades.Sector</class>
-    <class>sgvet.entidades.HoraLaboral</class>
-    <class>sgvet.entidades.ParteDeNodo</class>
-    <class>sgvet.entidades.ProductoTerminado</class>
     <class>sgvet.entidades.Cargo</class>
     <class>sgvet.entidades.CentroDeTrabajo</class>
-    <class>sgvet.entidades.Proveedor</class>
-    <class>sgvet.entidades.MateriaPrima</class>
-    <class>sgvet.entidades.ItemIndice</class>
-    <class>sgvet.entidades.RutaFabricacion</class>
-    <class>sgvet.entidades.Edificio</class>
-    <class>sgvet.entidades.DetalleOrdenProduccion</class>
+    <class>sgvet.entidades.Componente</class>
     <class>sgvet.entidades.CostoFijo</class>
-    <class>sgvet.entidades.EstructuraDeProducto</class>
-    <class>sgvet.entidades.Maquina</class>
-    <class>sgvet.entidades.ParteDeEstructura</class>
-    <class>sgvet.entidades.ProductoComponente</class>
-    <class>sgvet.entidades.NodoRuta</class>
-    <class>sgvet.entidades.DetalleOrdenCompra</class>
-    <class>sgvet.entidades.Empleado</class>
     <class>sgvet.entidades.Demanda</class>
+    <class>sgvet.entidades.DetalleOrdenCompra</class>
+    <class>sgvet.entidades.DetalleOrdenProduccion</class>
+    <class>sgvet.entidades.Edificio</class>
+    <class>sgvet.entidades.Empleado</class>
     <class>sgvet.entidades.Intermedio</class>
+    <class>sgvet.entidades.ItemIndice</class>
+    <class>sgvet.entidades.Maquina</class>
+    <class>sgvet.entidades.OrdenCompra</class>
+    <class>sgvet.entidades.OrdenProduccion</class>
+    <class>sgvet.entidades.ProductoComponente</class>
+    <class>sgvet.entidades.Proveedor</class>
+    <class>sgvet.entidades.Sector</class>
     <properties>
       <property name="eclipselink.jdbc.password" value="radiadores"/>
       <property name="eclipselink.jdbc.user" value="radiadores"/>
