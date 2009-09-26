@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.Demanda;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.ProductoTerminado;
 import sgvet.gestores.GestorDemanda;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
 import sgvet.igu.model.DemandaTableModel;
@@ -557,9 +556,9 @@ private void tfPMSEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 }//GEN-LAST:event_tfPMSEActionPerformed
 
 private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdTerminadoActionPerformed
-    PanelBuscarProductoGral buscarProv = new PanelBuscarProductoGral(this);
-    buscarProv.setModal(true);
-    buscarProv.setVisible(true);
+//    PanelBuscarProductoGral buscarProv = new PanelBuscarProductoGral(this);
+//    buscarProv.setModal(true);
+//    buscarProv.setVisible(true);
 }//GEN-LAST:event_btBuscarProdTerminadoActionPerformed
 
 private void dpPeriodoFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpPeriodoFinalActionPerformed

@@ -7,7 +7,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.Componente;
 import sgvet.entidades.DetalleOrdenCompra;
-import sgvet.entidades.MateriaPrima.Estado;
 import sgvet.entidades.OrdenCompra;
 import sgvet.entidades.Proveedor;
 import sgvet.gestores.GestorOrdenCompra;

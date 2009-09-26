@@ -136,6 +136,6 @@ dispose();
     private org.jdesktop.swingx.JXTable tProductos;
     // End of variables declaration//GEN-END:variables
     private void cargarTabla(){
-        GestorOrdenCompra.getInstancia().generarOrdenAutomatica(tm);
+//        GestorOrdenCompra.getInstancia().generarOrdenAutomatica(tm);
     }
 }

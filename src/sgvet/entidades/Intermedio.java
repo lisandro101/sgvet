@@ -14,9 +14,9 @@ import javax.persistence.Table;
  * @version 1.0
  */
 @Entity
-@Table(name="productos")
+@Table(name="intermedios")
 @DiscriminatorValue("P")
-public abstract class Producto extends Componente implements Serializable {
+public abstract class Intermedio extends Componente implements Serializable {
     private static final long serialVersionUID = 1L;
     
     private String categoria;

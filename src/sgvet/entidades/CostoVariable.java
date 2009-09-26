@@ -10,7 +10,7 @@ package sgvet.entidades;
  * @author stafoxter
  */
 public class CostoVariable {
-    private ProductoTerminado productoTerminado;
+    private ProductoComponente producto;
     private double costoManoObra;
     private double costoMateriales;
 
@@ -30,12 +30,12 @@ public class CostoVariable {
         this.costoMateriales = costoMateriales;
     }
 
-    public ProductoTerminado getProductoTerminado() {
-        return productoTerminado;
+    public ProductoComponente getProductoTerminado() {
+        return producto;
     }
 
-    public void setProductoTerminado(ProductoTerminado productoTerminado) {
-        this.productoTerminado = productoTerminado;
+    public void setProductoTerminado(ProductoComponente productoTerminado) {
+        this.producto = productoTerminado;
     }
     
     

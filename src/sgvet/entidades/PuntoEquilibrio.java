@@ -11,7 +11,7 @@ package sgvet.entidades;
  */
 public class PuntoEquilibrio {
 
-    private ProductoTerminado productoTerminado;
+    private ProductoComponente producto;
     private double equivalencia;
 
     public double getEquivalencia() {
@@ -22,11 +22,11 @@ public class PuntoEquilibrio {
         this.equivalencia = equivalencia;
     }
 
-    public ProductoTerminado getProductoTerminado() {
-        return productoTerminado;
+    public ProductoComponente getProductoTerminado() {
+        return producto;
     }
 
-    public void setProductoTerminado(ProductoTerminado productoTerminado) {
-        this.productoTerminado = productoTerminado;
+    public void setProductoTerminado(ProductoComponente productoTerminado) {
+        this.producto = productoTerminado;
     }
 }

@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.OrdenProduccion;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.ProductoTerminado;
 import sgvet.gestores.GestorOrdenProduccion;
 import sgvet.igu.buscar.PanelBuscarOrdenProduccion;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
@@ -44,7 +43,6 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
     private void inicializar() { 
         tm = new OrdenProduccionTableModel(0);
         jtProducto.setModel(tm);
-        btTerminado.setEnabled(false);
         
     }
     /** This method is called from within the constructor to
@@ -59,15 +57,10 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
         jPanel1 = new javax.swing.JPanel();
         jdFecha = new org.jdesktop.swingx.JXDatePicker();
         lbFecha = new javax.swing.JLabel();
-        lbFechaEntrega = new javax.swing.JLabel();
-        jdFechaEntrega = new org.jdesktop.swingx.JXDatePicker();
         lbNumero = new javax.swing.JLabel();
         tfNumero = new javax.swing.JTextField();
         lbCliente = new javax.swing.JLabel();
         tfCliente = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        tfEstado = new javax.swing.JTextField();
-        btTerminado = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtProducto = new org.jdesktop.swingx.JXTable();
@@ -92,10 +85,6 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
 
         lbFecha.setText("Fecha");
 
-        lbFechaEntrega.setText("Fecha de Entrega");
-
-        jdFechaEntrega.setFormats("dd/MM/yy");
-
         lbNumero.setText("Numero");
 
         tfNumero.setEditable(false);
@@ -107,17 +96,6 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
 
         lbCliente.setText("Cliente");
 
-        jLabel1.setText("Estado");
-
-        tfEstado.setEditable(false);
-
-        btTerminado.setText("Terminado");
-        btTerminado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTerminadoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,8 +106,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbNumero)
-                            .addComponent(lbCliente)
-                            .addComponent(jLabel1)))
+                            .addComponent(lbCliente)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lbFecha)))
@@ -137,16 +114,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
                     .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lbFechaEntrega)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jdFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btTerminado)))
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -163,15 +131,8 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lbFecha)
-                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbFechaEntrega)
-                    .addComponent(jdFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
-                    .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btTerminado))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -236,7 +197,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
                 .addContainerGap()
                 .addComponent(lbProducto)
                 .addGap(3, 3, 3)
-                .addComponent(tfProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addComponent(tfProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btBuscarProducto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -285,8 +246,8 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 773, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -308,7 +269,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
         });
         jPanel4.add(btBuscarOrdenProduccion);
 
-        btProcesarOrdenProduccion.setText("Procesar");
+        btProcesarOrdenProduccion.setText("Vender");
         btProcesarOrdenProduccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btProcesarOrdenProduccionActionPerformed(evt);
@@ -405,7 +366,6 @@ private void btAnularOrdenProduccionActionPerformed(java.awt.event.ActionEvent e
         //ordenProduccion.setBorrado(true);
         if(GestorOrdenProduccion.getInstancia().anularOrden(ordenProduccion)){
             FachadaPersistencia.getInstancia().actualizar(ordenProduccion, true);
-            tfEstado.setText(ordenProduccion.getEstado().toString());
         }else{
             JOptionPane.showMessageDialog(this, "No es posible anular la orden."+"\nEsta en estado: "+ordenProduccion.getEstado().toString());
         }
@@ -461,7 +421,6 @@ private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         } else {
             GestorOrdenProduccion.getInstancia().procesarOrden(ordenProduccion);
-            tfEstado.setText(ordenProduccion.getEstado().toString());
             tfNumero.setText(GestorOrdenProduccion.getInstancia().obtenerNroOrden());
             //ordenProduccion.setEstado(ordenProduccion.getEstado());
             ordenProduccion.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
@@ -483,18 +442,7 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     Util.getInstancia().limpiarCampos(this);
     ordenProduccion=null;
     btProcesarOrdenProduccion.setEnabled(true);
-    btTerminado.setEnabled(false);
 }//GEN-LAST:event_btLimpiarActionPerformed
-
-private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTerminadoActionPerformed
-    if(ordenProduccion==null){ // || !(tfEstado.getText().equals(OrdenCompra.EstadoOrdenCompra.PENDIENTE))){
-        JOptionPane.showMessageDialog(this, "No se ha seleccionado una Orden");
-    }else{
-        GestorOrdenProduccion.getInstancia().terminarOrden(ordenProduccion);
-        tfEstado.setText(ordenProduccion.getEstado().toString());
-        GestorOrdenProduccion.getInstancia().revisarOrdenesSuspendidas(); 
-    }
-}//GEN-LAST:event_btTerminadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -506,8 +454,6 @@ private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton btLimpiar;
     private javax.swing.JButton btModificarOrdenProduccion;
     private javax.swing.JButton btProcesarOrdenProduccion;
-    private javax.swing.JButton btTerminado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -515,17 +461,14 @@ private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXDatePicker jdFecha;
-    private org.jdesktop.swingx.JXDatePicker jdFechaEntrega;
     private org.jdesktop.swingx.JXTable jtProducto;
     private javax.swing.JLabel lbCantidad;
     private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbFecha;
-    private javax.swing.JLabel lbFechaEntrega;
     private javax.swing.JLabel lbNumero;
     private javax.swing.JLabel lbProducto;
     private javax.swing.JSpinner spCantidad;
     private javax.swing.JTextField tfCliente;
-    private javax.swing.JTextField tfEstado;
     private javax.swing.JTextField tfNumero;
     private javax.swing.JTextField tfProducto;
     // End of variables declaration//GEN-END:variables
@@ -540,7 +483,6 @@ private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         ordenProduccion.setNombreCliente(tfCliente.getText());
         ordenProduccion.setDetallesOrdenProduccion(tm.getFilas());
         ordenProduccion.setFecha(jdFecha.getDate());
-        ordenProduccion.setFechaEstimadaEntrega(jdFechaEntrega.getDate());
         
          for (DetalleOrdenProduccion detalle : ordenProduccion.getDetallesOrdenProduccion()) {
              detalle.setOrdenProduccion(ordenProduccion);
@@ -557,9 +499,6 @@ private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         tfCliente.setText(orden.getNombreCliente());
         tm.agregarFilas(orden.getDetallesOrdenProduccion());
         jdFecha.setDate(orden.getFecha());
-        jdFechaEntrega.setDate(orden.getFechaEstimadaEntrega());
-        tfEstado.setText(orden.getEstado().toString());
-        btTerminado.setEnabled(true);
         btProcesarOrdenProduccion.setEnabled(false);
     }
     
@@ -568,7 +507,6 @@ private void btTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         ordenProduccion.setNombreCliente(tfCliente.getText());
         ordenProduccion.setDetallesOrdenProduccion(tm.getFilas());
         ordenProduccion.setFecha(jdFecha.getDate());
-        ordenProduccion.setFechaEstimadaEntrega(jdFechaEntrega.getDate());
     }
     
     public void setProductoTerminado(ProductoComponente prod){

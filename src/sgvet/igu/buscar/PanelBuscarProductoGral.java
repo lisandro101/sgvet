@@ -13,25 +13,13 @@ import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableModel;
 import sgvet.entidades.Componente;
-import sgvet.entidades.EstructuraDeProducto;
-import sgvet.entidades.MateriaPrima;
-import sgvet.entidades.ParteDeEstructura;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.ProductoTerminado;
 import sgvet.entidades.Proveedor;
-import sgvet.entidades.RutaFabricacion;
 import sgvet.igu.PanelDemanda;
-import sgvet.igu.PanelPuntoEquilibrio;
-import sgvet.igu.PanelDetalleRuta;
-import sgvet.igu.PanelEstructuraDeProducto;
-import sgvet.igu.PanelMateriaPrima;
 import sgvet.igu.PanelOrdenCompra;
 import sgvet.igu.PanelOrdenProduccion;
 import sgvet.igu.PanelProductoComponente;
-import sgvet.igu.PanelProductoTerminado;
-import sgvet.igu.PanelRutaFabricacion;
 import sgvet.igu.interfaces.iBuscaProductoGeneral;
-import sgvet.igu.model.ComponenteDetalleRutaTableModel;
 import sgvet.igu.model.ProductoGralTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -42,41 +30,23 @@ import sgvet.persistencia.FachadaPersistencia;
 public class PanelBuscarProductoGral extends javax.swing.JDialog {
     
     private static final long serialVersionUID = 1L;
-
     private PanelDemanda panelDemanda;
-    private PanelPuntoEquilibrio panelPuntoEquilibrio;
     private ProductoGralTableModel tmBuscar;
     private ProductoGralTableModel tmOrigen;
-    private ComponenteDetalleRutaTableModel tmDetalleRuta;
-    //private ComponenteEstructuraTableModel tmDetalleEstructura;
     private List<Componente> componentes;    
-    private PanelMateriaPrima panelMateriaPrima;
     private PanelProductoComponente panelProductoComponente;
-    private PanelProductoTerminado panelProductoTerminado;
-    private PanelDetalleRuta panelDetalleRuta;
-    private PanelEstructuraDeProducto panelEstructuraDeProducto;
     private PanelOrdenCompra panelOrdenCompra;
     private PanelOrdenProduccion panelOrdenProduccion;
     private iBuscaProductoGeneral iProducto;
-    private PanelRutaFabricacion panelRutaFabricacion;
     private Proveedor proveedor;
-    List<EstructuraDeProducto> estructuras;
-    List<ParteDeEstructura> partes;
     
     public enum Tipo {
         TABLE_MODEL ("TableModel"),
-        PANEL_MATERIA_PRIMA ("Panel Materia Prima"),
         PANEL_PROD_COMPONENTE ("Panel Prod Componente"),
-        PANEL_PROD_TERMINADO ("Panel Prod Terminado"),
-        PANEL_DETALLE_RUTA ("Panel Detalle Ruta"),
-        PANEL_ESTRUCTURA ("Panel Estructura"),
-        PANEL_DETALLE_ESTRUCTURA ("Panel Detalle Estructura"),
         PANEL_PROVEEDOR ("Panel Proveedor"),
         PANEL_ORDEN_COMPRA ("Panel Orden Compra"),
         PANEL_ORDEN_PRODUCCION ("Panel Orden Produccion"),
         PANEL_IBUSCA ("Panel IBusca"),
-        PANEL_RUTA_FABRICACION ("Panel Ruta Fabricacion"),
-        PANEL_PUNTO_EQUILIBRIO ("Panel Punto Equilibrio"),
         PANEL_DEMANDA ("Panel Demanda");
         
         private String nombre;
@@ -108,15 +78,7 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
         tipo= Tipo.PANEL_IBUSCA;
         iProducto = iProd;
         inicializar();
-    }
-    
-    //Si es para la pantalla Materia prima
-    public PanelBuscarProductoGral(PanelMateriaPrima ini) {
-        initComponents();
-        tipo= Tipo.PANEL_MATERIA_PRIMA;
-        panelMateriaPrima= ini;
-        inicializar();
-    }
+    }    
     
     //Si es para la pantalla Producto Componente
     public PanelBuscarProductoGral(PanelProductoComponente ini) {
@@ -124,30 +86,7 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
         tipo= Tipo.PANEL_PROD_COMPONENTE;
         panelProductoComponente= ini;
         inicializar();
-    }
-    
-    //Si es para la pantalla Producto Terminado
-    public PanelBuscarProductoGral(PanelProductoTerminado ini) {
-        initComponents();
-        tipo= Tipo.PANEL_PROD_TERMINADO;
-        panelProductoTerminado= ini;
-        inicializar();
-    }
-
-    public PanelBuscarProductoGral(PanelDetalleRuta ini) {
-        initComponents();
-        tipo= Tipo.PANEL_DETALLE_RUTA;
-        panelDetalleRuta= ini;
-        tmDetalleRuta= ini.getTableModelComponente();
-        inicializar();
-    }
-    
-    public PanelBuscarProductoGral(PanelEstructuraDeProducto ini, Tipo tipo1) {
-        initComponents();
-        tipo= tipo1;
-        panelEstructuraDeProducto= ini;
-        inicializar();
-    }
+    }   
     
     public PanelBuscarProductoGral(PanelOrdenCompra tm1, Proveedor prov) {
         initComponents();
@@ -161,20 +100,6 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
         initComponents();
         tipo= Tipo.PANEL_ORDEN_PRODUCCION;
         panelOrdenProduccion= tm1;
-        inicializar();
-    }
-    
-    public PanelBuscarProductoGral(PanelRutaFabricacion tm1) {
-        initComponents();
-        tipo= Tipo.PANEL_RUTA_FABRICACION;
-        panelRutaFabricacion= tm1;
-        inicializar();
-    }
-    
-    public PanelBuscarProductoGral(PanelPuntoEquilibrio panel){
-        initComponents();
-        tipo= Tipo.PANEL_PUNTO_EQUILIBRIO;
-        panelPuntoEquilibrio =panel;
         inicializar();
     }
 
@@ -359,68 +284,17 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             iProducto.setComponente(resultado);
             dispose();
         
-        }else if(tipo== Tipo.PANEL_DETALLE_ESTRUCTURA){
-            panelEstructuraDeProducto.setComponente(resultado);
-            dispose();
-        
-        }else if(tipo== Tipo.PANEL_MATERIA_PRIMA){
-            panelMateriaPrima.setComponente((MateriaPrima)resultado);
-            dispose(); 
-            
         }else if(tipo== Tipo.PANEL_PROD_COMPONENTE){
             panelProductoComponente.setComponente((ProductoComponente)resultado);
             dispose(); 
-        }else if(tipo== Tipo.PANEL_DETALLE_RUTA){
-
-            if(tmDetalleRuta.getRowCount()<1){
-                asignarCantidad(resultado);
-                panelDetalleRuta.setComponente(resultado);       
-                dispose(); 
-            }else{
-                if(ValidacionBuscar.getInstancia().parteNodoRutaEstaCargadaEnTabla(tmDetalleRuta, resultado)){
-                    JOptionPane.showMessageDialog(this, "El Componente ya se encuentra asignado");
-                }else{
-                    asignarCantidad(resultado);
-                    panelDetalleRuta.setComponente(resultado);   
-                    dispose(); 
-                }
-            }
-             
-        }else if(tipo== Tipo.PANEL_PROD_TERMINADO){
-            panelProductoTerminado.setComponente((ProductoTerminado)resultado);
-            dispose(); 
-        }else if(tipo== Tipo.PANEL_PUNTO_EQUILIBRIO){
-            panelPuntoEquilibrio.setProductoTerminado((ProductoTerminado)resultado);
-            dispose();
         }else if(tipo== Tipo.PANEL_DEMANDA){
             panelDemanda.setProductoTerminado((ProductoComponente)resultado);
             dispose();
-        }else if(tipo== Tipo.PANEL_ESTRUCTURA){
-            Query consulta = FachadaPersistencia.getInstancia().crearConsulta("" +
-                    "SELECT a FROM EstructuraDeProducto a " +
-                    "WHERE a.productoTerminado= :producto" );
-            consulta.setParameter("producto", (ProductoTerminado)resultado);
-            EstructuraDeProducto estructura;
-            try{
-                estructura= FachadaPersistencia.getInstancia().buscar(EstructuraDeProducto.class, consulta).get(0);
-                panelEstructuraDeProducto.setEstructura(estructura);
-            }catch(IndexOutOfBoundsException e){
-                
-                estructura = new EstructuraDeProducto();
-                estructura.setProductoTerminado((ProductoTerminado)resultado);
-                panelEstructuraDeProducto.setEstructura(estructura);
-                        //panelEstructuraDeProducto.setProductoTerminado((ProductoTerminado)resultado);
-            }
-
-            dispose();       
         }else if(tipo==Tipo.PANEL_ORDEN_COMPRA){
             panelOrdenCompra.setComponente(resultado);
             dispose();
         }else if(tipo==Tipo.PANEL_ORDEN_PRODUCCION){
             panelOrdenProduccion.setProductoTerminado((ProductoComponente)resultado);
-            dispose();
-        }else if(tipo== Tipo.PANEL_RUTA_FABRICACION){
-            panelRutaFabricacion.setComponente(resultado);
             dispose();
         }
     }
@@ -434,15 +308,7 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
     Query consulta;
     tmBuscar.limpiarTableModel();
     
-    if( tipo== Tipo.PANEL_DETALLE_ESTRUCTURA){
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Componente a where ( (a.nombre) LIKE :nombre or (a.codigo) LIKE :codigo ) and a.borrado=false and a.tipo IN (:tipo1, :tipo2)");
-        consulta.setParameter("nombre", "%"+tfNombre.getText()+"%");
-        consulta.setParameter("codigo", "%"+tfCodigo.getText()+"%");
-        consulta.setParameter("tipo1", 'C');
-        consulta.setParameter("tipo2", 'M');
-        componentes = FachadaPersistencia.getInstancia().buscar(Componente.class, consulta);
-        
-    }else if(tipo == Tipo.PANEL_ORDEN_COMPRA){        
+    if(tipo == Tipo.PANEL_ORDEN_COMPRA){        
         consulta = FachadaPersistencia.getInstancia().crearConsulta(
                 "SELECT a FROM Componente a " +
                 "WHERE ( (a.nombre) LIKE :nombre OR (a.codigo) LIKE :codigo ) " +
@@ -455,57 +321,16 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
         componentes = FachadaPersistencia.getInstancia().buscar(Componente.class, consulta);
         
 
-    }else if(tipo== Tipo.PANEL_DETALLE_RUTA){
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from EstructuraDeProducto a where a.productoTerminado = :producto and a.borrado=false");
-        consulta.setParameter("producto", panelDetalleRuta.getProductoTerminado());    
-        estructuras= FachadaPersistencia.getInstancia().buscar(EstructuraDeProducto.class, consulta);
-        componentes= new ArrayList<Componente>();
-        
-        if(estructuras.size()==1){
-            partes= estructuras.get(0).getPartes();
-            
-            for (ParteDeEstructura parteDeEstructura1 : partes) {
-                componentes.add(parteDeEstructura1.getComponente());
-            }
-        
-        }
-       
-    }else if(tipo== Tipo.PANEL_RUTA_FABRICACION){
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from EstructuraDeProducto a where a.borrado=false");
-        estructuras= FachadaPersistencia.getInstancia().buscar(EstructuraDeProducto.class, consulta);
-
-        componentes= new ArrayList<Componente>();
-        List<Componente> comTemp = new ArrayList<Componente>();
-        
-        if(estructuras.size()>=1){
-            for (EstructuraDeProducto estructura : estructuras) {
-                comTemp.add(estructura.getProductoTerminado());
-            }
-        } 
-        
-        List<RutaFabricacion> rutas;
-
-        for (Componente compo : comTemp) {
-            consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from RutaFabricacion a where a.productoTerminado = :producto and a.borrado=false");
-            consulta.setParameter("producto", compo);
-            rutas= FachadaPersistencia.getInstancia().buscar(RutaFabricacion.class, consulta);
-            
-            if(rutas.size()==0){
-                componentes.add(compo);
-            }
-            
-        }
-    
     }else if(tipo==Tipo.PANEL_ORDEN_PRODUCCION){
         
         consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from RutaFabricacion a where a.borrado=false");
         
-        List<RutaFabricacion> rutas = FachadaPersistencia.getInstancia().buscar(RutaFabricacion.class, consulta);
+//        List<RutaFabricacion> rutas = FachadaPersistencia.getInstancia().buscar(RutaFabricacion.class, consulta);
         componentes= new ArrayList<Componente>();
         
-        for (RutaFabricacion rutaFabricacion : rutas) {
-            componentes.add(rutaFabricacion.getProductoTerminado());
-        }
+//        for (RutaFabricacion rutaFabricacion : rutas) {
+//            componentes.add(rutaFabricacion.getProductoTerminado());
+//        }
         
     }else{
         consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Componente a where ( (a.nombre) LIKE :nombre or (a.codigo) LIKE :codigo ) and a.borrado=false and a.tipo= :tipo" );
@@ -514,8 +339,6 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
         
         if(tipo== Tipo.TABLE_MODEL){
           // TODO: aca depende de q necesitamos para el TableModel  
-        }else if(tipo== Tipo.PANEL_MATERIA_PRIMA){
-            consulta.setParameter("tipo", 'M');
         }else if(tipo== Tipo.PANEL_PROD_COMPONENTE || tipo== Tipo.PANEL_DEMANDA){
             consulta.setParameter("tipo", 'C');
         }else{
@@ -552,12 +375,5 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
-
-    private void asignarCantidad(Componente componente){
-        for (ParteDeEstructura parteDeEstructura1 : partes) {
-            if(parteDeEstructura1.getComponente().getNombre().equals(componente.getNombre())){
-                panelDetalleRuta.setCantComponente(parteDeEstructura1.getCantidad());
-            }
-        }       
-    }
+   
 }

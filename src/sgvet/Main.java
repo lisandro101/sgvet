@@ -1,16 +1,11 @@
 package sgvet;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import sgvet.entidades.Cargo;
-import sgvet.entidades.Demanda;
 import sgvet.entidades.ItemIndice;
-import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.ProductoTerminado;
-import sgvet.entidades.Proveedor;
 import sgvet.igu.PantallaPrincipal;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.persistencia.IPersistente;

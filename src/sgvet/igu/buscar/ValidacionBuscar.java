@@ -19,28 +19,15 @@ import sgvet.entidades.CentroDeTrabajo;
 import sgvet.entidades.Componente;
 import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.DetalleOrdenProduccion;
-import sgvet.entidades.Empleado;
-import sgvet.entidades.HoraLaboral;
-import sgvet.entidades.MateriaPrima;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.ProductoTerminado;
 import sgvet.entidades.Maquina;
-import sgvet.entidades.OrdenCompra;
-import sgvet.entidades.ParteDeEstructura;
-import sgvet.entidades.ParteDeNodo;
 import sgvet.entidades.Proveedor;
-import sgvet.entidades.RutaFabricacion;
 import sgvet.igu.model.CentroTrabajoTableModel;
-import sgvet.igu.model.ComponenteDetalleRutaTableModel;
-import sgvet.igu.model.ComponenteEstructuraTableModel;
-import sgvet.igu.model.EmpleadoDetalleRutaTableModel;
-import sgvet.igu.model.IModeloReiniciable;
 import sgvet.igu.model.ProductoGralTableModel;
 import sgvet.igu.model.MaquinaTableModel;
 import sgvet.igu.model.OrdenCompraTableModel;
 import sgvet.igu.model.OrdenProduccionTableModel;
 import sgvet.igu.model.ProveedorTableModel;
-import sgvet.igu.model.RutaTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.persistencia.IPersistente;
 
@@ -68,18 +55,6 @@ public class ValidacionBuscar {
         
         for (int i = 0; i < proveedores.size(); i++) {
             if(proveedores.get(i).getNombre().equals(proveedor.getNombre())){
-                resultado=true;
-                
-            }
-        }
-        return resultado;
-    }
-    public boolean empleadoEstaCargadoEnTabla(EmpleadoDetalleRutaTableModel tm, HoraLaboral horaLaboral){
-        boolean resultado= false;
-        List<HoraLaboral> empleados= tm.getFilas();
-        
-        for (int i = 0; i < empleados.size(); i++) {
-            if(empleados.get(i).getEmpleado().getNombre().equals(horaLaboral.getEmpleado().getNombre())){
                 resultado=true;
                 
             }
@@ -138,32 +113,7 @@ public class ValidacionBuscar {
         
         return resultado;
     }
-    public boolean parteNodoRutaEstaCargadaEnTabla(ComponenteDetalleRutaTableModel tm, Componente parte){
-        boolean resultado = false;
-        List<ParteDeNodo> partes= tm.getFilas();
-        
-        for (int i = 0; i < partes.size(); i++) {
-            if(partes.get(i).getComponente().getNombre().equals(parte.getNombre())){
-                resultado = true;
-            }
-        }
-        
-        return resultado;
-    }
-    public boolean parteNodoEstructuraEstaCargadaEnTabla(ComponenteEstructuraTableModel tm, Componente parte){
-        boolean resultado = false;
-        List<ParteDeEstructura> partes= tm.getFilas();
-        
-        for (int i = 0; i < partes.size(); i++) {
-            if(partes.get(i).getComponente().getNombre().equals(parte.getNombre())){
-                resultado = true;
-            }
-        }
-        
-        return resultado;
-    }
     
-
     @Deprecated
     public boolean proveedorEstaCargadoEnBD(Proveedor proveedor){
         boolean resultado=false;
@@ -194,34 +144,7 @@ public class ValidacionBuscar {
         }    
         return  resultado;
     }
-    @Deprecated
-    public boolean productoTerminadoEstaCargadoEnBD(ProductoTerminado prod){
-        boolean resultado=false;
-        List<ProductoTerminado> productos;
-        
-        productos= FachadaPersistencia.getInstancia().buscar(ProductoTerminado.class, "Select c from ProductoTerminado c");
-        
-        for (int i = 0; i < productos.size(); i++) {
-            if(prod.getNombre().equals(productos.get(i).getNombre())){
-                resultado=true;
-            }   
-        }    
-        return  resultado;
-    }
-    @Deprecated
-    public boolean materiaPrimaEstaCargadoEnBD(MateriaPrima prod){
-        boolean resultado=false;
-        List<MateriaPrima> productos;
-        
-        productos= FachadaPersistencia.getInstancia().buscar(MateriaPrima.class, "Select c from MateriaPrima c");
-        
-        for (int i = 0; i < productos.size(); i++) {
-            if(prod.getNombre().equals(productos.get(i).getNombre())){
-                resultado=true;
-            }   
-        }    
-        return  resultado;
-    }
+
     @Deprecated
     public boolean cargoEmpleadoEstaCargadoEnBD(Cargo prod){
         boolean resultado=false;
@@ -341,19 +264,6 @@ public class ValidacionBuscar {
         
         for (CentroDeTrabajo cent : centros) {
             if(cent.getNombre().equals(centro.getNombre())){
-                resultado = true;
-            }
-        }
-        
-        return resultado;
-    }
-    
-    public boolean rutaEstaCargadaEnTabla(RutaTableModel tm, RutaFabricacion ruta){
-        boolean resultado= false;
-        List<RutaFabricacion> rutas = tm.getFilas();
-        
-        for (RutaFabricacion rut : rutas) {
-            if(rut.getNombre().equals(ruta.getNombre())){
                 resultado = true;
             }
         }
