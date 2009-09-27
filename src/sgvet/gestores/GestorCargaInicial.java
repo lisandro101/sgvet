@@ -160,6 +160,7 @@ public class GestorCargaInicial {
         List<IPersistente> persistentes = new ArrayList();
 
         /* -----  Repetir este codigo para crear proveedores a persistir  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 2Kg");
         prod.setBorrado(false);
@@ -277,6 +278,953 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
+/* -----  Producto del Provedor Top Nutrition  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Top Nutrition 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg Top Nutrition");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Top Nutrition")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Top Nutrition 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg Top Nutrition");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Top Nutrition")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Top Nutrition 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg Top Nutrition");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Top Nutrition")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Top Nutrition Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm Top Nutrition");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Top Nutrition")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+        /* -----  Producto del Provedor Vital Can  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Vital Can 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg Vital Can");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Vital Can")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Vital Can 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg Vital Can");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Vital Can")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Vital Can 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg Vital Can");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Vital Can")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Vital Can Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm Vital Can");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Vital Can")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto del Provedor Eukanuba  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Eukanuba 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg Eukanuba");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Eukanuba")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Eukanuba 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg Eukanuba");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Eukanuba")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Eukanuba 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg Eukanuba");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Eukanuba")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Eukanuba Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm Eukanuba");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Eukanuba")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+        /* -----  Producto del Provedor Royal  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Royal 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg Royal");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Royal")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Royal 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg Royal");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Royal")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Royal 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg Royal");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Royal")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Royal Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm Royal");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Royal")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+           /* -----  Producto del Provedor EXACT  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("EXACT 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg EXACT");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("EXACT")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("EXACT 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg EXACT");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("EXACT")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("EXACT 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg EXACT");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("EXACT")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("EXACT Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm EXACT");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("EXACT")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+           /* -----  Producto del Provedor KONGO  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("KONGO 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg KONGO");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Kongo")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("KONGO 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg KONGO");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Kongo")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("KONGO 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg KONGO");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Kongo")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("KONGO Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm KONGO");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Kongo")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+         /* -----  Producto del Provedor PURINA  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg PURINA1");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Purina")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg PURINA");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Purina")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg PURINA");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Purina")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm PURINA");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Purina")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+
+          /* -----  Producto del Provedor Dog Selection ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("Dog Selection 2Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-1-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(10);
+        prod.setDemandaAnual(1000);
+        prod.setDescripcion("Una Bolsa de 2 kg PURINA1");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 15Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA 15Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-2-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(40);
+        prod.setDemandaAnual(400);
+        prod.setDescripcion("Una Bolsa de 15 kg PURINA");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+/* -----  Producto Alimento 30Kg  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA 30Kg");
+        prod.setBorrado(false);
+        prod.setCodigo("2-3-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(80);
+        prod.setDemandaAnual(200);
+        prod.setDescripcion("Una Bolsa de 30 kg PURINA");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+/* -----  Producto Vitamina Complejo  ---- */
+        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+        prod.setNombre("PURINA Vitamina 200gm");
+        prod.setBorrado(false);
+        prod.setCodigo("2-4-44-44");
+        prod.setCondicionesEmbalaje("");
+        prod.setCostoAlmacenamiento(10);
+        prod.setCostoPedido(10);
+        prod.setCostoUnitario(15);
+        prod.setDemandaAnual(500);
+        prod.setDescripcion("Complejo Vitaminico Polvo 200gm PURINA");
+        prod.setEstado("Activo");
+        prod.setNumeroPlano("");
+        prod.setPesoUnidad(10);
+        prod.setPoliticaCompra("");
+        prod.setPrecioBase(10);
+        prod.setPrecioVenta(100);
+        prod.setStock(10);
+        prod.setStockReserva(5);
+        prod.setTamanioLoteEstandar(5);
+        prod.setTipoPrediccion("SE Simple");
+        prod.setUnidadMedida("unid");
+
+        prov = new ArrayList<Proveedor>();
+        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+        prod.setProveedores(prov);
+
+        persistentes.add(prod);
+        /* ------------------------------------------------------------------- */
+
+
+        
 
         /* Llama al método que persiste la lista de proveedores */
         persistir(persistentes);
