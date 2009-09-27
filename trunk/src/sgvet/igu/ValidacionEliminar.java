@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import sgvet.entidades.Cargo;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.Empleado;
-import sgvet.entidades.OrdenProduccion.EstadoOrdenProd;
+import sgvet.entidades.Venta.EstadoOrdenProd;
 import sgvet.entidades.ProductoComponente;
 import sgvet.persistencia.FachadaPersistencia;
 

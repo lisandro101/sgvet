@@ -15,10 +15,10 @@
     <class>sgvet.entidades.ItemIndice</class>
     <class>sgvet.entidades.Maquina</class>
     <class>sgvet.entidades.OrdenCompra</class>
-    <class>sgvet.entidades.OrdenProduccion</class>
     <class>sgvet.entidades.ProductoComponente</class>
     <class>sgvet.entidades.Proveedor</class>
     <class>sgvet.entidades.Sector</class>
+    <class>sgvet.entidades.Venta</class>
     <properties>
       <property name="eclipselink.jdbc.password" value="radiadores"/>
       <property name="eclipselink.jdbc.user" value="radiadores"/>

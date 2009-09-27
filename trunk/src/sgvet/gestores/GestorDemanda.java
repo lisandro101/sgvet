@@ -14,7 +14,7 @@ import javax.swing.table.TableModel;
 import sgvet.entidades.Demanda;
 import sgvet.entidades.DemandaXPeriodo;
 import sgvet.entidades.DetalleOrdenProduccion;
-import sgvet.entidades.OrdenProduccion;
+import sgvet.entidades.Venta;
 import sgvet.entidades.ProductoComponente;
 import sgvet.igu.PanelDemanda;
 import sgvet.persistencia.FachadaPersistencia;
@@ -326,11 +326,11 @@ public class GestorDemanda {
 
     public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto){
         int total=0;
-        //List <OrdenProduccion> ordenes = null;
+        //List <Venta> ordenes = null;
         List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();
         Date fechaIni;
         Date fechaFin;
-        OrdenProduccion ordenActual;
+        Venta ordenActual;
         int indice=0;
         int maxIndice;
         boolean salir = true;
@@ -345,20 +345,20 @@ public class GestorDemanda {
 
 //            for (DetalleOrdenProduccion detalleOrden : detallesOrdenes) {
 //
-//                Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.detallesOrdenProduccion = :nombre and a.borrado=false" );
+//                Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where a.detallesOrdenProduccion = :nombre and a.borrado=false" );
 //                consulta.setParameter("nombre",detalleOrden );
-//                ordenes = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+//                ordenes = FachadaPersistencia.getInstancia().buscar(Venta.class, consulta);
 //
 //            }
 //            System.out.println("\n Cant orden de produccion encontradas:"+ordenes.size()+"\n");
-    //        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.detallesOrdenProduccion.producto = :nombre and a.borrado=false ORDER BY a.fecha ASC" );
+    //        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where a.detallesOrdenProduccion.producto = :nombre and a.borrado=false ORDER BY a.fecha ASC" );
     //        consulta.setParameter("nombre",producto );
-    //        ordenes = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+    //        ordenes = FachadaPersistencia.getInstancia().buscar(Venta.class, consulta);
 
 //            ordenActual= ordenes.get(indice);
 //            maxIndice=ordenes.size();
 
-            ordenActual= detallesOrdenes.get(0).getOrdenProduccion();
+            ordenActual= detallesOrdenes.get(0).getVenta();
             
 
             while (ordenActual.getFecha().compareTo(fechaHoy)<=0 && salir) {
@@ -386,7 +386,7 @@ public class GestorDemanda {
                     
                     if(indice < maxIndice){                        
                         ++indice;
-                        ordenActual= detallesOrdenes.get(indice).getOrdenProduccion();
+                        ordenActual= detallesOrdenes.get(indice).getVenta();
                     }else{
                         salirDos = false;
                     }
@@ -405,7 +405,7 @@ public class GestorDemanda {
                         salir = false;
                     }
 
-                    ordenActual= detallesOrdenes.get(indice).getOrdenProduccion();
+                    ordenActual= detallesOrdenes.get(indice).getVenta();
 //                }
 
 
@@ -441,11 +441,11 @@ public class GestorDemanda {
         ordenarDetallesXFecha();
     }
     private void ordenarDetallesXFecha(){
-        List <OrdenProduccion> ordenesTemp;
+        List <Venta> ordenesTemp;
         Date fecha1;
         Date fecha2;
         DetalleOrdenProduccion detalleTemp;
-        OrdenProduccion ordenTemp;
+        Venta ordenTemp;
         int indice=-1;
 
         for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
@@ -453,10 +453,10 @@ public class GestorDemanda {
         }
         for (DetalleOrdenProduccion detallito : detallesOrdenes) {
             ++indice;
-            fecha1= detallesOrdenes.get(indice).getOrdenProduccion().getFecha();
+            fecha1= detallesOrdenes.get(indice).getVenta().getFecha();
             for (int i = 1; i < detallesOrdenes.size(); i++) {
                 
-                fecha2= detallesOrdenes.get(i).getOrdenProduccion().getFecha();
+                fecha2= detallesOrdenes.get(i).getVenta().getFecha();
 
                 if(fecha1.compareTo(fecha2)>0){
                     detalleTemp=detallesOrdenes.get(i);
@@ -468,7 +468,7 @@ public class GestorDemanda {
 //                }
             }
                 System.out.println("\n ----------------------------------------");
-                System.out.println("\n Fecha ordenada: "+detallito.getOrdenProduccion().getFecha().toString());
+                System.out.println("\n Fecha ordenada: "+detallito.getVenta().getFecha().toString());
         }
     }
 }

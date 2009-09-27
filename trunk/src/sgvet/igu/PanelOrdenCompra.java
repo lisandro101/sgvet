@@ -525,7 +525,7 @@ private void btEntregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }else{
         GestorOrdenCompra.getInstancia().terminarOrden(ordenCompra);
         tfEstado.setText(ordenCompra.getEstado().toString());
-        GestorOrdenProduccion.getInstancia().revisarOrdenesSuspendidas(); 
+        GestorOrdenProduccion.getInstancia().revisarOrdenesSuspendidas();
     }
     
     

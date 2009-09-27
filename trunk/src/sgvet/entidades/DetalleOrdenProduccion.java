@@ -29,7 +29,7 @@ public class DetalleOrdenProduccion implements Serializable, IPersistente {
     private int cantidad;
     private ProductoComponente producto;
     private boolean borrado;
-    private OrdenProduccion ordenProduccion;
+    private Venta venta;
     
     /**
      * Constructor
@@ -82,19 +82,20 @@ public class DetalleOrdenProduccion implements Serializable, IPersistente {
         return borrado;
     }
 
+    @Override
     public void setBorrado(boolean borrado) {
         this.borrado = borrado;
     }
     
     
     @JoinColumn(name="orden_de_produccion_id")
-    @ManyToOne(targetEntity=OrdenProduccion.class, cascade=CascadeType.ALL)
-    public OrdenProduccion getOrdenProduccion() {
-        return ordenProduccion;
+    @ManyToOne(targetEntity=Venta.class, cascade=CascadeType.ALL)
+    public Venta getVenta() {
+        return venta;
     }
 
-    public void setOrdenProduccion(OrdenProduccion orden) {
-        this.ordenProduccion = orden;
+    public void setVenta(Venta venta) {
+        this.venta = venta;
     }
 
     @Override
