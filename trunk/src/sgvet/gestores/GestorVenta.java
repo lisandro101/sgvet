@@ -16,19 +16,19 @@ import sgvet.persistencia.FachadaPersistencia;
  *
  * @author stafoxter
  */
-public class GestorOrdenProduccion {
+public class GestorVenta {
 
-    private static GestorOrdenProduccion instancia;
+    private static GestorVenta instancia;
     boolean actualizar = false;
 
-    public synchronized static GestorOrdenProduccion getInstancia() {
+    public synchronized static GestorVenta getInstancia() {
         if (instancia == null) {
-            instancia = new GestorOrdenProduccion();
+            instancia = new GestorVenta();
         }
         return instancia;
     }
 
-    private GestorOrdenProduccion() {
+    private GestorVenta() {
     }
 
     public void procesarOrden(Venta orden) {
