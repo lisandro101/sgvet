@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.DetalleOrdenProduccion;
-import sgvet.entidades.OrdenProduccion;
+import sgvet.entidades.Venta;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorOrdenProduccion;
 import sgvet.igu.buscar.PanelBuscarOrdenProduccion;
@@ -27,7 +27,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
     
     private List<Component> componentesObligatorios;
     
-    private OrdenProduccion ordenProduccion;
+    private Venta venta;
     private OrdenProduccionTableModel tm;
     private ProductoComponente producto;
     private DetalleOrdenProduccion detalleOrdenProduccion;
@@ -329,6 +329,12 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void limpiarCampos() {
+        Util.getInstancia().limpiarCampos(this);
+        venta = null;
+        btProcesarOrdenProduccion.setEnabled(true);
+    }
+
 private void tfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumeroActionPerformed
 // TODO add your handling code here:
 }//GEN-LAST:event_tfNumeroActionPerformed
@@ -350,9 +356,9 @@ private void btModificarOrdenProduccionActionPerformed(java.awt.event.ActionEven
         
     if(opcion == JOptionPane.YES_OPTION) {
         actualizarOrdenProduccion();
-        FachadaPersistencia.getInstancia().actualizar(ordenProduccion, true);
+        FachadaPersistencia.getInstancia().actualizar(venta, true);
 //        Util.getInstancia().limpiarCampos(this);
-//        ordenProduccion=null;            
+//        venta=null;            
         //inicializarBotones();
     }
 }//GEN-LAST:event_btModificarOrdenProduccionActionPerformed
@@ -363,15 +369,15 @@ private void btAnularOrdenProduccionActionPerformed(java.awt.event.ActionEvent e
                 JOptionPane.YES_NO_OPTION);
         
     if(opcion == JOptionPane.YES_OPTION) {
-        //ordenProduccion.setBorrado(true);
-        if(GestorOrdenProduccion.getInstancia().anularOrden(ordenProduccion)){
-            FachadaPersistencia.getInstancia().actualizar(ordenProduccion, true);
+        //venta.setBorrado(true);
+        if(GestorOrdenProduccion.getInstancia().anularOrden(venta)){
+            FachadaPersistencia.getInstancia().actualizar(venta, true);
         }else{
-            JOptionPane.showMessageDialog(this, "No es posible anular la orden."+"\nEsta en estado: "+ordenProduccion.getEstado().toString());
+            JOptionPane.showMessageDialog(this, "No es posible anular la orden."+"\nEsta en estado: "+venta.getEstado().toString());
         }
         
 //        Util.getInstancia().limpiarCampos(this);
-//        ordenProduccion=null;
+//        venta=null;
         //inicializarBotones();
     }   
 }//GEN-LAST:event_btAnularOrdenProduccionActionPerformed
@@ -411,7 +417,7 @@ private void btAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProcesarOrdenProduccionActionPerformed
     crearOrdenProduccion();
-    if (ValidacionBuscar.getInstancia().estaDuplicado(ordenProduccion)) {
+    if (ValidacionBuscar.getInstancia().estaDuplicado(venta)) {
         JOptionPane.showMessageDialog(this, "Orden ya registrada");
     } else {
 //        if(ValidacionBuscar.getInstancia().existenCamposVacios(this)){
@@ -420,12 +426,12 @@ private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent
         if(tfCliente.getText().trim().equals("") || !(tm.getRowCount() >= 1)){
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         } else {
-            GestorOrdenProduccion.getInstancia().procesarOrden(ordenProduccion);
+            GestorOrdenProduccion.getInstancia().procesarOrden(venta);
             tfNumero.setText(GestorOrdenProduccion.getInstancia().obtenerNroOrden());
-            //ordenProduccion.setEstado(ordenProduccion.getEstado());
-            ordenProduccion.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
-            FachadaPersistencia.getInstancia().actualizar(ordenProduccion, true);
-            btProcesarOrdenProduccion.setEnabled(false);
+            //venta.setEstado(venta.getEstado());
+            venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
+            FachadaPersistencia.getInstancia().actualizar(venta, true);
+                limpiarCampos();
         }
 
     }
@@ -439,9 +445,7 @@ private void btBuscarOrdenProduccionActionPerformed(java.awt.event.ActionEvent e
 }//GEN-LAST:event_btBuscarOrdenProduccionActionPerformed
 
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
-    Util.getInstancia().limpiarCampos(this);
-    ordenProduccion=null;
-    btProcesarOrdenProduccion.setEnabled(true);
+    limpiarCampos();
 }//GEN-LAST:event_btLimpiarActionPerformed
 
 
@@ -476,24 +480,24 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     
     
     
-     private OrdenProduccion crearOrdenProduccion(){
-        ordenProduccion= new OrdenProduccion();
+     private Venta crearOrdenProduccion(){
+        venta = new Venta();
         
-        //ordenProduccion.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
-        ordenProduccion.setNombreCliente(tfCliente.getText());
-        ordenProduccion.setDetallesOrdenProduccion(tm.getFilas());
-        ordenProduccion.setFecha(jdFecha.getDate());
+        //venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
+        venta.setNombreCliente(tfCliente.getText());
+        venta.setDetallesOrdenProduccion(tm.getFilas());
+        venta.setFecha(jdFecha.getDate());
         
-         for (DetalleOrdenProduccion detalle : ordenProduccion.getDetallesOrdenProduccion()) {
-             detalle.setOrdenProduccion(ordenProduccion);
+         for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
+             detalle.setVenta(venta);
          }
         
-        return ordenProduccion;
+        return venta;
     }
 
-    private void cargarPantallaOrdenProduccion(OrdenProduccion orden){
+    private void cargarPantallaOrdenProduccion(Venta orden){
         Util.getInstancia().limpiarCampos(this);
-        ordenProduccion = orden;
+        venta = orden;
         
         tfNumero.setText(Integer.toString(orden.getNroOrdenProduccion()));
         tfCliente.setText(orden.getNombreCliente());
@@ -503,10 +507,10 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
     
     private void actualizarOrdenProduccion(){
-        ordenProduccion.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
-        ordenProduccion.setNombreCliente(tfCliente.getText());
-        ordenProduccion.setDetallesOrdenProduccion(tm.getFilas());
-        ordenProduccion.setFecha(jdFecha.getDate());
+        venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
+        venta.setNombreCliente(tfCliente.getText());
+        venta.setDetallesOrdenProduccion(tm.getFilas());
+        venta.setFecha(jdFecha.getDate());
     }
     
     public void setProducto(ProductoComponente prod){
@@ -515,7 +519,7 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         
     }
     
-    public void setOrdenProduccion(OrdenProduccion orden){
+    public void setOrdenProduccion(Venta orden){
         cargarPantallaOrdenProduccion(orden);
         
     }
@@ -525,8 +529,8 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         return componentesObligatorios;
     }
 
-    public OrdenProduccion getOrdenProduccion() {
-        return ordenProduccion;
+    public Venta getOrdenProduccion() {
+        return venta;
     }
     
     

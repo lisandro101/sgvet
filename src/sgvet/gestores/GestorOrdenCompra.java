@@ -12,7 +12,7 @@ import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.OrdenCompra;
 import sgvet.entidades.OrdenCompra.EstadoOrdenCompra;
-import sgvet.entidades.OrdenProduccion.EstadoOrdenProd;
+import sgvet.entidades.Venta.EstadoOrdenProd;
 import sgvet.entidades.ProductoComponente;
 import sgvet.igu.model.OrdenCompraTableModel;
 import sgvet.persistencia.FachadaPersistencia;

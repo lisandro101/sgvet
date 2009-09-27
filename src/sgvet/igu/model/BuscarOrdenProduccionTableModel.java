@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sgvet.entidades.Cargo;
 import sgvet.entidades.OrdenCompra;
-import sgvet.entidades.OrdenProduccion;
+import sgvet.entidades.Venta;
 
 /**
  *
@@ -14,12 +14,12 @@ import sgvet.entidades.OrdenProduccion;
  */
 public class BuscarOrdenProduccionTableModel extends AbstractTableModel implements IModeloReiniciable {
     private static final long serialVersionUID = 1L;
-    private static final String[] NOMBRE_COLUMNAS = {"Nro Orden", "Cliente", "Fecha Emisión", "Fecha Entrega", "Estado"};
-    private static final boolean[] COLUMNAS_EDITABLES = {false, false, false, false, false};
+    private static final String[] NOMBRE_COLUMNAS = {"Nro Orden", "Cliente", "Fecha Emisión"};
+    private static final boolean[] COLUMNAS_EDITABLES = {false, false, false};
     private static final Class[] CLASE_COLUMNAS =
-        {String.class, String.class, Date.class, Date.class, String.class};
+        {String.class, String.class, Date.class};
     
-    private List<OrdenProduccion> ordenes;
+    private List<Venta> ordenes;
 
     /**
      * Constructor
@@ -27,7 +27,7 @@ public class BuscarOrdenProduccionTableModel extends AbstractTableModel implemen
      * @param filas Cantidad de filas iniciales
      */
     public BuscarOrdenProduccionTableModel(int filas) {
-        this.ordenes = new ArrayList<OrdenProduccion>(filas > 0 ? filas : 0);
+        this.ordenes = new ArrayList<Venta>(filas > 0 ? filas : 0);
     }
 
     /**
@@ -104,12 +104,6 @@ public class BuscarOrdenProduccionTableModel extends AbstractTableModel implemen
                 break;
             case 2:
                 resultado = ordenes.get(fila).getFecha();
-                break;
-            case 3:
-                resultado = ordenes.get(fila).getFechaEstimadaEntrega();
-                break;  
-            case 4:
-                resultado = ordenes.get(fila).getEstado().toString();
                 break;     
         }
         return resultado;
@@ -121,7 +115,7 @@ public class BuscarOrdenProduccionTableModel extends AbstractTableModel implemen
      * @param proveedor Proveedor a agregar
 
      */
-    public void agregarFila(OrdenProduccion cargo) {
+    public void agregarFila(Venta cargo) {
         ordenes.add(cargo);
         
         fireTableRowsInserted(ordenes.size(), ordenes.size());
@@ -145,11 +139,11 @@ public class BuscarOrdenProduccionTableModel extends AbstractTableModel implemen
      * 
      * @return Todas las filas del modelo
      */
-    public List<OrdenProduccion> getFilas() {
+    public List<Venta> getFilas() {
         return ordenes;
     }
     
-    public OrdenProduccion getFila(int indice){
+    public Venta getFila(int indice){
         return ordenes.get(indice);
         
     }

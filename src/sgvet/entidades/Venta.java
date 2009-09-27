@@ -24,7 +24,7 @@ import sgvet.persistencia.IPersistente;
  */
 @Entity
 @Table(name="ordenes_de_produccion")
-public class OrdenProduccion implements Serializable, IPersistente {
+public class Venta implements Serializable, IPersistente {
     private static final long serialVersionUID = 1L;
     private static final List<String> CAMPOS_UNICOS = new ArrayList<String>(0);
     
@@ -73,7 +73,7 @@ public class OrdenProduccion implements Serializable, IPersistente {
     /**
      * Constructor
      */
-    public OrdenProduccion(){
+    public Venta(){
         setId(UUID.randomUUID().toString());
     }
     
@@ -127,7 +127,7 @@ public class OrdenProduccion implements Serializable, IPersistente {
     }
 
     @OneToMany(targetEntity=DetalleOrdenProduccion.class,
-    cascade=CascadeType.ALL, mappedBy="ordenProduccion")
+    cascade=CascadeType.ALL, mappedBy="venta")
     public List<DetalleOrdenProduccion> getDetallesOrdenProduccion() {
         return detallesOrdenProduccion;
     }

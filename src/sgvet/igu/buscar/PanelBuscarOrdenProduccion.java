@@ -11,7 +11,7 @@ import java.util.List;
 import javax.persistence.Query;
 import sgvet.persistencia.FachadaPersistencia;
 import javax.swing.*;
-import sgvet.entidades.OrdenProduccion;
+import sgvet.entidades.Venta;
 import sgvet.igu.model.BuscarOrdenProduccionTableModel;
 
 /**
@@ -22,7 +22,7 @@ public class PanelBuscarOrdenProduccion extends javax.swing.JDialog {
     private static final long serialVersionUID = 1L;
 
 
-    private List<OrdenProduccion> ordenesProduccion;
+    private List<Venta> ordenesProduccion;
     private BuscarOrdenProduccionTableModel tm;
     private PanelOrdenProduccion panelOrdenProduccion;
     //private OrdenCompra ordenCompra;
@@ -30,7 +30,7 @@ public class PanelBuscarOrdenProduccion extends javax.swing.JDialog {
     /** Creates new form PanelBuscarMaquina */
     public PanelBuscarOrdenProduccion(PanelOrdenProduccion panel) {
         initComponents();
-        panelOrdenProduccion=panel;
+        panelOrdenProduccion = panel;
         inicializar();
     }
     
@@ -186,16 +186,16 @@ private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     Query consulta;
 
     if (tfNroOrden.getText().trim().equals("")) {
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.borrado=false");
+        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where a.borrado=false");
         
     } else {
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where (a.nroOrdenProduccion) LIKE :nro and a.borrado=false"); //(a.nombreCliente) LIKE :cliente and a.borrado=false" );
+        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where (a.nroOrdenProduccion) LIKE :nro and a.borrado=false"); //(a.nombreCliente) LIKE :cliente and a.borrado=false" );
         consulta.setParameter("nro", tfNroOrden.getText());
     //  consulta.setParameter("cliente", "%"+tfCliente.getText()+"%");
     }
 
 
-    ordenesProduccion = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+    ordenesProduccion = FachadaPersistencia.getInstancia().buscar(Venta.class, consulta);
 
 
     for (int i = 0; i < ordenesProduccion.size(); i++) {
@@ -206,7 +206,7 @@ private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
     int indice = tOrdenProduccion.convertRowIndexToModel(tOrdenProduccion.getSelectedRow());
-    OrdenProduccion resultado;
+    Venta resultado;
  
     if(indice ==-1 ){
         JOptionPane.showMessageDialog(this, "No se ha seleccionado maquina");
