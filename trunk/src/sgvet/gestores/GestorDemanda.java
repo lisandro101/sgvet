@@ -310,13 +310,11 @@ public class GestorDemanda {
         }
     }
 
+    @Deprecated
     public int CalcularDemandaAcumulada(ProductoComponente producto){
         int total=0;
 
-
         buscarDetalles(producto);
-
-
         for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
             total+= detalleOrdenProduccion.getCantidad();
         }
@@ -326,91 +324,29 @@ public class GestorDemanda {
 
     public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto){
         int total=0;
-        //List <Venta> ordenes = null;
         List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();
         Date fechaIni;
-        Date fechaFin;
-        Venta ordenActual;
-        int indice=0;
-        int maxIndice;
-        boolean salir = true;
-        boolean salirDos;
-        Date fechaHoy = new Date();
 
         buscarDetalles(producto);
 
-        maxIndice=detallesOrdenes.size()-1;
         if(detallesOrdenes.size()>0){
+            fechaIni= detallesOrdenes.get(0).getVenta().getFecha();
 
-
-//            for (DetalleOrdenProduccion detalleOrden : detallesOrdenes) {
-//
-//                Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where a.detallesOrdenProduccion = :nombre and a.borrado=false" );
-//                consulta.setParameter("nombre",detalleOrden );
-//                ordenes = FachadaPersistencia.getInstancia().buscar(Venta.class, consulta);
-//
-//            }
-//            System.out.println("\n Cant orden de produccion encontradas:"+ordenes.size()+"\n");
-    //        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where a.detallesOrdenProduccion.producto = :nombre and a.borrado=false ORDER BY a.fecha ASC" );
-    //        consulta.setParameter("nombre",producto );
-    //        ordenes = FachadaPersistencia.getInstancia().buscar(Venta.class, consulta);
-
-//            ordenActual= ordenes.get(indice);
-//            maxIndice=ordenes.size();
-
-            ordenActual= detallesOrdenes.get(0).getVenta();
-            
-
-            while (ordenActual.getFecha().compareTo(fechaHoy)<=0 && salir) {
-                fechaIni= primerDia(ordenActual.getFecha());
-                fechaFin= ultimoDia(ordenActual.getFecha());
-
-                System.out.println("\n Fecha inicio periodo: "+fechaIni.toString());
-                System.out.println("\n Fecha fin periodo: "+fechaFin.toString());
-                System.out.println("\n Fecha actual: "+ordenActual.getFecha().toString());
-                System.out.println("\n ----------------------------------------");
-
-                salirDos = true;
-                while (ordenActual.getFecha().compareTo(fechaIni)>=0 && ordenActual.getFecha().compareTo(fechaFin)<=0 && salirDos){
-
-                    System.out.println("\n Fecha actual: "+ordenActual.getFecha().toString());
-                    System.out.println("\n Indice: "+ indice);
-                    System.out.println("\n Indice max: "+maxIndice);
-                    System.out.println("\n ----------------------------------------");
-
-                    for (DetalleOrdenProduccion detalle : ordenActual.getDetallesOrdenProduccion()) {
-                            if (detalle.getProducto().getNombre().equals(producto.getNombre())){
-                                total += detalle.getCantidad();
-                            }
-                    }
-                    
-                    if(indice < maxIndice){                        
-                        ++indice;
-                        ordenActual= detallesOrdenes.get(indice).getVenta();
+            for (DetalleOrdenProduccion detallete : detallesOrdenes) {
+                if(diaValidoDelMes(detallete.getVenta().getFecha())){
+                    if(sonDelMismoMes(fechaIni, detallete.getVenta().getFecha())){
+                        total+=detallete.getCantidad();
                     }else{
-                        salirDos = false;
+                        demandasXPeriodo.add(new DemandaXPeriodo(fechaIni,total));
+                        total=detallete.getCantidad();
+                        fechaIni= detallete.getVenta().getFecha();
                     }
-                    
-                    
+
                 }
-
-//                if(total != 0){
-                    demandasXPeriodo.add(new DemandaXPeriodo(fechaIni,total));
-                    total=0;
-//                }else{
-
-                    if(indice < maxIndice){
-                        ++indice;
-                    }else{
-                        salir = false;
-                    }
-
-                    ordenActual= detallesOrdenes.get(indice).getVenta();
-//                }
-
-
             }
-        }
+            total+=detallesOrdenes.get(detallesOrdenes.size()-1).getCantidad();
+            demandasXPeriodo.add(new DemandaXPeriodo(fechaIni,total));
+         }
 
         return demandasXPeriodo;
     }
@@ -429,6 +365,23 @@ public class GestorDemanda {
         return cal.getTime();
     }
 
+    private boolean diaValidoDelMes(Date fecha){
+        boolean resul=false;
+        if(fecha.compareTo(primerDia(fecha))>=0 && fecha.compareTo(ultimoDia(fecha))<=0 ){
+            resul=true;
+        }
+        return resul;
+    }
+
+    private boolean sonDelMismoMes(Date fechaA, Date fechaB){
+        boolean resul=false;
+        if(fechaA.compareTo(primerDia(fechaB))>=0 && fechaA.compareTo(ultimoDia(fechaB))<=0 ){
+            resul=true;
+        }
+        return resul;
+    }
+
+
     private void buscarDetalles(ProductoComponente prod){
 
         Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false" );
@@ -440,35 +393,34 @@ public class GestorDemanda {
         }
         ordenarDetallesXFecha();
     }
+
+
     private void ordenarDetallesXFecha(){
-        List <Venta> ordenesTemp;
+        List <DetalleOrdenProduccion> detallesTemp = new ArrayList<DetalleOrdenProduccion>();
         Date fecha1;
-        Date fecha2;
-        DetalleOrdenProduccion detalleTemp;
-        Venta ordenTemp;
-        int indice=-1;
 
-        for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
+        DetalleOrdenProduccion detalleTemp=null;
 
-        }
-        for (DetalleOrdenProduccion detallito : detallesOrdenes) {
-            ++indice;
-            fecha1= detallesOrdenes.get(indice).getVenta().getFecha();
-            for (int i = 1; i < detallesOrdenes.size(); i++) {
-                
-                fecha2= detallesOrdenes.get(i).getVenta().getFecha();
+        int cantElem= detallesOrdenes.size();
 
-                if(fecha1.compareTo(fecha2)>0){
-                    detalleTemp=detallesOrdenes.get(i);
-                    detallesOrdenes.set(i, detallesOrdenes.get(indice));
-                    detallesOrdenes.set(indice, detalleTemp);
+        for (int i = 0; i < cantElem; i++) {
+            fecha1=detallesOrdenes.get(0).getVenta().getFecha();
+            for (DetalleOrdenProduccion detallete : detallesOrdenes) {
+                if(detallete.getVenta().getFecha().compareTo(fecha1)<=0){
+                    fecha1=detallete.getVenta().getFecha();
+                    detalleTemp=detallete;
                 }
-//                if(fecha1.compareTo(fecha2)>0){
-//                    detalleTemp=detallesOrdenes.get(i);
-//                }
             }
-                System.out.println("\n ----------------------------------------");
-                System.out.println("\n Fecha ordenada: "+detallito.getVenta().getFecha().toString());
+            detallesTemp.add(detalleTemp);
+            detallesOrdenes.remove(detalleTemp);
+            
+        }
+        detallesOrdenes=detallesTemp;
+
+        //borrar estas lineas
+        for (DetalleOrdenProduccion detallene : detallesOrdenes) {
+            System.out.println("\n ----------------------------------------");
+            System.out.println("\n Fecha ordenada: "+detallene.getVenta().getFecha().toString()+ "  Cantidad: "+ detallene.getCantidad());
         }
     }
 }

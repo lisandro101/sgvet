@@ -281,7 +281,7 @@ private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 //    demandas = tmDemanda.getFilas();
     alfa = Double.parseDouble(tfAlfa.getText());
     //demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
-    tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().CalcularDemandaAcumulada(producto)));
+//    tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().CalcularDemandaAcumulada(producto)));
     MostrarXPantalla( GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto));
 
     tmDemanda.limpiarTableModel();
