@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.Demanda;
+import sgvet.entidades.DemandaXPeriodo;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
 import sgvet.igu.model.DemandaSESTableModel;
@@ -57,7 +58,7 @@ public class PanelDemandaExpoSimpleNew extends javax.swing.JDialog implements IV
     }
 
     private void inicializarBotones(){
-        btCalcular.setEnabled(false);
+        //btCalcular.setEnabled(false);
 
     }
 
@@ -279,8 +280,9 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
 //    demandas = tmDemanda.getFilas();
     alfa = Double.parseDouble(tfAlfa.getText());
-    demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
+    //demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
     tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().CalcularDemandaAcumulada(producto)));
+    MostrarXPantalla( GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto));
 
     tmDemanda.limpiarTableModel();
     tmDemanda.agregarFilas(demandas);
@@ -373,5 +375,17 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 //            alfa = Double.parseDouble(tfAlfa.getText());
 //        }
         return resul;
+    }
+
+    private void MostrarXPantalla(List<DemandaXPeriodo> demandas){
+        if(demandas != null){
+            for (DemandaXPeriodo demandaXPeriodo : demandas) {
+            System.out.println("\n Periodo: "+demandaXPeriodo.getMes()+"    Total: "+demandaXPeriodo.getVentas());
+            }
+        }else{
+            System.out.println("\n No se registraron ventas del producto seleccionado\n");
+        }
+
+
     }
 }

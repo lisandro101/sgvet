@@ -4,6 +4,7 @@
  */
 
 package sgvet.gestores;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,7 +24,8 @@ import sgvet.persistencia.FachadaPersistencia;
  * @author stafoxter
  */
 public class GestorDemanda {
-    
+
+    private List <DetalleOrdenProduccion> detallesOrdenes;
     private static GestorDemanda instancia;
     
     public synchronized static GestorDemanda getInstancia(){
@@ -310,10 +312,10 @@ public class GestorDemanda {
 
     public int CalcularDemandaAcumulada(ProductoComponente producto){
         int total=0;
-        List <DetalleOrdenProduccion> detallesOrdenes;
-        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false" );
-        consulta.setParameter("nombre",producto );
-        detallesOrdenes = FachadaPersistencia.getInstancia().buscar(DetalleOrdenProduccion.class, consulta);
+
+
+        buscarDetalles(producto);
+
 
         for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
             total+= detalleOrdenProduccion.getCantidad();
@@ -324,26 +326,91 @@ public class GestorDemanda {
 
     public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto){
         int total=0;
-        List <OrdenProduccion> ordenes;
-        List<DemandaXPeriodo> demandasXPeriodo;
+        //List <OrdenProduccion> ordenes = null;
+        List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();
         Date fechaIni;
         Date fechaFin;
+        OrdenProduccion ordenActual;
+        int indice=0;
+        int maxIndice;
+        boolean salir = true;
+        boolean salirDos;
+        Date fechaHoy = new Date();
 
-        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.detalleOrdenProduccion.producto = :nombre and a.borrado=false ORDER BY a.fecha ASC" );
-        consulta.setParameter("nombre",producto );
-        ordenes = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+        buscarDetalles(producto);
 
-        fechaIni= primerDia(ordenes.get(0).getFecha());
-        fechaFin= ultimoDia(ordenes.get(0).getFecha());
+        maxIndice=detallesOrdenes.size()-1;
+        if(detallesOrdenes.size()>0){
 
-        for (OrdenProduccion ordenProduccion : ordenes) {
-//            fechaT = ordenProduccion.getFecha();
-//            fechaT.
-//            if(fechaT.){
 
+//            for (DetalleOrdenProduccion detalleOrden : detallesOrdenes) {
+//
+//                Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.detallesOrdenProduccion = :nombre and a.borrado=false" );
+//                consulta.setParameter("nombre",detalleOrden );
+//                ordenes = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+//
 //            }
+//            System.out.println("\n Cant orden de produccion encontradas:"+ordenes.size()+"\n");
+    //        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenProduccion a where a.detallesOrdenProduccion.producto = :nombre and a.borrado=false ORDER BY a.fecha ASC" );
+    //        consulta.setParameter("nombre",producto );
+    //        ordenes = FachadaPersistencia.getInstancia().buscar(OrdenProduccion.class, consulta);
+
+//            ordenActual= ordenes.get(indice);
+//            maxIndice=ordenes.size();
+
+            ordenActual= detallesOrdenes.get(0).getOrdenProduccion();
+            
+
+            while (ordenActual.getFecha().compareTo(fechaHoy)<=0 && salir) {
+                fechaIni= primerDia(ordenActual.getFecha());
+                fechaFin= ultimoDia(ordenActual.getFecha());
+
+                System.out.println("\n Fecha inicio periodo: "+fechaIni.toString());
+                System.out.println("\n Fecha fin periodo: "+fechaFin.toString());
+                System.out.println("\n Fecha actual: "+ordenActual.getFecha().toString());
+                System.out.println("\n ----------------------------------------");
+
+                salirDos = true;
+                while (ordenActual.getFecha().compareTo(fechaIni)>=0 && ordenActual.getFecha().compareTo(fechaFin)<=0 && salirDos){
+
+                    System.out.println("\n Fecha actual: "+ordenActual.getFecha().toString());
+                    System.out.println("\n Indice: "+ indice);
+                    System.out.println("\n Indice max: "+maxIndice);
+                    System.out.println("\n ----------------------------------------");
+
+                    for (DetalleOrdenProduccion detalle : ordenActual.getDetallesOrdenProduccion()) {
+                            if (detalle.getProducto().getNombre().equals(producto.getNombre())){
+                                total += detalle.getCantidad();
+                            }
+                    }
+                    
+                    if(indice < maxIndice){                        
+                        ++indice;
+                        ordenActual= detallesOrdenes.get(indice).getOrdenProduccion();
+                    }else{
+                        salirDos = false;
+                    }
+                    
+                    
+                }
+
+//                if(total != 0){
+                    demandasXPeriodo.add(new DemandaXPeriodo(fechaIni,total));
+                    total=0;
+//                }else{
+
+                    if(indice < maxIndice){
+                        ++indice;
+                    }else{
+                        salir = false;
+                    }
+
+                    ordenActual= detallesOrdenes.get(indice).getOrdenProduccion();
+//                }
+
+
+            }
         }
-        demandasXPeriodo=null;
 
         return demandasXPeriodo;
     }
@@ -351,15 +418,57 @@ public class GestorDemanda {
     private Date primerDia(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(0), cal.get(1), 1);
+        cal.set(cal.get(cal.YEAR),cal.get(cal.MONTH), 1);
         return cal.getTime();
     }
 
     private Date ultimoDia(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(0), cal.get(1), 28);
+        cal.set(cal.get(cal.YEAR),cal.get(cal.MONTH), 28);
         return cal.getTime();
     }
 
+    private void buscarDetalles(ProductoComponente prod){
+
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false" );
+        consulta.setParameter("nombre",prod );
+        detallesOrdenes = FachadaPersistencia.getInstancia().buscar(DetalleOrdenProduccion.class, consulta);
+
+        if(detallesOrdenes.size()>0){
+            System.out.println("\n Cant detalles de produccion encontrados:"+detallesOrdenes.size()+"\n");
+        }
+        ordenarDetallesXFecha();
+    }
+    private void ordenarDetallesXFecha(){
+        List <OrdenProduccion> ordenesTemp;
+        Date fecha1;
+        Date fecha2;
+        DetalleOrdenProduccion detalleTemp;
+        OrdenProduccion ordenTemp;
+        int indice=-1;
+
+        for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
+
+        }
+        for (DetalleOrdenProduccion detallito : detallesOrdenes) {
+            ++indice;
+            fecha1= detallesOrdenes.get(indice).getOrdenProduccion().getFecha();
+            for (int i = 1; i < detallesOrdenes.size(); i++) {
+                
+                fecha2= detallesOrdenes.get(i).getOrdenProduccion().getFecha();
+
+                if(fecha1.compareTo(fecha2)>0){
+                    detalleTemp=detallesOrdenes.get(i);
+                    detallesOrdenes.set(i, detallesOrdenes.get(indice));
+                    detallesOrdenes.set(indice, detalleTemp);
+                }
+//                if(fecha1.compareTo(fecha2)>0){
+//                    detalleTemp=detallesOrdenes.get(i);
+//                }
+            }
+                System.out.println("\n ----------------------------------------");
+                System.out.println("\n Fecha ordenada: "+detallito.getOrdenProduccion().getFecha().toString());
+        }
+    }
 }
