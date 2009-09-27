@@ -538,7 +538,8 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
    }else{
        if (tipoDemanda.equalsIgnoreCase("SE Simple")) {
 
-           PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
+//           PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
+           PanelDemandaExpoSimpleNew panel = new PanelDemandaExpoSimpleNew(productoComponente);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
 

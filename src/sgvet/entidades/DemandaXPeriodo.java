@@ -15,6 +15,11 @@ public class DemandaXPeriodo {
     private Date mes;
     private int totalVentas;
 
+    public DemandaXPeriodo(Date periodo, int total) {
+        mes = periodo;
+        totalVentas= total;
+    }
+
     /**
      * @return the mes
      */
