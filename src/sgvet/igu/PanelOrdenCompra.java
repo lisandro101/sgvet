@@ -10,7 +10,7 @@ import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.OrdenCompra;
 import sgvet.entidades.Proveedor;
 import sgvet.gestores.GestorOrdenCompra;
-import sgvet.gestores.GestorOrdenProduccion;
+import sgvet.gestores.GestorVenta;
 import sgvet.gestores.GestorProveedor;
 import sgvet.igu.buscar.PanelBuscarOrdenCompra;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
@@ -525,7 +525,7 @@ private void btEntregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }else{
         GestorOrdenCompra.getInstancia().terminarOrden(ordenCompra);
         tfEstado.setText(ordenCompra.getEstado().toString());
-        GestorOrdenProduccion.getInstancia().revisarOrdenesSuspendidas();
+        GestorVenta.getInstancia().revisarOrdenesSuspendidas();
     }
     
     

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.Venta;
 import sgvet.entidades.ProductoComponente;
-import sgvet.gestores.GestorOrdenProduccion;
+import sgvet.gestores.GestorVenta;
 import sgvet.igu.buscar.PanelBuscarOrdenProduccion;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
 import sgvet.igu.buscar.ValidacionBuscar;
@@ -370,7 +370,7 @@ private void btAnularOrdenProduccionActionPerformed(java.awt.event.ActionEvent e
         
     if(opcion == JOptionPane.YES_OPTION) {
         //venta.setBorrado(true);
-        if(GestorOrdenProduccion.getInstancia().anularOrden(venta)){
+        if(GestorVenta.getInstancia().anularOrden(venta)){
             FachadaPersistencia.getInstancia().actualizar(venta, true);
         }else{
             JOptionPane.showMessageDialog(this, "No es posible anular la orden."+"\nEsta en estado: "+venta.getEstado().toString());
@@ -426,8 +426,8 @@ private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent
         if(tfCliente.getText().trim().equals("") || !(tm.getRowCount() >= 1)){
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         } else {
-            GestorOrdenProduccion.getInstancia().procesarOrden(venta);
-            tfNumero.setText(GestorOrdenProduccion.getInstancia().obtenerNroOrden());
+            GestorVenta.getInstancia().procesarOrden(venta);
+            tfNumero.setText(GestorVenta.getInstancia().obtenerNroOrden());
             //venta.setEstado(venta.getEstado());
             venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
             FachadaPersistencia.getInstancia().actualizar(venta, true);
