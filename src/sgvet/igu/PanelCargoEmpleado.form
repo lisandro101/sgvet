@@ -28,7 +28,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pABMCargo" alignment="0" max="32767" attributes="2"/>
                   <Component id="pTabla" alignment="0" max="32767" attributes="2"/>
-                  <Component id="pBotones" alignment="1" pref="600" max="32767" attributes="0"/>
+                  <Component id="pBotones" alignment="1" pref="604" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
