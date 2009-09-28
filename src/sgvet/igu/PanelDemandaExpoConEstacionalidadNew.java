@@ -6,7 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import sgvet.entidades.DemandaXPeriodo;
+import javax.swing.table.DefaultTableModel;
+import sgvet.entidades.Demanda;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
 import sgvet.utils.*;
@@ -15,22 +16,22 @@ import sgvet.utils.*;
  *
  * @author  Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
-public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog implements IValidable {
+public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog implements IValidable {
     private static final long serialVersionUID = 1L;
 
 //    private DemandaSESTableModel tmDemanda;
 //    private DefaultTableModel tModel;
     private ProductoComponente producto;
 //    private List<Demanda> demandas;
-//
+
 //    private int cantAnios;
 //    private Date anioInicial;
     private double alfa;
-    private double beta;
+    private double gamma;
 
 
     /** Creates new form PanelCargoEmpleado */
-    public PanelDemandaExpoConTendenciaNew(ProductoComponente productoNuevo) {
+    public PanelDemandaExpoConEstacionalidadNew(ProductoComponente productoNuevo) {
 
         producto = productoNuevo;
 
@@ -41,7 +42,7 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
 
     }
 
-    public PanelDemandaExpoConTendenciaNew() {
+    public PanelDemandaExpoConEstacionalidadNew() {
         initComponents();
         inicializar();
 
@@ -57,7 +58,7 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
     }
 
     private void inicializarBotones(){
-        //btCalcular.setEnabled(false);
+//        btCalcular.setEnabled(false);
 
     }
 
@@ -79,12 +80,12 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
         jPanel1 = new javax.swing.JPanel();
         lbAlfa = new javax.swing.JLabel();
         tfAlfa = new javax.swing.JTextField();
-        tfBeta = new javax.swing.JTextField();
-        lbBeta = new javax.swing.JLabel();
-        lbPrediccion = new javax.swing.JLabel();
-        tfPrediccion = new javax.swing.JTextField();
-        tfDemandaAcumulada = new javax.swing.JTextField();
+        tfGamma = new javax.swing.JTextField();
+        lbGamma = new javax.swing.JLabel();
         lbDemandaAcumulada = new javax.swing.JLabel();
+        tfDemandaAcumulada = new javax.swing.JTextField();
+        tfPrediccion = new javax.swing.JTextField();
+        lbPrediccion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -135,8 +136,8 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
                     .addComponent(lbNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminadoLayout.setVerticalGroup(
@@ -169,60 +170,60 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
 
         lbAlfa.setText("ALfa:");
 
-        tfAlfa.setText("0.4");
+        tfAlfa.setText("0.3");
         tfAlfa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAlfaActionPerformed(evt);
             }
         });
 
-        tfBeta.setText("0.2");
-        tfBeta.addActionListener(new java.awt.event.ActionListener() {
+        tfGamma.setText("0.6");
+        tfGamma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfBetaActionPerformed(evt);
+                tfGammaActionPerformed(evt);
             }
         });
 
-        lbBeta.setText("Beta:");
+        lbGamma.setText("Gamma:");
 
-        lbPrediccion.setText("Prediccion:");
-
-        tfPrediccion.setEditable(false);
+        lbDemandaAcumulada.setText("Demanda Acumulada:");
 
         tfDemandaAcumulada.setEditable(false);
 
-        lbDemandaAcumulada.setText("Demanda Acumulada:");
+        tfPrediccion.setEditable(false);
+
+        lbPrediccion.setText("Prediccion:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbPrediccion)
-                    .addComponent(lbDemandaAcumulada)
                     .addComponent(lbAlfa)
-                    .addComponent(lbBeta))
+                    .addComponent(lbGamma)
+                    .addComponent(lbPrediccion)
+                    .addComponent(lbDemandaAcumulada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                    .addComponent(tfBeta, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
-                .addGap(178, 178, 178))
+                    .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(tfGamma, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
+                .addGap(187, 187, 187))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbAlfa)
-                    .addComponent(tfAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbBeta)
-                    .addComponent(tfBeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfAlfa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbAlfa, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfGamma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbGamma, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDemandaAcumulada)
@@ -238,7 +239,7 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -250,13 +251,13 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -267,15 +268,8 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_btCerrarActionPerformed
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-
-    List <DemandaXPeriodo> ventas;
-    if(validarYCargarDatosPantalla()){
-        ventas= GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto);
-        tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().calcularAcumulado(ventas)));
-        tfPrediccion.setText(GestorDemanda.getInstancia().calcularESNew(alfa, ventas)+"");
-        GestorDemanda.getInstancia().mostrarXPantalla(ventas);
-    }
-
+//    tModel.fireTableDataChanged();
+//    GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma);
 
 }//GEN-LAST:event_btCalcularActionPerformed
 
@@ -289,9 +283,9 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     // TODO add your handling code here:
 }//GEN-LAST:event_tfAlfaActionPerformed
 
-private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBetaActionPerformed
+private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfGammaActionPerformed
     // TODO add your handling code here:
-}//GEN-LAST:event_tfBetaActionPerformed
+}//GEN-LAST:event_tfGammaActionPerformed
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -301,18 +295,18 @@ private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.ButtonGroup errores;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAlfa;
-    private javax.swing.JLabel lbBeta;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbDemandaAcumulada;
+    private javax.swing.JLabel lbGamma;
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbPrediccion;
     private javax.swing.JPanel pBotones;
     private javax.swing.JPanel pProducto;
     private javax.swing.JPanel pProductoTerminado;
     private javax.swing.JTextField tfAlfa;
-    private javax.swing.JTextField tfBeta;
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfDemandaAcumulada;
+    private javax.swing.JTextField tfGamma;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfPrediccion;
     // End of variables declaration//GEN-END:variables
@@ -355,12 +349,12 @@ private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private boolean validarYCargarDatosPantalla(){
         boolean resul= true;
 
-        if(tfAlfa.getText().equals("") || tfBeta.getText().equals("")){
+        if(tfAlfa.getText().equals("") || tfGamma.getText().equals("")){
             resul=false;
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         }else{
             alfa = Double.parseDouble(tfAlfa.getText());
-            beta = Double.parseDouble(tfBeta.getText());
+            gamma = Double.parseDouble(tfGamma.getText());
         }
         return resul;
     }
@@ -372,10 +366,5 @@ private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         return sdf.format(fecha);
     }
 
-//    private void cargarDatosEnTabla(){
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            tModel.setValueAt((123+i*4), i, 1);
-//
-//        }
-//    }
+
 }

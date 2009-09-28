@@ -549,8 +549,7 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
            panel.setVisible(true);
        }
        else if(tipoDemanda.equalsIgnoreCase("SE Tendencia")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-
-           PanelDemandaExpoConTendencia panel = new PanelDemandaExpoConTendencia(productoComponente);
+           PanelDemandaExpoConTendenciaNew panel = new PanelDemandaExpoConTendenciaNew(productoComponente);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
        }

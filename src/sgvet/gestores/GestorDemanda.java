@@ -239,23 +239,28 @@ public class GestorDemanda {
         int temp=0;
         int demandaReal=0;
         int demandaPre=0;
-        ventas.get(0).setPrediccionVenta(ventas.get(0).getVentas());
+        if(ventas.size()>0){
+            ventas.get(0).setPrediccionVenta(ventas.get(0).getVentas());
 
-        for (int i = 1; i < ventas.size(); i++) {
-            if(ventas.get(i).getVentas() != 0){
-                demandaReal= ventas.get(i).getVentas();
-            }else if(ventas.get(i).getVentas() == 0){
-                ++temp;
+            for (int i = 1; i < ventas.size(); i++) {
+                if(ventas.get(i).getVentas() != 0){
+                    demandaReal= ventas.get(i).getVentas();
+                }else if(ventas.get(i).getVentas() == 0){
+                    ++temp;
+                }
+                if(temp<=1){
+                    demandaPre= (int) ventas.get(i - 1).getPrediccionVenta();
+                }
+                ventas.get(i).setPrediccionVenta((int)(alfa * demandaReal + (1 - alfa)
+                        * demandaPre));
             }
-            if(temp<=1){
-                demandaPre= (int) ventas.get(i - 1).getPrediccionVenta();
-            }
-            ventas.get(i).setPrediccionVenta((int)(alfa * demandaReal + (1 - alfa)
-                    * demandaPre));
+            temp= ventas.get(ventas.size()-1).getPrediccionVenta();
         }
-        return ventas.get(ventas.size()-1).getPrediccionVenta();
+
+        return temp;
     }
 
+    @Deprecated
     public void calcularDemandaConEstacionalidad(TableModel tModel, double alfa, double gamma){
         double indiceEsta1[] = new double[tModel.getRowCount()];
         double demanPromedio1[] = new double[tModel.getRowCount()];
@@ -295,6 +300,95 @@ public class GestorDemanda {
         }
  
     }
+
+    public double calcularDemandaConEstacionalidadNew(List<DemandaXPeriodo> ventas, double alfa, double gamma){
+//        double indiceEsta1[] = new double[tModel.getRowCount()];
+//        double demanPromedio1[] = new double[tModel.getRowCount()];
+//        double indiceEsta2[] = new double[tModel.getRowCount()];
+//        double demanPromedio2[] = new double[tModel.getRowCount()];
+//        int totaldemanPromedio1=0;
+//
+//        double ultimoReal=0;
+
+        double temp=0;
+        double estimacionAnt;
+        double indiceAnt;
+        List <Double> indiceEsta = new ArrayList<Double>(12);
+        List <Double> estimacion = new ArrayList<Double>();
+        int estacion=0;
+        int ventaAcumulada = calcularAcumulado(ventas);
+
+        for (DemandaXPeriodo demandaXPeriodo : ventas) {
+            if(estacion == 12){
+                    estacion=0;
+            }
+            if(ventaAcumulada != 0){
+                indiceEsta.set(estacion, Double.valueOf(demandaXPeriodo.getVentas()/ventaAcumulada)); //revisar esta linea
+            }else{
+                System.out.println("\n ---------------------------------------------");
+                System.out.println("\n El valor de las ventas acumuladas es cero");
+                System.out.println("\n ---------------------------------------------");
+            }
+
+        }
+
+
+
+        estacion=0;
+        for (int i = 0; i < ventas.size(); i++) {
+            if(i==0){
+                indiceAnt=1;
+                estimacionAnt=ventas.get(0).getVentas();
+            }else{
+                if(estacion == 12){
+                    estacion=0;
+                }
+                indiceAnt= indiceEsta.get(estacion);
+                ++estacion;
+
+                estimacionAnt= estimacion.get(i-1);
+            }
+            temp = alfa*ventas.get(i).getVentas() + (1-alfa)*(estimacionAnt+indiceAnt);
+            estimacion.set(i,temp );
+ //           temp= beta *(ventas.get(i).getVentas()-estimacionAnt)+(1-beta)*indiceAnt;
+  //          indice.set(i, temp);
+        }
+
+   //     temp= estimacion.get(estimacion.size()-1) + indice.get(indice.size()-1);
+        return temp;
+
+
+//
+//        for (int i = 0; i < tModel.getRowCount(); i++) {
+//            for (int j = 1; j < tModel.getColumnCount()-1; j++) {
+//                demanPromedio1[i] += Double.parseDouble(tModel.getValueAt(i, j).toString());
+//            }
+//            demanPromedio1[i]= demanPromedio1[i]/ (tModel.getColumnCount()-2);
+//
+//            totaldemanPromedio1 += demanPromedio1[i];    //tipos incompatibles
+//        }
+//        totaldemanPromedio1 = totaldemanPromedio1/tModel.getRowCount();
+//
+//        for (int i = 0; i < tModel.getRowCount(); i++) {
+//            indiceEsta1[i]=demanPromedio1[i]/totaldemanPromedio1;
+//        }
+//
+//        for (int i = 0; i < tModel.getRowCount(); i++) {
+//            if(tModel.getValueAt(i,tModel.getColumnCount()-1 ) != null){
+//
+//                temp = Double.parseDouble(tModel.getValueAt(i,tModel.getColumnCount()-1).toString());
+//                ultimoReal= temp/indiceEsta1[i]*alfa+ (1-alfa)*demanPromedio1[i];
+//                demanPromedio2[i]= ultimoReal;
+//            }else{
+//
+//                demanPromedio2[i]= ultimoReal* indiceEsta1[i];
+//                tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
+//
+//            }
+//        }
+
+    }
+
     @Deprecated
     public void calcularDemandaConTendencia(TableModel tModel, double alfa, double beta){
         double indiceTend1[] = new double[tModel.getRowCount()];
@@ -478,12 +572,14 @@ public class GestorDemanda {
 
     private List <DemandaXPeriodo> cerrarPeriodo(List <DemandaXPeriodo> ventas, List<DetalleOrdenProduccion> detalles){
         Date hoy = new Date();
-
-        if(diaValidoDelMes(hoy)){
-            if(sonDelMismoMes(hoy, detalles.get(detalles.size()-1).getVenta().getFecha())){
-                ventas.remove(ventas.size()-1);
+        if(detalles.size()>0){
+            if(diaValidoDelMes(hoy)){
+                if(sonDelMismoMes(hoy, detalles.get(detalles.size()-1).getVenta().getFecha())){
+                    ventas.remove(ventas.size()-1);
+                }
             }
         }
+        
 
         return ventas;
     }
@@ -505,4 +601,11 @@ public class GestorDemanda {
             System.out.println("\n No se registraron ventas del producto seleccionado\n");
         }
     }
+
+     private int truncar(double valor){
+         int resul;
+         resul= Math.round((float)valor);
+         return resul;
+     }
+
 }
