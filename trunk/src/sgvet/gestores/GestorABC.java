@@ -9,6 +9,7 @@ import sgvet.entidades.Demanda;
 import sgvet.entidades.ItemABC;
 import sgvet.entidades.ProductoComponente;
 import sgvet.persistencia.FachadaPersistencia;
+import sgvet.persistencia.IPersistente;
 
 public class GestorABC {
 
@@ -40,32 +41,71 @@ public class GestorABC {
         List<ItemABC> itemsABC = new ArrayList<ItemABC>();
 
         for (ProductoComponente producto : productos) {
-            double demanda = producto.getDemandaAnual();
-            double precio = producto.getPrecioVenta();
-            double demandaVal =  demanda * precio;
-            ItemABC itemAbc = new ItemABC(producto, demandaVal);
-            itemsABC.add(itemAbc);
+            itemsABC.add(new ItemABC(producto, producto.getDemandaAnual() * producto.getPrecioVenta()));
         }
 
+        List<ItemABC> curvaABC = new ArrayList<ItemABC>();       
+        int cantElem = itemsABC.size();
         ItemABC itemMayor = null;
-        List<ItemABC> curvaABC = new ArrayList<ItemABC>();
 
-        for (int i = 0; i < itemsABC.size()-1; i++) {
-            for (int j = i+1; j < itemsABC.size(); j++) {
-                if (itemsABC.get(i).getDemandaValorizada() > itemsABC.get(j).getDemandaValorizada())
-                    itemMayor = itemsABC.get(i);
-                else
-                    itemMayor = itemsABC.get(j);
+        for (int i = 0; i < cantElem; i++) {
+
+            itemMayor=itemsABC.get(0);
+            for (ItemABC item : itemsABC) {
+                if(itemMayor.getDemandaValorizada()<=item.getDemandaValorizada()){
+                    itemMayor=item;
+                }
+
             }
             curvaABC.add(itemMayor);
+            itemsABC.remove(itemMayor);
+
         }
 
-        for (ProductoComponente p : productos) {
-            System.out.println("Producto: " + p.getNombre() + " " + p.getDemandaAnual() + " " + p.getPrecioVenta());
-        }
+        double demandaAcumulada = 0;
+
         for (ItemABC itemABC : curvaABC) {
-            System.out.println("Demanda: " + itemABC.getDemandaValorizada() + " " + itemABC.getProducto().getNombre());
+            demandaAcumulada += itemABC.getDemandaValorizada();
+            itemABC.setDemandaAcumulada(demandaAcumulada);
         }
+
+        double demandaClaseA = 0.8 * demandaAcumulada;
+        double demandaClaseB = 0.9 * demandaAcumulada;
+        List<ProductoComponente> productosActualizados = new ArrayList<ProductoComponente>();
+
+        for (ItemABC itemABC : curvaABC) {
+            if(itemABC.getDemandaAcumulada() <= demandaClaseA) {
+                itemABC.getProducto().setCategoria("Curva A");
+                productosActualizados.add(itemABC.getProducto());
+            }
+            else if(itemABC.getDemandaAcumulada() <= demandaClaseB) {
+                itemABC.getProducto().setCategoria("Curva B");
+                productosActualizados.add(itemABC.getProducto());
+            }
+            else {
+                itemABC.getProducto().setCategoria("Curva C");
+                productosActualizados.add(itemABC.getProducto());
+            }
+        }
+
+//        persistir(productosActualizados);
+
+        for (ItemABC itemABC : curvaABC) {
+            System.out.println("Demanda: " + itemABC.getDemandaValorizada() 
+                    + " " + itemABC.getProducto().getNombre()
+                    + " " + itemABC.getDemandaAcumulada()
+                    + " " + itemABC.getProducto().getCategoria());
+        }
+    }
+
+    public void persistir(List<IPersistente> objetos) {
+        FachadaPersistencia.getInstancia().comenzarTransaccion();
+
+        for (IPersistente objeto : objetos) {
+            FachadaPersistencia.getInstancia().grabar(objeto, false);
+        }
+
+        FachadaPersistencia.getInstancia().finalizarTransaccion();
     }
 
 }
