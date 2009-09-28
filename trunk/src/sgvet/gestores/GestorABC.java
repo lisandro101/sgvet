@@ -88,7 +88,7 @@ public class GestorABC {
             }
         }
 
-//        persistir(productosActualizados);
+        persistir(productosActualizados);
 
         for (ItemABC itemABC : curvaABC) {
             System.out.println("Demanda: " + itemABC.getDemandaValorizada() 
@@ -98,11 +98,12 @@ public class GestorABC {
         }
     }
 
-    public void persistir(List<IPersistente> objetos) {
+    public void persistir(List<ProductoComponente> prods) {
+
         FachadaPersistencia.getInstancia().comenzarTransaccion();
 
-        for (IPersistente objeto : objetos) {
-            FachadaPersistencia.getInstancia().grabar(objeto, false);
+        for (ProductoComponente prod : prods) {
+            FachadaPersistencia.getInstancia().actualizar(prod, false);
         }
 
         FachadaPersistencia.getInstancia().finalizarTransaccion();

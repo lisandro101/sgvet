@@ -47,6 +47,7 @@ public class Main {
                 if(prod.size()<=0) {
                     System.out.println("Realizando Carga Inicial....");
                     GestorCargaInicial.getInstancia().cargarProductos(GestorCargaInicial.getInstancia().cargarProveedores());
+                    System.out.println("Finalizada Carga Inicial.");
                 }
             }
             
