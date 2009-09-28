@@ -5,7 +5,6 @@
 
 package sgvet.gestores;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +19,16 @@ import sgvet.persistencia.IPersistente;
  * @author Lisandro
  */
 public class GestorCargaInicial {
+
+    private static GestorCargaInicial instance;
+
+    public synchronized static GestorCargaInicial getInstancia(){
+        if (instance == null){
+            instance = new GestorCargaInicial();
+        }
+        return instance;
+    }
+
     public HashMap<String,Proveedor> cargarProveedores() {
 
         Proveedor prov;

@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
+import sgvet.gestores.GestorABC;
+import sgvet.gestores.GestorCargaInicial;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
@@ -72,6 +74,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         calcularIndices = new javax.swing.JMenuItem();
         demanda = new javax.swing.JMenu();
         prediccionDemanda = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         reportes = new javax.swing.JMenu();
         verReportes = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
@@ -135,6 +138,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         menu.add(indices);
 
         demanda.setText("Demanda");
+        demanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                demandaActionPerformed(evt);
+            }
+        });
 
         prediccionDemanda.setText("Predicción de la demanda");
         prediccionDemanda.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +151,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         demanda.add(prediccionDemanda);
+
+        jMenuItem2.setText("Calcular Curva ABC");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        demanda.add(jMenuItem2);
 
         menu.add(demanda);
 
@@ -284,6 +300,14 @@ private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     dialogoReportes.setVisible(true);
 }//GEN-LAST:event_verReportesActionPerformed
 
+private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demandaActionPerformed
+    
+}//GEN-LAST:event_demandaActionPerformed
+
+private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    GestorABC.getInstancia().calcularCurvaABC();
+}//GEN-LAST:event_jMenuItem2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
@@ -294,6 +318,7 @@ private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JMenu indices;
     private javax.swing.JMenu inventario;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem prediccionDemanda;
