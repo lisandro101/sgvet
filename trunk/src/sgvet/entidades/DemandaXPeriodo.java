@@ -14,6 +14,7 @@ import java.util.Date;
 public class DemandaXPeriodo {
     private Date mes;
     private int totalVentas;
+    private int prediccionVenta;
 
     public DemandaXPeriodo(Date periodo, int total) {
         mes = periodo;
@@ -46,6 +47,20 @@ public class DemandaXPeriodo {
      */
     public void setVentas(int ventas) {
         this.totalVentas = ventas;
+    }
+
+    /**
+     * @return the prediccionVenta
+     */
+    public int getPrediccionVenta() {
+        return prediccionVenta;
+    }
+
+    /**
+     * @param prediccionVenta the prediccionVenta to set
+     */
+    public void setPrediccionVenta(int prediccionVenta) {
+        this.prediccionVenta = prediccionVenta;
     }
 
     

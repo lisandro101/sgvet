@@ -30,7 +30,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pBotones" alignment="1" pref="449" max="32767" attributes="1"/>
+          <Component id="pBotones" alignment="1" pref="445" max="32767" attributes="1"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -46,13 +46,13 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pProducto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="pBotones" min="-2" max="-2" attributes="0"/>
+              <Component id="pBotones" min="-2" pref="33" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -126,8 +126,8 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfCodigoProducto" pref="338" max="32767" attributes="3"/>
-                          <Component id="tfNombreProducto" alignment="0" pref="338" max="32767" attributes="3"/>
+                          <Component id="tfCodigo" pref="334" max="32767" attributes="3"/>
+                          <Component id="tfNombre" alignment="0" pref="334" max="32767" attributes="3"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -138,12 +138,12 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="2" attributes="0">
                           <Component id="lbCodigo" alignment="2" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfCodigoProducto" alignment="2" min="-2" pref="21" max="-2" attributes="0"/>
+                          <Component id="tfCodigo" alignment="2" min="-2" pref="21" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lbNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfNombreProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="11" max="32767" attributes="0"/>
                   </Group>
@@ -161,12 +161,12 @@
                 <Property name="text" type="java.lang.String" value="Nombre:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfCodigoProducto">
+            <Component class="javax.swing.JTextField" name="tfCodigo">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfNombreProducto">
+            <Component class="javax.swing.JTextField" name="tfNombre">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -188,42 +188,53 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lbDemandaAcumulada" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbAlfa5" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tfAlfa" alignment="0" pref="159" max="32767" attributes="3"/>
-                              <Component id="tfPrediccion" alignment="0" pref="159" max="32767" attributes="0"/>
-                              <Component id="tfDemandaAcumulada" alignment="0" pref="159" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="lbPrediccion" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                          <Component id="tfPrediccion" pref="143" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="lbPrediccion" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="215" max="-2" attributes="0"/>
+                          <Component id="lbDemandaAcumulada" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="tfDemandaAcumulada" pref="94" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="lbAlfa" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbBeta" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="tfBeta" alignment="0" pref="143" max="32767" attributes="3"/>
+                              <Component id="tfAlfa" alignment="0" pref="143" max="32767" attributes="3"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbAlfa5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tfAlfa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="tfAlfa" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbAlfa" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="tfBeta" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbBeta" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbDemandaAcumulada" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfDemandaAcumulada" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbPrediccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="tfPrediccion" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -234,22 +245,40 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lbAlfa5">
+        <Component class="javax.swing.JLabel" name="lbAlfa">
           <Properties>
             <Property name="text" type="java.lang.String" value="ALfa:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfAlfa">
           <Properties>
-            <Property name="text" type="java.lang.String" value="0.3"/>
+            <Property name="text" type="java.lang.String" value="0.4"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfAlfaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbDemandaAcumulada">
+        <Component class="javax.swing.JTextField" name="tfBeta">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Demanda Acumulada:"/>
+            <Property name="text" type="java.lang.String" value="0.2"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfBetaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbBeta">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Beta:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbPrediccion">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Prediccion:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfPrediccion">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfDemandaAcumulada">
@@ -257,14 +286,9 @@
             <Property name="editable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lbPrediccion">
+        <Component class="javax.swing.JLabel" name="lbDemandaAcumulada">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Predicci&#xf3;n:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="tfPrediccion">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="Demanda Acumulada:"/>
           </Properties>
         </Component>
       </SubComponents>

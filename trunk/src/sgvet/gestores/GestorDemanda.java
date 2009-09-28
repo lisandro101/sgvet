@@ -25,7 +25,7 @@ import sgvet.persistencia.FachadaPersistencia;
  */
 public class GestorDemanda {
 
-    private List <DetalleOrdenProduccion> detallesOrdenes;
+//    private List <DetalleOrdenProduccion> detallesOrdenes;
     private static GestorDemanda instancia;
     
     public synchronized static GestorDemanda getInstancia(){
@@ -164,7 +164,7 @@ public class GestorDemanda {
     }
 
      //..................realiza el suavizamiento exponencial simple.................................
-  
+    @Deprecated
     public void suavizarES(double alfa, int periodo, int demandaActual){
 
         double [] vectorXDemanda = null;
@@ -173,7 +173,7 @@ public class GestorDemanda {
         System.out.println("El promedio actual es: "+ promActual);
        
     }
-
+    @Deprecated
     public void suavizarES(float alfa, double promDemanda, double demandaActual){
         
         double promActual=actualizarES((float) alfa,promDemanda,demandaActual);
@@ -184,7 +184,7 @@ public class GestorDemanda {
 
 
     //------------------------------------------------------------------------------------------------
-
+    @Deprecated
     public double inicializarES(double alfa, double vectorXDemanda[]){
         //Este método calcula el nuevo promedio de distintos valores de Xn para un mismo periodo............
         double promActual = 0;
@@ -198,7 +198,7 @@ public class GestorDemanda {
 
 
     //------------------------------------------------------------------------------------------------
-
+    @Deprecated
     public double actualizarES(float alfa, double promDemanda, double demandaActual){
         //este método calcula el nuevo promedio a partir del ultimo promedio
         double promActual = alfa * demandaActual + (1-alfa) * promDemanda;
@@ -209,7 +209,7 @@ public class GestorDemanda {
    
 
     // Calcula el suavizamiento exponencial simple para un arreglo de demandas a predecir
-
+    @Deprecated
     public List<Demanda> calcularES(double alfa, List<Demanda> demandas){
         int temp=0;
         int demandaReal=0;
@@ -233,6 +233,27 @@ public class GestorDemanda {
         }
 
         return demandas;
+    }
+
+    public int calcularESNew(double alfa, List<DemandaXPeriodo> ventas){
+        int temp=0;
+        int demandaReal=0;
+        int demandaPre=0;
+        ventas.get(0).setPrediccionVenta(ventas.get(0).getVentas());
+
+        for (int i = 1; i < ventas.size(); i++) {
+            if(ventas.get(i).getVentas() != 0){
+                demandaReal= ventas.get(i).getVentas();
+            }else if(ventas.get(i).getVentas() == 0){
+                ++temp;
+            }
+            if(temp<=1){
+                demandaPre= (int) ventas.get(i - 1).getPrediccionVenta();
+            }
+            ventas.get(i).setPrediccionVenta((int)(alfa * demandaReal + (1 - alfa)
+                    * demandaPre));
+        }
+        return ventas.get(ventas.size()-1).getPrediccionVenta();
     }
 
     public void calcularDemandaConEstacionalidad(TableModel tModel, double alfa, double gamma){
@@ -274,7 +295,7 @@ public class GestorDemanda {
         }
  
     }
-
+    @Deprecated
     public void calcularDemandaConTendencia(TableModel tModel, double alfa, double beta){
         double indiceTend1[] = new double[tModel.getRowCount()];
         double indiceTend2[] = new double[tModel.getRowCount()];
@@ -309,25 +330,53 @@ public class GestorDemanda {
             
         }
     }
+        // TableModel tModel
+        public double calcularDemandaConTendenciaNew(List<DemandaXPeriodo> ventas, double alfa, double beta){
 
-    @Deprecated
-    public int CalcularDemandaAcumulada(ProductoComponente producto){
-        int total=0;
+        double estimacionAnt;
+        double indiceAnt;
+        double temp;
+        List <Double> indice = new ArrayList<Double>();
+        List <Double> estimacion = new ArrayList<Double>();
 
-        buscarDetalles(producto);
-        for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
-            total+= detalleOrdenProduccion.getCantidad();
+//        indice.add(0.0);
+
+        for (int i = 0; i < ventas.size(); i++) {
+            if(i==0){
+                indiceAnt=0;
+                estimacionAnt=ventas.get(0).getVentas();
+            }else{
+                indiceAnt= indice.get(i-1);
+                estimacionAnt= estimacion.get(i-1);
+            }
+            temp = alfa*ventas.get(i).getVentas() + (1-alfa)*(estimacionAnt+indiceAnt);
+            estimacion.set(i,temp );
+            temp= beta *(ventas.get(i).getVentas()-estimacionAnt)+(1-beta)*indiceAnt;
+            indice.set(i, temp);
         }
 
-        return total;
+        temp= estimacion.get(estimacion.size()-1) + indice.get(indice.size()-1);
+        return temp;
     }
+//    @Deprecated
+//    public int CalcularDemandaAcumulada(ProductoComponente producto){
+//        int total=0;
+//
+//        buscarDetalles(producto);
+//        for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
+//            total+= detalleOrdenProduccion.getCantidad();
+//        }
+//
+//        return total;
+//    }
 
     public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto){
+        List <DetalleOrdenProduccion> detallesOrdenes;
         int total=0;
         List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();
         Date fechaIni;
 
-        buscarDetalles(producto);
+        detallesOrdenes = buscarDetalles(producto);
 
         if(detallesOrdenes.size()>0){
             fechaIni= detallesOrdenes.get(0).getVenta().getFecha();
@@ -348,7 +397,7 @@ public class GestorDemanda {
             demandasXPeriodo.add(new DemandaXPeriodo(fechaIni,total));
          }
 
-        return demandasXPeriodo;
+        return cerrarPeriodo(demandasXPeriodo, detallesOrdenes);
     }
 
     private Date primerDia(Date fecha){
@@ -382,8 +431,8 @@ public class GestorDemanda {
     }
 
 
-    private void buscarDetalles(ProductoComponente prod){
-
+    private List <DetalleOrdenProduccion> buscarDetalles(ProductoComponente prod){
+        List <DetalleOrdenProduccion> detallesOrdenes;
         Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false" );
         consulta.setParameter("nombre",prod );
         detallesOrdenes = FachadaPersistencia.getInstancia().buscar(DetalleOrdenProduccion.class, consulta);
@@ -391,11 +440,12 @@ public class GestorDemanda {
         if(detallesOrdenes.size()>0){
             System.out.println("\n Cant detalles de produccion encontrados:"+detallesOrdenes.size()+"\n");
         }
-        ordenarDetallesXFecha();
+
+        return ordenarDetallesXFecha(detallesOrdenes);
     }
 
 
-    private void ordenarDetallesXFecha(){
+    private List <DetalleOrdenProduccion> ordenarDetallesXFecha(List <DetalleOrdenProduccion> detallesOrdenes){
         List <DetalleOrdenProduccion> detallesTemp = new ArrayList<DetalleOrdenProduccion>();
         Date fecha1;
 
@@ -421,6 +471,38 @@ public class GestorDemanda {
         for (DetalleOrdenProduccion detallene : detallesOrdenes) {
             System.out.println("\n ----------------------------------------");
             System.out.println("\n Fecha ordenada: "+detallene.getVenta().getFecha().toString()+ "  Cantidad: "+ detallene.getCantidad());
+        }
+
+        return detallesOrdenes;
+    }
+
+    private List <DemandaXPeriodo> cerrarPeriodo(List <DemandaXPeriodo> ventas, List<DetalleOrdenProduccion> detalles){
+        Date hoy = new Date();
+
+        if(diaValidoDelMes(hoy)){
+            if(sonDelMismoMes(hoy, detalles.get(detalles.size()-1).getVenta().getFecha())){
+                ventas.remove(ventas.size()-1);
+            }
+        }
+
+        return ventas;
+    }
+
+    public int calcularAcumulado( List<DemandaXPeriodo> ventas){
+        int resul=0;
+        for (DemandaXPeriodo demandaXPeriodo : ventas) {
+            resul += demandaXPeriodo.getVentas();
+        }
+        return resul;
+    }
+
+     public void mostrarXPantalla(List<DemandaXPeriodo> demandas){
+        if(demandas != null){
+            for (DemandaXPeriodo demandaXPeriodo : demandas) {
+            System.out.println("\n Periodo: "+demandaXPeriodo.getMes()+"    Total: "+demandaXPeriodo.getVentas());
+            }
+        }else{
+            System.out.println("\n No se registraron ventas del producto seleccionado\n");
         }
     }
 }
