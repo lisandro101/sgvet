@@ -650,7 +650,7 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
     
     public void setComponente(ProductoComponente prod){
-        productoComponente=prod;
+        productoComponente = prod;
         cargarPantallaProductoComponente(prod);
         
     }
@@ -688,8 +688,8 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         Util.getInstancia().limpiarCampos(this);
         tfCodigo.setText(prod.getCodigo());
         tfNombre.setText(prod.getNombre());
-        cbCategoria.setToolTipText(prod.getCategoria());
-        cbEstado.setToolTipText(prod.getEstado());
+        cbCategoria.setSelectedItem(prod.getCategoria());
+        cbEstado.setSelectedItem(prod.getEstado());
         tfNroPlano.setText(prod.getNumeroPlano());
         tfPrecioBase.setText(String.valueOf(prod.getPrecioBase())); 
         tfPesoUnidad.setText(String.valueOf(prod.getPesoUnidad()));
