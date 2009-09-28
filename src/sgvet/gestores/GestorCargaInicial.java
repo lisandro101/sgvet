@@ -1238,7 +1238,26 @@ public class GestorCargaInicial {
         /* Llama al método que persiste la lista de proveedores */
         persistir(persistentes);
     }
+/*
+     public void CargarOrdenCompra(HashMap<String,OrdenCompra> OrdenCompra) {
 
+        OrdenCompra OrdComp;
+        List<OrdenCompra> OrdComp;
+        List<IPersistente> persistentes = new ArrayList();
+
+        //* -----  Repetir este codigo para crear OrdenCompra a persistir  ----
+
+        OrdComp = new OrdenCompra();   //Recordar siempre hacer el new para que genere un nuevo UID!
+   	OrdenCompra.setId(01);
+    	OrdenCompra.setProveedor("Dog Chow");
+    	OrdenCompra.setFecha("25/09/2009");
+    	OrdenCompra.setFechaEstimadaEntrega("30/09/2009");
+        //OrdenCampra.setDetallesOrdenCompra.getId();
+    	OrdenCompra.setNroOrdenCompra(1);
+       	OrdenCompra.setEstado("Pendiente");
+        persistir(persistentes);
+}
+*/
     public void persistir(List<IPersistente> objetos) {
         FachadaPersistencia.getInstancia().comenzarTransaccion();
 
