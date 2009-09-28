@@ -1,7 +1,6 @@
 package sgvet.igu;
 
 import java.awt.Component;
-import java.util.Arrays;
 import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;

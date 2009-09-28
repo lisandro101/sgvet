@@ -11,6 +11,7 @@ import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
 import sgvet.gestores.GestorABC;
 import sgvet.gestores.GestorCargaInicial;
+import sgvet.igu.PanelCurvaABC;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
@@ -305,7 +306,11 @@ private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_demandaActionPerformed
 
 private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    GestorABC.getInstancia().calcularCurvaABC();
+//    GestorABC.getInstancia().calcularCurvaABC();
+    PanelCurvaABC panelABC = new PanelCurvaABC(this, rootPaneCheckingEnabled);
+    panelABC.setLocationRelativeTo(this);
+    panelABC.setVisible(true);
+    
 }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
