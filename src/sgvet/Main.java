@@ -6,6 +6,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import sgvet.entidades.Cargo;
 import sgvet.entidades.ItemIndice;
+import sgvet.entidades.ProductoComponente;
+import sgvet.gestores.GestorCargaInicial;
 import sgvet.igu.PantallaPrincipal;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.persistencia.IPersistente;
@@ -40,8 +42,12 @@ public class Main {
         new Thread() {
             @Override
             public void run() {
-                FachadaPersistencia.getInstancia().buscar(Cargo.class,
-                        "SELECT c FROM Cargo c WHERE 0 > 1");
+                List<ProductoComponente> prod = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class,
+                        "SELECT c FROM ProductoComponente c");
+                if(prod.size()<=0) {
+                    System.out.println("Realizando Carga Inicial....");
+                    GestorCargaInicial.getInstancia().cargarProductos(GestorCargaInicial.getInstancia().cargarProveedores());
+                }
             }
             
         }.start();
