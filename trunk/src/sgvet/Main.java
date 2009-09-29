@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import sgvet.entidades.Cargo;
 import sgvet.entidades.ItemIndice;
 import sgvet.entidades.ProductoComponente;
+import sgvet.gestores.GestorABC;
 import sgvet.gestores.GestorCargaInicial;
 import sgvet.igu.PantallaPrincipal;
 import sgvet.persistencia.FachadaPersistencia;
@@ -47,6 +47,7 @@ public class Main {
                 if(prod.size()<=0) {
                     System.out.println("Realizando Carga Inicial....");
                     GestorCargaInicial.getInstancia().cargarProductos(GestorCargaInicial.getInstancia().cargarProveedores());
+                    GestorABC.getInstancia().calcularCurvaABC();
                     System.out.println("Finalizada Carga Inicial.");
                 }
             }
