@@ -9,14 +9,10 @@ package sgvet.igu.buscar;
 import sgvet.igu.*;
 import java.util.List;
 import javax.persistence.Query;
-import sgvet.entidades.Maquina;
-import sgvet.igu.model.MaquinaTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 import javax.swing.*;
 import sgvet.entidades.OrdenCompra;
-import sgvet.entidades.Proveedor;
 import sgvet.igu.model.BuscarOrdenCompraTableModel;
-import sgvet.igu.model.OrdenCompraTableModel;
 
 /**
  *
