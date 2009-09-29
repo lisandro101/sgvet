@@ -203,22 +203,19 @@ public class GestorABC {
 
         for (int i = 0; i < cantElem; i++) {
 
-            itemMayor=itemsABC.get(0);
+            itemMayor = itemsABC.get(0);
             for (ItemABC item : itemsABC) {
                 if(itemMayor.getDemandaValorizada()<=item.getDemandaValorizada()){
                     itemMayor=item;
                 }
 
             }
+
             curvaABC.add(itemMayor);
             itemsABC.remove(itemMayor);
             demandaAnualTotal += itemMayor.getProducto().getDemandaAnual();
             demandaValorizadaTotal += itemMayor.getDemandaValorizada();
         }
-
-//    private static int cantidadProductosA;
-//    private static int cantidadProductosB;
-//    private static int cantidadProductosC;
 
         double demandaAcumulada = 0;
 
@@ -227,14 +224,18 @@ public class GestorABC {
             demandaAcumulada += itemABC.getDemandaValorizada();
             itemABC.setDemandaAcumulada(demandaAcumulada);
 
-            if(itemABC.getProducto().getCategoria().equals("Curva A")) {
-                cantidadProductosA++;
-            }
-            else if(itemABC.getProducto().getCategoria().equals("Curva B")) {
-                cantidadProductosB++;
-            }
-            else {
-                cantidadProductosC++;
+            if (itemABC.getProducto().getCategoria() != null) {
+
+                if(itemABC.getProducto().getCategoria().equals("Curva A")) {
+                    cantidadProductosA++;
+                }
+                else if(itemABC.getProducto().getCategoria().equals("Curva B")) {
+                    cantidadProductosB++;
+                }
+                else {
+                    cantidadProductosC++;
+                }
+                
             }
         }
 
