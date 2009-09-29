@@ -9,9 +9,6 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
-import sgvet.gestores.GestorABC;
-import sgvet.gestores.GestorCargaInicial;
-import sgvet.igu.PanelCurvaABC;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
@@ -28,8 +25,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private PanelOrdenCompra panelOrdenCompra;
     private PanelEmpleado panelEmpleado;   
     private PanelOrdenProduccion panelOrdenProduccion;
-    private PanelMaquina panelMaquina; 
-    private PanelCentroTrabajo panelCentroTrabajo;
 
     /** Creates new form PantallaPrincipal */
     public PantallaPrincipal() {
@@ -43,16 +38,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         panelOrdenCompra = new PanelOrdenCompra();
         panelEmpleado = new PanelEmpleado();        
         panelOrdenProduccion = new PanelOrdenProduccion();
-        panelMaquina = new PanelMaquina();
-        panelCentroTrabajo = new PanelCentroTrabajo();
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
 //        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
 //        jTabbedPane1.add("     Personal      ", panelEmpleado);
         jTabbedPane1.add("       Venta       ", panelOrdenProduccion);
-//        jTabbedPane1.add("    Maquinaria     ", panelMaquina);
-//        jTabbedPane1.add("  Centro Trabajo   ", panelCentroTrabajo);
     }
 
     /** This method is called from within the constructor to
@@ -236,14 +227,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
                     limpiarCampos(panelOrdenProduccion);
                 }
                 break;
-            case 6:
-                if (panelMaquina.getMaquina() == null) {
-                    limpiarCampos(panelMaquina);
-                } else {
-                    guardarInfoPanel(panelMaquina);
-                    limpiarCampos(panelMaquina);
-                }
-                break;
             case 7:
                 if (panelProveedor.getProveedor() == null) {
                     limpiarCampos(panelProveedor);
@@ -252,14 +235,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
                     limpiarCampos(panelProveedor);
                 }
                 break;        
-            case 10:
-                if (panelCentroTrabajo.getCentroDeTrabajo() == null) {
-                    limpiarCampos(panelCentroTrabajo);
-                } else {
-                    guardarInfoPanel(panelCentroTrabajo);
-                    limpiarCampos(panelCentroTrabajo);
-                }
-                break;
             default:
                 break;
         }

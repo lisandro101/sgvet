@@ -15,16 +15,12 @@ import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
 import sgvet.entidades.Cargo;
-import sgvet.entidades.CentroDeTrabajo;
 import sgvet.entidades.Componente;
 import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.Maquina;
 import sgvet.entidades.Proveedor;
-import sgvet.igu.model.CentroTrabajoTableModel;
 import sgvet.igu.model.ProductoGralTableModel;
-import sgvet.igu.model.MaquinaTableModel;
 import sgvet.igu.model.OrdenCompraTableModel;
 import sgvet.igu.model.OrdenProduccionTableModel;
 import sgvet.igu.model.ProveedorTableModel;
@@ -101,19 +97,6 @@ public class ValidacionBuscar {
         return resultado;
     }
     
-    public boolean maquinaEstaCargadaEnTabla(MaquinaTableModel tm, Maquina maquina){
-        boolean resultado = false;
-        List<Maquina> maquinas= tm.getFilas();
-        
-        for (int i = 0; i < maquinas.size(); i++) {
-            if(maquinas.get(i).getNombre().equals(maquina.getNombre())){
-                resultado = true;
-            }
-        }
-        
-        return resultado;
-    }
-    
     @Deprecated
     public boolean proveedorEstaCargadoEnBD(Proveedor proveedor){
         boolean resultado=false;
@@ -159,25 +142,7 @@ public class ValidacionBuscar {
         }    
         return  resultado;
     }
-            
-
-
-    @Deprecated
-    public boolean maquinaEstaCargadaEnBD(Maquina maquina){
-        boolean resultado = false;
-        List<Maquina> maquinas;
-        
-        maquinas = FachadaPersistencia.getInstancia().buscar(Maquina.class, "Select c from Maquina c");
-        
-        for (int i = 0; i < maquinas.size(); i++) {
-            if(maquina.getNombre().equals(maquinas.get(i).getNombre())){
-                resultado = true;
-            }   
-        }    
-        
-        return  resultado;
-    }
-    
+  
     @SuppressWarnings({"unchecked", "unchecked"})
     public boolean estaDuplicado(IPersistente obj) {
         boolean resultado = false;
@@ -258,33 +223,4 @@ public class ValidacionBuscar {
         return false;
     }
     
-    public boolean centroEstaCargadoEnTabla(CentroTrabajoTableModel tm, CentroDeTrabajo centro){
-        boolean resultado= false;
-        List<CentroDeTrabajo> centros = tm.getFilas();
-        
-        for (CentroDeTrabajo cent : centros) {
-            if(cent.getNombre().equals(centro.getNombre())){
-                resultado = true;
-            }
-        }
-        
-        return resultado;
-    }
-
-@Deprecated
-public boolean centroEstaCargadoEnBD(CentroDeTrabajo centroDeTrabajo) {
-        boolean resultado = false;
-        List<CentroDeTrabajo> centros;
-        
-        centros = FachadaPersistencia.getInstancia().buscar(CentroDeTrabajo.class, "Select c from CentroDeTrabajo c");
-        
-        for (CentroDeTrabajo centro : centros) {
-            if(centroDeTrabajo.getNombre().equals(centro.getNombre())){
-                resultado = true;
-            }
-        }
-            
-        return  resultado;
-    }
-
 }
