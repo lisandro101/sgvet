@@ -69,6 +69,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         reportes = new javax.swing.JMenu();
         verReportes = new javax.swing.JMenuItem();
+        configuracion = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -165,6 +167,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         reportes.add(verReportes);
 
         menu.add(reportes);
+
+        configuracion.setText("Configuración");
+        configuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configuracionActionPerformed(evt);
+            }
+        });
+
+        jMenuItem3.setText("Parámetros");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        configuracion.add(jMenuItem3);
+
+        menu.add(configuracion);
 
         ayuda.setText("Ayuda");
         menu.add(ayuda);
@@ -288,10 +307,21 @@ private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     
 }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
+      
+}//GEN-LAST:event_configuracionActionPerformed
+
+private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    PanelConfiguracion panelConf = new PanelConfiguracion(this, true);
+      panelConf.setLocationRelativeTo(this);
+      panelConf.setVisible(true);
+}//GEN-LAST:event_jMenuItem3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
     private javax.swing.JMenuItem calcularIndices;
+    private javax.swing.JMenu configuracion;
     private javax.swing.JMenuItem costoFijo;
     private javax.swing.JMenu costos;
     private javax.swing.JMenu demanda;
@@ -299,6 +329,7 @@ private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JMenu inventario;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem prediccionDemanda;
