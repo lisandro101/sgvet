@@ -518,8 +518,10 @@ public class GestorDemanda {
             demandasXPeriodo.get(i).setCerrado(true);
             
         }
+        abrirPeriodoActualSiNoEstaFinalizado(demandasXPeriodo);
+        validarPeriodoNulos(demandasXPeriodo);
 
-        return abrirPeriodoActualSiNoEstaFinalizado(demandasXPeriodo);
+        return demandasXPeriodo;
     }
 
     @Deprecated
@@ -643,6 +645,10 @@ public class GestorDemanda {
         }else{
             System.out.println("\n No se registraron ventas del producto seleccionado\n");
         }
+        System.out.println("\n--------------------------------------------------------------");
+        System.out.println("\n Ventas del periodo abierto: "+ ventasDelMesAbierto);
+        System.out.println("\n--------------------------------------------------------------");
+
     }
 
      private int truncar(double valor){
@@ -826,13 +832,14 @@ public class GestorDemanda {
         int resul = 0;
 
         for (DemandaXPeriodo demandaXPeriodo : demandas) {
-            if (demandaXPeriodo.getVentas() == 0) {
+            if (demandaXPeriodo.getVentas() == 0 && demandaXPeriodo.isCerrado()) {
                 ++resul;
             }
 
         }
+
         if (resul > 0) {
-            JOptionPane.showMessageDialog(null, "Existen periodos en los que no se han registrado ventas");
+            JOptionPane.showMessageDialog(null, "Existen periodos cerrados en los que no se han registrado ventas");
         }
 
     }
