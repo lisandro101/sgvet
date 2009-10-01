@@ -2,6 +2,7 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -9,6 +10,7 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
+import sgvet.gestores.GestorDemanda;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
@@ -58,23 +60,21 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         menu = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
+        salir = new javax.swing.JMenuItem();
         costos = new javax.swing.JMenu();
         costoFijo = new javax.swing.JMenuItem();
-        inventario = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        indices = new javax.swing.JMenu();
-        calcularIndices = new javax.swing.JMenuItem();
         demanda = new javax.swing.JMenu();
         prediccionDemanda = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        reportes = new javax.swing.JMenu();
-        verReportes = new javax.swing.JMenuItem();
+        curvaABC = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        reportes = new javax.swing.JMenu();
+        verReportes = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Veterinaria");
+        setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(800, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -91,6 +91,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         archivo.setText("Archivo");
+
+        salir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        salir.setText("Salir");
+        salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirActionPerformed(evt);
+            }
+        });
+        archivo.add(salir);
+
         menu.add(archivo);
 
         costos.setText("Costos");
@@ -106,31 +116,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         menu.add(costos);
 
-        inventario.setText("Inventario");
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Calcular");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        inventario.add(jMenuItem1);
-
-        menu.add(inventario);
-
-        indices.setText("Indices");
-
-        calcularIndices.setText("Calcular");
-        calcularIndices.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcularIndicesActionPerformed(evt);
-            }
-        });
-        indices.add(calcularIndices);
-
-        menu.add(indices);
-
         demanda.setText("Demanda");
         demanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +123,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        prediccionDemanda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         prediccionDemanda.setText("Predicción de la demanda");
         prediccionDemanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,15 +132,34 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         demanda.add(prediccionDemanda);
 
-        jMenuItem2.setText("Calcular Curva ABC");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        curvaABC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        curvaABC.setText("Calcular Curva ABC");
+        curvaABC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                curvaABCActionPerformed(evt);
             }
         });
-        demanda.add(jMenuItem2);
+        demanda.add(curvaABC);
 
         menu.add(demanda);
+
+        configuracion.setText("Configuración");
+        configuracion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                configuracionActionPerformed(evt);
+            }
+        });
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Parámetros");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        configuracion.add(jMenuItem3);
+
+        menu.add(configuracion);
 
         reportes.setText("Reportes");
 
@@ -167,23 +172,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         reportes.add(verReportes);
 
         menu.add(reportes);
-
-        configuracion.setText("Configuración");
-        configuracion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configuracionActionPerformed(evt);
-            }
-        });
-
-        jMenuItem3.setText("Parámetros");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        configuracion.add(jMenuItem3);
-
-        menu.add(configuracion);
 
         ayuda.setText("Ayuda");
         menu.add(ayuda);
@@ -198,7 +186,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
         );
 
         pack();
@@ -268,19 +256,6 @@ private void costoFijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     panelCostoFijo.setVisible(true);
 }//GEN-LAST:event_costoFijoActionPerformed
 
-private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    PanelInventario panelInventario = new PanelInventario();
-    panelInventario.setModal(true);
-    panelInventario.setVisible(true);
-}//GEN-LAST:event_jMenuItem1ActionPerformed
-
-private void calcularIndicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcularIndicesActionPerformed
-    PanelIndices panelIndices = new PanelIndices();
-
-    panelIndices.setLocationRelativeTo(this);
-    panelIndices.setVisible(true);
-}//GEN-LAST:event_calcularIndicesActionPerformed
-
 private void prediccionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prediccionDemandaActionPerformed
     PanelDemanda panelDemanda = new PanelDemanda();
     panelDemanda.setModal(true);
@@ -299,41 +274,42 @@ private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     
 }//GEN-LAST:event_demandaActionPerformed
 
-private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+private void curvaABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curvaABCActionPerformed
 //    GestorABC.getInstancia().calcularCurvaABC();
     PanelCurvaABC panelABC = new PanelCurvaABC(this, rootPaneCheckingEnabled);
     panelABC.setLocationRelativeTo(this);
     panelABC.setVisible(true);
     
-}//GEN-LAST:event_jMenuItem2ActionPerformed
+}//GEN-LAST:event_curvaABCActionPerformed
 
 private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
       
 }//GEN-LAST:event_configuracionActionPerformed
 
 private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-    PanelConfiguracion panelConf = new PanelConfiguracion(this, true);
+      PanelConfiguracion panelConf = new PanelConfiguracion(this, true);
       panelConf.setLocationRelativeTo(this);
       panelConf.setVisible(true);
 }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+    salir();
+}//GEN-LAST:event_salirActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
-    private javax.swing.JMenuItem calcularIndices;
     private javax.swing.JMenu configuracion;
     private javax.swing.JMenuItem costoFijo;
     private javax.swing.JMenu costos;
+    private javax.swing.JMenuItem curvaABC;
     private javax.swing.JMenu demanda;
-    private javax.swing.JMenu indices;
-    private javax.swing.JMenu inventario;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem prediccionDemanda;
     private javax.swing.JMenu reportes;
+    private javax.swing.JMenuItem salir;
     private javax.swing.JMenuItem verReportes;
     // End of variables declaration//GEN-END:variables
     private void salir() {
