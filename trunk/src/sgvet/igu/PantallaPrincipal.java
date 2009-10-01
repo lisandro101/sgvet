@@ -2,7 +2,6 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -10,7 +9,6 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
-import sgvet.gestores.GestorDemanda;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
@@ -25,7 +23,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     private PanelProveedor panelProveedor;
     private PanelProductoComponente panelProductoComponente;
     private PanelOrdenCompra panelOrdenCompra;
-    private PanelEmpleado panelEmpleado;   
     private PanelOrdenProduccion panelOrdenProduccion;
 
     /** Creates new form PantallaPrincipal */
@@ -38,13 +35,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         panelProveedor = new PanelProveedor();
         panelProductoComponente = new PanelProductoComponente();
         panelOrdenCompra = new PanelOrdenCompra();
-        panelEmpleado = new PanelEmpleado();        
         panelOrdenProduccion = new PanelOrdenProduccion();
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
 //        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
-//        jTabbedPane1.add("     Personal      ", panelEmpleado);
         jTabbedPane1.add("       Venta       ", panelOrdenProduccion);
     }
 
@@ -61,8 +56,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         menu = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         salir = new javax.swing.JMenuItem();
-        costos = new javax.swing.JMenu();
-        costoFijo = new javax.swing.JMenuItem();
         demanda = new javax.swing.JMenu();
         prediccionDemanda = new javax.swing.JMenuItem();
         curvaABC = new javax.swing.JMenuItem();
@@ -102,19 +95,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         archivo.add(salir);
 
         menu.add(archivo);
-
-        costos.setText("Costos");
-
-        costoFijo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        costoFijo.setText("Costo Fijo");
-        costoFijo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                costoFijoActionPerformed(evt);
-            }
-        });
-        costos.add(costoFijo);
-
-        menu.add(costos);
 
         demanda.setText("Demanda");
         demanda.addActionListener(new java.awt.event.ActionListener() {
@@ -210,14 +190,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
                     limpiarCampos(panelProductoComponente);
                 }
                 break;
-            case 3:
-                if (panelEmpleado.getEmpleado() == null) {
-                    limpiarCampos(panelEmpleado);
-                } else {
-                    guardarInfoPanel(panelEmpleado);
-                    limpiarCampos(panelEmpleado);
-                }
-                break;
             case 4:
                 if (panelOrdenCompra.getOrdenCompra() == null) {
                     limpiarCampos(panelOrdenCompra);
@@ -249,12 +221,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
         tabVieja = tabNueva;
     }
 }//GEN-LAST:event_jTabbedPane1MouseClicked
-
-private void costoFijoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoFijoActionPerformed
-    PanelCostoFijo panelCostoFijo = new PanelCostoFijo();
-    panelCostoFijo.setModal(true);
-    panelCostoFijo.setVisible(true);
-}//GEN-LAST:event_costoFijoActionPerformed
 
 private void prediccionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prediccionDemandaActionPerformed
     PanelDemanda panelDemanda = new PanelDemanda();
@@ -300,8 +266,6 @@ private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
     private javax.swing.JMenu configuracion;
-    private javax.swing.JMenuItem costoFijo;
-    private javax.swing.JMenu costos;
     private javax.swing.JMenuItem curvaABC;
     private javax.swing.JMenu demanda;
     private javax.swing.JMenuItem jMenuItem3;

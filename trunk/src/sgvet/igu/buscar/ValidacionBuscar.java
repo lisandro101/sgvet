@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
-import sgvet.entidades.Cargo;
 import sgvet.entidades.Componente;
 import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.DetalleOrdenProduccion;
@@ -122,21 +121,6 @@ public class ValidacionBuscar {
         
         for (int i = 0; i < productos.size(); i++) {
             if(prod.getNombre().equals(productos.get(i).getNombre())){
-                resultado=true;
-            }   
-        }    
-        return  resultado;
-    }
-
-    @Deprecated
-    public boolean cargoEmpleadoEstaCargadoEnBD(Cargo prod){
-        boolean resultado=false;
-        List<Cargo> cargos;
-        
-        cargos= FachadaPersistencia.getInstancia().buscar(Cargo.class, "Select c from Cargo c");
-        
-        for (int i = 0; i < cargos.size(); i++) {
-            if(prod.getNombre().equals(cargos.get(i).getNombre())){
                 resultado=true;
             }   
         }    
