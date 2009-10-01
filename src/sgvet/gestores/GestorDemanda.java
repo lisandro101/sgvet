@@ -4,7 +4,6 @@
  */
 
 package sgvet.gestores;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +14,6 @@ import javax.swing.table.TableModel;
 import sgvet.entidades.Demanda;
 import sgvet.entidades.DemandaXPeriodo;
 import sgvet.entidades.DetalleOrdenProduccion;
-import sgvet.entidades.Venta;
 import sgvet.entidades.ProductoComponente;
 import sgvet.igu.PanelDemanda;
 import sgvet.persistencia.FachadaPersistencia;
@@ -528,7 +526,7 @@ public class GestorDemanda {
     private Date primerDia(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(cal.YEAR),cal.get(cal.MONTH), 1);
+        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), 1);
         return cal.getTime();
     }
 
@@ -536,7 +534,7 @@ public class GestorDemanda {
     private Date ultimoDia(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(cal.YEAR),cal.get(cal.MONTH), 28);
+        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), 28);
         return cal.getTime();
     }
 
@@ -782,23 +780,23 @@ public class GestorDemanda {
         return fecha;
     }
 
-     private Date sumarDiasALaFecha(Date fecha, int cantDias){
+     public Date sumarDiasALaFecha(Date fecha, int cantDias){
          Calendar cal = Calendar.getInstance();
          cal.setTime(fecha);
          cal.add(Calendar.DAY_OF_YEAR, cantDias);
          return cal.getTime();
      }
-     private Date primerDiaDelAnio(Date fecha){
+     public Date primerDiaDelAnio(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(cal.YEAR),Calendar.JANUARY, 1);
+        cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY, 1);
         return cal.getTime();
     }
 
-    private Date ultimoDiaDelPrimerMesDelAnio(Date fecha){
+    public Date ultimoDiaDelPrimerMesDelAnio(Date fecha){
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(cal.YEAR),Calendar.JANUARY, 28);
+        cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY, 28);
         return cal.getTime();
     }
 
@@ -816,7 +814,7 @@ public class GestorDemanda {
     }
 
 
-    private int aQuePeriodoCorrespondeLaFecha(Date fecha){
+    public int aQuePeriodoCorrespondeLaFecha(Date fecha){
         int resul=1;
         List<DemandaXPeriodo> anio = getPeriodosDelAnio(fecha);
 

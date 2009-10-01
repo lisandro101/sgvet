@@ -40,57 +40,62 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
-        jLabel1 = new javax.swing.JLabel();
+        dpFechaActual = new org.jdesktop.swingx.JXDatePicker();
+        lbFechaActual = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btRetrocederPeriodo = new javax.swing.JButton();
+        btAplicar = new javax.swing.JButton();
+        btAvanzarPeriodo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configuración");
 
-        jXDatePicker1.setDate(new Date());
-        jXDatePicker1.setFormats("dd/MM/yyyy");
-        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+        dpFechaActual.setDate(new Date());
+        dpFechaActual.setFormats("dd/MM/yyyy");
+        dpFechaActual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDatePicker1ActionPerformed(evt);
+                dpFechaActualActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Fecha Actual:");
+        lbFechaActual.setText("Fecha Actual:");
 
-        jPanel1.setLayout(new java.awt.GridBagLayout());
-
-        jButton1.setText("Aplicar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btRetrocederPeriodo.setText("<");
+        btRetrocederPeriodo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btRetrocederPeriodoActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new java.awt.GridBagConstraints());
+        jPanel1.add(btRetrocederPeriodo);
 
-        jButton2.setText("Cerrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btAplicar.setText("Aplicar");
+        btAplicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btAplicarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new java.awt.GridBagConstraints());
+        jPanel1.add(btAplicar);
+
+        btAvanzarPeriodo.setText(">");
+        btAvanzarPeriodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAvanzarPeriodoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btAvanzarPeriodo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(21, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbFechaActual)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dpFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -98,9 +103,9 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jXDatePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                    .addComponent(lbFechaActual)
+                    .addComponent(dpFechaActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -108,18 +113,28 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
-        GestorDemanda.getInstancia().setFechaHoy(jXDatePicker1.getDate());
-    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+    private void dpFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpFechaActualActionPerformed
+        GestorDemanda.getInstancia().setFechaHoy(dpFechaActual.getDate());
+}//GEN-LAST:event_dpFechaActualActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        GestorDemanda.getInstancia().setFechaHoy(jXDatePicker1.getDate());
+    private void btAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAplicarActionPerformed
+        GestorDemanda.getInstancia().setFechaHoy(dpFechaActual.getDate());
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+}//GEN-LAST:event_btAplicarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btRetrocederPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetrocederPeriodoActionPerformed
+        
+        Date nuevaFecha = GestorDemanda.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), -28);
+        dpFechaActual.setDate(nuevaFecha);
+
+}//GEN-LAST:event_btRetrocederPeriodoActionPerformed
+
+    private void btAvanzarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAvanzarPeriodoActionPerformed
+
+        Date nuevaFecha = GestorDemanda.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), 28);
+        dpFechaActual.setDate(nuevaFecha);
+        
+    }//GEN-LAST:event_btAvanzarPeriodoActionPerformed
 
    
 
@@ -129,11 +144,12 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btAplicar;
+    private javax.swing.JButton btAvanzarPeriodo;
+    private javax.swing.JButton btRetrocederPeriodo;
+    private org.jdesktop.swingx.JXDatePicker dpFechaActual;
     private javax.swing.JPanel jPanel1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
+    private javax.swing.JLabel lbFechaActual;
     // End of variables declaration//GEN-END:variables
 
 }
