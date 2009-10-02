@@ -15,17 +15,17 @@ import javax.persistence.Table;
  * @created 21-oct-2008 12:47:04 a.m.
  */
 @Entity
-@Table(name="productos_componente")
+@Table(name = "productos_componente")
 @DiscriminatorValue("C")
 public class ProductoComponente extends Intermedio implements Serializable {
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
     private List<Demanda> demandas;
     private double precioVenta;
     private String tipoPrediccion;
     private Stock stockProducto;
 
-    @Column(name="precio_venta")
+    @Column(name = "precio_venta")
     public double getPrecioVenta() {
         return precioVenta;
     }
@@ -34,7 +34,7 @@ public class ProductoComponente extends Intermedio implements Serializable {
         this.precioVenta = precioVenta;
     }
 
-    @Column(name="tipo_prediccion", length=20)
+    @Column(name = "tipo_prediccion", length = 20)
     public String getTipoPrediccion() {
         return tipoPrediccion;
     }
@@ -43,8 +43,8 @@ public class ProductoComponente extends Intermedio implements Serializable {
         this.tipoPrediccion = tipoPrediccion;
     }
 
-    @OneToMany(targetEntity=Demanda.class, cascade=CascadeType.ALL,
-    mappedBy="producto")
+    @OneToMany(targetEntity = Demanda.class, cascade = CascadeType.ALL,
+    mappedBy = "producto")
     public List<Demanda> getDemandas() {
         return demandas;
     }
@@ -53,17 +53,16 @@ public class ProductoComponente extends Intermedio implements Serializable {
         this.demandas = demandas;
     }
 
-    /*
-   //@OneToMany(targetEntity=Stock.class, cascade=CascadeType.ALL,mappedBy="producto")
 
 
-    public Stock getStock(){
+    @OneToMany(targetEntity=Stock.class, cascade=CascadeType.ALL,mappedBy="producto")
+    public Stock getStockProducto() {
         return stockProducto;
     }
-*/
-    public void setStock(Stock stock){
-        this.stockProducto=stock;
+
+
+
+    public void setStock(Stock stock) {
+        this.stockProducto = stock;
     }
-
-
 }

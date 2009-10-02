@@ -2,8 +2,13 @@
 
 package sgvet.entidades;
 
+import java.util.Date;
+
 
 public class Stock {
+
+    public Stock() {
+    }
 
     private int disponible;
     private int faltante;
