@@ -53,13 +53,13 @@ public class ProductoComponente extends Intermedio implements Serializable {
         this.demandas = demandas;
     }
 
-
+/*
 
     @OneToMany(targetEntity=Stock.class, cascade=CascadeType.ALL,mappedBy="producto")
     public Stock getStockProducto() {
         return stockProducto;
     }
-
+*/
 
 
     public void setStock(Stock stock) {
