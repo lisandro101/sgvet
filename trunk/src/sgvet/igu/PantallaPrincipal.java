@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
+import sgvet.entidades.Stock;
+import sgvet.gestores.GestorStock;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
@@ -59,6 +61,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         demanda = new javax.swing.JMenu();
         prediccionDemanda = new javax.swing.JMenuItem();
         curvaABC = new javax.swing.JMenuItem();
+        Stock = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         reportes = new javax.swing.JMenu();
@@ -120,6 +123,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         demanda.add(curvaABC);
+
+        Stock.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        Stock.setText("Stock");
+        Stock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StockActionPerformed(evt);
+            }
+        });
+        demanda.add(Stock);
 
         menu.add(demanda);
 
@@ -262,7 +274,15 @@ private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     salir();
 }//GEN-LAST:event_salirActionPerformed
 
+private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockActionPerformed
+    // TODO add your handling code here:
+    GestorStock objGS = new GestorStock();
+    objGS.getInstancia().calcularStockDisponible();
+
+}//GEN-LAST:event_StockActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Stock;
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
     private javax.swing.JMenu configuracion;

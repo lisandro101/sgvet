@@ -2,14 +2,22 @@
 
 package sgvet.entidades;
 
-import java.util.Date;
+import java.io.Serializable;
+//import java.util.Date;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-
-public class Stock {
+@Entity
+@Table(name = "Stock")
+@DiscriminatorValue("S")
+public class Stock implements Serializable {
 
     public Stock() {
     }
 
+    @Id
     private int disponible;
     private int faltante;
     private int puntoReposicion;
