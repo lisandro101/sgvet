@@ -15,7 +15,9 @@ public class Stock implements Serializable {
     private int faltante;
     private int puntoReposicion;
 
+
     public Stock() {
+        
     }
 
     @Id

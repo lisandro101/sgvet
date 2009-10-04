@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
-import sgvet.entidades.Stock;
 import sgvet.gestores.GestorStock;
 import sgvet.igu.model.IModeloReiniciable;
 
@@ -41,7 +40,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
-//        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
+//      jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
         jTabbedPane1.add("       Venta       ", panelOrdenProduccion);
     }
 
