@@ -1,39 +1,48 @@
-
-
 package sgvet.entidades;
 
 import java.io.Serializable;
-//import java.util.Date;
-import javax.persistence.DiscriminatorValue;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Stock")
-@DiscriminatorValue("S")
+@Table(name = "stocks")
 public class Stock implements Serializable {
+
+    private String id;
+    private int disponible;
+    private int faltante;
+    private int puntoReposicion;
 
     public Stock() {
     }
 
     @Id
-    private int disponible;
-    private int faltante;
-    private int puntoReposicion;
+    @Column(name="id", length=36)
+    public String getId() {
+        return id;
+    }
 
+    @Column(name="disponible")
     public int getDisponible() {
         return disponible;
     }
 
+    @Column(name="faltante")
     public int getFaltante() {
         return faltante;
     }
 
+    @Column(name="punto_reposicion")
     public int getPuntoReposicion() {
         return puntoReposicion;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public void setDisponible(int disponible) {
         this.disponible = disponible;
     }

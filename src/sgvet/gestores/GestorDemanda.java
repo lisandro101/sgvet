@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import sgvet.entidades.Demanda;
-import sgvet.entidades.DemandaXPeriodo;
+import sgvet.entidades.auxiliares.DemandaXPeriodo;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.ProductoComponente;
 import sgvet.igu.PanelDemanda;
