@@ -4,11 +4,11 @@
  */
 
 package sgvet.gestores;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import sgvet.entidades.ProductoComponente;
-//import sgvet.entidades.Stock;
+import sgvet.entidades.Stock;
 import sgvet.persistencia.FachadaPersistencia;
 
 public class GestorStock {
@@ -28,10 +28,11 @@ public synchronized static GestorStock getInstancia(){
                 "WHERE a.borrado = false");
 List<ProductoComponente> productos = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
 int cantElem = productos.size();
+    private Stock stock;
 public void calcularStockDisponible(){
         for (ProductoComponente producto : productos) {
-            //this.stock = producto.getStockProducto();
-            System.out.println("El producto " + producto.getNombre() + " tiene " + /*stock.getDisponible()*/producto.getStock() + " unidades en disponibilidad");
+            stock = producto.getStockProducto();
+           // System.out.println("El producto " + producto.getNombre() + " tiene " + stock.getDisponible()  /*producto.getStock()*/ + " unidades en disponibilidad");
             System.out.println("LLEGA!!!!");
         }
 }
