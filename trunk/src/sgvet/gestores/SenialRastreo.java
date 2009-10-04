@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package PackSR;
+package sgvet.gestores;
 ///import java.lang.Object;
 /**
  *
