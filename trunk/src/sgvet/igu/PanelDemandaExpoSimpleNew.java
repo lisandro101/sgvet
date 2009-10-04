@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.Demanda;
-import sgvet.entidades.DemandaXPeriodo;
+import sgvet.entidades.auxiliares.DemandaXPeriodo;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
 import sgvet.igu.model.DemandaSESTableModel;

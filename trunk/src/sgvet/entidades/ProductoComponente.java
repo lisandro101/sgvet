@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -53,16 +54,12 @@ public class ProductoComponente extends Intermedio implements Serializable {
         this.demandas = demandas;
     }
 
-/*
-
-    @OneToMany(targetEntity=Stock.class, cascade=CascadeType.ALL,mappedBy="producto")
+    @OneToOne(targetEntity=Stock.class, cascade=CascadeType.ALL)
     public Stock getStockProducto() {
         return stockProducto;
     }
-*/
 
-
-    public void setStock(Stock stock) {
+    public void setStockProducto(Stock stock) {
         this.stockProducto = stock;
     }
 }

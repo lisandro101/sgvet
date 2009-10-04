@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package sgvet.entidades;
+package sgvet.entidades.auxiliares;
 
 import java.util.Date;
 
