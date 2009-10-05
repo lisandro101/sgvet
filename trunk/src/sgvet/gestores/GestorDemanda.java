@@ -339,25 +339,82 @@ public class GestorDemanda {
 
     }
 
-    public void calcularDemandaConEstacionalidadTemporal(List<DemandaXPeriodo> ventas, double alfa, double gamma){
+    public void calcularDemandaConEstacionalidadTemporal(List<DemandaXPeriodo> ventas, double alfa, double gamma) {
 
         int cantPeriodos;
         int cantAnios;
+        int cantAniosCompletos;
+        DemandaXPeriodo demandaPeriodo = null;
 
-        cantAnios= calcularCantAniosDeVentas(ventas);
-        cantPeriodos=13;
+        cantAnios = calcularCantAniosDeVentas(ventas);
+        cantPeriodos = 13;
+        List<DemandaXPeriodo> demandaPromedioXEstacionAnteriores = new ArrayList<DemandaXPeriodo>(cantPeriodos);
+        List<DemandaXPeriodo> indicesEstacionalidad = new ArrayList<DemandaXPeriodo>(cantPeriodos);
+
 
         double indiceEsta1[] = new double[cantPeriodos];
         double demanPromedio1[] = new double[cantPeriodos];
         double indiceEsta2[] = new double[cantPeriodos];
         double demanPromedio2[] = new double[cantPeriodos];
-        int totaldemanPromedio1= 0;
-        double temp=0;
-        double ultimoReal=0;
+        int totaldemanPromedio = 0;
+        int nroPeriodoRelativo = 0;
+        double ultimoReal = 0;
+        int contador = 0;
+        double promedioEstaciones;
 
-
-        totaldemanPromedio1= calcularAcumulado(ventas) /cantPeriodos;
         
+
+        if(isFechaDelAnio(fechaHoy, ventas.get(ventas.size()-1).getAnio())){
+            cantAniosCompletos = cantAnios-1;
+        }else{
+            cantAniosCompletos = cantAnios;
+        }
+
+        for (DemandaXPeriodo demanda : ventas) {
+            if (!isFechaDelAnio(demanda.getAnio(), fechaHoy)) {
+                if (nroPeriodoRelativo == 13) {
+                    nroPeriodoRelativo = 0;
+
+                    if (contador < 13) {
+                        demandaPeriodo = new DemandaXPeriodo();
+                        //demandaPeriodo.setAnio(demanda.getAnio());
+                        demandaPeriodo.setNroPeriodo(demanda.getNroPeriodo());
+                        demandaPeriodo.setVentas(demanda.getVentas());
+                        demandaPromedioXEstacionAnteriores.set(nroPeriodoRelativo, demandaPeriodo);
+
+                        ++contador;
+                    } else {
+
+                        demandaPeriodo = demandaPromedioXEstacionAnteriores.get(nroPeriodoRelativo);
+
+                        totaldemanPromedio = demandaPeriodo.getVentas() + demanda.getVentas();
+                        demandaPeriodo.setVentas(totaldemanPromedio);
+
+                        demandaPromedioXEstacionAnteriores.set(nroPeriodoRelativo, demandaPeriodo);
+
+                    }
+                    ++nroPeriodoRelativo;
+
+                }
+            }
+        }
+
+        //divide la suma de las ventas de las distintas estaciones por la cantidad de años cerrados
+        DemandaXPeriodo dema;
+        for (int i = 0; i < cantPeriodos; i++) {
+            promedioEstaciones = demandaPromedioXEstacionAnteriores.get(i).getVentas() / cantAniosCompletos;
+            dema=demandaPromedioXEstacionAnteriores.get(i);
+            dema.setVentas(truncar(promedioEstaciones));
+            demandaPromedioXEstacionAnteriores.set(i, dema);
+        }
+
+        // calcula el indice de estacionalidad
+        totaldemanPromedio = calcularAcumulado(demandaPromedioXEstacionAnteriores) / cantPeriodos;
+        for (int i = 0; i < cantPeriodos; i++) {
+            dema= demandaPromedioXEstacionAnteriores.get(i);
+            dema.setVentas(truncar(dema.getVentas()/totaldemanPromedio));
+            indicesEstacionalidad.set(i, dema);
+        }
 
 //        for (int i = 0; i < cantPeriodos; i++) {
 //            for (int j = 1; j < cantAnios; j++) {
