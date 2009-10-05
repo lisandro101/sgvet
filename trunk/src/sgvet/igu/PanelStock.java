@@ -139,7 +139,9 @@ public class PanelStock extends javax.swing.JFrame {
             System.out.println("STOCK DISPONIBLE");
             List<ProductoComponente> listaProductos = objgs.calcularStockDisponible();
             //System.out.println("La cantidad de productos es " + listaProductos.size());
-            // for (){
+            for (ProductoComponente producto : listaProductos){
+                System.out.println("El producto " + producto.getNombre() + " tiene" + producto.getStock() + " items en Stock");
+            }
             this.inicializar(listaProductos, columnNames);
 
         }
