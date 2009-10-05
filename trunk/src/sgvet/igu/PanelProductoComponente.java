@@ -269,7 +269,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         lbTipoPrediccion.setText("Tipo Predicción:");
         lbTipoPrediccion.setName("tipoPrediccion"); // NOI18N
 
-        cbTipoPrediccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SE Simple", "SE Tendencia", "SE Estacionalidad", "SE Tendencia &  Estacionalidad" }));
+        cbTipoPrediccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SE Simple", "SE Tendencia", "SE Estacionalidad" }));
         cbTipoPrediccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoPrediccionActionPerformed(evt);
@@ -432,7 +432,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pCampos, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pTablaProveedores, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE))
+                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

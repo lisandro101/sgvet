@@ -491,11 +491,10 @@
             <Component class="javax.swing.JComboBox" name="cbTipoPrediccion">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="3">
                     <StringItem index="0" value="SE Simple"/>
                     <StringItem index="1" value="SE Tendencia"/>
                     <StringItem index="2" value="SE Estacionalidad"/>
-                    <StringItem index="3" value="SE Tendencia &amp;  Estacionalidad"/>
                   </StringArray>
                 </Property>
               </Properties>

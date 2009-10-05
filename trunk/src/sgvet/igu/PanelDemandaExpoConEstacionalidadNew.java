@@ -6,10 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import sgvet.entidades.Demanda;
 import sgvet.entidades.ProductoComponente;
-import sgvet.gestores.GestorDemanda;
 import sgvet.utils.*;
 
 /**
