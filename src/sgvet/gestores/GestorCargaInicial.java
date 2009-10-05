@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import sgvet.entidades.OrdenCompra;
+import sgvet.entidades.OrdenCompra.EstadoOrdenCompra;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.Proveedor;
 import sgvet.persistencia.FachadaPersistencia;
@@ -1239,6 +1241,9 @@ public class GestorCargaInicial {
         persistir(persistentes);
     }
 /*
+ *## Lizandro tengo problema con el formato de fecha y las ralciones de EstadoOrdenCompra.##
+ * y de paso anda revisando el codigo.
+ * Gracias.
      public void CargarOrdenCompra(HashMap<String,OrdenCompra> OrdenCompra) {
 
         OrdenCompra OrdComp;
@@ -1248,13 +1253,15 @@ public class GestorCargaInicial {
         //* -----  Repetir este codigo para crear OrdenCompra a persistir  ----
 
         OrdComp = new OrdenCompra();   //Recordar siempre hacer el new para que genere un nuevo UID!
-   	OrdenCompra.setId(01);
-    	OrdenCompra.setProveedor("Dog Chow");
-    	OrdenCompra.setFecha("25/09/2009");
-    	OrdenCompra.setFechaEstimadaEntrega("30/09/2009");
+   	OrdComp.setId("1");
+        Proveedor Prov = new Proveedor();
+    	OrdComp.setProveedor(Prov);
+    	//OrdComp.setFecha(25/09/2009);
+    	//OrdComp.setFechaEstimadaEntrega("30/09/2009");
         //OrdenCampra.setDetallesOrdenCompra.getId();
-    	OrdenCompra.setNroOrdenCompra(1);
-       	OrdenCompra.setEstado("Pendiente");
+    	OrdComp.setNroOrdenCompra(1);
+        //EstadoOrdenCompra EstadoOrden=new EstadoOrdenCompra();
+       	OrdComp.setEstado(OrdenCompra.EstadoOrdenCompra.ANULADO);
         persistir(persistentes);
 }
 */
