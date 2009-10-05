@@ -322,6 +322,74 @@ public class GestorDemanda {
  
     }
 
+    //supone que las fechas de las ventas estan ordenadas ascendentemente
+    private int calcularCantAniosDeVentas(List<DemandaXPeriodo> ventas){
+        int resul=0;
+        Date anioTemp= ventas.get(0).getAnio();
+        if(ventas.size()>0){
+            for (DemandaXPeriodo demandaXPeriodo : ventas) {
+                if(!isFechaDelAnio(demandaXPeriodo.getAnio(), anioTemp)){
+                    ++resul;
+                }
+            }
+        }
+
+
+        return resul;
+
+    }
+
+    public void calcularDemandaConEstacionalidadTemporal(List<DemandaXPeriodo> ventas, double alfa, double gamma){
+
+        int cantPeriodos;
+        int cantAnios;
+
+        cantAnios= calcularCantAniosDeVentas(ventas);
+        cantPeriodos=13;
+
+        double indiceEsta1[] = new double[cantPeriodos];
+        double demanPromedio1[] = new double[cantPeriodos];
+        double indiceEsta2[] = new double[cantPeriodos];
+        double demanPromedio2[] = new double[cantPeriodos];
+        int totaldemanPromedio1= 0;
+        double temp=0;
+        double ultimoReal=0;
+
+
+        totaldemanPromedio1= calcularAcumulado(ventas) /cantPeriodos;
+        
+
+//        for (int i = 0; i < cantPeriodos; i++) {
+//            for (int j = 1; j < cantAnios; j++) {
+//                demanPromedio1[i] += ventas.get(i)Double.parseDouble(tModel.getValueAt(i, j).toString());
+//            }
+//            demanPromedio1[i]= demanPromedio1[i]/ (tModel.getColumnCount()-2);
+//
+//            totaldemanPromedio1 += demanPromedio1[i];    //tipos incompatibles
+//        }
+//        totaldemanPromedio1 = totaldemanPromedio1/tModel.getRowCount();
+//
+//        for (int i = 0; i < tModel.getRowCount(); i++) {
+//            indiceEsta1[i]=demanPromedio1[i]/totaldemanPromedio1;
+//        }
+//
+//        for (int i = 0; i < tModel.getRowCount(); i++) {
+//            if(tModel.getValueAt(i,tModel.getColumnCount()-1 ) != null){
+//
+//                temp = Double.parseDouble(tModel.getValueAt(i,tModel.getColumnCount()-1).toString());
+//                ultimoReal= temp/indiceEsta1[i]*alfa+ (1-alfa)*demanPromedio1[i];
+//                demanPromedio2[i]= ultimoReal;
+//            }else{
+//
+//                demanPromedio2[i]= ultimoReal* indiceEsta1[i];
+//                tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
+//
+//            }
+//        }
+
+    }
+
+
     public double calcularDemandaConEstacionalidadNew(List<DemandaXPeriodo> ventas, double alfa, double gamma){
 //        double indiceEsta1[] = new double[tModel.getRowCount()];
 //        double demanPromedio1[] = new double[tModel.getRowCount()];
@@ -617,7 +685,9 @@ public class GestorDemanda {
     public int calcularAcumulado( List<DemandaXPeriodo> ventas){
         int resul=0;
         for (DemandaXPeriodo demandaXPeriodo : ventas) {
-            resul += demandaXPeriodo.getVentas();
+            if(demandaXPeriodo.isCerrado()){
+                resul += demandaXPeriodo.getVentas();
+            }
         }
         return resul;
     }
@@ -813,6 +883,20 @@ public class GestorDemanda {
         }
     }
 
+    private boolean isFechaDelAnio(Date fecha, Date anio){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(anio);
+        cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY, 1);
+        Date primerDiaAnio= cal.getTime();
+        cal.set(cal.get(Calendar.YEAR)+1,Calendar.JANUARY, 1);
+        Date primerDiaAnioSiguiente= cal.getTime();
+
+        if(fecha.compareTo(primerDiaAnio)>=0 && fecha.compareTo(primerDiaAnioSiguiente)<0){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public int aQuePeriodoCorrespondeLaFecha(Date fecha){
         int resul=1;
