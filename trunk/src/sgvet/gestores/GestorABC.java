@@ -1,5 +1,3 @@
-
-
 package sgvet.gestores;
 
 import java.util.ArrayList;
@@ -22,9 +20,8 @@ public class GestorABC {
     private double demanda80;
     private double demanda90;
 
-
-    public synchronized static GestorABC getInstancia(){
-        if (instance == null){
+    public synchronized static GestorABC getInstancia() {
+        if (instance == null) {
             instance = new GestorABC();
         }
         return instance;
@@ -85,15 +82,15 @@ public class GestorABC {
     public double getDemanda90() {
         return demanda90;
     }
+
     private GestorABC() {
-
     }
+
     @Deprecated
-    public void calcularABC(List<Demanda> demandas){
-
+    public void calcularABC(List<Demanda> demandas) {
     }
 
-    public List<ItemABC> calcularCurvaABC(){
+    public List<ItemABC> calcularCurvaABC() {
 
         Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
                 "SELECT a " +
@@ -108,16 +105,16 @@ public class GestorABC {
             itemsABC.add(new ItemABC(producto, producto.getDemandaAnual() * producto.getPrecioVenta()));
         }
 
-        List<ItemABC> curvaABC = new ArrayList<ItemABC>();       
+        List<ItemABC> curvaABC = new ArrayList<ItemABC>();
         int cantElem = itemsABC.size();
         ItemABC itemMayor = null;
 
         for (int i = 0; i < cantElem; i++) {
 
-            itemMayor=itemsABC.get(0);
+            itemMayor = itemsABC.get(0);
             for (ItemABC item : itemsABC) {
-                if(itemMayor.getDemandaValorizada()<=item.getDemandaValorizada()){
-                    itemMayor=item;
+                if (itemMayor.getDemandaValorizada() <= item.getDemandaValorizada()) {
+                    itemMayor = item;
                 }
 
             }
@@ -138,15 +135,13 @@ public class GestorABC {
         List<ProductoComponente> productosActualizados = new ArrayList<ProductoComponente>();
 
         for (ItemABC itemABC : curvaABC) {
-            if(itemABC.getDemandaAcumulada() <= demandaClaseA) {
+            if (itemABC.getDemandaAcumulada() <= demandaClaseA) {
                 itemABC.getProducto().setCategoria("Curva A");
                 productosActualizados.add(itemABC.getProducto());
-            }
-            else if(itemABC.getDemandaAcumulada() <= demandaClaseB) {
+            } else if (itemABC.getDemandaAcumulada() <= demandaClaseB) {
                 itemABC.getProducto().setCategoria("Curva B");
                 productosActualizados.add(itemABC.getProducto());
-            }
-            else {
+            } else {
                 itemABC.getProducto().setCategoria("Curva C");
                 productosActualizados.add(itemABC.getProducto());
             }
@@ -162,7 +157,7 @@ public class GestorABC {
         List<ProductoComponente> productos;
 
         demandaAnualTotal = 0;
-        demandaValorizadaTotal= 0;
+        demandaValorizadaTotal = 0;
         cantidadProductos = 0;
         cantidadProductosA = 0;
         cantidadProductosB = 0;
@@ -170,20 +165,19 @@ public class GestorABC {
         demanda80 = 0;
         demanda90 = 0;
 
-        if(categoria.equals("Todas")) {
+        if (categoria.equals("Todas")) {
             Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
-                "SELECT a " +
-                "FROM ProductoComponente a " +
-                "WHERE a.borrado = false");
+                    "SELECT a " +
+                    "FROM ProductoComponente a " +
+                    "WHERE a.borrado = false");
             productos = FachadaPersistencia.getInstancia().buscar(
                     ProductoComponente.class, consulta);
-        }
-        else {
+        } else {
             Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
-                "SELECT a " +
-                "FROM ProductoComponente a " +
-                "WHERE a.borrado = false " +
-                "AND a.categoria = :categoria");
+                    "SELECT a " +
+                    "FROM ProductoComponente a " +
+                    "WHERE a.borrado = false " +
+                    "AND a.categoria = :categoria");
             consulta.setParameter("categoria", categoria);
             productos = FachadaPersistencia.getInstancia().buscar(
                     ProductoComponente.class, consulta);
@@ -205,8 +199,8 @@ public class GestorABC {
 
             itemMayor = itemsABC.get(0);
             for (ItemABC item : itemsABC) {
-                if(itemMayor.getDemandaValorizada()<=item.getDemandaValorizada()){
-                    itemMayor=item;
+                if (itemMayor.getDemandaValorizada() <= item.getDemandaValorizada()) {
+                    itemMayor = item;
                 }
 
             }
@@ -220,22 +214,20 @@ public class GestorABC {
         double demandaAcumulada = 0;
 
         for (ItemABC itemABC : curvaABC) {
-            
+
             demandaAcumulada += itemABC.getDemandaValorizada();
             itemABC.setDemandaAcumulada(demandaAcumulada);
 
             if (itemABC.getProducto().getCategoria() != null) {
 
-                if(itemABC.getProducto().getCategoria().equals("Curva A")) {
+                if (itemABC.getProducto().getCategoria().equals("Curva A")) {
                     cantidadProductosA++;
-                }
-                else if(itemABC.getProducto().getCategoria().equals("Curva B")) {
+                } else if (itemABC.getProducto().getCategoria().equals("Curva B")) {
                     cantidadProductosB++;
-                }
-                else {
+                } else {
                     cantidadProductosC++;
                 }
-                
+
             }
         }
 
@@ -255,5 +247,4 @@ public class GestorABC {
 
         FachadaPersistencia.getInstancia().finalizarTransaccion();
     }
-
 }

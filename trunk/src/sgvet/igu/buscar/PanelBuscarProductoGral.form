@@ -56,8 +56,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lbCodigo" alignment="1" pref="49" max="32767" attributes="0"/>
-                      <Component id="lbNombre" alignment="1" pref="49" max="32767" attributes="0"/>
+                      <Component id="lbCodigo" alignment="1" pref="50" max="32767" attributes="0"/>
+                      <Component id="lbNombre" alignment="1" pref="50" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">

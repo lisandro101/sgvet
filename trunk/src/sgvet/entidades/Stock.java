@@ -4,16 +4,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "stocks")
-public class Stock implements Serializable {
+public class Stock /*implements Serializable*/ {
 
     private String id;
     private int disponible;
     private int faltante;
     private int puntoReposicion;
+    private ProductoComponente productoComponente;
 
 
     public Stock() {
@@ -55,6 +57,15 @@ public class Stock implements Serializable {
 
     public void setPuntoReposicion(int puntoReposicion) {
         this.puntoReposicion = puntoReposicion;
+    }
+
+    @OneToOne
+    public ProductoComponente getProductoComponente() {
+        return productoComponente;
+    }
+
+    public void setProductoComponente(ProductoComponente productoComponente) {
+        this.productoComponente = productoComponente;
     }
 
 }
