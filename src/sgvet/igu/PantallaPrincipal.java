@@ -9,7 +9,6 @@ import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
-import sgvet.gestores.GestorStock;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
