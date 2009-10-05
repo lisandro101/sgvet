@@ -59,6 +59,7 @@ public class Stock /*implements Serializable*/ {
         this.puntoReposicion = puntoReposicion;
     }
 
+   
     @OneToOne
     public ProductoComponente getProductoComponente() {
         return productoComponente;

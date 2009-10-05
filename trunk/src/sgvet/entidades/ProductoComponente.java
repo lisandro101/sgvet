@@ -57,6 +57,10 @@ public class ProductoComponente extends Intermedio implements Serializable {
     //@OneToMany(targetEntity = Stock.class, cascade = CascadeType.ALL, mappedBy = "Producto")
     //@OneToOne(targetEntity=Stock.class, cascade=CascadeType.ALL,mappedBy = "Producto")
    // @OneToOne(mappedBy = "productoComponente")
+    
+    
+
+    @OneToOne
     public Stock getStockProducto() {
         return stockProducto;
     }
