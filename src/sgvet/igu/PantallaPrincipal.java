@@ -275,8 +275,9 @@ private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 
 private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockActionPerformed
     // TODO add your handling code here:
-    GestorStock objGS = new GestorStock();
-    objGS.getInstancia().calcularStockDisponible();
+    PanelStock pstock = new PanelStock();
+    pstock.setLocationRelativeTo(this);
+    pstock.setVisible(true);
 
 }//GEN-LAST:event_StockActionPerformed
 
