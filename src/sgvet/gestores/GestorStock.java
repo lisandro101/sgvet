@@ -45,11 +45,11 @@ public class GestorStock {
             for (ProductoComponente producto : productos) {
 
                 if (producto.getStock() >= stockMayor.getStock()) {
-                    stockMayor = producto;
-                }
-                prodOrd.add(stockMayor);
-                productos.remove(stockMayor);
+                    stockMayor = producto;        
+                }    
             }
+            prodOrd.add(stockMayor);
+            productos.remove(stockMayor);
         // stock = producto.getStockProducto();
         // System.out.println("El producto " + producto.getNombre() + " tiene " + /*stock.getDisponible()*/producto.getStock() + " unidades en disponibilidad");
 

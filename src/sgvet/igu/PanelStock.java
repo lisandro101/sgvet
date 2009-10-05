@@ -139,13 +139,12 @@ public class PanelStock extends javax.swing.JFrame {
             System.out.println("STOCK DISPONIBLE");
             List<ProductoComponente> listaProductos = objgs.calcularStockDisponible();
             //System.out.println("La cantidad de productos es " + listaProductos.size());
-            for (ProductoComponente producto : listaProductos){
-                System.out.println("El producto " + producto.getNombre() + " tiene" + producto.getStock() + " items en Stock");
+            for (ProductoComponente producto : listaProductos) {
+            componentes.add(producto);
+
             }
-            this.inicializar(listaProductos, columnNames);
-
+            inicializar(componentes,columnNames);
         }
-
         if (comboStock.getSelectedItem() == "Stock x Demanda Anual") {
             String[] columnNames = {"Nombre", "Stock x Demanda Anual"};
             List<ProductoComponente> listaProductos = objgs.calcularStockDemandaAnual();
@@ -165,11 +164,11 @@ public class PanelStock extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
-    private void inicializar(List listaProductos, String[] columnNames) {
+    private void inicializar(List componentes, String[] columnNames) {
         tmBuscar = new ProductoGralTableModel(0);
         tResultadoComponentes.setModel(tmBuscar);
         tResultadoComponentes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
+       
     }
 
     /**
