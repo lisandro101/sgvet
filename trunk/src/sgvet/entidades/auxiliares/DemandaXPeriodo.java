@@ -24,7 +24,7 @@ public class DemandaXPeriodo {
 
     public DemandaXPeriodo(Date periodo, int total) {
         mes = periodo;
-        totalVentas= total;
+        totalVentas = total;
     }
 
     public DemandaXPeriodo() {
