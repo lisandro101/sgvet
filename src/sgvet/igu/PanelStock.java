@@ -1,4 +1,3 @@
-
 package sgvet.igu;
 
 import java.util.List;
@@ -27,8 +26,9 @@ public class PanelStock extends javax.swing.JFrame {
     /** Creates new form PanelStock */
     public PanelStock() {
         initComponents();
-        String[] columnNames ={"Nombre", "Demanda Anual", "Demanda Real"};
+        String[] columnNames = {"Nombre", "Demanda Anual", "Demanda Real"};
 
+        comboStock.addItem(ABORT);
     }
 
     /** This method is called from within the constructor to
@@ -45,7 +45,8 @@ public class PanelStock extends javax.swing.JFrame {
         pBoton = new javax.swing.JPanel();
         btBuscar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
-        btAceptar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        comboStock = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,7 +78,7 @@ public class PanelStock extends javax.swing.JFrame {
         });
         pBoton.add(btBuscar);
 
-        btCancelar.setText("Cancelar");
+        btCancelar.setText("Aceptar");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btCancelarActionPerformed(evt);
@@ -85,13 +86,20 @@ public class PanelStock extends javax.swing.JFrame {
         });
         pBoton.add(btCancelar);
 
-        btAceptar.setText("Aceptar");
-        btAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAceptarActionPerformed(evt);
-            }
-        });
-        pBoton.add(btAceptar);
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        comboStock.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(comboStock, 0, 489, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(comboStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,37 +108,53 @@ public class PanelStock extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
-                    .addComponent(pBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(pBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(pBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
-}//GEN-LAST:event_btAceptarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         dispose();
 }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-       
-        //tmBuscar.limpiarTableModel();
+
+
 
         GestorStock objgs = new GestorStock();
-        List<ProductoComponente> listaProductos = objgs.calcularStockDemandaAnual();
-        System.out.println("La cantidad de productos es " + listaProductos.size());
-        this.inicializar(listaProductos);
+        System.out.println("LLEGA!!!");
+        if (comboStock.getSelectedItem() == "Stock Disponible") {
+            List<ProductoComponente> listaProductos = objgs.calcularStockDisponible();
+            System.out.println("La cantidad de productos es " + listaProductos.size());
+            this.inicializar(listaProductos);
+
+        }
+
+        if (comboStock.getSelectedItem() == "Stock Disponible") {
+        }
+
+         if (comboStock.getSelectedItem() == "Stock Disponible") {
+        }
+
+         if (comboStock.getSelectedItem() == "Stock Disponible") {
+        }
+
+         if (comboStock.getSelectedItem() == "Stock Disponible") {
+        }
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void inicializar(List listaProductos) {
@@ -153,9 +177,10 @@ public class PanelStock extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAceptar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCancelar;
+    private javax.swing.JComboBox comboStock;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pBoton;
     private org.jdesktop.swingx.JXTable tResultadoComponentes;
