@@ -60,6 +60,7 @@ public class ProductoComponente extends Intermedio implements Serializable {
     
     
 
+
     @OneToOne
     public Stock getStockProducto() {
         return stockProducto;
