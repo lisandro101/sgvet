@@ -24,6 +24,7 @@ public class SenialRastreo {
 
     public SenialRastreo()
     {
+     /*
      demandaReal= new double[13];
      pronostico=new double[13];
      alfa=0.1 ;
@@ -32,6 +33,8 @@ public class SenialRastreo {
      MSE=new double[13];
      desviacionEstandar=new double[13];
      senialRastreo=new double[13];
+    */
+
     }
 
     public SenialRastreo( double[] DemandaRealX, double[] PronosticoX, double GammaX, double[] ErrorX, double[] ErrorPromedioX, double[] MSEX, double[] DesviacionEstandarX,double[] SenialRastreoX){
@@ -50,9 +53,9 @@ public class SenialRastreo {
     public double[] Error (double[] DemandaReal,double[] Pronostico)
     {
        // demandaReal=DemandaRealX;
-        error=new double[13];
+        error=new double[DemandaReal.length];
         //pronostico=demandaReal;
-        for(int i=0;i<13;i++)
+        for(int i=0;i<DemandaReal.length;i++)
         {
             if(i==0)
             {
@@ -71,10 +74,10 @@ public class SenialRastreo {
 
     public double[] ErrorPromedio(double Gamma1, double[] Error1)
     {
-     errorPromedio=new double[13];
+     errorPromedio=new double[Error1.length];
      error=Error1;
      alfa=Gamma1;
-        for(int i=0;i<13;i++)
+        for(int i=0;i<Error1.length;i++)
         {
             if(i==0)
             {
@@ -92,9 +95,9 @@ public class SenialRastreo {
 
     public double[] MSE(double Gamma, double[] Error1)
     {
-       MSE=new double[13];
+       MSE=new double[Error1.length];
        error=Error1;
-      for(int i=0;i<13;i++)
+      for(int i=0;i<Error1.length;i++)
         {
             if(i==0)
             {
@@ -113,9 +116,9 @@ public class SenialRastreo {
 
     public double[] DesviacionEstandar(double Gamma, double[] MSE1)
     {
-        desviacionEstandar=new double[13];
+        desviacionEstandar=new double[MSE1.length];
         MSE=MSE1;
-      for(int i=0;i<13;i++)
+      for(int i=0;i<MSE1.length;i++)
         {
             if(i==0)
             {
@@ -137,7 +140,7 @@ public class SenialRastreo {
     {
      desviacionEstandar=DesviacionEstandar1;
      errorPromedio=ErrorPromedio1;
-     senialRastreo=new double[13];
+     senialRastreo=new double[DesviacionEstandar1.length];
       for(int i=0;i<13;i++)
         {
             if(i==0)
@@ -160,13 +163,13 @@ public class SenialRastreo {
     {
         demandaReal = _demandaReal;
         pronostico = _pronostico;
-        error = new double[13];
-        errorPromedio = new double[13];
-        MSE = new double[13];
-        desviacionEstandar = new double[13];
-        senialRastreo = new double[13];
+        error = new double[_demandaReal.length];
+        errorPromedio = new double[_demandaReal.length];
+        MSE = new double[_demandaReal.length];
+        desviacionEstandar = new double[_demandaReal.length];
+        senialRastreo = new double[_demandaReal.length];
 
-        for(int i=0;i<13;i++)
+        for(int i=0;i<_demandaReal.length;i++)
         {
             if(i == 0)
             {
@@ -179,7 +182,7 @@ public class SenialRastreo {
             //System.out.println(error[i]);
          }
 
-        for(int i=0;i<13;i++)
+        for(int i=0;i<_demandaReal.length;i++)
         {
             if(i == 0)
             {
@@ -193,7 +196,7 @@ public class SenialRastreo {
             //System.out.println(errorPromedio[i]);
         }
 
-       for(int i=0;i<13;i++)
+       for(int i=0;i<_demandaReal.length;i++)
        {
             if(i == 0)
             {
@@ -205,7 +208,7 @@ public class SenialRastreo {
             }
        }
 
-      for(int i=0;i<13;i++)
+      for(int i=0;i<_demandaReal.length;i++)
       {
 
             if(i==0)
@@ -220,7 +223,7 @@ public class SenialRastreo {
             }
       }
 
-      for(int i=0;i<13;i++)
+      for(int i=0;i<_demandaReal.length;i++)
       {
         if(i == 0)
         {
