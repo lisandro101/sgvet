@@ -141,7 +141,7 @@ public class SenialRastreo {
      desviacionEstandar=DesviacionEstandar1;
      errorPromedio=ErrorPromedio1;
      senialRastreo=new double[DesviacionEstandar1.length];
-      for(int i=0;i<13;i++)
+      for(int i=0;i<DesviacionEstandar1.length;i++)
         {
             if(i==0)
             {
