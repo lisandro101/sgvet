@@ -4,19 +4,21 @@
  */
 
 package sgvet.gestores;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 import sgvet.entidades.Demanda;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.ProductoComponente;
 import sgvet.igu.PanelDemanda;
 import sgvet.persistencia.FachadaPersistencia;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -282,7 +284,11 @@ public class GestorDemanda {
     }
 
     @Deprecated
-    public void calcularDemandaConEstacionalidad(TableModel tModel, double alfa, double gamma){
+    public List<Integer> calcularDemandaConEstacionalidad(TableModel tModel, double alfa, double gamma, List<DemandaXPeriodo> vendido){
+
+        tModel= convertirListATableModel(vendido);
+        List<Integer> predicciones = new ArrayList<Integer>();
+
         double indiceEsta1[] = new double[tModel.getRowCount()];
         double demanPromedio1[] = new double[tModel.getRowCount()];
         double indiceEsta2[] = new double[tModel.getRowCount()];
@@ -317,9 +323,10 @@ public class GestorDemanda {
                 demanPromedio2[i]= ultimoReal* indiceEsta1[i];
                 tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
 
+                predicciones.add((int)demanPromedio2[i]);
             }
         }
- 
+        return predicciones;
     }
 
     //supone que las fechas de las ventas estan ordenadas ascendentemente
@@ -982,5 +989,26 @@ public class GestorDemanda {
         }
 
     }
-    
+
+    private TableModel convertirListATableModel(List<DemandaXPeriodo> ventas){
+        DefaultTableModel tabla = new DefaultTableModel();
+        int indice=0;
+        tabla.setRowCount(13);
+        tabla.setColumnCount(calcularCantAniosDeVentas(ventas)+1); // es mas 1 xq le sume la columna donde figura los nombres de los periodos
+
+
+        for (int j = 1; j < tabla.getColumnCount(); j++) {
+            for (int i = 0; i < tabla.getRowCount(); i++) {
+                if(ventas.size()>=indice){
+                    tabla.setValueAt(ventas.get(indice).getVentas(), i, j);
+                }else{
+                    tabla.setValueAt( 0 , i, j);
+                }
+
+
+                ++indice;
+            }
+        }
+        return tabla;
+    }
 }
