@@ -431,7 +431,7 @@ private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent
             //venta.setEstado(venta.getEstado());
             venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
             FachadaPersistencia.getInstancia().actualizar(venta, true);
-                limpiarCampos();
+       //  limpiarCampos();
         }
 
     }

@@ -61,8 +61,8 @@ public class PanelDemandaExpoConEsta extends javax.swing.JDialog implements IVal
     }
 
     private void inicializarBotones(){
-        btCalcular.setEnabled(false);
-
+        //btCalcular.setEnabled(false);
+        btCargar.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -301,9 +301,19 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_btCerrarActionPerformed
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-    tModel.fireTableDataChanged();
-    GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma);
 
+    tModel.fireTableDataChanged();
+    List<Integer> resultados;
+
+    resultados = GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma, GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto));
+
+    int nro =1;
+    for (Integer resul : resultados) {
+        System.out.println("\n --------------------------------");
+        System.out.println("\n Prediccion "+ nro +" :" + resul);
+        System.out.println("\n --------------------------------");
+        ++nro;
+    }
 //    tDemanda.repaint();
 //    alfa = Double.parseDouble(tfAlfa.getText());
 //    demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
