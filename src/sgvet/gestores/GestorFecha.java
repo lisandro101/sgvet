@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
 
 /**
@@ -40,6 +39,28 @@ public class GestorFecha {
      */
     public void setFechaHoy(Date fechaHoy) {
         this.fechaHoy = fechaHoy;
+    }
+
+    /**
+     * Devuelve el año de un Date.
+     * @param fecha
+     * @return año
+     */
+    public int getAnio(Date fecha) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        return cal.get(Calendar.YEAR);
+    }
+
+       /**
+     * Devuelve el mes de un Date.
+     * @param fecha
+     * @return mes
+     */
+    public int getMes(Date fecha) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        return cal.get(Calendar.MONTH)+1;
     }
 
     @Deprecated

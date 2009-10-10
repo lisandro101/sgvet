@@ -223,7 +223,7 @@ public class GestorDemanda {
                     ++temp;
                 }
                 if (temp <= 1) {
-                    demandaPre = (int) ventas.get(i - 1).getPrediccionVenta();
+                    demandaPre = ventas.get(i - 1).getPrediccionVenta();
                 }
                 ventas.get(i).setPrediccionVenta((int) (alfa * demandaReal + (1 - alfa) * demandaPre));
             }
