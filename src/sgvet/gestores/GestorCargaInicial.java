@@ -2,15 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sgvet.gestores;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import sgvet.entidades.OrdenCompra;
-import sgvet.entidades.OrdenCompra.EstadoOrdenCompra;
+import sgvet.entidades.ClaseDemanda;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.Proveedor;
 import sgvet.persistencia.FachadaPersistencia;
@@ -24,22 +22,22 @@ public class GestorCargaInicial {
 
     private static GestorCargaInicial instance;
 
-    public synchronized static GestorCargaInicial getInstancia(){
-        if (instance == null){
+    public synchronized static GestorCargaInicial getInstancia() {
+        if (instance == null) {
             instance = new GestorCargaInicial();
         }
         return instance;
     }
 
-    public HashMap<String,Proveedor> cargarProveedores() {
+    public HashMap<String, Proveedor> cargarProveedores() {
 
         Proveedor prov;
-        List<IPersistente> persistentes = new ArrayList();
-        HashMap<String,Proveedor> proveedores = new HashMap<String, Proveedor>();
+        List<IPersistente> persistentes = new ArrayList<IPersistente>();
+        HashMap<String, Proveedor> proveedores = new HashMap<String, Proveedor>();
 
-        
+
         /* -----  Repetir este codigo para crear proveedores a persistir  ---- */
-        
+
         /* -----  Proveedor Dog Chow  ---- */
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Dog Chow");
@@ -104,7 +102,7 @@ public class GestorCargaInicial {
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
         /* ------------------------------------------------------------------- */
- /* -----  Proveedor EXACT  ---- */
+        /* -----  Proveedor EXACT  ---- */
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("EXACT");
         prov.setBorrado(false);
@@ -164,11 +162,11 @@ public class GestorCargaInicial {
         return proveedores;
     }
 
-    public void cargarProductos(HashMap<String,Proveedor> proveedores) {
+    public void cargarProductos(HashMap<String, Proveedor> proveedores) {
 
         ProductoComponente prod;
         List<Proveedor> prov;
-        List<IPersistente> persistentes = new ArrayList();
+        List<IPersistente> persistentes = new ArrayList<IPersistente>();
 
         /* -----  Repetir este codigo para crear proveedores a persistir  ---- */
 
@@ -193,14 +191,14 @@ public class GestorCargaInicial {
         prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
-        
+
         prov = new ArrayList<Proveedor>();
         prov.add(proveedores.get("Dog Chow")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
         prod.setProveedores(prov);
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 15Kg");
         prod.setBorrado(false);
@@ -229,7 +227,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 30Kg");
         prod.setBorrado(false);
@@ -259,7 +257,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow Vitamina 200gm");
         prod.setBorrado(false);
@@ -289,7 +287,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto del Provedor Top Nutrition  ---- */
+        /* -----  Producto del Provedor Top Nutrition  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 2Kg");
         prod.setBorrado(false);
@@ -318,7 +316,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 15Kg");
         prod.setBorrado(false);
@@ -347,7 +345,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 30Kg");
         prod.setBorrado(false);
@@ -377,7 +375,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition Vitamina 200gm");
         prod.setBorrado(false);
@@ -436,7 +434,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 15Kg");
         prod.setBorrado(false);
@@ -465,7 +463,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 30Kg");
         prod.setBorrado(false);
@@ -495,7 +493,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can Vitamina 200gm");
         prod.setBorrado(false);
@@ -525,7 +523,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto del Provedor Eukanuba  ---- */
+        /* -----  Producto del Provedor Eukanuba  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 2Kg");
         prod.setBorrado(false);
@@ -554,7 +552,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 15Kg");
         prod.setBorrado(false);
@@ -583,7 +581,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 30Kg");
         prod.setBorrado(false);
@@ -613,7 +611,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba Vitamina 200gm");
         prod.setBorrado(false);
@@ -672,7 +670,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 15Kg");
         prod.setBorrado(false);
@@ -701,7 +699,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 30Kg");
         prod.setBorrado(false);
@@ -731,7 +729,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal Vitamina 200gm");
         prod.setBorrado(false);
@@ -761,7 +759,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-           /* -----  Producto del Provedor EXACT  ---- */
+        /* -----  Producto del Provedor EXACT  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 2Kg");
         prod.setBorrado(false);
@@ -790,7 +788,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 15Kg");
         prod.setBorrado(false);
@@ -819,7 +817,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 30Kg");
         prod.setBorrado(false);
@@ -849,7 +847,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT Vitamina 200gm");
         prod.setBorrado(false);
@@ -879,7 +877,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-           /* -----  Producto del Provedor KONGO  ---- */
+        /* -----  Producto del Provedor KONGO  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 2Kg");
         prod.setBorrado(false);
@@ -908,7 +906,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 15Kg");
         prod.setBorrado(false);
@@ -937,7 +935,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 30Kg");
         prod.setBorrado(false);
@@ -967,7 +965,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO Vitamina 200gm");
         prod.setBorrado(false);
@@ -997,7 +995,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-         /* -----  Producto del Provedor PURINA  ---- */
+        /* -----  Producto del Provedor PURINA  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 2Kg");
         prod.setBorrado(false);
@@ -1026,7 +1024,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 15Kg");
         prod.setBorrado(false);
@@ -1055,7 +1053,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 30Kg");
         prod.setBorrado(false);
@@ -1085,7 +1083,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA Vitamina 200gm");
         prod.setBorrado(false);
@@ -1116,7 +1114,7 @@ public class GestorCargaInicial {
         /* ------------------------------------------------------------------- */
 
 
-          /* -----  Producto del Provedor Dog Selection ---- */
+        /* -----  Producto del Provedor Dog Selection ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Selection 2Kg");
         prod.setBorrado(false);
@@ -1145,7 +1143,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 15Kg  ---- */
+        /* -----  Producto Alimento 15Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 15Kg");
         prod.setBorrado(false);
@@ -1174,7 +1172,7 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
-/* -----  Producto Alimento 30Kg  ---- */
+        /* -----  Producto Alimento 30Kg  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 30Kg");
         prod.setBorrado(false);
@@ -1204,7 +1202,7 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         /* ------------------------------------------------------------------- */
 
-/* -----  Producto Vitamina Complejo  ---- */
+        /* -----  Producto Vitamina Complejo  ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA Vitamina 200gm");
         prod.setBorrado(false);
@@ -1235,36 +1233,71 @@ public class GestorCargaInicial {
         /* ------------------------------------------------------------------- */
 
 
-        
+
 
         /* Llama al método que persiste la lista de proveedores */
         persistir(persistentes);
     }
-/*
- *## Lizandro tengo problema con el formato de fecha y las ralciones de EstadoOrdenCompra.##
- * y de paso anda revisando el codigo.
- * Gracias.
-     public void CargarOrdenCompra(HashMap<String,OrdenCompra> OrdenCompra) {
+    /*
+     *## Lizandro tengo problema con el formato de fecha y las ralciones de EstadoOrdenCompra.##
+     * y de paso anda revisando el codigo.
+     * Gracias.
+    public void CargarOrdenCompra(HashMap<String,OrdenCompra> OrdenCompra) {
 
-        OrdenCompra OrdComp;
-        List<OrdenCompra> OrdComp;
-        List<IPersistente> persistentes = new ArrayList();
+    OrdenCompra OrdComp;
+    List<OrdenCompra> OrdComp;
+    List<IPersistente> persistentes = new ArrayList();
 
-        //* -----  Repetir este codigo para crear OrdenCompra a persistir  ----
+    //* -----  Repetir este codigo para crear OrdenCompra a persistir  ----
 
-        OrdComp = new OrdenCompra();   //Recordar siempre hacer el new para que genere un nuevo UID!
-   	OrdComp.setId("1");
-        Proveedor Prov = new Proveedor();
-    	OrdComp.setProveedor(Prov);
-    	//OrdComp.setFecha(25/09/2009);
-    	//OrdComp.setFechaEstimadaEntrega("30/09/2009");
-        //OrdenCampra.setDetallesOrdenCompra.getId();
-    	OrdComp.setNroOrdenCompra(1);
-        //EstadoOrdenCompra EstadoOrden=new EstadoOrdenCompra();
-       	OrdComp.setEstado(OrdenCompra.EstadoOrdenCompra.ANULADO);
+    OrdComp = new OrdenCompra();   //Recordar siempre hacer el new para que genere un nuevo UID!
+    OrdComp.setId("1");
+    Proveedor Prov = new Proveedor();
+    OrdComp.setProveedor(Prov);
+    //OrdComp.setFecha(25/09/2009);
+    //OrdComp.setFechaEstimadaEntrega("30/09/2009");
+    //OrdenCampra.setDetallesOrdenCompra.getId();
+    OrdComp.setNroOrdenCompra(1);
+    //EstadoOrdenCompra EstadoOrden=new EstadoOrdenCompra();
+    OrdComp.setEstado(OrdenCompra.EstadoOrdenCompra.ANULADO);
+    persistir(persistentes);
+    }
+     */
+
+    /**
+     * Persiste en la base de datos las clases de demanda
+     */
+    public void cargarClasesDemanda() {
+
+        ClaseDemanda cd;
+        List<IPersistente> persistentes = new ArrayList<IPersistente>();
+
+        cd = new ClaseDemanda();
+        cd.setClase("Clase A");
+        cd.setNumeroClase(1);
+        cd.setL(2);
+        persistentes.add(cd);
+
+        cd = new ClaseDemanda();
+        cd.setClase("Clase B");
+        cd.setNumeroClase(2);
+        cd.setL(4.5);
+        persistentes.add(cd);
+
+        cd = new ClaseDemanda();
+        cd.setClase("Clase C");
+        cd.setNumeroClase(3);
+        cd.setL(5);
+        persistentes.add(cd);
+
         persistir(persistentes);
-}
-*/
+    }
+
+    /**
+     * Guarda en la base de datos una lista de objetos persistentes (cualquier
+     * objeto que implemente la interfaz IPersistente).
+     * @param objetos
+     */
     public void persistir(List<IPersistente> objetos) {
         FachadaPersistencia.getInstancia().comenzarTransaccion();
 

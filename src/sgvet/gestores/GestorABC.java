@@ -3,7 +3,6 @@ package sgvet.gestores;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
-import sgvet.entidades.Demanda;
 import sgvet.entidades.auxiliares.ItemABC;
 import sgvet.entidades.ProductoComponente;
 import sgvet.persistencia.FachadaPersistencia;
@@ -86,10 +85,6 @@ public class GestorABC {
     private GestorABC() {
     }
 
-    @Deprecated
-    public void calcularABC(List<Demanda> demandas) {
-    }
-
     public List<ItemABC> calcularCurvaABC() {
 
         Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
@@ -136,13 +131,13 @@ public class GestorABC {
 
         for (ItemABC itemABC : curvaABC) {
             if (itemABC.getDemandaAcumulada() <= demandaClaseA) {
-                itemABC.getProducto().setCategoria("Curva A");
+                itemABC.getProducto().setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(1));
                 productosActualizados.add(itemABC.getProducto());
             } else if (itemABC.getDemandaAcumulada() <= demandaClaseB) {
-                itemABC.getProducto().setCategoria("Curva B");
+                itemABC.getProducto().setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(2));
                 productosActualizados.add(itemABC.getProducto());
             } else {
-                itemABC.getProducto().setCategoria("Curva C");
+                itemABC.getProducto().setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(3));
                 productosActualizados.add(itemABC.getProducto());
             }
         }
@@ -218,11 +213,11 @@ public class GestorABC {
             demandaAcumulada += itemABC.getDemandaValorizada();
             itemABC.setDemandaAcumulada(demandaAcumulada);
 
-            if (itemABC.getProducto().getCategoria() != null) {
+            if (itemABC.getProducto().getCategoria().toString() != null) {
 
-                if (itemABC.getProducto().getCategoria().equals("Curva A")) {
+                if (itemABC.getProducto().getCategoria().toString().equals("Curva A")) {
                     cantidadProductosA++;
-                } else if (itemABC.getProducto().getCategoria().equals("Curva B")) {
+                } else if (itemABC.getProducto().getCategoria().toString().equals("Curva B")) {
                     cantidadProductosB++;
                 } else {
                     cantidadProductosC++;

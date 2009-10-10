@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sgvet.gestores;
 
 import java.util.ArrayList;
@@ -24,7 +23,6 @@ import javax.swing.table.TableModel;
  * @author stafoxter
  */
 public class GestorDemanda {
-
 
     private Date fechaCierre;
     private double[] indices;
