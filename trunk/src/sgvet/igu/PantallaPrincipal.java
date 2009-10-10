@@ -57,7 +57,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         archivo = new javax.swing.JMenu();
         salir = new javax.swing.JMenuItem();
         demanda = new javax.swing.JMenu();
-        prediccionDemanda = new javax.swing.JMenuItem();
         curvaABC = new javax.swing.JMenuItem();
         Stock = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenu();
@@ -103,15 +102,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 demandaActionPerformed(evt);
             }
         });
-
-        prediccionDemanda.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
-        prediccionDemanda.setText("Predicción de la demanda");
-        prediccionDemanda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prediccionDemandaActionPerformed(evt);
-            }
-        });
-        demanda.add(prediccionDemanda);
 
         curvaABC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         curvaABC.setText("Calcular Curva ABC");
@@ -232,13 +222,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
     }
 }//GEN-LAST:event_jTabbedPane1MouseClicked
 
-private void prediccionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prediccionDemandaActionPerformed
-    PanelDemanda panelDemanda = new PanelDemanda();
-    panelDemanda.setModal(true);
-    panelDemanda.setLocationRelativeTo(null);
-    panelDemanda.setVisible(true);
-}//GEN-LAST:event_prediccionDemandaActionPerformed
-
 private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verReportesActionPerformed
     DialogoReportes dialogoReportes = new DialogoReportes(this, true);
 
@@ -290,7 +273,6 @@ private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuBar menu;
-    private javax.swing.JMenuItem prediccionDemanda;
     private javax.swing.JMenu reportes;
     private javax.swing.JMenuItem salir;
     private javax.swing.JMenuItem verReportes;

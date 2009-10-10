@@ -307,7 +307,7 @@ private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     List <DemandaXPeriodo> ventas;
     if(validarYCargarDatosPantalla()){
-        ventas= GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto);
+        ventas= GestorDemanda.getInstancia().calcularDemandaXPeriodo(producto);
         tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().calcularAcumulado(ventas)));
         tfPrediccion.setText(GestorDemanda.getInstancia().calcularESNew(alfa, ventas)+"");
         GestorDemanda.getInstancia().mostrarXPantalla(ventas);
