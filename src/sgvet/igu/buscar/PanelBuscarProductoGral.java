@@ -14,7 +14,7 @@ import javax.swing.table.TableModel;
 import sgvet.entidades.Componente;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.Proveedor;
-import sgvet.igu.PanelDemanda;
+
 import sgvet.igu.PanelOrdenCompra;
 import sgvet.igu.PanelOrdenProduccion;
 import sgvet.igu.PanelProductoComponente;
@@ -30,7 +30,7 @@ import sgvet.persistencia.FachadaPersistencia;
 public class PanelBuscarProductoGral extends javax.swing.JDialog {
 
     private static final long serialVersionUID = 1L;
-    private PanelDemanda panelDemanda;
+
     private ProductoGralTableModel tmBuscar;
     private ProductoGralTableModel tmOrigen;
     private List<Componente> componentes;
@@ -103,13 +103,13 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
         panelOrdenProduccion = tm1;
         inicializar();
     }
-
-    public PanelBuscarProductoGral(PanelDemanda panel) {
-        initComponents();
-        tipo = Tipo.PANEL_DEMANDA;
-        panelDemanda = panel;
-        inicializar();
-    }
+//
+//    public PanelBuscarProductoGral(PanelDemanda panel) {
+//        initComponents();
+//        tipo = Tipo.PANEL_DEMANDA;
+//        panelDemanda = panel;
+//        inicializar();
+//    }
 
     public PanelBuscarProductoGral(PanelStock panel) {
         //throw new UnsupportedOperationException("Not yet implemented");
@@ -296,9 +296,9 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         } else if (tipo == Tipo.PANEL_PROD_COMPONENTE) {
             panelProductoComponente.setComponente((ProductoComponente) resultado);
             dispose();
-        } else if (tipo == Tipo.PANEL_DEMANDA) {
-            panelDemanda.setProductoTerminado((ProductoComponente) resultado);
-            dispose();
+//        } else if (tipo == Tipo.PANEL_DEMANDA) {
+//            panelDemanda.setProductoTerminado((ProductoComponente) resultado);
+//            dispose();
         } else if (tipo == Tipo.PANEL_ORDEN_COMPRA) {
             panelOrdenCompra.setComponente(resultado);
             dispose();

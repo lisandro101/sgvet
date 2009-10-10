@@ -25,7 +25,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="pBoton" alignment="0" pref="473" max="32767" attributes="1"/>
+                  <Component id="pBoton" alignment="0" pref="474" max="32767" attributes="1"/>
                   <Component id="pTablaComponentes" alignment="0" max="32767" attributes="0"/>
                   <Component id="pProductoTerminado" alignment="1" max="32767" attributes="1"/>
               </Group>
@@ -121,7 +121,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="320" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="321" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
               </Group>
           </Group>
