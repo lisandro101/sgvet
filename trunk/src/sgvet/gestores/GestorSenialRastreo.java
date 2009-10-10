@@ -1,6 +1,11 @@
 package sgvet.gestores;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.Venta;
+import sgvet.entidades.auxiliares.DemandaXPeriodo;
 
 /**
  *
@@ -200,25 +205,51 @@ public class GestorSenialRastreo {
     /**
      * Devuelve true si la señal de rastreo del producto se encuentra fuera
      * de los limites definidos por su clase.
-     * @param prod
-     * @return true si esta fuera del rango y false en su defecto
+     * @param prod 
+     * @param demandas
+     * @return true si esta fuera del rango y false en su defecto.
      */
-//    public boolean senialRastreoFueraRango(ProductoComponente prod) {
-//        double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
-//        double sr = senial[senial.length];
-//
-//        if (prod.getCategoria().equalsIgnoreCase("Curva A")){
-//            if (sr > )
-//        }
-//        else if (prod.getCategoria().equalsIgnoreCase("Curva B")) {
-//
-//        }
-//        else {
-//
-//        }
-//
-//
-//
-//        return true;
-//    }
+    public boolean senialRastreoFueraRango(ProductoComponente prod, List<DemandaXPeriodo> demandas) {
+        
+        double sr = parserSenialRastreo(demandas);
+
+        if (Math.abs(sr) > prod.getCategoria().getL()) {
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    /**
+     * Recibe un list con todas las DemandaXPeriodo de un producto y devuelve
+     * la senial de rastreo de ese producto para el año actual.
+     * @param todas
+     * @return senialRastreo
+     */
+    public double parserSenialRastreo(List<DemandaXPeriodo> todas){
+
+        GestorFecha gf = GestorFecha.getInstancia();
+        List<DemandaXPeriodo> demandas = new ArrayList<DemandaXPeriodo>();
+
+        for (DemandaXPeriodo demandaXPeriodo : todas) {
+            if(gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(new Date())){
+                demandas.add(demandaXPeriodo);
+            }
+        }
+
+        demandaReal = new double[demandas.size()];
+        pronostico = new double[demandas.size()];
+
+        for (int i = 0; i < demandas.size(); i++) {
+            demandaReal[i] = demandas.get(i).getVentas();
+            pronostico[i] = demandas.get(i).getPrediccionVenta();
+        }
+
+        double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
+
+        return senial[senial.length];
+
+    }
 }
