@@ -12,6 +12,7 @@
     <class>sgvet.entidades.Proveedor</class>
     <class>sgvet.entidades.Venta</class>
     <class>sgvet.entidades.Stock</class>
+    <class>sgvet.entidades.ClaseDemanda</class>
     <properties>
       <property name="eclipselink.jdbc.password" value="radiadores"/>
       <property name="eclipselink.jdbc.user" value="radiadores"/>

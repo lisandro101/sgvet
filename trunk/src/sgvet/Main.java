@@ -34,6 +34,7 @@ public class Main {
         
         
         PantallaPrincipal p = new PantallaPrincipal();
+        final GestorCargaInicial gcarga = GestorCargaInicial.getInstancia();
         
         p.setLocationRelativeTo(null);
         p.setVisible(true);
@@ -45,7 +46,8 @@ public class Main {
                         "SELECT c FROM ProductoComponente c");
                 if(prod.size()<=0) {
                     System.out.println("Realizando Carga Inicial....");
-                    GestorCargaInicial.getInstancia().cargarProductos(GestorCargaInicial.getInstancia().cargarProveedores());
+                    gcarga.cargarProductos(gcarga.cargarProveedores());
+                    gcarga.cargarClasesDemanda();
                     GestorABC.getInstancia().calcularCurvaABC();
                     System.out.println("Finalizada Carga Inicial.");
                 }

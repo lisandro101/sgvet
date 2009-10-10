@@ -205,7 +205,7 @@ public class Componente implements Serializable, IPersistente {
     }
 
     /**
-     * @param costoEmision the costoEmision to set
+     * @param costoPedido 
      */
     public void setCostoPedido(double costoPedido) {
         this.costoPedido = costoPedido;

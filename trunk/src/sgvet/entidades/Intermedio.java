@@ -18,7 +18,6 @@ import javax.persistence.Table;
 public abstract class Intermedio extends Componente implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private String categoria;
     private String condicionesEmbalaje;
     private String numeroPlano;
     private String politicaCompra;
@@ -26,15 +25,6 @@ public abstract class Intermedio extends Componente implements Serializable {
     private String estado;
     
     private boolean borrado;
-
-    @Column(name="categoria", length=100)
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
     @Column(name="condiciones_embalaje", length=255)
     public String getCondicionesEmbalaje() {

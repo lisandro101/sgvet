@@ -9,6 +9,7 @@ import sgvet.igu.buscar.PanelBuscarProveedor;
 import javax.swing.JOptionPane;
 import sgvet.utils.Util;
 import sgvet.entidades.ProductoComponente;
+import sgvet.gestores.GestorConfiguracion;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
 import sgvet.igu.buscar.ValidacionBuscar;
 import sgvet.igu.model.ProveedorTableModel;
@@ -253,9 +254,14 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
 
         tfCodigo.setInputVerifier(new ValidarCodigo(2));
 
-        cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Activo", "Suspendido", "Inactivo" }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Activo", "Suspendido", "Inactivo" }));
 
-        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Curva A", "Curva B", "Curva C" }));
+        cbCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Clase A", "Clase B", "Clase C" }));
+        cbCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCategoriaActionPerformed(evt);
+            }
+        });
 
         cbUnidadMedida.setModel(tmUnidadMedida);
         cbUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +275,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         lbTipoPrediccion.setText("Tipo Predicción:");
         lbTipoPrediccion.setName("tipoPrediccion"); // NOI18N
 
-        cbTipoPrediccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SE Simple", "SE Tendencia", "SE Estacionalidad" }));
+        cbTipoPrediccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "SE Simple", "SE Tendencia", "SE Estacionalidad" }));
         cbTipoPrediccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoPrediccionActionPerformed(evt);
@@ -410,8 +416,8 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pTablaProveedoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTablaProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pTablaProveedoresLayout.setVerticalGroup(
@@ -559,6 +565,10 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
    
 }//GEN-LAST:event_btDemandaActionPerformed
 
+private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoriaActionPerformed
+    // TODO add your handling code here:
+}//GEN-LAST:event_cbCategoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoProd;
@@ -626,7 +636,7 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         
         productoComponente.setCodigo(tfCodigo.getText());
         productoComponente.setNombre(tfNombre.getText());
-        productoComponente.setCategoria(cbCategoria.getSelectedItem().toString());
+        productoComponente.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
         productoComponente.setEstado(cbEstado.getSelectedItem().toString());
         productoComponente.setNumeroPlano(tfNroPlano.getText());
         productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
@@ -661,7 +671,7 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         
         productoComponente.setCodigo(tfCodigo.getText());
         productoComponente.setNombre(tfNombre.getText());
-        productoComponente.setCategoria(cbCategoria.getSelectedItem().toString());
+        productoComponente.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
         productoComponente.setEstado(cbEstado.getSelectedItem().toString());
         productoComponente.setNumeroPlano(tfNroPlano.getText());
         productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
@@ -688,7 +698,7 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         Util.getInstancia().limpiarCampos(this);
         tfCodigo.setText(prod.getCodigo());
         tfNombre.setText(prod.getNombre());
-        cbCategoria.setSelectedItem(prod.getCategoria());
+        cbCategoria.setSelectedItem(prod.getCategoria().toString());
         cbEstado.setSelectedItem(prod.getEstado());
         tfNroPlano.setText(prod.getNumeroPlano());
         tfPrecioBase.setText(String.valueOf(prod.getPrecioBase())); 
