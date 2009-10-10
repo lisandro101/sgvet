@@ -5,6 +5,7 @@
 
 package sgvet.gestores;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,33 +28,32 @@ import javax.swing.table.TableModel;
 public class GestorDemanda {
 
     private Date fechaHoy;
-
+    private Date fechaCierre;
+    private double[] indices;
     private int ventasDelMesAbierto;
-//    private List <DetalleOrdenProduccion> detallesOrdenes;
     private static GestorDemanda instancia;
-//    private Date anioActual;
-    //private static final int DURACIONPERIODO =28;
-    
-    public synchronized static GestorDemanda getInstancia(){
-        if (instancia == null){
+
+    public synchronized static GestorDemanda getInstancia() {
+        if (instancia == null) {
             instancia = new GestorDemanda();
         }
-        return instancia;            
+        return instancia;
     }
-    private GestorDemanda(){
-        
+
+    private GestorDemanda() {
     }
 
     /**
      * @return the fechaHoy
      */
     public Date getFechaHoy() {
-        if(fechaHoy== null){
-            fechaHoy= new Date();
+        if (fechaHoy == null) {
+            fechaHoy = new Date();
         }
 
         return fechaHoy;
     }
+
 
     /**
      * @param fechaHoy the fechaHoy to set
@@ -61,9 +61,10 @@ public class GestorDemanda {
     public void setFechaHoy(Date fechaHoy) {
         this.fechaHoy = fechaHoy;
     }
-    public double calcularPM(List<Demanda> demandas){
-        int n=0;
-        double total=0.0;
+
+    public double calcularPM(List<Demanda> demandas) {
+        int n = 0;
+        double total = 0.0;
 //        for (Demanda demanda : demandas) {
 //            total += demanda.getDemandaReal();
 //            ++n;
@@ -74,29 +75,29 @@ public class GestorDemanda {
                 total += demandas.get(j).getDemandaReal();
                 ++n;
             }
-            demandas.get(i).setPM(total/n);
-            if(i != (demandas.size()-1)){
-                total=0;
-                n=0;
+            demandas.get(i).setPM(total / n);
+            if (i != (demandas.size() - 1)) {
+                total = 0;
+                n = 0;
             }
 
         }
-        return (total/n);
+        return (total / n);
     }
 
-    public double calcularPMP(List<Demanda> demandas){
-        double total=0.0;
+    public double calcularPMP(List<Demanda> demandas) {
+        double total = 0.0;
 //        for (Demanda demanda : demandas) {
 //            total += demanda.getDemandaReal()* demanda.getPonderacionPMP();
 //        }
         demandas.get(0).setPM(demandas.get(0).getDemandaReal());
         for (int i = 1; i < demandas.size(); i++) {
             for (int j = 1; j <= i; j++) {
-                total += demandas.get(j).getDemandaReal()* demandas.get(j).getPrediccionSES();
+                total += demandas.get(j).getDemandaReal() * demandas.get(j).getPrediccionSES();
             }
             demandas.get(i).setPMP(total);
-            if(i != (demandas.size()-1)){
-                total=0;
+            if (i != (demandas.size() - 1)) {
+                total = 0;
             }
 
         }
@@ -104,28 +105,28 @@ public class GestorDemanda {
 
         return total;
     }
-    
-    public double calcularPMSE(List<Demanda> demandas, double alfa){
-        double valorF=0;
-        double resultado=0;
-        int max= demandas.size()-1;
+
+    public double calcularPMSE(List<Demanda> demandas, double alfa) {
+        double valorF = 0;
+        double resultado = 0;
+        int max = demandas.size() - 1;
         demandas.get(0).setPMSE(demandas.get(0).getDemandaReal());
 
         for (int i = 1; i < demandas.size(); i++) {
-            valorF = demandas.get(i-1).getPMSE();
-            resultado = valorF + alfa*(demandas.get(i-1).getDemandaReal()-valorF);
+            valorF = demandas.get(i - 1).getPMSE();
+            resultado = valorF + alfa * (demandas.get(i - 1).getDemandaReal() - valorF);
             demandas.get(i).setPMSE(resultado);
 
         }
 
         valorF = demandas.get(max).getPMSE();
-        resultado = valorF + alfa*(demandas.get(max).getDemandaReal()-valorF);
+        resultado = valorF + alfa * (demandas.get(max).getDemandaReal() - valorF);
 
         return resultado;
     }
 
-    public boolean validarConstanteAlfa(double constante){
-        if(constante>=0 && constante<=1){
+    public boolean validarConstanteAlfa(double constante) {
+        if (constante >= 0 && constante <= 1) {
             return true;
         }
         return false;
@@ -142,319 +143,174 @@ public class GestorDemanda {
         return false;
     }
 
-    public double[] calcularErrores(List<Demanda> demandasHist,Demanda demandaPred, double demandaReal, PanelDemanda.Error error){
+    public double[] calcularErrores(List<Demanda> demandasHist, Demanda demandaPred, double demandaReal, PanelDemanda.Error error) {
         double[] errores = new double[3];
-        int n=0;
+        int n = 0;
 //        double resultado=0;
 
-        if(error == PanelDemanda.Error.ERROR_MEDIO){
-            errores[0]= Math.abs(demandaReal-demandaPred.getPM());
-            errores[1]= Math.abs(demandaReal-demandaPred.getPMP());
-            errores[2]= Math.abs(demandaReal-demandaPred.getPMSE());
-        }else if(error == PanelDemanda.Error.ERROR_MEDIO_ABSOLUTO){
+        if (error == PanelDemanda.Error.ERROR_MEDIO) {
+            errores[0] = Math.abs(demandaReal - demandaPred.getPM());
+            errores[1] = Math.abs(demandaReal - demandaPred.getPMP());
+            errores[2] = Math.abs(demandaReal - demandaPred.getPMSE());
+        } else if (error == PanelDemanda.Error.ERROR_MEDIO_ABSOLUTO) {
             for (Demanda dema : demandasHist) {
-                errores[0] += Math.abs(dema.getDemandaReal()-dema.getPM());
-                errores[1] += Math.abs(dema.getDemandaReal()-dema.getPMP());
-                errores[2] += Math.abs(dema.getDemandaReal()-dema.getPMSE());
+                errores[0] += Math.abs(dema.getDemandaReal() - dema.getPM());
+                errores[1] += Math.abs(dema.getDemandaReal() - dema.getPMP());
+                errores[2] += Math.abs(dema.getDemandaReal() - dema.getPMSE());
                 ++n;
             }
-            errores[0] = errores[0]/n;
-            errores[1] = errores[1]/n;
-            errores[2] = errores[2]/n;
+            errores[0] = errores[0] / n;
+            errores[1] = errores[1] / n;
+            errores[2] = errores[2] / n;
 
-        }else if(error == PanelDemanda.Error.ERROR_CUADRADO_MEDIO){
+        } else if (error == PanelDemanda.Error.ERROR_CUADRADO_MEDIO) {
             for (Demanda dema : demandasHist) {
-                errores[0] += Math.pow((dema.getDemandaReal()-dema.getPM()),2);
-                errores[1] += Math.pow((dema.getDemandaReal()-dema.getPMP()),2);
-                errores[2] += Math.pow((dema.getDemandaReal()-dema.getPMSE()),2);
+                errores[0] += Math.pow((dema.getDemandaReal() - dema.getPM()), 2);
+                errores[1] += Math.pow((dema.getDemandaReal() - dema.getPMP()), 2);
+                errores[2] += Math.pow((dema.getDemandaReal() - dema.getPMSE()), 2);
                 ++n;
             }
-            errores[0] = errores[0]/n;
-            errores[1] = errores[1]/n;
-            errores[2] = errores[2]/n;
-        }else{
+            errores[0] = errores[0] / n;
+            errores[1] = errores[1] / n;
+            errores[2] = errores[2] / n;
+        } else {
             for (Demanda dema : demandasHist) {
-                errores[0] += (Math.abs(dema.getDemandaReal()-dema.getPM()))/dema.getDemandaReal();
-                errores[1] += (Math.abs(dema.getDemandaReal()-dema.getPMP()))/dema.getDemandaReal();
-                errores[2] += (Math.abs(dema.getDemandaReal()-dema.getPMSE()))/dema.getDemandaReal();
+                errores[0] += (Math.abs(dema.getDemandaReal() - dema.getPM())) / dema.getDemandaReal();
+                errores[1] += (Math.abs(dema.getDemandaReal() - dema.getPMP())) / dema.getDemandaReal();
+                errores[2] += (Math.abs(dema.getDemandaReal() - dema.getPMSE())) / dema.getDemandaReal();
                 ++n;
             }
-            errores[0] = (errores[0]/n)*100;
-            errores[1] = (errores[1]/n)*100;
-            errores[2] = (errores[2]/n)*100;
+            errores[0] = (errores[0] / n) * 100;
+            errores[1] = (errores[1] / n) * 100;
+            errores[2] = (errores[2] / n) * 100;
         }
         return errores;
     }
 
-     //..................realiza el suavizamiento exponencial simple.................................
-    @Deprecated
-    public void suavizarES(double alfa, int periodo, int demandaActual){
-
-        double [] vectorXDemanda = null;
-        //busqueda de datos históricos o la última media en la base de datos según el periodo especificado....
-        double promActual = inicializarES(alfa,vectorXDemanda);
-        System.out.println("El promedio actual es: "+ promActual);
-       
-    }
-    @Deprecated
-    public void suavizarES(float alfa, double promDemanda, double demandaActual){
-        
-        double promActual=actualizarES((float) alfa,promDemanda,demandaActual);
-        System.out.println("El promedio actual es: "+ promActual);
-
-
-    }
-
-
-    //------------------------------------------------------------------------------------------------
-    @Deprecated
-    public double inicializarES(double alfa, double vectorXDemanda[]){
-        //Este método calcula el nuevo promedio de distintos valores de Xn para un mismo periodo............
-        double promActual = 0;
-        double promAnterior = 0;
-        for(int i=0;i<vectorXDemanda.length;i++){
-            promActual += alfa * vectorXDemanda[i] + (1-alfa) * promAnterior;
-            promAnterior = promActual;
-        }
-        return promActual;
-    }
-
-
-    //------------------------------------------------------------------------------------------------
-    @Deprecated
-    public double actualizarES(float alfa, double promDemanda, double demandaActual){
-        //este método calcula el nuevo promedio a partir del ultimo promedio
-        double promActual = alfa * demandaActual + (1-alfa) * promDemanda;
-        return promActual;
-    }
-
-    //------------------------------------------------------------------------------------------------
-   
-
     // Calcula el suavizamiento exponencial simple para un arreglo de demandas a predecir
     @Deprecated
-    public List<Demanda> calcularES(double alfa, List<Demanda> demandas){
-        int temp=0;
-        int demandaReal=0;
-        int demandaPre=0;
+    public List<Demanda> calcularES(double alfa, List<Demanda> demandas) {
+        int temp = 0;
+        int demandaReal = 0;
+        int demandaPre = 0;
         //demandas.get(0).setPrediccionSES(demandaEspActual);
         demandas.get(0).setPrediccionSES(demandas.get(0).getDemandaReal());
 
         for (int i = 1; i < demandas.size(); i++) {
-            if(demandas.get(i).getDemandaReal() != 0){
-                demandaReal= demandas.get(i).getDemandaReal();
+            if (demandas.get(i).getDemandaReal() != 0) {
+                demandaReal = demandas.get(i).getDemandaReal();
 
-            }else if(demandas.get(i).getDemandaReal() == 0){
+            } else if (demandas.get(i).getDemandaReal() == 0) {
                 ++temp;
             }
-            if(temp<=1){
-                demandaPre= (int) demandas.get(i - 1).getPrediccionSES();
+            if (temp <= 1) {
+                demandaPre = (int) demandas.get(i - 1).getPrediccionSES();
             }
 
-            demandas.get(i).setPrediccionSES((int)(alfa * demandaReal + (1 - alfa)
-                    * demandaPre));
+            demandas.get(i).setPrediccionSES((int) (alfa * demandaReal + (1 - alfa) * demandaPre));
         }
 
         return demandas;
     }
 
-    public int calcularESNew(double alfa, List<DemandaXPeriodo> ventas){
-        int temp=0;
-        int demandaReal=0;
-        int demandaPre=0;
-        if(ventas.size()>0){
+    public int calcularESNew(double alfa, List<DemandaXPeriodo> ventas) {
+        int temp = 0;
+        int demandaReal = 0;
+        int demandaPre = 0;
+        if (ventas.size() > 0) {
             ventas.get(0).setPrediccionVenta(ventas.get(0).getVentas());
 
             for (int i = 1; i < ventas.size(); i++) {
-                if(ventas.get(i).getVentas() != 0){
-                    demandaReal= ventas.get(i).getVentas();
-                }else if(ventas.get(i).getVentas() == 0){
+                if (ventas.get(i).getVentas() != 0) {
+                    demandaReal = ventas.get(i).getVentas();
+                } else if (ventas.get(i).getVentas() == 0) {
                     ++temp;
                 }
-                if(temp<=1){
-                    demandaPre= (int) ventas.get(i - 1).getPrediccionVenta();
+                if (temp <= 1) {
+                    demandaPre = (int) ventas.get(i - 1).getPrediccionVenta();
                 }
-                ventas.get(i).setPrediccionVenta((int)(alfa * demandaReal + (1 - alfa)
-                        * demandaPre));
+                ventas.get(i).setPrediccionVenta((int) (alfa * demandaReal + (1 - alfa) * demandaPre));
             }
-            temp= ventas.get(ventas.size()-1).getPrediccionVenta();
+            temp = ventas.get(ventas.size() - 1).getPrediccionVenta();
         }
 
         return temp;
     }
 
-    @Deprecated
-    public List<Integer> calcularDemandaConEstacionalidad(TableModel tModel, double alfa, double gamma, List<DemandaXPeriodo> vendido){
+    public List<Integer> calcularDemandaConEstacionalidad(double alfa, double gamma, List<DemandaXPeriodo> vendido) {
 
-        tModel= convertirListATableModel(vendido);
+        DefaultTableModel tModel = convertirListATableModel(vendido);
         List<Integer> predicciones = new ArrayList<Integer>();
+        //mostrarTableModel(tModel);
 
         double indiceEsta1[] = new double[tModel.getRowCount()];
         double demanPromedio1[] = new double[tModel.getRowCount()];
         double indiceEsta2[] = new double[tModel.getRowCount()];
         double demanPromedio2[] = new double[tModel.getRowCount()];
-        int totaldemanPromedio1=0;
-        double temp=0;
-        double ultimoReal=0;
+        int totaldemanPromedio1 = 0;
+        double temp = 0;
+        double ultimoReal = 0;
 
 
         for (int i = 0; i < tModel.getRowCount(); i++) {
-            for (int j = 1; j < tModel.getColumnCount()-1; j++) {
+            for (int j = 1; j < tModel.getColumnCount() - 1; j++) {
                 demanPromedio1[i] += Double.parseDouble(tModel.getValueAt(i, j).toString());
             }
-            demanPromedio1[i]= demanPromedio1[i]/ (tModel.getColumnCount()-2);
+            demanPromedio1[i] = demanPromedio1[i] / (tModel.getColumnCount() - 2);
 
             totaldemanPromedio1 += demanPromedio1[i];    //tipos incompatibles
         }
-        totaldemanPromedio1 = totaldemanPromedio1/tModel.getRowCount();
+        totaldemanPromedio1 = totaldemanPromedio1 / tModel.getRowCount();
 
         for (int i = 0; i < tModel.getRowCount(); i++) {
-            indiceEsta1[i]=demanPromedio1[i]/totaldemanPromedio1;
+            indiceEsta1[i] = demanPromedio1[i] / totaldemanPromedio1;
         }
 
+        Integer cero = new Integer(0);
         for (int i = 0; i < tModel.getRowCount(); i++) {
-            if(tModel.getValueAt(i,tModel.getColumnCount()-1 ) != null){
+            if (tModel.getValueAt(i, tModel.getColumnCount() - 1) != null && !tModel.getValueAt(i, tModel.getColumnCount() - 1).equals(cero)) {
 
-                temp = Double.parseDouble(tModel.getValueAt(i,tModel.getColumnCount()-1).toString());
-                ultimoReal= temp/indiceEsta1[i]*alfa+ (1-alfa)*demanPromedio1[i];
-                demanPromedio2[i]= ultimoReal;
-            }else{
+                temp = Double.parseDouble(tModel.getValueAt(i, tModel.getColumnCount() - 1).toString());
+                ultimoReal = temp / indiceEsta1[i] * alfa + (1 - alfa) * demanPromedio1[i];
+                demanPromedio2[i] = ultimoReal;
+            } else {
 
-                demanPromedio2[i]= ultimoReal* indiceEsta1[i];
-                tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
+                demanPromedio2[i] = ultimoReal * indiceEsta1[i];
+                tModel.setValueAt((int) demanPromedio2[i], i, tModel.getColumnCount() - 1);
 
-                predicciones.add((int)demanPromedio2[i]);
+
+                predicciones.add((int) demanPromedio2[i]);
             }
         }
+        indices = indiceEsta1;
+
         return predicciones;
     }
 
     //supone que las fechas de las ventas estan ordenadas ascendentemente
-    private int calcularCantAniosDeVentas(List<DemandaXPeriodo> ventas){
-        int resul=0;
-        Date anioTemp= ventas.get(0).getAnio();
-        if(ventas.size()>0){
-            for (DemandaXPeriodo demandaXPeriodo : ventas) {
-                if(!isFechaDelAnio(demandaXPeriodo.getAnio(), anioTemp)){
-                    ++resul;
-                }
+    private int calcularCantAniosDeVentas(List<DemandaXPeriodo> ventas) {
+        int resul = 0;
+        int periodo = 0;
+        Date primerAnio; //= primerDiaDelAnio(ventas.get(0).getAnio());
+        Date ultimoAnio;
+
+        if (ventas.size() > 0) {
+            primerAnio = primerDiaDelAnio(ventas.get(0).getAnio());
+            ultimoAnio = primerDiaDelAnio(ventas.get(ventas.size() - 1).getAnio());
+
+            while (primerAnio.compareTo(ultimoAnio) < 0) {
+                primerAnio = primerDiaDelAnio(ventas.get(periodo).getAnio());
+                periodo += 13;
+                ++resul;
             }
+
         }
-
-
         return resul;
 
     }
 
-    public void calcularDemandaConEstacionalidadTemporal(List<DemandaXPeriodo> ventas, double alfa, double gamma) {
-
-        int cantPeriodos;
-        int cantAnios;
-        int cantAniosCompletos;
-        DemandaXPeriodo demandaPeriodo = null;
-
-        cantAnios = calcularCantAniosDeVentas(ventas);
-        cantPeriodos = 13;
-        List<DemandaXPeriodo> demandaPromedioXEstacionAnteriores = new ArrayList<DemandaXPeriodo>(cantPeriodos);
-        List<DemandaXPeriodo> indicesEstacionalidad = new ArrayList<DemandaXPeriodo>(cantPeriodos);
-
-
-        double indiceEsta1[] = new double[cantPeriodos];
-        double demanPromedio1[] = new double[cantPeriodos];
-        double indiceEsta2[] = new double[cantPeriodos];
-        double demanPromedio2[] = new double[cantPeriodos];
-        int totaldemanPromedio = 0;
-        int nroPeriodoRelativo = 0;
-        double ultimoReal = 0;
-        int contador = 0;
-        double promedioEstaciones;
-
-        
-
-        if(isFechaDelAnio(fechaHoy, ventas.get(ventas.size()-1).getAnio())){
-            cantAniosCompletos = cantAnios-1;
-        }else{
-            cantAniosCompletos = cantAnios;
-        }
-
-        for (DemandaXPeriodo demanda : ventas) {
-            if (!isFechaDelAnio(demanda.getAnio(), fechaHoy)) {
-                if (nroPeriodoRelativo == 13) {
-                    nroPeriodoRelativo = 0;
-
-                    if (contador < 13) {
-                        demandaPeriodo = new DemandaXPeriodo();
-                        //demandaPeriodo.setAnio(demanda.getAnio());
-                        demandaPeriodo.setNroPeriodo(demanda.getNroPeriodo());
-                        demandaPeriodo.setVentas(demanda.getVentas());
-                        demandaPromedioXEstacionAnteriores.set(nroPeriodoRelativo, demandaPeriodo);
-
-                        ++contador;
-                    } else {
-
-                        demandaPeriodo = demandaPromedioXEstacionAnteriores.get(nroPeriodoRelativo);
-
-                        totaldemanPromedio = demandaPeriodo.getVentas() + demanda.getVentas();
-                        demandaPeriodo.setVentas(totaldemanPromedio);
-
-                        demandaPromedioXEstacionAnteriores.set(nroPeriodoRelativo, demandaPeriodo);
-
-                    }
-                    ++nroPeriodoRelativo;
-
-                }
-            }
-        }
-
-        //divide la suma de las ventas de las distintas estaciones por la cantidad de años cerrados
-        DemandaXPeriodo dema;
-        for (int i = 0; i < cantPeriodos; i++) {
-            promedioEstaciones = demandaPromedioXEstacionAnteriores.get(i).getVentas() / cantAniosCompletos;
-            dema=demandaPromedioXEstacionAnteriores.get(i);
-            dema.setVentas(truncar(promedioEstaciones));
-            demandaPromedioXEstacionAnteriores.set(i, dema);
-        }
-
-        // calcula el indice de estacionalidad
-        totaldemanPromedio = calcularAcumulado(demandaPromedioXEstacionAnteriores) / cantPeriodos;
-        for (int i = 0; i < cantPeriodos; i++) {
-            dema= demandaPromedioXEstacionAnteriores.get(i);
-            dema.setVentas(truncar(dema.getVentas()/totaldemanPromedio));
-            indicesEstacionalidad.set(i, dema);
-        }
-
-//        for (int i = 0; i < cantPeriodos; i++) {
-//            for (int j = 1; j < cantAnios; j++) {
-//                demanPromedio1[i] += ventas.get(i)Double.parseDouble(tModel.getValueAt(i, j).toString());
-//            }
-//            demanPromedio1[i]= demanPromedio1[i]/ (tModel.getColumnCount()-2);
-//
-//            totaldemanPromedio1 += demanPromedio1[i];    //tipos incompatibles
-//        }
-//        totaldemanPromedio1 = totaldemanPromedio1/tModel.getRowCount();
-//
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            indiceEsta1[i]=demanPromedio1[i]/totaldemanPromedio1;
-//        }
-//
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            if(tModel.getValueAt(i,tModel.getColumnCount()-1 ) != null){
-//
-//                temp = Double.parseDouble(tModel.getValueAt(i,tModel.getColumnCount()-1).toString());
-//                ultimoReal= temp/indiceEsta1[i]*alfa+ (1-alfa)*demanPromedio1[i];
-//                demanPromedio2[i]= ultimoReal;
-//            }else{
-//
-//                demanPromedio2[i]= ultimoReal* indiceEsta1[i];
-//                tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
-//
-//            }
-//        }
-
-    }
-
-
-    public double calcularDemandaConEstacionalidadNew(List<DemandaXPeriodo> ventas, double alfa, double gamma){
+    @Deprecated
+    public double calcularDemandaConEstacionalidadNew(List<DemandaXPeriodo> ventas, double alfa, double gamma) {
 //        double indiceEsta1[] = new double[tModel.getRowCount()];
 //        double demanPromedio1[] = new double[tModel.getRowCount()];
 //        double indiceEsta2[] = new double[tModel.getRowCount()];
@@ -463,21 +319,21 @@ public class GestorDemanda {
 //
 //        double ultimoReal=0;
 
-        double temp=0;
+        double temp = 0;
         double estimacionAnt;
         double indiceAnt;
-        List <Double> indiceEsta = new ArrayList<Double>(12);
-        List <Double> estimacion = new ArrayList<Double>();
-        int estacion=0;
+        List<Double> indiceEsta = new ArrayList<Double>(12);
+        List<Double> estimacion = new ArrayList<Double>();
+        int estacion = 0;
         int ventaAcumulada = calcularAcumulado(ventas);
 
         for (DemandaXPeriodo demandaXPeriodo : ventas) {
-            if(estacion == 12){
-                    estacion=0;
+            if (estacion == 12) {
+                estacion = 0;
             }
-            if(ventaAcumulada != 0){
-                indiceEsta.set(estacion, Double.valueOf(demandaXPeriodo.getVentas()/ventaAcumulada)); //revisar esta linea
-            }else{
+            if (ventaAcumulada != 0) {
+                indiceEsta.set(estacion, Double.valueOf(demandaXPeriodo.getVentas() / ventaAcumulada)); //revisar esta linea
+            } else {
                 System.out.println("\n ---------------------------------------------");
                 System.out.println("\n El valor de las ventas acumuladas es cero");
                 System.out.println("\n ---------------------------------------------");
@@ -487,63 +343,30 @@ public class GestorDemanda {
 
 
 
-        estacion=0;
+        estacion = 0;
         for (int i = 0; i < ventas.size(); i++) {
-            if(i==0){
-                indiceAnt=1;
-                estimacionAnt=ventas.get(0).getVentas();
-            }else{
-                if(estacion == 12){
-                    estacion=0;
+            if (i == 0) {
+                indiceAnt = 1;
+                estimacionAnt = ventas.get(0).getVentas();
+            } else {
+                if (estacion == 12) {
+                    estacion = 0;
                 }
-                indiceAnt= indiceEsta.get(estacion);
+                indiceAnt = indiceEsta.get(estacion);
                 ++estacion;
 
-                estimacionAnt= estimacion.get(i-1);
+                estimacionAnt = estimacion.get(i - 1);
             }
-            temp = alfa*ventas.get(i).getVentas() + (1-alfa)*(estimacionAnt+indiceAnt);
-            estimacion.set(i,temp );
- //           temp= beta *(ventas.get(i).getVentas()-estimacionAnt)+(1-beta)*indiceAnt;
-  //          indice.set(i, temp);
+            temp = alfa * ventas.get(i).getVentas() + (1 - alfa) * (estimacionAnt + indiceAnt);
+            estimacion.set(i, temp);
+
         }
 
-   //     temp= estimacion.get(estimacion.size()-1) + indice.get(indice.size()-1);
         return temp;
-
-
-//
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            for (int j = 1; j < tModel.getColumnCount()-1; j++) {
-//                demanPromedio1[i] += Double.parseDouble(tModel.getValueAt(i, j).toString());
-//            }
-//            demanPromedio1[i]= demanPromedio1[i]/ (tModel.getColumnCount()-2);
-//
-//            totaldemanPromedio1 += demanPromedio1[i];    //tipos incompatibles
-//        }
-//        totaldemanPromedio1 = totaldemanPromedio1/tModel.getRowCount();
-//
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            indiceEsta1[i]=demanPromedio1[i]/totaldemanPromedio1;
-//        }
-//
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            if(tModel.getValueAt(i,tModel.getColumnCount()-1 ) != null){
-//
-//                temp = Double.parseDouble(tModel.getValueAt(i,tModel.getColumnCount()-1).toString());
-//                ultimoReal= temp/indiceEsta1[i]*alfa+ (1-alfa)*demanPromedio1[i];
-//                demanPromedio2[i]= ultimoReal;
-//            }else{
-//
-//                demanPromedio2[i]= ultimoReal* indiceEsta1[i];
-//                tModel.setValueAt((int)demanPromedio2[i] , i, tModel.getColumnCount()-1);
-//
-//            }
-//        }
-
     }
 
     @Deprecated
-    public void calcularDemandaConTendencia(TableModel tModel, double alfa, double beta){
+    public void calcularDemandaConTendencia(TableModel tModel, double alfa, double beta) {
         double indiceTend1[] = new double[tModel.getRowCount()];
         double indiceTend2[] = new double[tModel.getRowCount()];
         double demanPromedio1[] = new double[tModel.getRowCount()];
@@ -552,317 +375,339 @@ public class GestorDemanda {
 
         //inicializar tendencia en cero y la demanda promedio en con la demanda real actual
         for (int i = 0; i < tModel.getRowCount(); i++) {
-            indiceTend1[i]=0;
-            demanPromedio1[i]=Double.parseDouble(tModel.getValueAt(i,1).toString());
+            indiceTend1[i] = 0;
+            demanPromedio1[i] = Double.parseDouble(tModel.getValueAt(i, 1).toString());
         }
 
-        for (int j = 1; j < tModel.getColumnCount()-1; j++) {
+        for (int j = 1; j < tModel.getColumnCount() - 1; j++) {
             for (int i = 0; i < tModel.getRowCount(); i++) {
 
-                if(tModel.getValueAt(i,j ) != null){
-                    demanPromedio2[i]= (alfa*Double.parseDouble(tModel.getValueAt(i,j).toString())+(1-alfa)*(demanPromedio1[i] + indiceTend2[i]));
-                    indiceTend2[i]= beta *(demanPromedio2[i]- demanPromedio1[i])+(1-beta)*indiceTend1[i];
+                if (tModel.getValueAt(i, j) != null) {
+                    demanPromedio2[i] = (alfa * Double.parseDouble(tModel.getValueAt(i, j).toString()) + (1 - alfa) * (demanPromedio1[i] + indiceTend2[i]));
+                    indiceTend2[i] = beta * (demanPromedio2[i] - demanPromedio1[i]) + (1 - beta) * indiceTend1[i];
 
-                }else{
-
+                } else {
                 }
             }
             for (int s = 0; s < tModel.getRowCount(); s++) {
-                temp= demanPromedio2[s]+indiceTend2[s];
-                tModel.setValueAt((int)temp, s, j+1);
-                
-                indiceTend1[s]=indiceTend2[s];
-                demanPromedio1[s]= demanPromedio2[s];
+                temp = demanPromedio2[s] + indiceTend2[s];
+                tModel.setValueAt((int) temp, s, j + 1);
+
+                indiceTend1[s] = indiceTend2[s];
+                demanPromedio1[s] = demanPromedio2[s];
             }
-            
+
         }
     }
-        // TableModel tModel
-        public double calcularDemandaConTendenciaNew(List<DemandaXPeriodo> ventas, double alfa, double beta){
+    // TableModel tModel
+
+    public double calcularDemandaConTendenciaNew(List<DemandaXPeriodo> ventas, double alfa, double beta) {
 
         double estimacionAnt;
         double indiceAnt;
         double temp;
-        List <Double> indice = new ArrayList<Double>();
-        List <Double> estimacion = new ArrayList<Double>();
+        List<Double> indice = new ArrayList<Double>();
+        List<Double> estimacion = new ArrayList<Double>();
 
 //        indice.add(0.0);
 
         for (int i = 0; i < ventas.size(); i++) {
-            if(i==0){
-                indiceAnt=0;
-                estimacionAnt=ventas.get(0).getVentas();
-            }else{
-                indiceAnt= indice.get(i-1);
-                estimacionAnt= estimacion.get(i-1);
+            if (i == 0) {
+                indiceAnt = 0;
+                estimacionAnt = ventas.get(0).getVentas();
+            } else {
+                indiceAnt = indice.get(i - 1);
+                estimacionAnt = estimacion.get(i - 1);
             }
-            temp = alfa*ventas.get(i).getVentas() + (1-alfa)*(estimacionAnt+indiceAnt);
-            estimacion.set(i,temp );
-            temp= beta *(ventas.get(i).getVentas()-estimacionAnt)+(1-beta)*indiceAnt;
+            temp = alfa * ventas.get(i).getVentas() + (1 - alfa) * (estimacionAnt + indiceAnt);
+            estimacion.set(i, temp);
+            temp = beta * (ventas.get(i).getVentas() - estimacionAnt) + (1 - beta) * indiceAnt;
             indice.set(i, temp);
         }
 
-        temp= estimacion.get(estimacion.size()-1) + indice.get(indice.size()-1);
+        temp = estimacion.get(estimacion.size() - 1) + indice.get(indice.size() - 1);
         return temp;
     }
-//    @Deprecated
-//    public int CalcularDemandaAcumulada(ProductoComponente producto){
-//        int total=0;
-//
-//        buscarDetalles(producto);
-//        for (DetalleOrdenProduccion detalleOrdenProduccion : detallesOrdenes) {
-//            total+= detalleOrdenProduccion.getCantidad();
-//        }
-//
-//        return total;
-//    }
 
-    public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto){
-        List <DetalleOrdenProduccion> detallesOrdenes;
-        int total=0;
-        List<DemandaXPeriodo> demandasXPeriodo = getPeriodosDelAnio(getFechaHoy());
+    public List<DemandaXPeriodo> CalcularDemandaXPeriodo(ProductoComponente producto) {
+        List<DetalleOrdenProduccion> detallesOrdenes;
+        int total = 0;
+        List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();//getPeriodosDelAnio(getFechaHoy());
+
+        int cantVendida;
         Date fechaIni;
-        int primerIndice=0;
-        int indiceNroPeriodoActual=0;
+        Date fechaFin;
+        int periodoIni;
+        DemandaXPeriodo ventaDelPeriodo;
+
+        int primerIndice = 0;
+        int indiceNroPeriodoActual = 0;
 
         // los detalles de las oredenes se encuentran ordenados por fecha ascendente
         detallesOrdenes = buscarDetalles(producto);
 
-        if(detallesOrdenes.size()>0){
+
+
+        if (detallesOrdenes.size() > 0) {
+
+            periodoIni = aQuePeriodoCorrespondeLaFecha(detallesOrdenes.get(0).getVenta().getFecha());
+            fechaIni = calcularLimiteInferiorDelPeriodo(periodoIni, detallesOrdenes.get(0).getVenta().getFecha());
+            fechaFin = calcularLimiteSuperiorDelPeriodo(periodoIni, detallesOrdenes.get(0).getVenta().getFecha());
+            cantVendida = 0;//detallesOrdenes.get(0).getCantidad();
+
+            ventaDelPeriodo = new DemandaXPeriodo(periodoIni, fechaIni, fechaIni, fechaFin, cantVendida, false);
+
             for (DetalleOrdenProduccion detallete : detallesOrdenes) {
 
-                    indiceNroPeriodoActual= aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha())-1;
-                    total = detallete.getCantidad()+ demandasXPeriodo.get(indiceNroPeriodoActual).getVentas();
+                if (isFechaDelAnio(fechaFin, detallete.getVenta().getFecha())) { // si son del mismo año
+                    if (isFechaDelPeriodo(detallete.getVenta().getFecha(), ventaDelPeriodo)) { // si son del mismo periodo
+                        sumarVentaAlPeriodo(detallete.getCantidad(), ventaDelPeriodo);
+                    } else {
+                        ventaDelPeriodo.setCerrado(true);
+                        demandasXPeriodo.add(ventaDelPeriodo);
 
-                demandasXPeriodo.get(indiceNroPeriodoActual).setVentas(total);
+                        periodoIni = aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha());
+                        fechaIni = calcularLimiteInferiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                        fechaFin = calcularLimiteSuperiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                        cantVendida = detallete.getCantidad();
 
-                if(indiceNroPeriodoActual>0 && primerIndice==0){
-                    primerIndice=indiceNroPeriodoActual;
+                        ventaDelPeriodo = new DemandaXPeriodo(periodoIni, fechaIni, fechaIni, fechaFin, cantVendida, false);
+
+                    }
+                } else {
+                    ventaDelPeriodo.setCerrado(true);
+                    demandasXPeriodo.add(ventaDelPeriodo);
+
+                    periodoIni = aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha());
+                    fechaIni = calcularLimiteInferiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                    fechaFin = calcularLimiteSuperiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                    cantVendida = detallete.getCantidad();
+
+                    ventaDelPeriodo = new DemandaXPeriodo(periodoIni, fechaIni, fechaIni, fechaFin, cantVendida, false);
                 }
 
-
             }
+            ventaDelPeriodo.setCerrado(true);
 
-         }
-         for (int i = primerIndice; i <= indiceNroPeriodoActual; i++) {
-            demandasXPeriodo.get(i).setCerrado(true);
-            
+            demandasXPeriodo.add(ventaDelPeriodo);
+
         }
+
         abrirPeriodoActualSiNoEstaFinalizado(demandasXPeriodo);
         validarPeriodoNulos(demandasXPeriodo);
 
         return demandasXPeriodo;
     }
 
+    private void sumarVentaAlPeriodo(int venta, DemandaXPeriodo periodo) {
+        int temp = venta;
+        temp += periodo.getVentas();
+        periodo.setVentas(temp);
+
+    }
+
     @Deprecated
-    private Date primerDia(Date fecha){
+    private Date primerDia(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), 1);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1);
         return cal.getTime();
     }
 
     @Deprecated
-    private Date ultimoDia(Date fecha){
+    private Date ultimoDia(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH), 28);
+        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 28);
         return cal.getTime();
     }
 
-    private boolean diaValidoDelMes(Date fecha){
-        boolean resul=false;
-        if(fecha.compareTo(primerDia(fecha))>=0 && fecha.compareTo(ultimoDia(fecha))<=0 ){
-            resul=true;
+    private boolean diaValidoDelMes(Date fecha) {
+        boolean resul = false;
+        if (fecha.compareTo(primerDia(fecha)) >= 0 && fecha.compareTo(ultimoDia(fecha)) <= 0) {
+            resul = true;
         }
         return resul;
     }
 
-    private boolean sonDelMismoMes(Date fechaA, Date fechaB){
-        boolean resul=false;
-        if(fechaA.compareTo(primerDia(fechaB))>=0 && fechaA.compareTo(ultimoDia(fechaB))<=0 ){
-            resul=true;
+    private boolean sonDelMismoMes(Date fechaA, Date fechaB) {
+        boolean resul = false;
+        if (fechaA.compareTo(primerDia(fechaB)) >= 0 && fechaA.compareTo(ultimoDia(fechaB)) <= 0) {
+            resul = true;
         }
         return resul;
     }
 
-
-    private List <DetalleOrdenProduccion> buscarDetalles(ProductoComponente prod){
-        List <DetalleOrdenProduccion> detallesOrdenes;
-        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false" );
-        consulta.setParameter("nombre",prod );
+    private List<DetalleOrdenProduccion> buscarDetalles(ProductoComponente prod) {
+        List<DetalleOrdenProduccion> detallesOrdenes;
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from DetalleOrdenProduccion a where a.producto= :nombre and a.borrado=false");
+        consulta.setParameter("nombre", prod);
         detallesOrdenes = FachadaPersistencia.getInstancia().buscar(DetalleOrdenProduccion.class, consulta);
 
-        if(detallesOrdenes.size()>0){
-            System.out.println("\n Cant detalles de produccion encontrados:"+detallesOrdenes.size()+"\n");
+        if (detallesOrdenes.size() > 0) {
+            System.out.println("\n Cant detalles de produccion encontrados:" + detallesOrdenes.size() + "\n");
         }
 
         return ordenarDetallesXFecha(detallesOrdenes);
     }
 
-
-    private List <DetalleOrdenProduccion> ordenarDetallesXFecha(List <DetalleOrdenProduccion> detallesOrdenes){
-        List <DetalleOrdenProduccion> detallesTemp = new ArrayList<DetalleOrdenProduccion>();
+    private List<DetalleOrdenProduccion> ordenarDetallesXFecha(List<DetalleOrdenProduccion> detallesOrdenes) {
+        List<DetalleOrdenProduccion> detallesTemp = new ArrayList<DetalleOrdenProduccion>();
         Date fecha1;
 
-        DetalleOrdenProduccion detalleTemp=null;
+        DetalleOrdenProduccion detalleTemp = null;
 
-        int cantElem= detallesOrdenes.size();
+        int cantElem = detallesOrdenes.size();
 
         for (int i = 0; i < cantElem; i++) {
-            fecha1=detallesOrdenes.get(0).getVenta().getFecha();
+            fecha1 = detallesOrdenes.get(0).getVenta().getFecha();
             for (DetalleOrdenProduccion detallete : detallesOrdenes) {
-                if(detallete.getVenta().getFecha().compareTo(fecha1)<=0){
-                    fecha1=detallete.getVenta().getFecha();
-                    detalleTemp=detallete;
+                if (detallete.getVenta().getFecha().compareTo(fecha1) <= 0) {
+                    fecha1 = detallete.getVenta().getFecha();
+                    detalleTemp = detallete;
                 }
             }
             detallesTemp.add(detalleTemp);
             detallesOrdenes.remove(detalleTemp);
-            
-        }
-        detallesOrdenes=detallesTemp;
 
-        
+        }
+        detallesOrdenes = detallesTemp;
+
+
 
         return detallesOrdenes;
     }
 
-    private List <DemandaXPeriodo> abrirPeriodoActualSiNoEstaFinalizado(List <DemandaXPeriodo> ventas){
-        int indiceNroPeridoHoy = aQuePeriodoCorrespondeLaFecha(getFechaHoy())-1;
-        ventasDelMesAbierto=0;
+    private List<DemandaXPeriodo> abrirPeriodoActualSiNoEstaFinalizado(List<DemandaXPeriodo> ventas) {
+        int indice = ventas.size() - 1;
+        DemandaXPeriodo demandete = ventas.get(indice);
 
-        ventasDelMesAbierto = ventas.get(indiceNroPeridoHoy).getVentas();
-        ventas.get(indiceNroPeridoHoy).setCerrado(false);
-//        if(detalles.size()>0){
-//            if(diaValidoDelMes(getFechaHoy())){
-//                if(sonDelMismoMes(getFechaHoy(), detalles.get(detalles.size()-1).getVenta().getFecha())){
-//                    ventas.remove(ventas.size()-1);
-//                }
-//            }
-//        }
-//
+        if (isFechaDelPeriodo(getFechaHoy(), demandete)) {
+            ventas.get(indice).setCerrado(false);
+            ventasDelMesAbierto= ventas.get(indice).getVentas();
+            fechaCierre = ventas.get(indice).getFechaFin();
+        }       
 
         return ventas;
     }
 
-    public int calcularAcumulado( List<DemandaXPeriodo> ventas){
-        int resul=0;
+    public int calcularAcumulado(List<DemandaXPeriodo> ventas) {
+        int resul = 0;
         for (DemandaXPeriodo demandaXPeriodo : ventas) {
-            if(demandaXPeriodo.isCerrado()){
+            if (demandaXPeriodo.isCerrado()) {
                 resul += demandaXPeriodo.getVentas();
             }
         }
         return resul;
     }
 
-     public void mostrarXPantalla(List<DemandaXPeriodo> demandas){
-         String estado;
-         if(demandas != null){
+    public void mostrarXPantalla(List<DemandaXPeriodo> demandas) {
+        String estado;
+        if (demandas != null) {
             for (DemandaXPeriodo demandaXPeriodo : demandas) {
-                if(demandaXPeriodo.isCerrado()){
-                    estado= "Cerrado";
-                }else{
-                    estado= "Abierto";
+                if (demandaXPeriodo.isCerrado()) {
+                    estado = "Cerrado";
+                } else {
+                    estado = "Abierto";
                 }
 
                 System.out.println("\n--------------------------------------------------------------");
-                System.out.println("\n NRO PERIODO: "+demandaXPeriodo.getNroPeriodo());
-                System.out.println("\n Fecha Inicio: "+ demandaXPeriodo.getFechaInicio());
-                System.out.println("\n Fecha Fin: "+ demandaXPeriodo.getFechaFin());               
-                System.out.println("\n Total venta del Periodo: "+ demandaXPeriodo.getVentas());
-                System.out.println("\n Estado : "+ estado);
+                System.out.println("\n NRO PERIODO: " + demandaXPeriodo.getNroPeriodo());
+                System.out.println("\n Fecha Inicio: " + demandaXPeriodo.getFechaInicio());
+                System.out.println("\n Fecha Fin: " + demandaXPeriodo.getFechaFin());
+                System.out.println("\n Total venta del Periodo: " + demandaXPeriodo.getVentas());
+                System.out.println("\n Estado : " + estado);
 
             }
-        }else{
+        } else {
             System.out.println("\n No se registraron ventas del producto seleccionado\n");
         }
         System.out.println("\n--------------------------------------------------------------");
-        System.out.println("\n Ventas del periodo abierto: "+ ventasDelMesAbierto);
+        System.out.println("\n Ventas del periodo abierto: " + ventasDelMesAbierto);
         System.out.println("\n--------------------------------------------------------------");
 
     }
 
-     private int truncar(double valor){
-         int resul;
-         resul= Math.round((float)valor);
-         return resul;
-     }
+    private int truncar(double valor) {
+        int resul;
+        resul = Math.round((float) valor);
+        return resul;
+    }
 
-     private boolean estaCerradoElPeriodo(DemandaXPeriodo venta){
-         if(venta.isCerrado()){
-             return true;
-         }else{
-             return false;
-         }
-     }
+    private boolean estaCerradoElPeriodo(DemandaXPeriodo venta) {
+        if (venta.isCerrado()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-     private List<DemandaXPeriodo> getPeriodosDelAnio(Date anio){
-         List<DemandaXPeriodo> periodos = new ArrayList<DemandaXPeriodo>(13);
-         DemandaXPeriodo ventaMensual;
+    private List<DemandaXPeriodo> getPeriodosDelAnio(Date anio) {
+        List<DemandaXPeriodo> periodos = new ArrayList<DemandaXPeriodo>(13);
+        DemandaXPeriodo ventaMensual;
 
-         for (int i = 1; i <= 13; i++) { // arma la List de los 13 periodos en que dividimos el año
-            ventaMensual= new DemandaXPeriodo();
+        for (int i = 1; i <= 13; i++) { // arma la List de los 13 periodos en que dividimos el año
+            ventaMensual = new DemandaXPeriodo();
             ventaMensual.setAnio(anio);
             ventaMensual.setNroPeriodo(i);
             ventaMensual.setFechaInicio(calcularLimiteInferiorDelPeriodo(i, anio));
             ventaMensual.setFechaFin(calcularLimiteSuperiorDelPeriodo(i, anio));
 //            ventaMensual.setCerrado(false);
             periodos.add(ventaMensual);
-         }
+        }
 
-         return periodos;
-     }
+        return periodos;
+    }
 
-     private Date calcularLimiteInferiorDelPeriodo(int nroPeriodo, Date anio){
-         Date fecha;
-         fecha= primerDiaDelAnio(anio);
+    private Date calcularLimiteInferiorDelPeriodo(int nroPeriodo, Date anio) {
+        Date fecha;
+        fecha = primerDiaDelAnio(anio);
 
-         switch(nroPeriodo) {
+        switch (nroPeriodo) {
             case 1:
                 break;
             case 2:
-                fecha= sumarDiasALaFecha(fecha, 28);
+                fecha = sumarDiasALaFecha(fecha, 28);
                 break;
             case 3:
-                fecha= sumarDiasALaFecha(fecha, 56);
+                fecha = sumarDiasALaFecha(fecha, 56);
                 break;
             case 4:
-                fecha= sumarDiasALaFecha(fecha, 84);
+                fecha = sumarDiasALaFecha(fecha, 84);
                 break;
             case 5:
-                fecha= sumarDiasALaFecha(fecha, 112);
+                fecha = sumarDiasALaFecha(fecha, 112);
                 break;
             case 6:
-                fecha= sumarDiasALaFecha(fecha, 140);
+                fecha = sumarDiasALaFecha(fecha, 140);
                 break;
             case 7:
-                fecha= sumarDiasALaFecha(fecha, 168);
+                fecha = sumarDiasALaFecha(fecha, 168);
                 break;
             case 8:
-                fecha= sumarDiasALaFecha(fecha, 196);
+                fecha = sumarDiasALaFecha(fecha, 196);
                 break;
             case 9:
-                fecha= sumarDiasALaFecha(fecha, 224);
+                fecha = sumarDiasALaFecha(fecha, 224);
                 break;
             case 10:
-                fecha= sumarDiasALaFecha(fecha, 252);
+                fecha = sumarDiasALaFecha(fecha, 252);
                 break;
             case 11:
-                fecha= sumarDiasALaFecha(fecha, 280);
+                fecha = sumarDiasALaFecha(fecha, 280);
                 break;
             case 12:
-                fecha= sumarDiasALaFecha(fecha, 308);
+                fecha = sumarDiasALaFecha(fecha, 308);
                 break;
             case 13:
-                fecha= sumarDiasALaFecha(fecha, 336);
+                fecha = sumarDiasALaFecha(fecha, 336);
                 break;
             default:
                 System.out.println("\n\n\n El valor de periodo no esta entre 1 y 13 \n\n\n");
         }
 
-         return fecha;
-     }
+        return fecha;
+    }
 
     private Date calcularLimiteSuperiorDelPeriodo(int nroPeriodo, Date anio) {
         Date fecha;
@@ -914,61 +759,62 @@ public class GestorDemanda {
         return fecha;
     }
 
-     public Date sumarDiasALaFecha(Date fecha, int cantDias){
-         Calendar cal = Calendar.getInstance();
-         cal.setTime(fecha);
-         cal.add(Calendar.DAY_OF_YEAR, cantDias);
-         return cal.getTime();
-     }
-     public Date primerDiaDelAnio(Date fecha){
+    public Date sumarDiasALaFecha(Date fecha, int cantDias) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY, 1);
+        cal.add(Calendar.DAY_OF_YEAR, cantDias);
         return cal.getTime();
     }
 
-    public Date ultimoDiaDelPrimerMesDelAnio(Date fecha){
+    public Date primerDiaDelAnio(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY, 28);
+        cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 1);
         return cal.getTime();
     }
 
-    private DemandaXPeriodo cerrarPeriodo(DemandaXPeriodo venta){
+    public Date ultimoDiaDelPrimerMesDelAnio(Date fecha) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 28);
+        return cal.getTime();
+    }
+
+    private DemandaXPeriodo cerrarPeriodo(DemandaXPeriodo venta) {
         venta.setCerrado(true);
         return venta;
     }
 
-    private boolean isFechaDelPeriodo(Date fecha, DemandaXPeriodo periodo){
-        if(fecha.compareTo(periodo.getFechaInicio())>=0 && fecha.compareTo(periodo.getFechaFin())<=0){
+    private boolean isFechaDelPeriodo(Date fecha, DemandaXPeriodo periodo) {
+        if (fecha.compareTo(periodo.getFechaInicio()) >= 0 && fecha.compareTo(periodo.getFechaFin()) <= 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
-    private boolean isFechaDelAnio(Date fecha, Date anio){
+    private boolean isFechaDelAnio(Date fecha, Date anio) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(anio);
-        cal.set(cal.get(Calendar.YEAR),Calendar.JANUARY, 1);
-        Date primerDiaAnio= cal.getTime();
-        cal.set(cal.get(Calendar.YEAR)+1,Calendar.JANUARY, 1);
-        Date primerDiaAnioSiguiente= cal.getTime();
+        cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 1);
+        Date primerDiaAnio = cal.getTime();
+        cal.set(cal.get(Calendar.YEAR) + 1, Calendar.JANUARY, 1);
+        Date primerDiaAnioSiguiente = cal.getTime();
 
-        if(fecha.compareTo(primerDiaAnio)>=0 && fecha.compareTo(primerDiaAnioSiguiente)<0){
+        if (fecha.compareTo(primerDiaAnio) >= 0 && fecha.compareTo(primerDiaAnioSiguiente) < 0) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-
-    public int aQuePeriodoCorrespondeLaFecha(Date fecha){
-        int resul=1;
+    
+    public int aQuePeriodoCorrespondeLaFecha(Date fecha) {
+        int resul = 1;
         List<DemandaXPeriodo> anio = getPeriodosDelAnio(fecha);
 
         for (DemandaXPeriodo demanda : anio) {
-            if(isFechaDelPeriodo(fecha, demanda)){
-                resul=demanda.getNroPeriodo();
+            if (isFechaDelPeriodo(fecha, demanda)) {
+                resul = demanda.getNroPeriodo();
             }
         }
         return resul;
@@ -990,19 +836,19 @@ public class GestorDemanda {
 
     }
 
-    private TableModel convertirListATableModel(List<DemandaXPeriodo> ventas){
+    private DefaultTableModel convertirListATableModel(List<DemandaXPeriodo> ventas) {
         DefaultTableModel tabla = new DefaultTableModel();
-        int indice=0;
+        int indice = 0;
         tabla.setRowCount(13);
-        tabla.setColumnCount(calcularCantAniosDeVentas(ventas)+1); // es mas 1 xq le sume la columna donde figura los nombres de los periodos
+        tabla.setColumnCount(calcularCantAniosDeVentas(ventas) + 1); // es mas 1 xq le sume la columna donde figura los nombres de los periodos
 
 
         for (int j = 1; j < tabla.getColumnCount(); j++) {
             for (int i = 0; i < tabla.getRowCount(); i++) {
-                if(ventas.size()>=indice){
+                if (indice < ventas.size()) {
                     tabla.setValueAt(ventas.get(indice).getVentas(), i, j);
-                }else{
-                    tabla.setValueAt( 0 , i, j);
+                } else {
+                    tabla.setValueAt(0, i, j);
                 }
 
 
@@ -1010,5 +856,34 @@ public class GestorDemanda {
             }
         }
         return tabla;
+    }
+
+    private void mostrarTableModel(DefaultTableModel tabla) {
+        System.out.println("\n -------------------------------------------------");
+        for (int i = 0; i < tabla.getRowCount(); i++) {
+            for (int j = 0; j < tabla.getColumnCount(); j++) {
+
+                System.out.print("   " + tabla.getValueAt(i, j));
+            }
+            System.out.println("\n");
+        }
+        System.out.println("\n -------------------------------------------------");
+    }
+
+    public int getVentasPeriodoAbierto() {
+        return ventasDelMesAbierto;
+    }
+
+    public double[] getIndicesEstacionalidad() {
+        return indices;
+    }
+
+    public Date getFechaCierre(){
+        return fechaCierre;
+    }
+
+    public String formatearFecha(Date fecha){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(fecha);
     }
 }

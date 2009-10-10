@@ -544,7 +544,8 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
        }
        else if(tipoDemanda.equalsIgnoreCase("SE Estacionalidad")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
            
-           PanelDemandaExpoConEsta panel = new PanelDemandaExpoConEsta(productoComponente);
+           //PanelDemandaExpoConEsta panel = new PanelDemandaExpoConEsta(productoComponente);
+           PanelDemandaExpoConEstacionalidadNew panel = new PanelDemandaExpoConEstacionalidadNew(productoComponente);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
        }
