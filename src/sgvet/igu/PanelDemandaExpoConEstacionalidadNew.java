@@ -2,11 +2,14 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import sgvet.entidades.ProductoComponente;
+import sgvet.gestores.GestorDemanda;
 import sgvet.utils.*;
 
 /**
@@ -17,7 +20,7 @@ public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog im
     private static final long serialVersionUID = 1L;
 
 //    private DemandaSESTableModel tmDemanda;
-//    private DefaultTableModel tModel;
+    private DefaultTableModel tModel;
     private ProductoComponente producto;
 //    private List<Demanda> demandas;
 
@@ -48,15 +51,23 @@ public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog im
     }
 
     private void inicializar() {
-//        tModel = new DefaultTableModel();
-//        tDemanda.setModel(tModel);
+
+        tModel = new DefaultTableModel();
+
+        List<String> nombreColumnas = new ArrayList<String>();
+        nombreColumnas.add("Periodo");
+        nombreColumnas.add("Predicción");
+        tModel.setColumnIdentifiers(nombreColumnas.toArray());
+
+
+        TPrediccion.setModel(tModel);
         cargarPantalla();
         btLimpiar.setEnabled(false);
     }
 
     private void inicializarBotones(){
 //        btCalcular.setEnabled(false);
-
+        btIndices.setEnabled(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -81,8 +92,15 @@ public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog im
         lbGamma = new javax.swing.JLabel();
         lbDemandaAcumulada = new javax.swing.JLabel();
         tfDemandaAcumulada = new javax.swing.JTextField();
-        tfPrediccion = new javax.swing.JTextField();
         lbPrediccion = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TPrediccion = new org.jdesktop.swingx.JXTable();
+        btIndices = new javax.swing.JButton();
+        pPeriodoAbierto = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        tfFechaCierre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tfAcumulado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -133,8 +151,8 @@ public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog im
                     .addComponent(lbNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminadoLayout.setVerticalGroup(
@@ -187,14 +205,86 @@ public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog im
 
         tfDemandaAcumulada.setEditable(false);
 
-        tfPrediccion.setEditable(false);
-
         lbPrediccion.setText("Prediccion:");
+
+        TPrediccion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Periodo", "Predicción"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TPrediccion.setEditable(false);
+        jScrollPane1.setViewportView(TPrediccion);
+
+        btIndices.setText("Indices");
+        btIndices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btIndicesActionPerformed(evt);
+            }
+        });
+
+        pPeriodoAbierto.setBorder(javax.swing.BorderFactory.createTitledBorder("Periodo Abierto"));
+
+        jLabel1.setText("Fecha de cierre:");
+
+        tfFechaCierre.setEditable(false);
+
+        jLabel2.setText("Acumulado:");
+
+        tfAcumulado.setEditable(false);
+
+        javax.swing.GroupLayout pPeriodoAbiertoLayout = new javax.swing.GroupLayout(pPeriodoAbierto);
+        pPeriodoAbierto.setLayout(pPeriodoAbiertoLayout);
+        pPeriodoAbiertoLayout.setHorizontalGroup(
+            pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPeriodoAbiertoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfAcumulado, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(tfFechaCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pPeriodoAbiertoLayout.setVerticalGroup(
+            pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pPeriodoAbiertoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tfFechaCierre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(tfAcumulado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(134, 134, 134)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btIndices)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addGap(185, 185, 185))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,39 +294,46 @@ public class PanelDemandaExpoConEstacionalidadNew extends javax.swing.JDialog im
                     .addComponent(lbDemandaAcumulada))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(tfGamma, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
-                .addGap(187, 187, 187))
+                    .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(tfGamma, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfAlfa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbAlfa, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbAlfa)
+                            .addComponent(tfAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbGamma)
+                            .addComponent(tfGamma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbDemandaAcumulada)
+                            .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbPrediccion)
+                        .addGap(8, 8, 8))
+                    .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfGamma, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbGamma, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbDemandaAcumulada)
-                    .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPrediccion)
-                    .addComponent(tfPrediccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btIndices)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+            .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -265,8 +362,17 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_btCerrarActionPerformed
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-//    tModel.fireTableDataChanged();
-//    GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma);
+    List<Integer> resultados;
+//    alfa = Double.parseDouble(tfAlfa.getText());
+//    gamma = Double.parseDouble(tfGamma.getText());
+
+
+    if (validarYCargarDatosPantalla()) {
+        resultados = GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(alfa, gamma, GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto));
+        CargarTabla(resultados);
+        btIndices.setEnabled(true);
+        inicializarPanelPeriodoAbierto();
+    }
 
 }//GEN-LAST:event_btCalcularActionPerformed
 
@@ -283,14 +389,25 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfGammaActionPerformed
     // TODO add your handling code here:
 }//GEN-LAST:event_tfGammaActionPerformed
+
+private void btIndicesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIndicesActionPerformed
+    PanelIndiceEstacionalidad PanelIndice = new PanelIndiceEstacionalidad(GestorDemanda.getInstancia().getIndicesEstacionalidad()); 
+     PanelIndice.setModal(true);
+     PanelIndice.setVisible(true);
+}//GEN-LAST:event_btIndicesActionPerformed
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.jdesktop.swingx.JXTable TPrediccion;
     private javax.swing.JButton btCalcular;
     private javax.swing.JButton btCerrar;
+    private javax.swing.JButton btIndices;
     private javax.swing.JButton btLimpiar;
     private javax.swing.ButtonGroup errores;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbAlfa;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbDemandaAcumulada;
@@ -298,14 +415,16 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private javax.swing.JLabel lbNombre;
     private javax.swing.JLabel lbPrediccion;
     private javax.swing.JPanel pBotones;
+    private javax.swing.JPanel pPeriodoAbierto;
     private javax.swing.JPanel pProducto;
     private javax.swing.JPanel pProductoTerminado;
+    private javax.swing.JTextField tfAcumulado;
     private javax.swing.JTextField tfAlfa;
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfDemandaAcumulada;
+    private javax.swing.JTextField tfFechaCierre;
     private javax.swing.JTextField tfGamma;
     private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfPrediccion;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -331,17 +450,6 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
 
 
-    private Date convertirFecha(Date fecha){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-
-        return cal.getTime();
-    }
-
-    private double redondear(double valor){
-        return (Math.floor(valor*100)/100);
-    }
 
     private boolean validarYCargarDatosPantalla(){
         boolean resul= true;
@@ -356,10 +464,36 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         return resul;
     }
 
-    private String formatearFecha(Date fecha){
+   
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+    private void CargarTabla(List<Integer> resultados){
+        int fila= 0;
+        int nroPeriodo = 13 - resultados.size();
 
+        tModel.setRowCount(resultados.size());
+        tModel.setColumnCount(2);
+        //TPrediccion.setModel(tModel);
+        for (Integer resul : resultados) {
+            ++nroPeriodo;
+            tModel.setValueAt(nroPeriodo, fila, 0);
+            tModel.setValueAt(resul, fila, 1);
+
+            ++fila;
+        }
+
+    }
+
+    private void inicializarPanelPeriodoAbierto(){
+        tfAcumulado.setText(String.valueOf(GestorDemanda.getInstancia().getVentasPeriodoAbierto()));
+
+        if(GestorDemanda.getInstancia().getFechaCierre() != null){
+            tfFechaCierre.setText(formatearFecha(GestorDemanda.getInstancia().getFechaCierre()));
+        }
+
+   }
+
+   private String formatearFecha(Date fecha){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(fecha);
     }
 

@@ -27,6 +27,15 @@ public class DemandaXPeriodo {
         totalVentas = total;
     }
 
+    public DemandaXPeriodo(int nroPeriodo1, Date anio1, Date fechaInicio1, Date fechaFin1, int cantVendida, boolean cerrado1) {
+        nroPeriodo=nroPeriodo1;
+        anio= anio1;
+        fechaInicio = fechaInicio1;
+        fechaFin= fechaFin1;
+        totalVentas=cantVendida;
+        cerrado=cerrado1;
+    }
+
     public DemandaXPeriodo() {
 
     }

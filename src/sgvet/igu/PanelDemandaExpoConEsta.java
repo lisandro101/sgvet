@@ -302,18 +302,23 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
 
-    tModel.fireTableDataChanged();
+   // tModel.fireTableDataChanged();
     List<Integer> resultados;
+    alfa = Double.parseDouble(tfAlfa.getText());
+    gamma = Double.parseDouble(tfGamma.getText());
 
-    resultados = GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(tModel, alfa, gamma, GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto));
 
-    int nro =1;
-    for (Integer resul : resultados) {
-        System.out.println("\n --------------------------------");
-        System.out.println("\n Prediccion "+ nro +" :" + resul);
-        System.out.println("\n --------------------------------");
-        ++nro;
-    }
+    resultados = GestorDemanda.getInstancia().calcularDemandaConEstacionalidad( alfa, gamma, GestorDemanda.getInstancia().CalcularDemandaXPeriodo(producto));
+
+//    int nro =1;
+//    for (Integer resul : resultados) {
+//        System.out.println("\n --------------------------------");
+//        System.out.println("\n Prediccion "+ nro +" :" + resul);
+//        System.out.println("\n --------------------------------");
+//        ++nro;
+//    }
+
+
 //    tDemanda.repaint();
 //    alfa = Double.parseDouble(tfAlfa.getText());
 //    demandas = GestorDemanda.getInstancia().calcularES(alfa, demandas);
@@ -482,7 +487,7 @@ private void tfGammaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private String formatearFecha(Date fecha){
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         return sdf.format(fecha);
     }
