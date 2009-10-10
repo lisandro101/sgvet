@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.util.Date;
 import java.util.List;
 import sgvet.gestores.GestorDemanda;
+import sgvet.gestores.GestorFecha;
 import sgvet.utils.IValidable;
 
 /**
@@ -114,24 +115,24 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     }// </editor-fold>//GEN-END:initComponents
 
     private void dpFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpFechaActualActionPerformed
-        GestorDemanda.getInstancia().setFechaHoy(dpFechaActual.getDate());
+        GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
 }//GEN-LAST:event_dpFechaActualActionPerformed
 
     private void btAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAplicarActionPerformed
-        GestorDemanda.getInstancia().setFechaHoy(dpFechaActual.getDate());
+        GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
 
 }//GEN-LAST:event_btAplicarActionPerformed
 
     private void btRetrocederPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetrocederPeriodoActionPerformed
         
-        Date nuevaFecha = GestorDemanda.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), -28);
+        Date nuevaFecha = GestorFecha.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), -28);
         dpFechaActual.setDate(nuevaFecha);
 
 }//GEN-LAST:event_btRetrocederPeriodoActionPerformed
 
     private void btAvanzarPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAvanzarPeriodoActionPerformed
 
-        Date nuevaFecha = GestorDemanda.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), 28);
+        Date nuevaFecha = GestorFecha.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), 28);
         dpFechaActual.setDate(nuevaFecha);
         
     }//GEN-LAST:event_btAvanzarPeriodoActionPerformed
