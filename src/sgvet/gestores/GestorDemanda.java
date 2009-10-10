@@ -5,9 +5,7 @@
 
 package sgvet.gestores;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
@@ -27,7 +25,7 @@ import javax.swing.table.TableModel;
  */
 public class GestorDemanda {
 
-    private Date fechaHoy;
+
     private Date fechaCierre;
     private double[] indices;
     private int ventasDelMesAbierto;
@@ -40,28 +38,28 @@ public class GestorDemanda {
         return instancia;
     }
 
-    private GestorDemanda() {
-    }
-
-    /**
-     * @return the fechaHoy
-     */
-    public Date getFechaHoy() {
-        if (fechaHoy == null) {
-            fechaHoy = new Date();
-        }
-
-        return fechaHoy;
-    }
-
-
-    /**
-     * @param fechaHoy the fechaHoy to set
-     */
-    public void setFechaHoy(Date fechaHoy) {
-        this.fechaHoy = fechaHoy;
-    }
-
+//    private GestorDemanda() {
+//    }
+//
+//    /**
+//     * @return the fechaHoy
+//     */
+//    public Date getFechaHoy() {
+//        if (fechaHoy == null) {
+//            fechaHoy = new Date();
+//        }
+//
+//        return fechaHoy;
+//    }
+//
+//
+//    /**
+//     * @param fechaHoy the fechaHoy to set
+//     */
+//    public void setFechaHoy(Date fechaHoy) {
+//        this.fechaHoy = fechaHoy;
+//    }
+//
     public double calcularPM(List<Demanda> demandas) {
         int n = 0;
         double total = 0.0;
@@ -295,11 +293,11 @@ public class GestorDemanda {
         Date ultimoAnio;
 
         if (ventas.size() > 0) {
-            primerAnio = primerDiaDelAnio(ventas.get(0).getAnio());
-            ultimoAnio = primerDiaDelAnio(ventas.get(ventas.size() - 1).getAnio());
+            primerAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(0).getAnio());
+            ultimoAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(ventas.size() - 1).getAnio());
 
             while (primerAnio.compareTo(ultimoAnio) < 0) {
-                primerAnio = primerDiaDelAnio(ventas.get(periodo).getAnio());
+                primerAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(periodo).getAnio());
                 periodo += 13;
                 ++resul;
             }
@@ -450,25 +448,25 @@ public class GestorDemanda {
 
         if (detallesOrdenes.size() > 0) {
 
-            periodoIni = aQuePeriodoCorrespondeLaFecha(detallesOrdenes.get(0).getVenta().getFecha());
-            fechaIni = calcularLimiteInferiorDelPeriodo(periodoIni, detallesOrdenes.get(0).getVenta().getFecha());
-            fechaFin = calcularLimiteSuperiorDelPeriodo(periodoIni, detallesOrdenes.get(0).getVenta().getFecha());
+            periodoIni = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(detallesOrdenes.get(0).getVenta().getFecha());
+            fechaIni = GestorFecha.getInstancia().calcularLimiteInferiorDelPeriodo(periodoIni, detallesOrdenes.get(0).getVenta().getFecha());
+            fechaFin = GestorFecha.getInstancia().calcularLimiteSuperiorDelPeriodo(periodoIni, detallesOrdenes.get(0).getVenta().getFecha());
             cantVendida = 0;//detallesOrdenes.get(0).getCantidad();
 
             ventaDelPeriodo = new DemandaXPeriodo(periodoIni, fechaIni, fechaIni, fechaFin, cantVendida, false);
 
             for (DetalleOrdenProduccion detallete : detallesOrdenes) {
 
-                if (isFechaDelAnio(fechaFin, detallete.getVenta().getFecha())) { // si son del mismo año
-                    if (isFechaDelPeriodo(detallete.getVenta().getFecha(), ventaDelPeriodo)) { // si son del mismo periodo
+                if (GestorFecha.getInstancia().isFechaDelAnio(fechaFin, detallete.getVenta().getFecha())) { // si son del mismo año
+                    if (GestorFecha.getInstancia().isFechaDelPeriodo(detallete.getVenta().getFecha(), ventaDelPeriodo)) { // si son del mismo periodo
                         sumarVentaAlPeriodo(detallete.getCantidad(), ventaDelPeriodo);
                     } else {
                         ventaDelPeriodo.setCerrado(true);
                         demandasXPeriodo.add(ventaDelPeriodo);
 
-                        periodoIni = aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha());
-                        fechaIni = calcularLimiteInferiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
-                        fechaFin = calcularLimiteSuperiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                        periodoIni = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha());
+                        fechaIni = GestorFecha.getInstancia().calcularLimiteInferiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                        fechaFin = GestorFecha.getInstancia().calcularLimiteSuperiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
                         cantVendida = detallete.getCantidad();
 
                         ventaDelPeriodo = new DemandaXPeriodo(periodoIni, fechaIni, fechaIni, fechaFin, cantVendida, false);
@@ -478,9 +476,9 @@ public class GestorDemanda {
                     ventaDelPeriodo.setCerrado(true);
                     demandasXPeriodo.add(ventaDelPeriodo);
 
-                    periodoIni = aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha());
-                    fechaIni = calcularLimiteInferiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
-                    fechaFin = calcularLimiteSuperiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                    periodoIni = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(detallete.getVenta().getFecha());
+                    fechaIni = GestorFecha.getInstancia().calcularLimiteInferiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
+                    fechaFin = GestorFecha.getInstancia().calcularLimiteSuperiorDelPeriodo(periodoIni, detallete.getVenta().getFecha());
                     cantVendida = detallete.getCantidad();
 
                     ventaDelPeriodo = new DemandaXPeriodo(periodoIni, fechaIni, fechaIni, fechaFin, cantVendida, false);
@@ -506,37 +504,6 @@ public class GestorDemanda {
 
     }
 
-    @Deprecated
-    private Date primerDia(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1);
-        return cal.getTime();
-    }
-
-    @Deprecated
-    private Date ultimoDia(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 28);
-        return cal.getTime();
-    }
-
-    private boolean diaValidoDelMes(Date fecha) {
-        boolean resul = false;
-        if (fecha.compareTo(primerDia(fecha)) >= 0 && fecha.compareTo(ultimoDia(fecha)) <= 0) {
-            resul = true;
-        }
-        return resul;
-    }
-
-    private boolean sonDelMismoMes(Date fechaA, Date fechaB) {
-        boolean resul = false;
-        if (fechaA.compareTo(primerDia(fechaB)) >= 0 && fechaA.compareTo(ultimoDia(fechaB)) <= 0) {
-            resul = true;
-        }
-        return resul;
-    }
 
     private List<DetalleOrdenProduccion> buscarDetalles(ProductoComponente prod) {
         List<DetalleOrdenProduccion> detallesOrdenes;
@@ -551,6 +518,11 @@ public class GestorDemanda {
         return ordenarDetallesXFecha(detallesOrdenes);
     }
 
+     /**
+     * Devuelve el List de DetalleOrdenProduccion ordenados por fecha ascendente
+     * @param detallesOrdenes List de DetalleOrdenProduccion desordenado
+     * @return
+     */
     private List<DetalleOrdenProduccion> ordenarDetallesXFecha(List<DetalleOrdenProduccion> detallesOrdenes) {
         List<DetalleOrdenProduccion> detallesTemp = new ArrayList<DetalleOrdenProduccion>();
         Date fecha1;
@@ -582,7 +554,7 @@ public class GestorDemanda {
         int indice = ventas.size() - 1;
         DemandaXPeriodo demandete = ventas.get(indice);
 
-        if (isFechaDelPeriodo(getFechaHoy(), demandete)) {
+        if (GestorFecha.getInstancia().isFechaDelPeriodo(GestorFecha.getInstancia().getFechaHoy(), demandete)) {
             ventas.get(indice).setCerrado(false);
             ventasDelMesAbierto= ventas.get(indice).getVentas();
             fechaCierre = ventas.get(indice).getFechaFin();
@@ -642,183 +614,15 @@ public class GestorDemanda {
         }
     }
 
-    private List<DemandaXPeriodo> getPeriodosDelAnio(Date anio) {
-        List<DemandaXPeriodo> periodos = new ArrayList<DemandaXPeriodo>(13);
-        DemandaXPeriodo ventaMensual;
 
-        for (int i = 1; i <= 13; i++) { // arma la List de los 13 periodos en que dividimos el año
-            ventaMensual = new DemandaXPeriodo();
-            ventaMensual.setAnio(anio);
-            ventaMensual.setNroPeriodo(i);
-            ventaMensual.setFechaInicio(calcularLimiteInferiorDelPeriodo(i, anio));
-            ventaMensual.setFechaFin(calcularLimiteSuperiorDelPeriodo(i, anio));
-//            ventaMensual.setCerrado(false);
-            periodos.add(ventaMensual);
-        }
-
-        return periodos;
-    }
-
-    private Date calcularLimiteInferiorDelPeriodo(int nroPeriodo, Date anio) {
-        Date fecha;
-        fecha = primerDiaDelAnio(anio);
-
-        switch (nroPeriodo) {
-            case 1:
-                break;
-            case 2:
-                fecha = sumarDiasALaFecha(fecha, 28);
-                break;
-            case 3:
-                fecha = sumarDiasALaFecha(fecha, 56);
-                break;
-            case 4:
-                fecha = sumarDiasALaFecha(fecha, 84);
-                break;
-            case 5:
-                fecha = sumarDiasALaFecha(fecha, 112);
-                break;
-            case 6:
-                fecha = sumarDiasALaFecha(fecha, 140);
-                break;
-            case 7:
-                fecha = sumarDiasALaFecha(fecha, 168);
-                break;
-            case 8:
-                fecha = sumarDiasALaFecha(fecha, 196);
-                break;
-            case 9:
-                fecha = sumarDiasALaFecha(fecha, 224);
-                break;
-            case 10:
-                fecha = sumarDiasALaFecha(fecha, 252);
-                break;
-            case 11:
-                fecha = sumarDiasALaFecha(fecha, 280);
-                break;
-            case 12:
-                fecha = sumarDiasALaFecha(fecha, 308);
-                break;
-            case 13:
-                fecha = sumarDiasALaFecha(fecha, 336);
-                break;
-            default:
-                System.out.println("\n\n\n El valor de periodo no esta entre 1 y 13 \n\n\n");
-        }
-
-        return fecha;
-    }
-
-    private Date calcularLimiteSuperiorDelPeriodo(int nroPeriodo, Date anio) {
-        Date fecha;
-        fecha = ultimoDiaDelPrimerMesDelAnio(anio);
-
-        switch (nroPeriodo) {
-            case 1:
-                break;
-            case 2:
-                fecha = sumarDiasALaFecha(fecha, 28);
-                break;
-            case 3:
-                fecha = sumarDiasALaFecha(fecha, 56);
-                break;
-            case 4:
-                fecha = sumarDiasALaFecha(fecha, 84);
-                break;
-            case 5:
-                fecha = sumarDiasALaFecha(fecha, 112);
-                break;
-            case 6:
-                fecha = sumarDiasALaFecha(fecha, 140);
-                break;
-            case 7:
-                fecha = sumarDiasALaFecha(fecha, 168);
-                break;
-            case 8:
-                fecha = sumarDiasALaFecha(fecha, 196);
-                break;
-            case 9:
-                fecha = sumarDiasALaFecha(fecha, 224);
-                break;
-            case 10:
-                fecha = sumarDiasALaFecha(fecha, 252);
-                break;
-            case 11:
-                fecha = sumarDiasALaFecha(fecha, 280);
-                break;
-            case 12:
-                fecha = sumarDiasALaFecha(fecha, 308);
-                break;
-            case 13:
-                fecha = sumarDiasALaFecha(fecha, 336);
-                break;
-            default:
-                System.out.println("\n\n\n El valor de periodo no esta entre 1 y 13 \n\n\n");
-        }
-
-        return fecha;
-    }
-
-    public Date sumarDiasALaFecha(Date fecha, int cantDias) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        cal.add(Calendar.DAY_OF_YEAR, cantDias);
-        return cal.getTime();
-    }
-
-    public Date primerDiaDelAnio(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 1);
-        return cal.getTime();
-    }
-
-    public Date ultimoDiaDelPrimerMesDelAnio(Date fecha) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(fecha);
-        cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 28);
-        return cal.getTime();
-    }
+ 
 
     private DemandaXPeriodo cerrarPeriodo(DemandaXPeriodo venta) {
         venta.setCerrado(true);
         return venta;
     }
 
-    private boolean isFechaDelPeriodo(Date fecha, DemandaXPeriodo periodo) {
-        if (fecha.compareTo(periodo.getFechaInicio()) >= 0 && fecha.compareTo(periodo.getFechaFin()) <= 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean isFechaDelAnio(Date fecha, Date anio) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(anio);
-        cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 1);
-        Date primerDiaAnio = cal.getTime();
-        cal.set(cal.get(Calendar.YEAR) + 1, Calendar.JANUARY, 1);
-        Date primerDiaAnioSiguiente = cal.getTime();
-
-        if (fecha.compareTo(primerDiaAnio) >= 0 && fecha.compareTo(primerDiaAnioSiguiente) < 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     
-    public int aQuePeriodoCorrespondeLaFecha(Date fecha) {
-        int resul = 1;
-        List<DemandaXPeriodo> anio = getPeriodosDelAnio(fecha);
-
-        for (DemandaXPeriodo demanda : anio) {
-            if (isFechaDelPeriodo(fecha, demanda)) {
-                resul = demanda.getNroPeriodo();
-            }
-        }
-        return resul;
-    }
 
     private void validarPeriodoNulos(List<DemandaXPeriodo> demandas) {
         int resul = 0;
@@ -882,8 +686,5 @@ public class GestorDemanda {
         return fechaCierre;
     }
 
-    public String formatearFecha(Date fecha){
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(fecha);
-    }
+ 
 }
