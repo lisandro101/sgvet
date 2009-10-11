@@ -204,15 +204,14 @@ public class GestorSenialRastreo {
     /**
      * Devuelve true si la señal de rastreo del producto se encuentra fuera
      * de los limites definidos por su clase.
-     * @param prod 
-     * @param demandas
+     * @param producto
      * @return true si esta fuera del rango y false en su defecto.
      */
-    public boolean senialRastreoFueraRango(ProductoComponente prod, List<DemandaXPeriodo> demandas) {
+    public boolean senialRastreoFueraRango(ProductoComponente producto) {
         
-        double sr = parserSenialRastreo(demandas);
+        double sr = calcularSenialRastreo(producto);
 
-        if (Math.abs(sr) > prod.getCategoria().getL()) {
+        if (Math.abs(sr) > producto.getCategoria().getL()) {
             return true;
         }
         else{
@@ -222,14 +221,15 @@ public class GestorSenialRastreo {
     }
 
     /**
-     * Recibe un list con todas las DemandaXPeriodo de un producto y devuelve
-     * la senial de rastreo de ese producto para el año actual.
-     * @param todas
+     * Devuelve la senial de rastreo de un producto para el año actual.
+     * @param producto 
      * @return senialRastreo
      */
-    public double parserSenialRastreo(List<DemandaXPeriodo> todas){
+    public double calcularSenialRastreo(ProductoComponente producto){
 
         GestorFecha gf = GestorFecha.getInstancia();
+        GestorDemanda gd = GestorDemanda.getInstancia();
+        List<DemandaXPeriodo> todas = gd.calcularPrediccionDemandaXPeriodo(producto);
         List<DemandaXPeriodo> demandas = new ArrayList<DemandaXPeriodo>();
 
         for (DemandaXPeriodo demandaXPeriodo : todas) {
