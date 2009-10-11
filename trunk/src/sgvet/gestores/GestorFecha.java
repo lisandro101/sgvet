@@ -52,7 +52,7 @@ public class GestorFecha {
         return cal.get(Calendar.YEAR);
     }
 
-       /**
+    /**
      * Devuelve el mes de un Date.
      * @param fecha
      * @return mes
@@ -60,7 +60,51 @@ public class GestorFecha {
     public int getMes(Date fecha) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
-        return cal.get(Calendar.MONTH)+1;
+        return cal.get(Calendar.MONTH) + 1;
+    }
+
+    /**
+     * Devuelve un Date creado a partir del dia, mes y anio pasados como
+     * parametros.
+     * @param dia
+     * @param mes
+     * @param anio
+     * @return
+     */
+    public Date getFecha(int dia, int mes, int anio) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(anio, mes, dia);
+        return cal.getTime();
+    }
+
+    /**
+     * Devuelve un Date creado a partir del dia y mes pasados como parametros
+     * y supone que el anio es el actual.
+     * @param dia
+     * @param mes
+     * @return
+     */
+    public Date getFecha(int dia, int mes) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int anio = cal.get(Calendar.YEAR);
+        cal.set(anio, mes, dia);
+        return cal.getTime();
+    }
+
+    /**
+     * Devuelve un Date creado a partir del dia pasado como parametro y supone
+     * el mes y el anio son los actuales.
+     * @param dia
+     * @return
+     */
+    public Date getFecha(int dia) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int mes = cal.get(Calendar.MONTH);
+        int anio = cal.get(Calendar.YEAR);
+        cal.set(anio, mes, dia);
+        return cal.getTime();
     }
 
     @Deprecated
@@ -94,7 +138,6 @@ public class GestorFecha {
         }
         return resul;
     }
-
 
     public List<DemandaXPeriodo> getPeriodosDelAnio(Date anio) {
         List<DemandaXPeriodo> periodos = new ArrayList<DemandaXPeriodo>(13);
@@ -233,7 +276,6 @@ public class GestorFecha {
         cal.set(cal.get(Calendar.YEAR), Calendar.JANUARY, 28);
         return cal.getTime();
     }
-
 
     /**
      * Devuelve true si la fecha pertenece al periodo enviados por parametro
