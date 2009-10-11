@@ -416,9 +416,14 @@ public class GestorDemanda {
                 estimacionAnt = estimacion.get(i - 1);
             }
             temp = alfa * ventas.get(i).getVentas() + (1 - alfa) * (estimacionAnt + indiceAnt);
-            estimacion.set(i, temp);
+
+            //estimacion.set(i, temp);
+            estimacion.add(temp);
+
             temp = beta * (ventas.get(i).getVentas() - estimacionAnt) + (1 - beta) * indiceAnt;
-            indice.set(i, temp);
+            
+            //indice.set(i, temp);
+            indice.add(temp);
         }
 
         temp = estimacion.get(estimacion.size() - 1) + indice.get(indice.size() - 1);
@@ -586,6 +591,7 @@ public class GestorDemanda {
                 System.out.println("\n Fecha Inicio: " + demandaXPeriodo.getFechaInicio());
                 System.out.println("\n Fecha Fin: " + demandaXPeriodo.getFechaFin());
                 System.out.println("\n Total venta del Periodo: " + demandaXPeriodo.getVentas());
+                System.out.println("\n Prediccion del Periodo: " + demandaXPeriodo.getPrediccionVenta());
                 System.out.println("\n Estado : " + estado);
 
             }
@@ -684,26 +690,61 @@ public class GestorDemanda {
         return fechaCierre;
     }
 
+    public List<DemandaXPeriodo> calcularPrediccionDemandaXPeriodo(ProductoComponente producto) {
 
-    public List<DemandaXPeriodo> calcularPrediccionDemandaXPeriodo(ProductoComponente producto){
-        
-        List<DemandaXPeriodo> resultado = calcularDemandaXPeriodo(producto);
+        List<DemandaXPeriodo> demandas = calcularDemandaXPeriodo(producto);
+        List<DemandaXPeriodo> temporal = new ArrayList<DemandaXPeriodo>();
+        int valor;
+
+        //variables q tiene q venir como parametros
+        double alfa = 0.4;
+        double gamma = 0.2;
+        double beta = 0.2;
+
 
         if (producto == null || producto.getTipoPrediccion().equalsIgnoreCase(" ")) {
             System.out.println("\n\n\n Debe seleccionar un producto y/o el producto seleccionado debe tener un tipo de prediccion asociado \n\n\n");
         } else {
-            if (producto.getTipoPrediccion().equalsIgnoreCase("SE Simple")) {
+            if (demandas.size() > 0) {
+
+                demandas.get(0).setPrediccionVenta(demandas.get(0).getVentas());
+                temporal.add(demandas.get(0));
+
+                if (producto.getTipoPrediccion().equalsIgnoreCase("SE Simple")) {
+
+                    for (int i = 1; i < demandas.size(); i++) {
+
+                        temporal.add(demandas.get(i));
+                        demandas.get(i).setPrediccionVenta(calcularESNew(alfa, temporal));
+                    }
 
 
-            } else if (producto.getTipoPrediccion().equalsIgnoreCase("SE Estacionalidad")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+                } else if (producto.getTipoPrediccion().equalsIgnoreCase("SE Estacionalidad")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
 
-            } else if (producto.getTipoPrediccion().equalsIgnoreCase("SE Tendencia")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+                    for (int i = 1; i < demandas.size(); i++) {
 
+                        temporal.add(demandas.get(i));
+                        demandas.get(i).setPrediccionVenta(calcularDemandaConEstacionalidad(alfa, gamma, temporal).get(0));
+                    }
+
+                } else if (producto.getTipoPrediccion().equalsIgnoreCase("SE Tendencia")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+
+                    for (int i = 1; i < demandas.size(); i++) {
+
+                        temporal.add(demandas.get(i));
+                        demandas.get(i).setPrediccionVenta(truncar(calcularDemandaConTendenciaNew(temporal, alfa, beta)));
+                    }
+                }
+
+            } else {
+                System.out.println("\n\n\n No se han registrado ventas del producto seleccionado \n\n\n");
             }
 
 
+            mostrarXPantalla(demandas);
+
         }
 
-        return resultado;
+        return demandas;
     }
 }

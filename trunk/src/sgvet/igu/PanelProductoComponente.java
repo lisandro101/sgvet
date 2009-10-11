@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import sgvet.utils.Util;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorConfiguracion;
+import sgvet.gestores.GestorDemanda;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
 import sgvet.igu.buscar.ValidacionBuscar;
 import sgvet.igu.model.ProveedorTableModel;
@@ -56,6 +57,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         btAgregar = new javax.swing.JButton();
         btModificar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
+        btTest = new javax.swing.JButton();
         pCampos = new javax.swing.JPanel();
         pProductoTerminado2 = new javax.swing.JPanel();
         tfCostoUnitario = new javax.swing.JTextField();
@@ -143,6 +145,14 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             }
         });
         pBotones.add(btEliminar);
+
+        btTest.setText("Test");
+        btTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTestActionPerformed(evt);
+            }
+        });
+        pBotones.add(btTest);
 
         lbCondEmbalaje.setText("Condiciones Embalaje:");
 
@@ -569,6 +579,10 @@ private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     // TODO add your handling code here:
 }//GEN-LAST:event_cbCategoriaActionPerformed
 
+private void btTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTestActionPerformed
+    GestorDemanda.getInstancia().calcularPrediccionDemandaXPeriodo(productoComponente);
+}//GEN-LAST:event_btTestActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoProd;
@@ -579,6 +593,7 @@ private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEliminarProv;
     private javax.swing.JButton btModificar;
+    private javax.swing.JButton btTest;
     private javax.swing.JComboBox cbCategoria;
     private javax.swing.JComboBox cbEstado;
     private javax.swing.JComboBox cbTipoPrediccion;
