@@ -176,7 +176,6 @@ public class ValidacionBuscar {
 
 
     public boolean existenCamposVacios(Container contenedor) {
-        //boolean resultado=false;
         for (Component componente : contenedor.getComponents()) {
             if (componente instanceof JTextField) {
                 if(((JTextField)componente).getText().trim().equals("")){

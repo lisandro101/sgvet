@@ -27,32 +27,29 @@ import sgvet.utils.Util;
  * @author Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
 public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
+
     private static final long serialVersionUID = 1L;
-    
     private List<Component> componentesObligatorios;
-    
     private OrdenCompraTableModel tm;
     private Proveedor proveedor;
     private DetalleOrdenCompra detalleOrdenCompra;
     private OrdenCompra ordenCompra;
     private Componente componente;
+
     /** Creates new form PanelOrdenCompra */
     public PanelOrdenCompra() {
         initComponents();
-        componentesObligatorios = Arrays.asList((Component)jdFecha);
+        componentesObligatorios = Arrays.asList((Component) jdFecha);
         inicializar();
-        inicializarBotones();
     }
 
-    private void inicializarBotones(){
-        btEntregado.setEnabled(false);
-    }
     private void inicializar() {
-        
+
         tm = new OrdenCompraTableModel(0);
         jtArticulo.setModel(tm);
-        
+
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -65,16 +62,11 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
         jPanel1 = new javax.swing.JPanel();
         jdFecha = new org.jdesktop.swingx.JXDatePicker();
         lbFecha = new javax.swing.JLabel();
-        lbFechaEntrega = new javax.swing.JLabel();
-        jdFechaEntrega = new org.jdesktop.swingx.JXDatePicker();
         tfNumero = new javax.swing.JTextField();
         lbProveedor = new javax.swing.JLabel();
         tfProveedor = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
-        lbEstado = new javax.swing.JLabel();
-        tfEstado = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        btEntregado = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtArticulo = new org.jdesktop.swingx.JXTable();
@@ -93,16 +85,11 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
         btModificarOrdenCompra = new javax.swing.JButton();
         btAnularOrdenCompra = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
-        btGenerarOrdenAuto = new javax.swing.JButton();
 
         jdFecha.setDate(new Date());
         jdFecha.setFormats("dd/MM/yy");
 
         lbFecha.setText("Fecha");
-
-        lbFechaEntrega.setText("Fecha de Entrega");
-
-        jdFechaEntrega.setFormats("dd/MM/yy");
 
         tfNumero.setEditable(false);
         tfNumero.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +107,6 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
             }
         });
 
-        btBuscar.setFont(new java.awt.Font("Lucida Grande", 0, 13));
         btBuscar.setText("Buscar");
         btBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,18 +114,7 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
             }
         });
 
-        lbEstado.setText("Estado");
-
-        tfEstado.setEditable(false);
-
         jLabel1.setText("Nro Orden");
-
-        btEntregado.setText("Entregado");
-        btEntregado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEntregadoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,32 +125,17 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbFecha)
-                                    .addComponent(lbProveedor))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                                            .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(tfNumero))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(lbFechaEntrega)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jdFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(btEntregado)))
-                                    .addComponent(tfProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btBuscar)
-                                .addGap(137, 137, 137))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbEstado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 514, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(119, 119, 119))
+                            .addComponent(lbFecha)
+                            .addComponent(lbProveedor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                                .addComponent(tfNumero))
+                            .addComponent(tfProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btBuscar)
+                        .addGap(256, 256, 256))
                     .addComponent(jLabel1)))
         );
         jPanel1Layout.setVerticalGroup(
@@ -188,20 +148,13 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jdFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbFecha)
-                    .addComponent(lbFechaEntrega)
-                    .addComponent(jdFechaEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbFecha))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(lbProveedor)
                     .addComponent(tfProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbEstado)
-                    .addComponent(tfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btEntregado))
-                .addGap(35, 35, 35))
+                    .addComponent(btBuscar))
+                .addGap(61, 61, 61))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -281,7 +234,7 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbArticulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                        .addComponent(tfArticulo, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btBuscarArticulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -290,10 +243,10 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
                         .addComponent(tfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(65, 65, 65))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 761, Short.MAX_VALUE)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 765, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 781, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -353,14 +306,6 @@ public class PanelOrdenCompra extends javax.swing.JPanel implements IValidable {
         });
         jPanel4.add(btLimpiar);
 
-        btGenerarOrdenAuto.setText("Generar Orden Auto");
-        btGenerarOrdenAuto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btGenerarOrdenAutoActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btGenerarOrdenAuto);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -392,20 +337,20 @@ private void tfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void btEliminarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarArticuloActionPerformed
     int filaSeleccionada = jtArticulo.convertRowIndexToModel(jtArticulo.getSelectedRow());
-    if(filaSeleccionada == -1){
+    if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "No se ha seleccionado Componente");
-    }else{
+    } else {
         tm.eliminarFila(filaSeleccionada);
-        
+
     }
 }//GEN-LAST:event_btEliminarArticuloActionPerformed
 
 private void btModificarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarOrdenCompraActionPerformed
     int opcion = JOptionPane.showConfirmDialog(this,
-                "¿Seguro desea guardar los cambios?", "Aceptar",
-                JOptionPane.YES_NO_OPTION);
-        
-    if(opcion == JOptionPane.YES_OPTION) {
+            "¿Seguro desea guardar los cambios?", "Aceptar",
+            JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
         actualizarOrdenCompra();
         FachadaPersistencia.getInstancia().actualizar(ordenCompra, true);
 //        Util.getInstancia().limpiarCampos(this);
@@ -416,16 +361,16 @@ private void btModificarOrdenCompraActionPerformed(java.awt.event.ActionEvent ev
 
 private void btAnularOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnularOrdenCompraActionPerformed
     int opcion = JOptionPane.showConfirmDialog(this,
-                "¿Seguro desea anular la Orden de Compra?", "Aceptar",
-                JOptionPane.YES_NO_OPTION);
-        
-    if(opcion == JOptionPane.YES_OPTION) {
+            "¿Seguro desea anular la Orden de Compra?", "Aceptar",
+            JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
         ordenCompra.setBorrado(true);
         FachadaPersistencia.getInstancia().actualizar(ordenCompra, true);
         Util.getInstancia().limpiarCampos(this);
-        ordenCompra=null;
+        ordenCompra = null;
         //inicializarBotones();
-    }   
+    }
 }//GEN-LAST:event_btAnularOrdenCompraActionPerformed
 
 private void tfArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfArticuloActionPerformed
@@ -435,7 +380,7 @@ private void tfArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void btBuscarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarArticuloActionPerformed
 
     PanelBuscarProductoGral buscarComponente = new PanelBuscarProductoGral(this, proveedor);
-    buscarComponente.setModal(true); 
+    buscarComponente.setModal(true);
     buscarComponente.setVisible(true);
 }//GEN-LAST:event_btBuscarArticuloActionPerformed
 
@@ -445,32 +390,32 @@ private void tfProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
 private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
     Util.getInstancia().limpiarCampos(this);
-    PanelBuscarProveedor buscarProv = new PanelBuscarProveedor(this, Tipo.PANEL_ORDEN_COMPRA);   
+    PanelBuscarProveedor buscarProv = new PanelBuscarProveedor(this, Tipo.PANEL_ORDEN_COMPRA);
     buscarProv.setModal(true);
     buscarProv.setVisible(true);
 }//GEN-LAST:event_btBuscarActionPerformed
 
 private void btAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarArticuloActionPerformed
-    
+
     double cantidad = Double.parseDouble(tfCantidad.getText());
-        if(componente == null ||cantidad ==0){
-            JOptionPane.showMessageDialog(this, "Existen campos vacios");
-        }else{ 
-        if(proveedor==null){
+    if (componente == null || cantidad == 0) {
+        JOptionPane.showMessageDialog(this, "Existen campos vacios");
+    } else {
+        if (proveedor == null) {
             JOptionPane.showMessageDialog(this, "Debe asignar proveedor");
-        }else{
-            if(!GestorProveedor.getInstancia().proveeComponente(componente, proveedor)){
+        } else {
+            if (!GestorProveedor.getInstancia().proveeComponente(componente, proveedor)) {
                 JOptionPane.showMessageDialog(this, "El proveedor no provee el componente seleccionado");
-        
-            }else{
+
+            } else {
                 detalleOrdenCompra = new DetalleOrdenCompra();
                 detalleOrdenCompra.setComponente(componente);
                 detalleOrdenCompra.setCantidad(cantidad);
 
 
-                if(ValidacionBuscar.getInstancia().componenteEstaCargadoOrdenEnTabla(tm, detalleOrdenCompra)){
+                if (ValidacionBuscar.getInstancia().componenteEstaCargadoOrdenEnTabla(tm, detalleOrdenCompra)) {
                     JOptionPane.showMessageDialog(this, "El Componente ya se encuentra asignado");
-                }else{
+                } else {
                     tm.agregarFila(detalleOrdenCompra);
                     //tfArticulo.setText("");
                     tfCantidad.setText("0");
@@ -478,8 +423,8 @@ private void btAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {/
                 }
             }
         }
-            
-        }
+
+    }
 }//GEN-LAST:event_btAgregarArticuloActionPerformed
 
 private void tfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCantidadActionPerformed
@@ -487,30 +432,25 @@ private void tfCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_tfCantidadActionPerformed
 
 private void btProcesarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProcesarOrdenCompraActionPerformed
+
     crearOrdenCompra();
-    
-    System.out.println("canttidad a procsar: "+ ordenCompra.getDetallesOrdenCompra().get(0).getCantidad());
-    
-    if(ValidacionBuscar.getInstancia().estaDuplicado(ordenCompra)){
+
+    if (ValidacionBuscar.getInstancia().estaDuplicado(ordenCompra)) {
         JOptionPane.showMessageDialog(this, "Orden ya registrada");
-    }else{
-        //if(ValidacionBuscar.getInstancia().existenCamposVacios(this)){
-//            JOptionPane.showMessageDialog(this, "Existen campos vacios");
-        if(proveedor==null){
+    } else {
+        if (proveedor == null) {
             JOptionPane.showMessageDialog(this, "No se ha asignado Proveedor");
-        }else{
-        
-            GestorOrdenCompra.getInstancia().procesarOrden(ordenCompra);
-            tfEstado.setText(ordenCompra.getEstado().toString());
-            tfNumero.setText(GestorOrdenCompra.getInstancia().obtenerNroOrden());
-            
-            ordenCompra.setNroOrdenCompra(Integer.parseInt(tfNumero.getText()));
-            FachadaPersistencia.getInstancia().actualizar(ordenCompra, true);
+        } else if (jtArticulo.getModel().getRowCount() <= 0) {
+            JOptionPane.showMessageDialog(this, "No se han asignado Articulos");
+        } else {
             btProcesarOrdenCompra.setEnabled(false);
+            tfNumero.setText(GestorOrdenCompra.getInstancia().obtenerNroOrden());
+            ordenCompra.setNroOrdenCompra(Integer.parseInt(tfNumero.getText()));
+            GestorOrdenCompra.getInstancia().terminarOrden(ordenCompra);
+            FachadaPersistencia.getInstancia().actualizar(ordenCompra, true);
         }
-            
-            
     }
+
 }//GEN-LAST:event_btProcesarOrdenCompraActionPerformed
 
 private void btBuscarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarOrdenCompraActionPerformed
@@ -519,33 +459,11 @@ private void btBuscarOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) 
     panelBusqueda.setVisible(true);
 }//GEN-LAST:event_btBuscarOrdenCompraActionPerformed
 
-private void btEntregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntregadoActionPerformed
-    if(ordenCompra==null){ // || !(tfEstado.getText().equals(OrdenCompra.EstadoOrdenCompra.PENDIENTE))){
-        JOptionPane.showMessageDialog(this, "No se ha seleccionado una Orden");
-    }else{
-        GestorOrdenCompra.getInstancia().terminarOrden(ordenCompra);
-        tfEstado.setText(ordenCompra.getEstado().toString());
-        GestorVenta.getInstancia().revisarOrdenesSuspendidas();
-    }
-    
-    
-}//GEN-LAST:event_btEntregadoActionPerformed
-
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
     Util.getInstancia().limpiarCampos(this);
-    ordenCompra= null;
+    ordenCompra = null;
     btProcesarOrdenCompra.setEnabled(true);
-    btEntregado.setEnabled(false);
 }//GEN-LAST:event_btLimpiarActionPerformed
-
-private void btGenerarOrdenAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGenerarOrdenAutoActionPerformed
-    PanelOrdenCompraAutomatica auto = new PanelOrdenCompraAutomatica(this);
-    
-    auto.setModal(true);
-    auto.setVisible(true);
-}//GEN-LAST:event_btGenerarOrdenAutoActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgregarArticulo;
     private javax.swing.JButton btAnularOrdenCompra;
@@ -553,8 +471,6 @@ private void btGenerarOrdenAutoActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JButton btBuscarArticulo;
     private javax.swing.JButton btBuscarOrdenCompra;
     private javax.swing.JButton btEliminarArticulo;
-    private javax.swing.JButton btEntregado;
-    private javax.swing.JButton btGenerarOrdenAuto;
     private javax.swing.JButton btLimpiar;
     private javax.swing.JButton btModificarOrdenCompra;
     private javax.swing.JButton btProcesarOrdenCompra;
@@ -566,24 +482,20 @@ private void btGenerarOrdenAutoActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXDatePicker jdFecha;
-    private org.jdesktop.swingx.JXDatePicker jdFechaEntrega;
     private org.jdesktop.swingx.JXTable jtArticulo;
     private javax.swing.JLabel lbArticulo;
     private javax.swing.JLabel lbCantidad;
-    private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbFecha;
-    private javax.swing.JLabel lbFechaEntrega;
     private javax.swing.JLabel lbProveedor;
     private javax.swing.JTextField tfArticulo;
     private javax.swing.JTextField tfCantidad;
-    private javax.swing.JTextField tfEstado;
     private javax.swing.JTextField tfNumero;
     private javax.swing.JTextField tfProveedor;
     // End of variables declaration//GEN-END:variables
 
     public void setDetalleOrdenCompra(DetalleOrdenCompra detalleOrdenCompra) {
         this.detalleOrdenCompra = detalleOrdenCompra;
-        
+
     }
 
     public void setOrdenCompra(OrdenCompra ordenCompra) {
@@ -600,48 +512,44 @@ private void btGenerarOrdenAutoActionPerformed(java.awt.event.ActionEvent evt) {
         tfArticulo.setText(componente.getNombre());
         tfCantidad.setText("0");
     }
-    
-    private OrdenCompra crearOrdenCompra(){
-        ordenCompra= new OrdenCompra();
-        
+
+    private OrdenCompra crearOrdenCompra() {
+        ordenCompra = new OrdenCompra();
+
         //ordenCompra.setNroOrdenCompra(tfNumero.getText());
         ordenCompra.setProveedor(proveedor);
         ordenCompra.setDetallesOrdenCompra(tm.getFilas());
         ordenCompra.setFecha(jdFecha.getDate());
-        ordenCompra.setFechaEstimadaEntrega(jdFechaEntrega.getDate());
-        
+
         for (DetalleOrdenCompra detalle : ordenCompra.getDetallesOrdenCompra()) {
-             detalle.setOrdenCompra(ordenCompra);
+            detalle.setOrdenCompra(ordenCompra);
         }
-        
+
         return ordenCompra;
     }
 
-    public void setTableModelComponentes(OrdenCompraTableModel tableModel){
+    public void setTableModelComponentes(OrdenCompraTableModel tableModel) {
         tm.agregarFilas(tableModel.getFilas());
     }
-    
-    private void cargarPantallaOrdenCompra(OrdenCompra orden){
+
+    private void cargarPantallaOrdenCompra(OrdenCompra orden) {
         Util.getInstancia().limpiarCampos(this);
         ordenCompra = orden;
-        proveedor= orden.getProveedor();
-        
+        proveedor = orden.getProveedor();
+
         tfNumero.setText(Integer.toString(orden.getNroOrdenCompra()));
         tfProveedor.setText(orden.getProveedor().getNombre());
         tm.agregarFilas(orden.getDetallesOrdenCompra());
         jdFecha.setDate(orden.getFecha());
-        jdFechaEntrega.setDate(orden.getFechaEstimadaEntrega());
-        tfEstado.setText(orden.getEstado().toString());
-        btEntregado.setEnabled(true);
     }
-    
-    private void actualizarOrdenCompra(){
+
+    private void actualizarOrdenCompra() {
         ordenCompra.setNroOrdenCompra(Integer.parseInt(tfNumero.getText()));
         ordenCompra.setProveedor(proveedor);
         ordenCompra.setDetallesOrdenCompra(tm.getFilas());
         ordenCompra.setFecha(jdFecha.getDate());
-        ordenCompra.setFechaEstimadaEntrega(jdFechaEntrega.getDate());
     }
+
     @Override
     public List<Component> getComponentesObligatorios() {
         return componentesObligatorios;
@@ -650,5 +558,4 @@ private void btGenerarOrdenAutoActionPerformed(java.awt.event.ActionEvent evt) {
     public OrdenCompra getOrdenCompra() {
         return ordenCompra;
     }
-    
 }

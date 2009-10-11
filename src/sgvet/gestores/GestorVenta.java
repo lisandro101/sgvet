@@ -67,22 +67,6 @@ public class GestorVenta {
         return Integer.toString(ultimaOrden + 1);
     }
 
-    @Deprecated
-    public void revisarOrdenesSuspendidas(){
-        Query consulta;
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Venta a where a.estado = :estado and a.borrado=false");
-        consulta.setParameter("estado", Venta.EstadoOrdenProd.SUSPENDIDO);
-        List<Venta> ordenes = FachadaPersistencia.getInstancia().buscar(Venta.class, consulta);
-
-        for (Venta venta : ordenes) {
-            procesarOrden(venta);
-            if(actualizar){
-                FachadaPersistencia.getInstancia().actualizar(venta, true);
-            }
-
-        }
-    }
-
     private void descontarStock(Venta orden) {
 
         for (DetalleOrdenProduccion detalle : orden.getDetallesOrdenProduccion()) {

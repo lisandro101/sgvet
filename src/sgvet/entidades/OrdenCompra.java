@@ -33,30 +33,10 @@ public class OrdenCompra implements Serializable, IPersistente {
     private String id;
     private Proveedor proveedor;
     private Date fecha;
-    private Date fechaEstimadaEntrega;
     private List<DetalleOrdenCompra> detallesOrdenCompra;
     private int nroOrdenCompra;
     private boolean borrado;
-    private EstadoOrdenCompra estado;
-    
-    public enum EstadoOrdenCompra {
-        PENDIENTE ("Pendiente"),
-        TERMINADO ("Terminado"),
-        ANULADO ("Anulado");
-        
-        private String nombre;
-        
-        private EstadoOrdenCompra(String nombre) {
-            this.nombre = nombre;
-        }
-
-        @Override
-        public String toString() {
-            return nombre;
-        }
-    }
-    
-    
+ 
     /**
      * Constructor
      */
@@ -104,16 +84,6 @@ public class OrdenCompra implements Serializable, IPersistente {
         this.fecha = fecha;
     }
 
-    @Column(name="fecha_estimada_entrega")
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getFechaEstimadaEntrega() {
-        return fechaEstimadaEntrega;
-    }
-
-    public void setFechaEstimadaEntrega(Date fechaEstimadaEntrega) {
-        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-    }
-
     @OneToMany(targetEntity=DetalleOrdenCompra.class, cascade=CascadeType.ALL,
     mappedBy="ordenCompra")
     public List<DetalleOrdenCompra> getDetallesOrdenCompra() {
@@ -148,15 +118,6 @@ public class OrdenCompra implements Serializable, IPersistente {
     @Transient
     public List<String> getCamposUnicos() {
         return CAMPOS_UNICOS;
-    }
-    
-    @Column(name="estado")
-    public EstadoOrdenCompra getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoOrdenCompra estado) {
-        this.estado = estado;
     }
     
 }
