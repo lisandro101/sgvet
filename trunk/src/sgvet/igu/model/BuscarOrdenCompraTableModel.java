@@ -11,12 +11,11 @@ import sgvet.entidades.OrdenCompra;
  * @author Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
 public class BuscarOrdenCompraTableModel extends AbstractTableModel implements IModeloReiniciable {
+
     private static final long serialVersionUID = 1L;
-    private static final String[] NOMBRE_COLUMNAS = {"Nro Orden", "Proveedor", "Fecha Emisión", "Fecha Entrega", "Estado"};
+    private static final String[] NOMBRE_COLUMNAS = {"Nro Orden", "Proveedor", "Fecha Emisión"};
     private static final boolean[] COLUMNAS_EDITABLES = {false, false, false, false, false};
-    private static final Class[] CLASE_COLUMNAS =
-        {String.class, String.class, Date.class, Date.class, String.class};
-    
+    private static final Class[] CLASE_COLUMNAS = {String.class, String.class, Date.class};
     private List<OrdenCompra> ordenes;
 
     /**
@@ -38,7 +37,7 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
     public String getColumnName(int columna) {
         return NOMBRE_COLUMNAS[columna];
     }
-    
+
     /**
      * Devuelve la clase de la columna indicada
      * 
@@ -61,7 +60,7 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
     public boolean isCellEditable(int fila, int columna) {
         return COLUMNAS_EDITABLES[columna];
     }
-    
+
     /**
      * Devuelve la cantidad de filas
      * 
@@ -92,8 +91,8 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
     @Override
     public Object getValueAt(int fila, int columna) {
         Object resultado = null;
-        
-        switch(columna) {
+
+        switch (columna) {
             case 0:
                 resultado = ordenes.get(fila).getNroOrdenCompra();
                 break;
@@ -103,28 +102,21 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
             case 2:
                 resultado = ordenes.get(fila).getFecha();
                 break;
-            case 3:
-                resultado = ordenes.get(fila).getFechaEstimadaEntrega();
-                break;    
-            case 4:
-                resultado = ordenes.get(fila).getEstado().toString();
-                break;    
         }
         return resultado;
     }
-    
-    /**
-     * Agrega Proveedor al modelo
-     * 
-     * @param proveedor Proveedor a agregar
 
+    /**
+     * Agrega una Orden de Compra al modelo
+     * 
+     * @param cargo
      */
     public void agregarFila(OrdenCompra cargo) {
         ordenes.add(cargo);
-        
+
         fireTableRowsInserted(ordenes.size(), ordenes.size());
     }
-    
+
     /**
      * Limita la cantidad de elementos del modelo al indicado
      * 
@@ -132,12 +124,12 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
      */
     public void limitarCantidad(int cantidad) {
         int cantidadAnterior = ordenes.size();
-        
+
         ordenes = ordenes.subList(0, cantidad);
-        
+
         fireTableRowsDeleted(cantidad, cantidadAnterior);
     }
-    
+
     /**
      * Devuelve todas las filas del modelo
      * 
@@ -146,21 +138,21 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
     public List<OrdenCompra> getFilas() {
         return ordenes;
     }
-    
-    public OrdenCompra getFila(int indice){
+
+    public OrdenCompra getFila(int indice) {
         return ordenes.get(indice);
-        
+
     }
-    
-    public void eliminarFila(int indice){        
+
+    public void eliminarFila(int indice) {
         ordenes.remove(indice);
-        fireTableRowsDeleted(indice, indice);       
+        fireTableRowsDeleted(indice, indice);
     }
-    
-    public void limpiarTableModel(){        
+
+    public void limpiarTableModel() {
         int tamanio = ordenes.size();
         ordenes.clear();
-        
+
         fireTableRowsDeleted(0, tamanio);
     }
 
@@ -168,6 +160,4 @@ public class BuscarOrdenCompraTableModel extends AbstractTableModel implements I
     public void reiniciar() {
         limpiarTableModel();
     }
-    
-
 }

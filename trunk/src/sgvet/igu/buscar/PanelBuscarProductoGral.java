@@ -314,8 +314,11 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 }//GEN-LAST:event_btCancelarActionPerformed
 
 private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProdTerminadoActionPerformed
+
     Query consulta;
     tmBuscar.limpiarTableModel();
+    List<Componente> todos;
+    componentes = new ArrayList<Componente>();
 
     if (tipo == Tipo.PANEL_ORDEN_COMPRA) {
         consulta = FachadaPersistencia.getInstancia().crearConsulta(
@@ -327,8 +330,13 @@ private void btBuscarProdTerminadoActionPerformed(java.awt.event.ActionEvent evt
         consulta.setParameter("tipo1", 'C');
         consulta.setParameter("tipo2", 'M');
 
-        componentes = FachadaPersistencia.getInstancia().buscar(Componente.class, consulta);
+        todos = FachadaPersistencia.getInstancia().buscar(Componente.class, consulta);
 
+        for (Componente componente : todos) {
+            if(componente.getProveedores().contains(proveedor)){
+                componentes.add(componente);
+            }
+        }
 
     } else if (tipo == Tipo.PANEL_ORDEN_PRODUCCION) {
 

@@ -39,8 +39,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
-//      jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
         jTabbedPane1.add("       Venta       ", panelOrdenProduccion);
+        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
     }
 
     /** This method is called from within the constructor to
@@ -234,7 +234,6 @@ private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_demandaActionPerformed
 
 private void curvaABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curvaABCActionPerformed
-//    GestorABC.getInstancia().calcularCurvaABC();
     PanelCurvaABC panelABC = new PanelCurvaABC(this, rootPaneCheckingEnabled);
     panelABC.setLocationRelativeTo(this);
     panelABC.setVisible(true);
