@@ -8,7 +8,7 @@ package sgvet.gestores;
  *
  * @author Luciano
  */
-public class ResionContinuaSQ {
+public class RevisionContinuaSQ {
 
 /*
  D : demanda anual. (unidad de ítem/año)
@@ -35,7 +35,7 @@ double r;
 double C;
 double CTG;
 double Qoptimo;
-public ResionContinuaSQ(){}
+public RevisionContinuaSQ(){}
 
 public double CTG(double A1, double N1,double H1, double Q1)
 {
