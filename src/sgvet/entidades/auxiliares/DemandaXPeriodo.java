@@ -2,22 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sgvet.entidades.auxiliares;
 
 import java.util.Date;
+import sgvet.entidades.ProductoComponente;
 
 /**
  *
  * @author Seba
  */
 public class DemandaXPeriodo {
+
     private int nroPeriodo; // son 13 perioodos- del 1 al 13
     private Date anio;
     private Date fechaInicio;
     private Date fechaFin;
     private boolean cerrado; // false si el periodo esta abierto (POR DEFECTO), true si esta cerrado
-
     private Date mes;
     private int totalVentas;
     private int prediccionVenta;
@@ -28,17 +28,17 @@ public class DemandaXPeriodo {
     }
 
     public DemandaXPeriodo(int nroPeriodo1, Date anio1, Date fechaInicio1, Date fechaFin1, int cantVendida, boolean cerrado1) {
-        nroPeriodo=nroPeriodo1;
-        anio= anio1;
+        nroPeriodo = nroPeriodo1;
+        anio = anio1;
         fechaInicio = fechaInicio1;
-        fechaFin= fechaFin1;
-        totalVentas=cantVendida;
-        cerrado=cerrado1;
+        fechaFin = fechaFin1;
+        totalVentas = cantVendida;
+        cerrado = cerrado1;
     }
 
     public DemandaXPeriodo() {
-
     }
+
     /**
      * @return the mes
      */
@@ -150,7 +150,4 @@ public class DemandaXPeriodo {
     public void setCerrado(boolean cerrado) {
         this.cerrado = cerrado;
     }
-
-    
-
 }
