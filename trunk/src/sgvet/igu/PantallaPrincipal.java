@@ -59,6 +59,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         demanda = new javax.swing.JMenu();
         curvaABC = new javax.swing.JMenuItem();
         Stock = new javax.swing.JMenuItem();
+        jmiSenialRastreo = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         reportes = new javax.swing.JMenu();
@@ -120,6 +121,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         demanda.add(Stock);
+
+        jmiSenialRastreo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jmiSenialRastreo.setText("Señal de Rastreo");
+        jmiSenialRastreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSenialRastreoActionPerformed(evt);
+            }
+        });
+        demanda.add(jmiSenialRastreo);
 
         menu.add(demanda);
 
@@ -213,7 +223,7 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
                     guardarInfoPanel(panelProveedor);
                     limpiarCampos(panelProveedor);
                 }
-                break;        
+                break;
             default:
                 break;
         }
@@ -230,24 +240,22 @@ private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_verReportesActionPerformed
 
 private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demandaActionPerformed
-    
 }//GEN-LAST:event_demandaActionPerformed
 
 private void curvaABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curvaABCActionPerformed
     PanelCurvaABC panelABC = new PanelCurvaABC(this, rootPaneCheckingEnabled);
     panelABC.setLocationRelativeTo(this);
     panelABC.setVisible(true);
-    
+
 }//GEN-LAST:event_curvaABCActionPerformed
 
 private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configuracionActionPerformed
-      
 }//GEN-LAST:event_configuracionActionPerformed
 
 private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-      PanelConfiguracion panelConf = new PanelConfiguracion(this, true);
-      panelConf.setLocationRelativeTo(this);
-      panelConf.setVisible(true);
+    PanelConfiguracion panelConf = new PanelConfiguracion(this, true);
+    panelConf.setLocationRelativeTo(this);
+    panelConf.setVisible(true);
 }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -255,13 +263,17 @@ private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
 }//GEN-LAST:event_salirActionPerformed
 
 private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockActionPerformed
-    // TODO add your handling code here:
     PanelStock pstock = new PanelStock();
     pstock.setLocationRelativeTo(this);
     pstock.setVisible(true);
 
 }//GEN-LAST:event_StockActionPerformed
 
+private void jmiSenialRastreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSenialRastreoActionPerformed
+    PanelSenialRastreo panelSR = new PanelSenialRastreo(this, true);
+    panelSR.setLocationRelativeTo(this);
+    panelSR.setVisible(true);
+}//GEN-LAST:event_jmiSenialRastreoActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Stock;
     private javax.swing.JMenu archivo;
@@ -271,11 +283,13 @@ private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     private javax.swing.JMenu demanda;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JMenuItem jmiSenialRastreo;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenu reportes;
     private javax.swing.JMenuItem salir;
     private javax.swing.JMenuItem verReportes;
     // End of variables declaration//GEN-END:variables
+
     private void salir() {
         int opcion = JOptionPane.showConfirmDialog(this,
                 "¿Está seguro que desea salir?", "Salir",
