@@ -29,145 +29,127 @@ public class GestorSenialRastreo {
         return instancia;
     }
 
-    public GestorSenialRastreo() {
-        /*
-        demandaReal= new double[13];
-        pronostico=new double[13];
-        alfa=0.1 ;
-        error=new double[13];
-        errorPromedio=new double[13];
-        MSE=new double[13];
-        desviacionEstandar=new double[13];
-        senialRastreo=new double[13];
-         */
+    private GestorSenialRastreo() {
     }
 
-    public GestorSenialRastreo(double[] DemandaRealX, double[] PronosticoX, double GammaX, double[] ErrorX, double[] ErrorPromedioX, double[] MSEX, double[] DesviacionEstandarX, double[] SenialRastreoX) {
+    public GestorSenialRastreo(double[] demandaRealX, double[] pronosticoX,
+            double gammaX, double[] errorX, double[] errorPromedioX,
+            double[] MSEX, double[] desviacionEstandarX, double[] senialRastreoX) {
         /*Atener en cuanta, Hay 13 periodos de 28 y de ellos tiene que existir un pronostico
         por cada periodo, para cada producto. La senial de Rastreo se calcula a cierre del periodo */
-        demandaReal = DemandaRealX;
-        pronostico = PronosticoX;
-        alfa = GammaX;
+        demandaReal = demandaRealX;
+        pronostico = pronosticoX;
+        alfa = gammaX;
         //error=new double[13];
-        errorPromedio = ErrorPromedioX;
+        errorPromedio = errorPromedioX;
         MSE = MSEX;
-        desviacionEstandar = DesviacionEstandarX;
-        senialRastreo = SenialRastreoX;
+        desviacionEstandar = desviacionEstandarX;
+        senialRastreo = senialRastreoX;
     }
 
-    public double[] Error(double[] DemandaReal, double[] Pronostico) {
+    public double[] Error(double[] demandaReal, double[] pronostico) {
         // demandaReal=DemandaRealX;
-        error = new double[DemandaReal.length];
+        error = new double[demandaReal.length];
         //pronostico=demandaReal;
-        for (int i = 0; i < DemandaReal.length; i++) {
+        for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
 
                 error[i] = 0;
             } else {
-                error[i] = Pronostico[i] - DemandaReal[i];
+                error[i] = pronostico[i] - demandaReal[i];
 
             }
-            //System.out.println(error[i]);
         }
         return error;
     }
 
-    public double[] ErrorPromedio(double Gamma1, double[] Error1) {
-        errorPromedio = new double[Error1.length];
-        error = Error1;
-        alfa = Gamma1;
-        for (int i = 0; i < Error1.length; i++) {
+    public double[] ErrorPromedio(double alfa, double[] error) {
+        errorPromedio = new double[error.length];
+        for (int i = 0; i < error.length; i++) {
             if (i == 0) {
                 errorPromedio[i] = 0;
             } else {
                 errorPromedio[i] = ((alfa * error[i]) + (1 - alfa) * errorPromedio[i - 1]);
             }
-            //System.out.println(errorPromedio[i]);
         }
 
         return errorPromedio;
     }
 
-    public double[] MSE(double Gamma, double[] Error1) {
-        MSE = new double[Error1.length];
-        error = Error1;
-        for (int i = 0; i < Error1.length; i++) {
+    public double[] MSE(double gamma, double[] error) {
+        MSE = new double[error.length];
+        for (int i = 0; i < error.length; i++) {
             if (i == 0) {
                 MSE[i] = 0;
             } else {
-                MSE[i] = ((Gamma * (error[i] * error[i])) + ((1 - Gamma) * MSE[i - 1]));
+                MSE[i] = ((gamma * (error[i] * error[i])) + ((1 - gamma) * MSE[i - 1]));
             }
-
-            // System.out.println(MSE[i]);
         }
 
         return MSE;
     }
 
-    public double[] DesviacionEstandar(double Gamma, double[] MSE1) {
-        desviacionEstandar = new double[MSE1.length];
-        MSE = MSE1;
-        for (int i = 0; i < MSE1.length; i++) {
+    public double[] DesviacionEstandar(double gamma, double[] MSE) {
+        desviacionEstandar = new double[MSE.length];
+        for (int i = 0; i < MSE.length; i++) {
             if (i == 0) {
                 desviacionEstandar[i] = 0;
             } else {
                 // desviacionEstandar[i]=1;math//=+RAIZ(F9)*RAIZ($G$2)/(2-$G$2)
-                desviacionEstandar[i] = (Math.sqrt(MSE[i]) * Math.sqrt(Gamma) / (2 - Gamma));
+                if ((2 - gamma) != 0) {
+                    desviacionEstandar[i] = (Math.sqrt(MSE[i]) * Math.sqrt(gamma) / (2 - gamma));
+                } else {
+                    desviacionEstandar[i] = 0;
+                }
 
             }
-            //System.out.println(desviacionEstandar[i]);
+        //System.out.println(desviacionEstandar[i]);
         }
 
         return desviacionEstandar;
     }
 
-    public double[] SenialRastreoFinal(double[] DesviacionEstandar1, double[] ErrorPromedio1) {
-        desviacionEstandar = DesviacionEstandar1;
-        errorPromedio = ErrorPromedio1;
-        senialRastreo = new double[DesviacionEstandar1.length];
-        for (int i = 0; i < DesviacionEstandar1.length; i++) {
+    public double[] SenialRastreoFinal(double[] desviacionEstandar, double[] errorPromedio) {
+        senialRastreo = new double[desviacionEstandar.length];
+        for (int i = 0; i < desviacionEstandar.length; i++) {
             if (i == 0) {
                 senialRastreo[i] = 0;
             } else {
-                senialRastreo[i] = errorPromedio[i] / desviacionEstandar[i];
+                if (desviacionEstandar[i] != 0) {
+                    senialRastreo[i] = errorPromedio[i] / desviacionEstandar[i];
+                } else {
+                    senialRastreo[i] = 0;
+                }
             }
-            System.out.println(senialRastreo[i]);
-            //System.out.println(errorPromedio[i]);
-            //System.out.println(desviacionEstandar[i]);
         }
 
         return senialRastreo;
     }
 
-    public double[] SenialRastreoFinalFull(double[] _demandaReal, double[] _pronostico) {
-        demandaReal = _demandaReal;
-        pronostico = _pronostico;
-        error = new double[_demandaReal.length];
-        errorPromedio = new double[_demandaReal.length];
-        MSE = new double[_demandaReal.length];
-        desviacionEstandar = new double[_demandaReal.length];
-        senialRastreo = new double[_demandaReal.length];
+    public double[] SenialRastreoFinalFull(double[] demandaReal, double[] pronostico) {
+        error = new double[demandaReal.length];
+        errorPromedio = new double[demandaReal.length];
+        MSE = new double[demandaReal.length];
+        desviacionEstandar = new double[demandaReal.length];
+        senialRastreo = new double[demandaReal.length];
 
-        for (int i = 0; i < _demandaReal.length; i++) {
+        for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
                 error[i] = 0;
             } else {
                 error[i] = pronostico[i] - demandaReal[i];
             }
-            //System.out.println(error[i]);
         }
 
-        for (int i = 0; i < _demandaReal.length; i++) {
+        for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
                 errorPromedio[i] = 0;
             } else {
                 errorPromedio[i] = ((alfa * error[i]) + (1 - alfa) * errorPromedio[i - 1]);
             }
-
-            //System.out.println(errorPromedio[i]);
         }
 
-        for (int i = 0; i < _demandaReal.length; i++) {
+        for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
                 MSE[i] = 0;
             } else {
@@ -175,26 +157,30 @@ public class GestorSenialRastreo {
             }
         }
 
-        for (int i = 0; i < _demandaReal.length; i++) {
+        for (int i = 0; i < demandaReal.length; i++) {
 
             if (i == 0) {
                 desviacionEstandar[i] = 0;
             } else {
                 // desviacionEstandar[i]=1;math//=+RAIZ(F9)*RAIZ($G$2)/(2-$G$2)
-                desviacionEstandar[i] = (Math.sqrt(MSE[i]) * Math.sqrt(alfa) / (2 - alfa));
-
+                if ((2 - alfa) != 0) {
+                    desviacionEstandar[i] = (Math.sqrt(MSE[i]) * Math.sqrt(alfa) / (2 - alfa));
+                } else {
+                    desviacionEstandar[i] = 0;
+                }
             }
         }
 
-        for (int i = 0; i < _demandaReal.length; i++) {
+        for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
                 senialRastreo[i] = 0;
             } else {
-                senialRastreo[i] = errorPromedio[i] / desviacionEstandar[i];
+                if (desviacionEstandar[i] != 0) {
+                    senialRastreo[i] = errorPromedio[i] / desviacionEstandar[i];
+                } else {
+                    senialRastreo[i] = 0;
+                }
             }
-            System.out.println(senialRastreo[i]);
-            //System.out.println(errorPromedio[i]);
-            //System.out.println(desviacionEstandar[i]);
         }
 
         return senialRastreo;
@@ -208,13 +194,12 @@ public class GestorSenialRastreo {
      * @return true si esta fuera del rango y false en su defecto.
      */
     public boolean senialRastreoFueraRango(ProductoComponente producto) {
-        
+
         double sr = calcularSenialRastreo(producto);
 
         if (Math.abs(sr) > producto.getCategoria().getL()) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
 
@@ -225,16 +210,16 @@ public class GestorSenialRastreo {
      * @param producto 
      * @return senialRastreo
      */
-    public double calcularSenialRastreo(ProductoComponente producto){
+    public double calcularSenialRastreo(ProductoComponente producto) {
 
         GestorFecha gf = GestorFecha.getInstancia();
         GestorDemanda gd = GestorDemanda.getInstancia();
         List<DemandaXPeriodo> todas = gd.calcularPrediccionDemandaXPeriodo(producto);
         List<DemandaXPeriodo> demandas = new ArrayList<DemandaXPeriodo>();
 
-        if(todas.size() > 0) {
+        if (todas.size() > 0) {
             for (DemandaXPeriodo demandaXPeriodo : todas) {
-                if(gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(new Date())){
+                if (gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(new Date())) {
                     demandas.add(demandaXPeriodo);
                 }
             }
@@ -248,10 +233,15 @@ public class GestorSenialRastreo {
             }
 
             double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
+            
+            System.out.println("Size " + senial.length);
 
-            return senial[senial.length];
-        }
-        else {
+            for (int i = 0; i < senial.length; i++) {
+                System.out.println("i " + senial[i]);
+
+            }
+            return senial[senial.length - 1];
+        } else {
             return -1;
         }
 
