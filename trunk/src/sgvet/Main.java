@@ -27,34 +27,29 @@ public class Main {
      */
     public static void main(String[] args) throws ClassNotFoundException, InstantiationException,
             IllegalAccessException, UnsupportedLookAndFeelException {
-        
-        
+
+
         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         System.setProperty("apple.laf.useScreenMenuBar", "true");
-        
-        
+
+
         PantallaPrincipal p = new PantallaPrincipal();
         final GestorCargaInicial gcarga = GestorCargaInicial.getInstancia();
-        
+
         p.setLocationRelativeTo(null);
         p.setVisible(true);
-        
+
         new Thread() {
+
             @Override
             public void run() {
                 List<ProductoComponente> prod = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class,
                         "SELECT c FROM ProductoComponente c");
-                if(prod.size()<=0) {
-                    System.out.println("Realizando Carga Inicial....");
-                    gcarga.cargarProductos(gcarga.cargarProveedores());
-                    gcarga.cargarClasesDemanda();
-                    GestorABC.getInstancia().calcularCurvaABC();
-                    System.out.println("Finalizada Carga Inicial.");
+                if (prod.size() <= 0) {
+                    gcarga.cargarTodo();
                 }
             }
-            
         }.start();
 
     }
-
 }
