@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sgvet.gestores;
 
 import java.util.ArrayList;
@@ -22,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
  * @author stafoxter
  */
 public class GestorDemanda {
-
 
     private Date fechaCierre;
     private double[] indices;
@@ -120,7 +118,6 @@ public class GestorDemanda {
 //
 //        return resultado;
 //    }
-
     public boolean validarConstanteAlfa(double constante) {
         if (constante >= 0 && constante <= 1) {
             return true;
@@ -208,7 +205,6 @@ public class GestorDemanda {
 //
 //        return demandas;
 //    }
-
     public int calcularESNew(double alfa, List<DemandaXPeriodo> ventas) {
         int temp = 0;
         int demandaReal = 0;
@@ -395,8 +391,6 @@ public class GestorDemanda {
 //
 //        }
 //    }
-
-
     public double calcularDemandaConTendenciaNew(List<DemandaXPeriodo> ventas, double alfa, double beta) {
 
         double estimacionAnt;
@@ -421,7 +415,7 @@ public class GestorDemanda {
             estimacion.add(temp);
 
             temp = beta * (ventas.get(i).getVentas() - estimacionAnt) + (1 - beta) * indiceAnt;
-            
+
             //indice.set(i, temp);
             indice.add(temp);
         }
@@ -492,9 +486,10 @@ public class GestorDemanda {
 
             demandasXPeriodo.add(ventaDelPeriodo);
 
-        }
+            abrirPeriodoActualSiNoEstaFinalizado(demandasXPeriodo);
 
-        abrirPeriodoActualSiNoEstaFinalizado(demandasXPeriodo);
+        }
+        
         validarPeriodoNulos(demandasXPeriodo);
 
         return demandasXPeriodo;
@@ -506,7 +501,6 @@ public class GestorDemanda {
         periodo.setVentas(temp);
 
     }
-
 
     private List<DetalleOrdenProduccion> buscarDetalles(ProductoComponente prod) {
         List<DetalleOrdenProduccion> detallesOrdenes;
@@ -521,7 +515,7 @@ public class GestorDemanda {
         return ordenarDetallesXFecha(detallesOrdenes);
     }
 
-     /**
+    /**
      * Devuelve el List de DetalleOrdenProduccion ordenados por fecha ascendente
      * @param detallesOrdenes List de DetalleOrdenProduccion desordenado
      * @return
@@ -559,9 +553,9 @@ public class GestorDemanda {
 
         if (GestorFecha.getInstancia().isFechaDelPeriodo(GestorFecha.getInstancia().getFechaHoy(), demandete)) {
             ventas.get(indice).setCerrado(false);
-            ventasDelMesAbierto= ventas.get(indice).getVentas();
+            ventasDelMesAbierto = ventas.get(indice).getVentas();
             fechaCierre = ventas.get(indice).getFechaFin();
-        }       
+        }
 
         return ventas;
     }
@@ -618,15 +612,10 @@ public class GestorDemanda {
         }
     }
 
-
- 
-
     private DemandaXPeriodo cerrarPeriodo(DemandaXPeriodo venta) {
         venta.setCerrado(true);
         return venta;
     }
-
-    
 
     private void validarPeriodoNulos(List<DemandaXPeriodo> demandas) {
         int resul = 0;
@@ -686,7 +675,7 @@ public class GestorDemanda {
         return indices;
     }
 
-    public Date getFechaCierre(){
+    public Date getFechaCierre() {
         return fechaCierre;
     }
 
