@@ -441,8 +441,6 @@ public class GestorDemanda {
         // los detalles de las oredenes se encuentran ordenados por fecha ascendente
         detallesOrdenes = buscarDetalles(producto);
 
-
-
         if (detallesOrdenes.size() > 0) {
 
             periodoIni = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(detallesOrdenes.get(0).getVenta().getFecha());
@@ -489,7 +487,7 @@ public class GestorDemanda {
             abrirPeriodoActualSiNoEstaFinalizado(demandasXPeriodo);
 
         }
-        
+
         validarPeriodoNulos(demandasXPeriodo);
 
         return demandasXPeriodo;

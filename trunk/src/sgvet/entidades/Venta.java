@@ -23,32 +23,31 @@ import sgvet.persistencia.IPersistente;
  * @version 1.0
  */
 @Entity
-@Table(name="ordenes_de_produccion")
+@Table(name = "ordenes_de_produccion")
 public class Venta implements Serializable, IPersistente {
+
     private static final long serialVersionUID = 1L;
     private static final List<String> CAMPOS_UNICOS = new ArrayList<String>(0);
-    
     private String id;
     private Date fecha;
-    private Date fechaEstimadaEntrega;
     private String nombreCliente;
     private List<DetalleOrdenProduccion> detallesOrdenProduccion;
     private boolean borrado;
     private int nroOrdenProduccion;
     private EstadoOrdenProd estado;
-    
+
     public enum EstadoOrdenProd {
-        PROCESANDO ("Procesando"),
-        TERMINADO ("Terminado"),
-        ANULADO ("Anulado"),
-        SUSPENDIDO ("Suspendido");
-        
+
+        PROCESANDO("Procesando"),
+        TERMINADO("Terminado"),
+        ANULADO("Anulado"),
+        SUSPENDIDO("Suspendido");
         private String nombre;
-        
+
         private EstadoOrdenProd(String nombre) {
             this.nombre = nombre;
         }
-        
+
 //        public EstadoOrdenProd obtenerEstado(String valor) {
 //        EstadoOrdenProd resultado = null;
 //        if(valor.equals("Procesando")){
@@ -63,27 +62,26 @@ public class Venta implements Serializable, IPersistente {
 //        
 //        return resultado;
 //    }
-
-        
         @Override
         public String toString() {
             return nombre;
         }
     }
+
     /**
      * Constructor
      */
-    public Venta(){
+    public Venta() {
         setId(UUID.randomUUID().toString());
     }
-    
+
     /**
      * Devuelve el identificador único de la clase
      * 
      * @return El identificador único de la clase
      */
     @Id
-    @Column(name="id", length=36)
+    @Column(name = "id", length = 36)
     public String getId() {
         return id;
     }
@@ -97,7 +95,7 @@ public class Venta implements Serializable, IPersistente {
         this.id = id;
     }
 
-    @Column(name="fecha")
+    @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     public Date getFecha() {
         return fecha;
@@ -107,17 +105,7 @@ public class Venta implements Serializable, IPersistente {
         this.fecha = fecha;
     }
 
-    @Column(name="fecha_estimada_entrega")
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getFechaEstimadaEntrega() {
-        return fechaEstimadaEntrega;
-    }
-
-    public void setFechaEstimadaEntrega(Date fechaEstimadaEntrega) {
-        this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-    }
-
-    @Column(name="nombre_cliente", length=100)
+    @Column(name = "nombre_cliente", length = 100)
     public String getNombreCliente() {
         return nombreCliente;
     }
@@ -126,8 +114,8 @@ public class Venta implements Serializable, IPersistente {
         this.nombreCliente = nombreCliente;
     }
 
-    @OneToMany(targetEntity=DetalleOrdenProduccion.class,
-    cascade=CascadeType.ALL, mappedBy="venta")
+    @OneToMany(targetEntity = DetalleOrdenProduccion.class,
+    cascade = CascadeType.ALL, mappedBy = "venta")
     public List<DetalleOrdenProduccion> getDetallesOrdenProduccion() {
         return detallesOrdenProduccion;
     }
@@ -136,7 +124,7 @@ public class Venta implements Serializable, IPersistente {
         this.detallesOrdenProduccion = detalles;
     }
 
-    @Column(name="borrado")
+    @Column(name = "borrado")
     public boolean isBorrado() {
         return borrado;
     }
@@ -151,8 +139,8 @@ public class Venta implements Serializable, IPersistente {
     public List<String> getCamposUnicos() {
         return CAMPOS_UNICOS;
     }
-    
-    @Column(name="nro_orden_produccion")
+
+    @Column(name = "nro_orden_produccion")
     public int getNroOrdenProduccion() {
         return nroOrdenProduccion;
     }
@@ -160,8 +148,8 @@ public class Venta implements Serializable, IPersistente {
     public void setNroOrdenProduccion(int nroOrden) {
         this.nroOrdenProduccion = nroOrden;
     }
-    
-    @Column(name="estado")
+
+    @Column(name = "estado")
     public EstadoOrdenProd getEstado() {
         return estado;
     }
@@ -169,6 +157,4 @@ public class Venta implements Serializable, IPersistente {
     public void setEstado(EstadoOrdenProd estado) {
         this.estado = estado;
     }
-
-    
 }
