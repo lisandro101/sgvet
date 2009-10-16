@@ -8,7 +8,7 @@ import sgvet.entidades.auxiliares.DemandaXPeriodo;
 
 /**
  *
- * @author LUCIANO
+ * @author Luciano, Lisandro
  */
 public class GestorSenialRastreo {
 
@@ -30,21 +30,6 @@ public class GestorSenialRastreo {
     }
 
     private GestorSenialRastreo() {
-    }
-
-    public GestorSenialRastreo(double[] demandaRealX, double[] pronosticoX,
-            double gammaX, double[] errorX, double[] errorPromedioX,
-            double[] MSEX, double[] desviacionEstandarX, double[] senialRastreoX) {
-        /*Atener en cuanta, Hay 13 periodos de 28 y de ellos tiene que existir un pronostico
-        por cada periodo, para cada producto. La senial de Rastreo se calcula a cierre del periodo */
-        demandaReal = demandaRealX;
-        pronostico = pronosticoX;
-        alfa = gammaX;
-        //error=new double[13];
-        errorPromedio = errorPromedioX;
-        MSE = MSEX;
-        desviacionEstandar = desviacionEstandarX;
-        senialRastreo = senialRastreoX;
     }
 
     public double[] Error(double[] demandaReal, double[] pronostico) {
@@ -103,7 +88,6 @@ public class GestorSenialRastreo {
                 }
 
             }
-        //System.out.println(desviacionEstandar[i]);
         }
 
         return desviacionEstandar;
