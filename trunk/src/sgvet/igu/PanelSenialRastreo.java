@@ -12,10 +12,9 @@ package sgvet.igu;
 
 import java.util.List;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 import sgvet.entidades.ProductoComponente;
-import sgvet.gestores.GestorABC;
 import sgvet.gestores.GestorSenialRastreo;
-import sgvet.igu.model.CurvaABCTableModel;
 import sgvet.igu.model.SenialRastreoTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.Util;
@@ -180,7 +179,9 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
                 ProductoComponente.class, consulta);
 
         tmSenialRastreo.limpiarTableModel();
-        tmSenialRastreo.agregarFilas(productos);
+        if (tmSenialRastreo.agregarFilas(productos)) {
+            JOptionPane.showMessageDialog(this, "No existen ventas para algunos productos.", "WARNING", JOptionPane.ERROR_MESSAGE);
+        }
 
         btLimpiar.setEnabled(true);
 
@@ -224,7 +225,6 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
 
     private void inicializar() {
 
-        GestorSenialRastreo gestor = GestorSenialRastreo.getInstancia();
         tmSenialRastreo = new SenialRastreoTableModel(0);
         jtABC.setModel(tmSenialRastreo);
 
@@ -237,7 +237,10 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
                 ProductoComponente.class, consulta);
 
         tmSenialRastreo.limpiarTableModel();
-        tmSenialRastreo.agregarFilas(productos);
+        
+        if (tmSenialRastreo.agregarFilas(productos)) {
+            JOptionPane.showMessageDialog(this, "No existen ventas para algunos productos.", "WARNING", JOptionPane.ERROR_MESSAGE);
+        }
 
     }
 }

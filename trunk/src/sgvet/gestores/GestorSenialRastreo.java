@@ -232,23 +232,28 @@ public class GestorSenialRastreo {
         List<DemandaXPeriodo> todas = gd.calcularPrediccionDemandaXPeriodo(producto);
         List<DemandaXPeriodo> demandas = new ArrayList<DemandaXPeriodo>();
 
-        for (DemandaXPeriodo demandaXPeriodo : todas) {
-            if(gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(new Date())){
-                demandas.add(demandaXPeriodo);
+        if(todas.size() > 0) {
+            for (DemandaXPeriodo demandaXPeriodo : todas) {
+                if(gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(new Date())){
+                    demandas.add(demandaXPeriodo);
+                }
             }
+
+            demandaReal = new double[demandas.size()];
+            pronostico = new double[demandas.size()];
+
+            for (int i = 0; i < demandas.size(); i++) {
+                demandaReal[i] = demandas.get(i).getVentas();
+                pronostico[i] = demandas.get(i).getPrediccionVenta();
+            }
+
+            double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
+
+            return senial[senial.length];
         }
-
-        demandaReal = new double[demandas.size()];
-        pronostico = new double[demandas.size()];
-
-        for (int i = 0; i < demandas.size(); i++) {
-            demandaReal[i] = demandas.get(i).getVentas();
-            pronostico[i] = demandas.get(i).getPrediccionVenta();
+        else {
+            return -1;
         }
-
-        double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
-
-        return senial[senial.length];
 
     }
 }
