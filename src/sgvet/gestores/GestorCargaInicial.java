@@ -32,6 +32,18 @@ public class GestorCargaInicial {
         return instance;
     }
 
+    public void cargarTodo() {
+
+        System.out.println("Realizando Carga Inicial....");
+
+        cargarVentas(cargarProductos(cargarProveedores()));
+        cargarClasesDemanda();
+        GestorABC.getInstancia().calcularCurvaABC();
+
+        System.out.println("Finalizada Carga Inicial.");
+
+    }
+
     public HashMap<String, Proveedor> cargarProveedores() {
 
         Proveedor prov;
@@ -39,12 +51,8 @@ public class GestorCargaInicial {
         List<IPersistente> persistentes = new ArrayList<IPersistente>();
         HashMap<String, Proveedor> proveedores = new HashMap<String, Proveedor>();
 
-
-
-
         /* -----  Repetir este codigo para crear proveedores a persistir  ---- */
 
-        /* -----  Proveedor Dog Chow  ---- */
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Dog Chow");
         prov.setBorrado(false);
@@ -56,8 +64,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4459532");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor Top Nutrition  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Top Nutrition");
         prov.setBorrado(false);
@@ -69,8 +76,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4296758");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor Vital Can  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Vital Can");
         prov.setBorrado(false);
@@ -82,7 +88,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4296048");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Eukanuba");
         prov.setBorrado(false);
@@ -94,8 +100,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4222222");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor Royal  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Royal");
         prov.setBorrado(false);
@@ -107,8 +112,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4217623");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor EXACT  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("EXACT");
         prov.setBorrado(false);
@@ -120,8 +124,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4287623");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor Kongo  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Kongo");
         prov.setBorrado(false);
@@ -133,8 +136,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4497345");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor Purina  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Purina");
         prov.setBorrado(false);
@@ -146,8 +148,7 @@ public class GestorCargaInicial {
         prov.setTelefono("4459302");
         persistentes.add(prov);
         proveedores.put(prov.getNombre(), prov);
-        /* ------------------------------------------------------------------- */
-        /* -----  Proveedor Dog Selection  ---- */
+
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Dog Selection");
         prov.setBorrado(false);
@@ -175,6 +176,7 @@ public class GestorCargaInicial {
         List<IPersistente> persistentes = new ArrayList<IPersistente>();
 
         HashMap<String, ProductoComponente> productos = new HashMap<String, ProductoComponente>();
+
         /* -----  Repetir este codigo para crear proveedores a persistir  ---- */
 
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
@@ -203,10 +205,10 @@ public class GestorCargaInicial {
         prov.add(proveedores.get("Dog Chow")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
         prod.setProveedores(prov);
 
-        productos.put(prod.getNombre(), prod);
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 15Kg");
         prod.setBorrado(false);
@@ -234,8 +236,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 30Kg");
         prod.setBorrado(false);
@@ -263,9 +266,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow Vitamina 200gm");
         prod.setBorrado(false);
@@ -293,9 +296,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto del Provedor Top Nutrition  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 2Kg");
         prod.setBorrado(false);
@@ -323,8 +326,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 15Kg");
         prod.setBorrado(false);
@@ -352,8 +356,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 30Kg");
         prod.setBorrado(false);
@@ -381,9 +386,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition Vitamina 200gm");
         prod.setBorrado(false);
@@ -411,9 +416,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto del Provedor Vital Can  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 2Kg");
         prod.setBorrado(false);
@@ -441,8 +446,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 15Kg");
         prod.setBorrado(false);
@@ -470,8 +476,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 30Kg");
         prod.setBorrado(false);
@@ -499,9 +506,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can Vitamina 200gm");
         prod.setBorrado(false);
@@ -530,9 +537,8 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         productos.put(prod.getNombre(), prod);
-        /* ------------------------------------------------------------------- */
 
-        /* -----  Producto del Provedor Eukanuba  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 2Kg");
         prod.setBorrado(false);
@@ -560,8 +566,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 15Kg");
         prod.setBorrado(false);
@@ -589,8 +596,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 30Kg");
         prod.setBorrado(false);
@@ -618,9 +626,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba Vitamina 200gm");
         prod.setBorrado(false);
@@ -648,9 +656,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto del Provedor Royal  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 2Kg");
         prod.setBorrado(false);
@@ -678,8 +686,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 15Kg");
         prod.setBorrado(false);
@@ -707,8 +716,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 30Kg");
         prod.setBorrado(false);
@@ -736,9 +746,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal Vitamina 200gm");
         prod.setBorrado(false);
@@ -766,9 +776,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto del Provedor EXACT  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 2Kg");
         prod.setBorrado(false);
@@ -796,8 +806,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 15Kg");
         prod.setBorrado(false);
@@ -825,8 +836,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 30Kg");
         prod.setBorrado(false);
@@ -854,9 +866,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT Vitamina 200gm");
         prod.setBorrado(false);
@@ -884,9 +896,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto del Provedor KONGO  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 2Kg");
         prod.setBorrado(false);
@@ -914,8 +926,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 15Kg");
         prod.setBorrado(false);
@@ -943,8 +956,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 30Kg");
         prod.setBorrado(false);
@@ -972,9 +986,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO Vitamina 200gm");
         prod.setBorrado(false);
@@ -1002,9 +1016,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto del Provedor PURINA  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 2Kg");
         prod.setBorrado(false);
@@ -1032,8 +1046,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 15Kg");
         prod.setBorrado(false);
@@ -1061,8 +1076,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 30Kg");
         prod.setBorrado(false);
@@ -1090,9 +1106,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
+        productos.put(prod.getNombre(), prod);
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA Vitamina 200gm");
         prod.setBorrado(false);
@@ -1121,10 +1137,8 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         productos.put(prod.getNombre(), prod);
-        /* ------------------------------------------------------------------- */
 
 
-        /* -----  Producto del Provedor Dog Selection ---- */
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Selection 2Kg");
         prod.setBorrado(false);
@@ -1152,8 +1166,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 15Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 15Kg");
         prod.setBorrado(false);
@@ -1181,8 +1196,9 @@ public class GestorCargaInicial {
         prod.setProveedores(prov);
 
         persistentes.add(prod);
-        /* ------------------------------------------------------------------- */
-        /* -----  Producto Alimento 30Kg  ---- */
+        productos.put(prod.getNombre(), prod);
+
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Protect Garrapaticida aerosol");
         prod.setBorrado(false);
@@ -1211,9 +1227,8 @@ public class GestorCargaInicial {
 
         persistentes.add(prod);
         productos.put(prod.getNombre(), prod);
-        /* ------------------------------------------------------------------- */
 
-        /* -----  Producto Vitamina Complejo  ---- */
+
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA Vitamina 200gm");
         prod.setBorrado(false);
@@ -1243,9 +1258,6 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         productos.put(prod.getNombre(), prod);
         /* ------------------------------------------------------------------- */
-
-
-
 
         /* Llama al método que persiste la lista de proveedores */
         persistir(persistentes);
@@ -1306,18 +1318,6 @@ public class GestorCargaInicial {
         persistir(persistentes);
     }
 
-    public void cargarTodo() {
-
-        System.out.println("Realizando Carga Inicial....");
-
-        cargarVentas(cargarProductos(cargarProveedores()));
-        cargarClasesDemanda();
-        GestorABC.getInstancia().calcularCurvaABC();
-
-        System.out.println("Finalizada Carga Inicial.");
-
-    }
-
     public void cargarVentas(HashMap<String, ProductoComponente> productos) {
 
 
@@ -1337,191 +1337,184 @@ public class GestorCargaInicial {
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2000);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2001);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(26);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
 
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2002);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(24);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+        
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2003);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(29);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2004);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+        
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2005);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(25);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+        
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2006);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2007);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(30);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+
+
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2008);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(31);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
         venta.setDetallesOrdenProduccion(detalle);
 
-        venta.setBorrado(false);
-
         persistentes.add(venta);
-        //---------------------------------------------------
+
+
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2009);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2009));
+        venta.setBorrado(false);
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
-
+        linea.setVenta(venta);
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
         detalle.add(linea);
@@ -1530,9 +1523,6 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
-        //---------------------------------------------------
-
-
 
 
         //-------------------------------------------------------------------
@@ -1547,6 +1537,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(26);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1567,6 +1558,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(25);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1587,6 +1579,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(25);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1607,6 +1600,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1627,6 +1621,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1647,6 +1642,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1667,6 +1663,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1687,6 +1684,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(15);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1706,6 +1704,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(15);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1725,6 +1724,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(31);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1744,6 +1744,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1769,6 +1770,7 @@ public class GestorCargaInicial {
         linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
         linea.setCantidad(28);
         linea.setBorrado(false);
+        linea.setVenta(venta);
 
 
         detalle = new ArrayList<DetalleOrdenProduccion>();
@@ -1779,7 +1781,6 @@ public class GestorCargaInicial {
 
         persistentes.add(venta);
         //---------------------------------------------------
-
 
         persistir(persistentes);
     }
