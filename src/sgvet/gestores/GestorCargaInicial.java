@@ -1306,9 +1306,21 @@ public class GestorCargaInicial {
         persistir(persistentes);
     }
 
+    public void cargarTodo() {
+
+        System.out.println("Realizando Carga Inicial....");
+
+        cargarVentas(cargarProductos(cargarProveedores()));
+        cargarClasesDemanda();
+        GestorABC.getInstancia().calcularCurvaABC();
+
+        System.out.println("Finalizada Carga Inicial.");
+
+    }
+
     public void cargarVentas(HashMap<String, ProductoComponente> productos) {
 
-        
+
 //nombre de productos: "PURINA Vitamina 200gm" "Protect Garrapaticida aerosol"  "Vital Can Vitamina 200gm"
         List<IPersistente> persistentes = new ArrayList<IPersistente>();
         //HashMap<String, Venta> ventas = new HashMap<String, Venta>();
@@ -1318,15 +1330,15 @@ public class GestorCargaInicial {
         DetalleOrdenProduccion linea;
 
 
- //-------------------------------------------------------------------
- //-------Producto para el calculo de la prediccion exponencial simple
- //-------------------------------------------------------------------
+        //-------------------------------------------------------------------
+        //-------Producto para el calculo de la prediccion exponencial simple
+        //-------------------------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2000);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
@@ -1339,14 +1351,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2001);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(26);
         linea.setBorrado(false);
@@ -1359,7 +1371,7 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
 
         venta = new Venta();
@@ -1367,7 +1379,7 @@ public class GestorCargaInicial {
         venta.setNroOrdenProduccion(2002);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(24);
         linea.setBorrado(false);
@@ -1380,14 +1392,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2003);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(29);
         linea.setBorrado(false);
@@ -1400,14 +1412,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2004);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
@@ -1420,14 +1432,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2005);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(25);
         linea.setBorrado(false);
@@ -1440,14 +1452,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2006);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
@@ -1460,14 +1472,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2007);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(30);
         linea.setBorrado(false);
@@ -1480,13 +1492,13 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2008);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(31);
         linea.setBorrado(false);
@@ -1499,13 +1511,13 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Pablo Romero");
         venta.setNroOrdenProduccion(2009);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Vital Can Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
@@ -1518,20 +1530,20 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
 
 
 
- //-------------------------------------------------------------------
- //-------Producto para el calculo de la prediccion con tendencia
- //-------------------------------------------------------------------
+        //-------------------------------------------------------------------
+        //-------Producto para el calculo de la prediccion con tendencia
+        //-------------------------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(995);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(26);
         linea.setBorrado(false);
@@ -1544,14 +1556,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(996);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(25);
         linea.setBorrado(false);
@@ -1564,14 +1576,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(997);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(25);
         linea.setBorrado(false);
@@ -1584,14 +1596,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(998);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
@@ -1604,14 +1616,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(999);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
@@ -1624,14 +1636,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(1000);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
@@ -1644,14 +1656,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(1001);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(27);
         linea.setBorrado(false);
@@ -1664,14 +1676,14 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(1002);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(15);
         linea.setBorrado(false);
@@ -1684,13 +1696,13 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Raul Castro");
         venta.setNroOrdenProduccion(1003);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(15);
         linea.setBorrado(false);
@@ -1703,13 +1715,13 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(1005);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(31);
         linea.setBorrado(false);
@@ -1722,13 +1734,13 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Juan Perez");
         venta.setNroOrdenProduccion(1005);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2009));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("PURINA Vitamina 200gm"));
         linea.setCantidad(28);
         linea.setBorrado(false);
@@ -1741,19 +1753,19 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
 
 
- //-------------------------------------------------------------------
- //-------Producto para el calculo de la prediccion con estacionalidad
- //-------------------------------------------------------------------
+        //-------------------------------------------------------------------
+        //-------Producto para el calculo de la prediccion con estacionalidad
+        //-------------------------------------------------------------------
         venta = new Venta();
         venta.setNombreCliente("Raul Castro");
         venta.setNroOrdenProduccion(3000);
         venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2007));
 
-        linea= new DetalleOrdenProduccion();
+        linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
         linea.setCantidad(28);
         linea.setBorrado(false);
@@ -1766,7 +1778,7 @@ public class GestorCargaInicial {
         venta.setBorrado(false);
 
         persistentes.add(venta);
- //---------------------------------------------------
+        //---------------------------------------------------
 
 
         persistir(persistentes);
