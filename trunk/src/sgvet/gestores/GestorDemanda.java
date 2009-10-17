@@ -291,9 +291,15 @@ public class GestorDemanda {
             ultimoAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(ventas.size() - 1).getAnio());
 
             while (primerAnio.compareTo(ultimoAnio) < 0) {
-                primerAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(periodo).getAnio());
-                periodo += 13;
-                ++resul;
+
+                if(periodo < ventas.size()){
+                    primerAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(periodo).getAnio());
+                    periodo += 13;
+                    ++resul;
+                }else{
+                    primerAnio = ultimoAnio;
+                }
+
             }
 
         }
@@ -440,6 +446,8 @@ public class GestorDemanda {
 
         // los detalles de las oredenes se encuentran ordenados por fecha ascendente
         detallesOrdenes = buscarDetalles(producto);
+        
+
 
         if (detallesOrdenes.size() > 0) {
 
@@ -707,11 +715,19 @@ public class GestorDemanda {
 
 
                 } else if (producto.getTipoPrediccion().equalsIgnoreCase("SE Estacionalidad")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-
+                    List<Integer> resultado;
                     for (int i = 1; i < demandas.size(); i++) {
 
                         temporal.add(demandas.get(i));
-                        demandas.get(i).setPrediccionVenta(calcularDemandaConEstacionalidad(alfa, gamma, temporal).get(0));
+                        resultado = calcularDemandaConEstacionalidad(alfa, gamma, temporal);
+
+                        if(resultado.size()>0){
+                            demandas.get(i).setPrediccionVenta(resultado.get(0));
+                        }else{
+                            demandas.get(i).setPrediccionVenta(0);
+                        }
+
+
                     }
 
                 } else if (producto.getTipoPrediccion().equalsIgnoreCase("SE Tendencia")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch

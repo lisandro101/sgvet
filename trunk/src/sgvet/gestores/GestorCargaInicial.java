@@ -1761,14 +1761,17 @@ public class GestorCargaInicial {
         //-------------------------------------------------------------------
         //-------Producto para el calculo de la prediccion con estacionalidad
         //-------------------------------------------------------------------
+
+//----------------------------------- AÑO 2006 -----------------------------------
+
         venta = new Venta();
         venta.setNombreCliente("Raul Castro");
         venta.setNroOrdenProduccion(3000);
-        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2007));
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2006));
 
         linea = new DetalleOrdenProduccion();
         linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
-        linea.setCantidad(28);
+        linea.setCantidad(145);
         linea.setBorrado(false);
         linea.setVenta(venta);
 
@@ -1782,6 +1785,1065 @@ public class GestorCargaInicial {
         persistentes.add(venta);
         //---------------------------------------------------
 
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3001);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(121);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3002);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(121);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3003);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(88);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3004);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(73);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3005);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(52);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3006);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(50);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3007);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(75);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3008);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(95);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3009);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(103);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3010);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 11, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(142);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3011);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 12, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(143);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3012);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(25, 12, 2006));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(154);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+
+//----------------------------------- AÑO 2007 -----------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3013);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(138);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3014);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(126);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3015);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(105);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3016);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(86);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3017);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(76);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3018);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(49);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3019);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(52);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3020);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(69);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3021);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(94);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3022);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(117);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3023);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 11, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(133);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3024);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 12, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(137);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3025);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(25, 12, 2007));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(139);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+
+//----------------------------------- AÑO 2008 -----------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3026);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(164);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3027);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(139);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3028);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(117);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3029);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(82);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3039);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(64);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3031);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(53);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3032);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(53);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3033);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(65);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3034);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(95);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3035);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(99);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3036);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 11, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(139);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3037);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 12, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(141);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3038);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(25, 12, 2008));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(147);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+//----------------------------------- AÑO 2009 -----------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3039);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 1, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(155);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3040);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 2, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(145);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3041);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 3, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(128);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3042);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 4, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(99);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3043);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 5, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(87);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3044);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 6, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(75);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3045);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 7, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(53);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3046);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 8, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(55);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3047);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 9, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(56);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+
+        venta = new Venta();
+        venta.setNombreCliente("Raul Castro");
+        venta.setNroOrdenProduccion(3048);
+        venta.setFecha(GestorFecha.getInstancia().getFecha(1, 10, 2009));
+
+        linea = new DetalleOrdenProduccion();
+        linea.setProducto(productos.get("Protect Garrapaticida aerosol"));
+        linea.setCantidad(63);
+        linea.setBorrado(false);
+        linea.setVenta(venta);
+
+
+        detalle = new ArrayList<DetalleOrdenProduccion>();
+        detalle.add(linea);
+        venta.setDetallesOrdenProduccion(detalle);
+
+        venta.setBorrado(false);
+
+        persistentes.add(venta);
+
+        //---------------------------------------------------
+        
         persistir(persistentes);
     }
 
