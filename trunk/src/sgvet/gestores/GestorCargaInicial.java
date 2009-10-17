@@ -17,7 +17,9 @@ import sgvet.persistencia.FachadaPersistencia;
 import sgvet.persistencia.IPersistente;
 
 /**
- *
+ *         Simple ("Vital Can Vitamina 200gm")
+ *         Con tendencia ("PURINA Vitamina 200gm")
+ *         Con estacionalidad("Protect Garrapaticida aerosol"));
  * @author Lisandro
  */
 public class GestorCargaInicial {
@@ -1228,36 +1230,36 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         productos.put(prod.getNombre(), prod);
 
-
-        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
-        prod.setNombre("PURINA Vitamina 200gm");
-        prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
-        prod.setCondicionesEmbalaje("");
-        prod.setCostoAlmacenamiento(10);
-        prod.setCostoPedido(10);
-        prod.setCostoUnitario(15);
-        prod.setDemandaAnual(500);
-        prod.setDescripcion("Complejo Vitaminico Polvo 200gm PURINA");
-        prod.setEstado("Activo");
-        prod.setNumeroPlano("");
-        prod.setPesoUnidad(10);
-        prod.setPoliticaCompra("");
-        prod.setPrecioBase(10);
-        prod.setPrecioVenta(100);
-        prod.setStock(10);
-        prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
-        prod.setTipoPrediccion("SE Simple");
-        prod.setUnidadMedida("unid");
-
-        prov = new ArrayList<Proveedor>();
-        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
-        prod.setProveedores(prov);
-
-        persistentes.add(prod);
-        productos.put(prod.getNombre(), prod);
-        /* ------------------------------------------------------------------- */
+//Esta supuestamente repetido
+//        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
+//        prod.setNombre("PURINA Vitamina 200gm");
+//        prod.setBorrado(false);
+//        prod.setCodigo("2-4-44-44");
+//        prod.setCondicionesEmbalaje("");
+//        prod.setCostoAlmacenamiento(10);
+//        prod.setCostoPedido(10);
+//        prod.setCostoUnitario(15);
+//        prod.setDemandaAnual(500);
+//        prod.setDescripcion("Complejo Vitaminico Polvo 200gm PURINA");
+//        prod.setEstado("Activo");
+//        prod.setNumeroPlano("");
+//        prod.setPesoUnidad(10);
+//        prod.setPoliticaCompra("");
+//        prod.setPrecioBase(10);
+//        prod.setPrecioVenta(100);
+//        prod.setStock(10);
+//        prod.setStockReserva(5);
+//        prod.setTamanioLoteEstandar(5);
+//        prod.setTipoPrediccion("SE Simple");
+//        prod.setUnidadMedida("unid");
+//
+//        prov = new ArrayList<Proveedor>();
+//        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
+//        prod.setProveedores(prov);
+//
+//        persistentes.add(prod);
+//        productos.put(prod.getNombre(), prod);
+//        /* ------------------------------------------------------------------- */
 
         /* Llama al método que persiste la lista de proveedores */
         persistir(persistentes);
