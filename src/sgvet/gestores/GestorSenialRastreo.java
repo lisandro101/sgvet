@@ -117,6 +117,8 @@ public class GestorSenialRastreo {
         desviacionEstandar = new double[demandaReal.length];
         senialRastreo = new double[demandaReal.length];
 
+        alfa=0.3;
+
         for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
                 error[i] = 0;
@@ -196,6 +198,7 @@ public class GestorSenialRastreo {
      */
     public double calcularSenialRastreo(ProductoComponente producto) {
 
+        double resultado;
         GestorFecha gf = GestorFecha.getInstancia();
         GestorDemanda gd = GestorDemanda.getInstancia();
         List<DemandaXPeriodo> todas = gd.calcularPrediccionDemandaXPeriodo(producto);
@@ -203,7 +206,7 @@ public class GestorSenialRastreo {
 
         if (todas.size() > 0) {
             for (DemandaXPeriodo demandaXPeriodo : todas) {
-                if (gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(new Date())) {
+                if (gf.getAnio(demandaXPeriodo.getAnio()) == gf.getAnio(gf.getFechaHoy())) {
                     demandas.add(demandaXPeriodo);
                 }
             }
@@ -214,20 +217,25 @@ public class GestorSenialRastreo {
             for (int i = 0; i < demandas.size(); i++) {
                 demandaReal[i] = demandas.get(i).getVentas();
                 pronostico[i] = demandas.get(i).getPrediccionVenta();
+
             }
 
             double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
             
-            System.out.println("Size " + senial.length);
 
-            for (int i = 0; i < senial.length; i++) {
-                System.out.println("i " + senial[i]);
-
+            if(senial.length > 0){
+                resultado= senial[senial.length - 1];
+                
+            }else{
+                resultado= Double.NaN;
             }
-            return senial[senial.length - 1];
+
         } else {
-            return -1;
+            resultado= Double.NaN;
         }
 
+        
+
+        return resultado;
     }
 }

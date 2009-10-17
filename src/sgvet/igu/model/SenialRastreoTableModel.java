@@ -179,7 +179,7 @@ public class SenialRastreoTableModel extends AbstractTableModel implements IMode
         limpiarTableModel();
         if (prod != null) {
             for (ProductoComponente productoComponente : prod) {
-                if (gsr.calcularSenialRastreo(productoComponente) >= 0) {
+                if (gsr.calcularSenialRastreo(productoComponente) != Double.NaN) {
                     productos.add(productoComponente);
                 } else {
                     faltanFilas = true;
