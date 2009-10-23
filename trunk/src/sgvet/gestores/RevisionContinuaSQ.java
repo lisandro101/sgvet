@@ -37,12 +37,12 @@ double CTG;
 double Qoptimo;
 public RevisionContinuaSQ(){}
 
-public double CTG(double A1, double N1,double H1, double Q1)
+public double CTG(double CostoEmision, double CantDemandaAnual,double CostoAnualMant, double TamanioLote)
 {
- A=A1;
- N=N1;
- H=H1;
- Q=Q1;
+ A=CostoEmision;
+ N=CantDemandaAnual;
+ H=CostoAnualMant;
+ Q=TamanioLote;
   double CTG1,CTG2;
   System.out.println(A);
   System.out.println("__");
@@ -57,23 +57,37 @@ public double CTG(double A1, double N1,double H1, double Q1)
   return  CTG=CTG1+CTG2;
 
 }
-public double N (double D, double Q)
+public double N (double DemandaAnual, double TamanioLote)
 {
+    D=DemandaAnual;
+    Q=TamanioLote;
+    System.out.println("El Cantidad de Pedido Por Anio es:");
+    System.out.println(N);
     return N=D/Q;
 }
 public double CostoTotalAnualEmision(double A,double D, double Q)
 {
+    System.out.println("El Costo Anual de Emision es:");
+    System.out.println(AN);
     return AN=A*(D/Q);
 }
-public double H(double r, double C)
+public double H(double TasaAnual, double CostoUnitario)
 {
+ r=TasaAnual;
+ C=CostoUnitario;
+  System.out.println("El Costo Anual de Almacenamiento es:");
   System.out.println(H);
   return H=r*C;
 
 }
-public double Qoptimo(double A, double D, double H)
+public double Qoptimo(double CostoEmision, double DemandaAnual, double CostoAnualMant)
 {
+ A=CostoEmision;
+ H=CostoAnualMant;
+ D=DemandaAnual;
     Qoptimo=Math.sqrt((2*A*D)/(H));
+    System.out.println("El Lote Optimo es:");
+    System.out.println(Qoptimo);
     return Qoptimo;
 }
 
