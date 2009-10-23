@@ -34,7 +34,11 @@ double H;
 double r;
 double C;
 double CTG;
-double Qoptimo;
+double QOptimo;
+double CTGOptimo;
+double NOptimo;
+double TAnual;
+
 public RevisionContinuaSQ(){}
 
 public double CTG(double CostoEmision, double DemandaAnual,double CostoAnualMant, double TamanioLote)
@@ -70,14 +74,56 @@ public double H(double TasaAnual, double CostoUnitario)
  return H=r*C;
 
 }
-public double Qoptimo(double CostoEmision, double DemandaAnual, double CostoAnualMant)
+public double QOptimo(double CostoEmision, double DemandaAnual, double CostoAnualMant)
 {
  A=CostoEmision;
  H=CostoAnualMant;
  D=DemandaAnual;
- Qoptimo=Math.sqrt((2*A*D)/(H));
- return Qoptimo;
+ QOptimo=Math.sqrt((2*A*D)/(H));
+ return QOptimo;
+}
+public double CTGOptimo(double CostoEmision, double DemandaAnual, double  CostoAnualMant)
+{
+    A=CostoEmision;
+    D=DemandaAnual;
+    H=CostoAnualMant;
+    CTGOptimo=Math.sqrt(2*A*D*H);
+    return CTGOptimo;
+}
+public double NOptimo(double CostoEmision, double DemandaAnual, double  CostoAnualMant)
+{
+    A=CostoEmision;
+    D=DemandaAnual;
+    H=CostoAnualMant;
+    NOptimo=Math.sqrt((D*H)/(2*A));
+    return NOptimo;
+}
+public double TAnual(double DemandaAnual, double TamanioLote)
+{
+   D=DemandaAnual;
+   Q=TamanioLote;
+   TAnual=Q/D;
+return TAnual;
+}
+public double TMensual(double DemandaAnual, double TamanioLote)
+{
+   D=DemandaAnual;
+   Q=TamanioLote;
+   double TMensual=(Q/D)*12;
+return TMensual;
+}
+public double TSemanal(double DemandaAnual, double TamanioLote)
+{
+   D=DemandaAnual;
+   Q=TamanioLote;
+   double TSemanal=(Q/D)*12;
+return TSemanal;
 }
 
 }
+
+
+
+
+
 
