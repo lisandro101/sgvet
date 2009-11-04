@@ -15,7 +15,7 @@ import sgvet.utils.*;
  *
  * @author  Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
-public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog implements IValidable {
+public class PanelDemandaConTendencia extends javax.swing.JDialog implements IValidable {
     private static final long serialVersionUID = 1L;
 
 //    private DemandaSESTableModel tmDemanda;
@@ -30,7 +30,7 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
 
 
     /** Creates new form PanelCargoEmpleado */
-    public PanelDemandaExpoConTendenciaNew(ProductoComponente productoNuevo) {
+    public PanelDemandaConTendencia(ProductoComponente productoNuevo) {
 
         producto = productoNuevo;
 
@@ -41,7 +41,7 @@ public class PanelDemandaExpoConTendenciaNew extends javax.swing.JDialog impleme
 
     }
 
-    public PanelDemandaExpoConTendenciaNew() {
+    public PanelDemandaConTendencia() {
         initComponents();
         inicializar();
 

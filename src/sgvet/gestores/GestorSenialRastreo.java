@@ -1,7 +1,6 @@
 package sgvet.gestores;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;

@@ -553,7 +553,7 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
        if (tipoDemanda.equalsIgnoreCase("SE Simple")) {
 
 //           PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
-           PanelDemandaExpoSimpleNew panel = new PanelDemandaExpoSimpleNew(productoComponente);
+           PanelDemandaSimple panel = new PanelDemandaSimple(productoComponente);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
 
@@ -561,12 +561,12 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
        else if(tipoDemanda.equalsIgnoreCase("SE Estacionalidad")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
            
            //PanelDemandaExpoConEsta panel = new PanelDemandaExpoConEsta(productoComponente);
-           PanelDemandaExpoConEstacionalidadNew panel = new PanelDemandaExpoConEstacionalidadNew(productoComponente);
+           PanelDemandaConEstacionalidad panel = new PanelDemandaConEstacionalidad(productoComponente);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
        }
        else if(tipoDemanda.equalsIgnoreCase("SE Tendencia")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-           PanelDemandaExpoConTendenciaNew panel = new PanelDemandaExpoConTendenciaNew(productoComponente);
+           PanelDemandaConTendencia panel = new PanelDemandaConTendencia(productoComponente);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
        }
