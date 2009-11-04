@@ -40,7 +40,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTabbedPane1.add("     Proveedor     ", panelProveedor);
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
         jTabbedPane1.add("       Venta       ", panelOrdenProduccion);
-        jTabbedPane1.add("   Orden Compra    ", panelOrdenCompra);
+        jTabbedPane1.add("    Orden Compra   ", panelOrdenCompra);
     }
 
     /** This method is called from within the constructor to

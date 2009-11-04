@@ -27,7 +27,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="16" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -39,7 +39,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="41" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -60,7 +60,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="pBotones" pref="740" max="32767" attributes="2"/>
+                          <Component id="pBotones" pref="742" max="32767" attributes="2"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -161,15 +161,15 @@
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Component id="lbDemandaAnualTotal" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfDemandaAnualTotal" pref="55" max="32767" attributes="0"/>
+                          <Component id="tfDemandaAnualTotal" pref="72" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="lbDemandaValorizadaTotal" min="-2" pref="132" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="tfDemandaValorizadaTotal" pref="77" max="32767" attributes="0"/>
+                          <Component id="tfDemandaValorizadaTotal" pref="92" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Component id="lbCantidadProductos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="tfCantidadProductos" pref="81" max="32767" attributes="0"/>
+                          <Component id="tfCantidadProductos" pref="96" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -323,7 +323,7 @@
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                           <Component id="lbDemanda90" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfDemanda90" pref="129" max="32767" attributes="0"/>
+                          <Component id="tfDemanda90" pref="149" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -387,7 +387,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Component id="jpCategoria" pref="728" max="32767" attributes="2"/>
+                      <Component id="jpCategoria" pref="730" max="32767" attributes="2"/>
                   </Group>
               </Group>
             </DimensionLayout>

@@ -10,6 +10,7 @@ import sgvet.persistencia.FachadaPersistencia;
 public class GestorABC {
 
     private static GestorABC instance;
+    private static GestorConfiguracion gc;
     private double demandaAnualTotal;
     private double demandaValorizadaTotal;
     private int cantidadProductos;
@@ -22,6 +23,7 @@ public class GestorABC {
     public synchronized static GestorABC getInstancia() {
         if (instance == null) {
             instance = new GestorABC();
+            gc = GestorConfiguracion.getInstancia();
         }
         return instance;
     }
@@ -173,7 +175,7 @@ public class GestorABC {
                     "FROM ProductoComponente a " +
                     "WHERE a.borrado = false " +
                     "AND a.categoria = :categoria");
-            consulta.setParameter("categoria", categoria);
+            consulta.setParameter("categoria", gc.getClaseDemanda(categoria));
             productos = FachadaPersistencia.getInstancia().buscar(
                     ProductoComponente.class, consulta);
         }

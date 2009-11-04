@@ -114,7 +114,7 @@ public class CurvaABCTableModel extends AbstractTableModel implements IModeloRei
     /**
      * Agrega Proveedor al modelo
      * 
-     * @param proveedor Proveedor a agregar
+     * @param item
 
      */
     public void agregarFila(ItemABC item) {
