@@ -451,7 +451,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
 }//GEN-LAST:event_rbClaseA1ActionPerformed
 
     private void rbClaseB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClaseB1ActionPerformed
-        clase = "Curva B";
+        clase = "Clase B";
 
         rbClaseA1.setSelected(false);
         rbClaseB1.setSelected(true);
@@ -461,7 +461,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
 }//GEN-LAST:event_rbClaseB1ActionPerformed
 
     private void rbClaseC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClaseC1ActionPerformed
-        clase = "Curva C";
+        clase = "Clase C";
 
         rbClaseA1.setSelected(false);
         rbClaseB1.setSelected(false);
