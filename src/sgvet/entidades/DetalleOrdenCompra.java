@@ -22,11 +22,11 @@ import sgvet.persistencia.IPersistente;
  * @version 1.0
  */
 @Entity
-@Table(name="detalles_ordenes_de_compra")
+@Table(name = "detalles_ordenes_de_compra")
 public class DetalleOrdenCompra implements Serializable, IPersistente {
+
     private static final long serialVersionUID = 1L;
     private static final List<String> CAMPOS_UNICOS = new ArrayList<String>(0);
-    
     private String id;
     private double cantidad;
     private Componente componente;
@@ -46,7 +46,7 @@ public class DetalleOrdenCompra implements Serializable, IPersistente {
      * @return El identificador único de la clase
      */
     @Id
-    @Column(name="id", length=36)
+    @Column(name = "id", length = 36)
     public String getId() {
         return id;
     }
@@ -60,17 +60,17 @@ public class DetalleOrdenCompra implements Serializable, IPersistente {
         this.id = id;
     }
 
-    @Column(name="cantidad")
+    @Column(name = "cantidad")
     public double getCantidad() {
         return cantidad;
     }
-    
+
     public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
-    @JoinColumn(name="componente_id")
-    @ManyToOne(targetEntity=Componente.class, cascade=CascadeType.ALL)
+    @JoinColumn(name = "componente_id")
+    @ManyToOne(targetEntity = Componente.class, cascade = CascadeType.ALL)
     public Componente getComponente() {
         return componente;
     }
@@ -78,9 +78,9 @@ public class DetalleOrdenCompra implements Serializable, IPersistente {
     public void setComponente(Componente componente) {
         this.componente = componente;
     }
-    
-    @JoinColumn(name="orden_de_compra_id")
-    @ManyToOne(targetEntity=OrdenCompra.class, cascade=CascadeType.ALL)
+
+    @JoinColumn(name = "orden_de_compra_id")
+    @ManyToOne(targetEntity = OrdenCompra.class, cascade = CascadeType.ALL)
     public OrdenCompra getOrdenCompra() {
         return ordenCompra;
     }
@@ -88,12 +88,13 @@ public class DetalleOrdenCompra implements Serializable, IPersistente {
     public void setOrdenCompra(OrdenCompra ordenCompra) {
         this.ordenCompra = ordenCompra;
     }
-    
-    @Column(name="borrado")
+
+    @Column(name = "borrado")
     public boolean isBorrado() {
         return borrado;
     }
 
+    @Override
     public void setBorrado(boolean borrado) {
         this.borrado = borrado;
     }
@@ -102,5 +103,10 @@ public class DetalleOrdenCompra implements Serializable, IPersistente {
     @Transient
     public List<String> getCamposUnicos() {
         return CAMPOS_UNICOS;
+    }
+
+    @Override
+    public String toString() {
+        return ("[" + id + "," + ordenCompra.toString() + "]");
     }
 }

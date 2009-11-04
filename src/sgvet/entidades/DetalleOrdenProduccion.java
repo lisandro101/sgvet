@@ -103,4 +103,9 @@ public class DetalleOrdenProduccion implements Serializable, IPersistente {
     public List<String> getCamposUnicos() {
         return CAMPOS_UNICOS;
     }
+
+    @Override
+    public String toString() {
+        return ("[" + id + "," + venta.toString() + "]");
+    }
 }

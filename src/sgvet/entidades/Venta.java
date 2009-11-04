@@ -17,7 +17,7 @@ import javax.persistence.Transient;
 import sgvet.persistencia.IPersistente;
 
 /**
- * Contiene los datos de una orden de producción
+ * Contiene los datos de una venta
  * 
  * @author Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  * @version 1.0
@@ -34,9 +34,12 @@ public class Venta implements Serializable, IPersistente {
     private List<DetalleOrdenProduccion> detallesOrdenProduccion;
     private boolean borrado;
     private int nroOrdenProduccion;
-    private EstadoOrdenProd estado;
+    private EstadoVenta estado;
 
-    public enum EstadoOrdenProd {
+    /**
+     * Representa el estado de una venta
+     */
+    public enum EstadoVenta {
 
         PROCESANDO("Procesando"),
         TERMINADO("Terminado"),
@@ -44,24 +47,32 @@ public class Venta implements Serializable, IPersistente {
         SUSPENDIDO("Suspendido");
         private String nombre;
 
-        private EstadoOrdenProd(String nombre) {
+        private EstadoVenta(String nombre) {
             this.nombre = nombre;
         }
 
-//        public EstadoOrdenProd obtenerEstado(String valor) {
-//        EstadoOrdenProd resultado = null;
-//        if(valor.equals("Procesando")){
-//            resultado= EstadoOrdenProd.PROCESANDO;
-//        }else if(valor.equals("Terminado")){
-//            resultado= EstadoOrdenProd.TERMINADO;
-//        }else if(valor.equals("Anulado")){
-//            resultado= EstadoOrdenProd.ANULADO;
-//        }else if(valor.equals("Suspendido")){
-//            resultado= EstadoOrdenProd.SUSPENDIDO;
-//        }
-//        
-//        return resultado;
-//    }
+        /**
+         * Devuelve el EstadoVenta correspondiente a la cadena recibida
+         * @param estado 
+         * @return
+         */
+        public EstadoVenta obtenerEstado(String estado) {
+
+            EstadoVenta resultado = null;
+
+            if (estado.equals("Procesando")) {
+                resultado = EstadoVenta.PROCESANDO;
+            } else if (estado.equals("Terminado")) {
+                resultado = EstadoVenta.TERMINADO;
+            } else if (estado.equals("Anulado")) {
+                resultado = EstadoVenta.ANULADO;
+            } else if (estado.equals("Suspendido")) {
+                resultado = EstadoVenta.SUSPENDIDO;
+            }
+
+            return resultado;
+        }
+
         @Override
         public String toString() {
             return nombre;
@@ -150,11 +161,16 @@ public class Venta implements Serializable, IPersistente {
     }
 
     @Column(name = "estado")
-    public EstadoOrdenProd getEstado() {
+    public EstadoVenta getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoOrdenProd estado) {
+    public void setEstado(EstadoVenta estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString(){
+        return id;
     }
 }

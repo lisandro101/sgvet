@@ -110,6 +110,7 @@ public class OrdenCompra implements Serializable, IPersistente {
         return borrado;
     }
 
+    @Override
     public void setBorrado(boolean borrado) {
         this.borrado = borrado;
     }
@@ -118,6 +119,11 @@ public class OrdenCompra implements Serializable, IPersistente {
     @Transient
     public List<String> getCamposUnicos() {
         return CAMPOS_UNICOS;
+    }
+
+    @Override
+    public String toString() {
+        return id;
     }
     
 }

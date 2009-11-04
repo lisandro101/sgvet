@@ -7,7 +7,7 @@ package sgvet.gestores;
 import java.util.List;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.Venta;
-import sgvet.entidades.Venta.EstadoOrdenProd;
+import sgvet.entidades.Venta.EstadoVenta;
 import sgvet.entidades.ProductoComponente;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -38,8 +38,8 @@ public class GestorVenta {
     }
 
     public boolean anularOrden(Venta orden) {
-        if (orden.getEstado() == EstadoOrdenProd.SUSPENDIDO) {
-            orden.setEstado(EstadoOrdenProd.ANULADO);
+        if (orden.getEstado() == EstadoVenta.SUSPENDIDO) {
+            orden.setEstado(EstadoVenta.ANULADO);
             FachadaPersistencia.getInstancia().actualizar(orden, true);
             return true;
         }
@@ -48,8 +48,8 @@ public class GestorVenta {
 
     @Deprecated
     public boolean terminarOrden(Venta orden) {
-        if (orden.getEstado() == EstadoOrdenProd.PROCESANDO) {
-            orden.setEstado(EstadoOrdenProd.TERMINADO);
+        if (orden.getEstado() == EstadoVenta.PROCESANDO) {
+            orden.setEstado(EstadoVenta.TERMINADO);
             sumarProductoTerminado(orden);
             FachadaPersistencia.getInstancia().actualizar(orden, true);
             return true;
