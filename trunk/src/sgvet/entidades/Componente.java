@@ -220,7 +220,7 @@ public class Componente implements Serializable, IPersistente {
     }
 
     /**
-     * @param costoUnitarioOmision the costoUnitarioOmision to set
+     * @param costoUnitario
      */
     public void setCostoUnitario(double costoUnitario) {
         this.costoUnitario = costoUnitario;
@@ -299,6 +299,11 @@ public class Componente implements Serializable, IPersistente {
      */
     public void setDemandaAnual(double demandaAnual) {
         this.demandaAnual = demandaAnual;
+    }
+
+    @Override
+    public String toString(){
+        return nombre;
     }
     
     

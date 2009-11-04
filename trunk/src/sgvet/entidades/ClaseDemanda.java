@@ -80,7 +80,7 @@ public class ClaseDemanda implements Serializable, IPersistente {
 
     @Override
     public String toString(){
-        return getClase();
+        return clase;
     }
 
 }

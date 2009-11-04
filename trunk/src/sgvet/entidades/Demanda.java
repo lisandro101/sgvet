@@ -133,6 +133,9 @@ public class Demanda implements Serializable, IPersistente{
         this.borrado = borrado;
     }
 
+    @Override
+    public String toString() {
+        return ("[" + id + "," + producto.toString() + "]");
+    }
 
-    
 }
