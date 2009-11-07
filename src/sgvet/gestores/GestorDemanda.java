@@ -441,6 +441,7 @@ public class GestorDemanda {
         int periodoIni;
         DemandaXPeriodo ventaDelPeriodo;
 
+
         int primerIndice = 0;
         int indiceNroPeriodoActual = 0;
 
@@ -548,19 +549,28 @@ public class GestorDemanda {
         }
         detallesOrdenes = detallesTemp;
 
-
+        mostrarDetallesVentas(detallesTemp);
 
         return detallesOrdenes;
     }
 
     private List<DemandaXPeriodo> abrirPeriodoActualSiNoEstaFinalizado(List<DemandaXPeriodo> ventas) {
-        int indice = ventas.size() - 1;
-        DemandaXPeriodo demandete = ventas.get(indice);
+//        int indice = ventas.size() - 1;
+//        DemandaXPeriodo demandete = ventas.get(indice);
 
-        if (GestorFecha.getInstancia().isFechaDelPeriodo(GestorFecha.getInstancia().getFechaHoy(), demandete)) {
-            ventas.get(indice).setCerrado(false);
-            ventasDelMesAbierto = ventas.get(indice).getVentas();
-            fechaCierre = ventas.get(indice).getFechaFin();
+
+        for (DemandaXPeriodo demandaXPeriodo : ventas) {
+            if (GestorFecha.getInstancia().isFechaDelPeriodo(GestorFecha.getInstancia().getFechaHoy(), demandaXPeriodo)) {
+//                ventas.get(indice).setCerrado(false);
+//                ventasDelMesAbierto = ventas.get(indice).getVentas();
+//                fechaCierre = ventas.get(indice).getFechaFin();
+                demandaXPeriodo.setCerrado(false);
+                ventasDelMesAbierto = demandaXPeriodo.getVentas();
+                fechaCierre = demandaXPeriodo.getFechaFin();
+
+            }else if(demandaXPeriodo.getFechaInicio().compareTo(GestorFecha.getInstancia().getFechaHoy())>0){
+                demandaXPeriodo.setCerrado(false);
+            }
         }
 
         return ventas;
@@ -576,7 +586,7 @@ public class GestorDemanda {
         return resul;
     }
 
-    public void mostrarXPantalla(List<DemandaXPeriodo> demandas) {
+    private  void mostrarXPantalla(List<DemandaXPeriodo> demandas) {
         String estado;
         if (demandas != null) {
             for (DemandaXPeriodo demandaXPeriodo : demandas) {
@@ -744,10 +754,20 @@ public class GestorDemanda {
             }
 
 
-            mostrarXPantalla(demandas);
+            //mostrarXPantalla(demandas);
 
         }
 
         return demandas;
     }
+
+     private void mostrarDetallesVentas(List<DetalleOrdenProduccion> detalles) {
+
+         System.out.println("\n\n ---------------------------------------------------");
+         System.out.println("VENTAS PRODUCTO: "+ detalles.get(0).getProducto().getNombre()+"\n");
+         for (DetalleOrdenProduccion detalle : detalles) {
+             System.out.println("Fecha: "+GestorFecha.getInstancia().formatearFecha(detalle.getVenta().getFecha())+"      Cantidad: "+ detalle.getVenta().getDetallesOrdenProduccion().get(0).getCantidad());
+         }
+         System.out.println("\n\n ---------------------------------------------------");
+     }
 }

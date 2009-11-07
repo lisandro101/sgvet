@@ -15,6 +15,11 @@ import sgvet.persistencia.IPersistente;
  *
  * @author Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
+
+// Simple - vital Can Vitamina 200gm
+// Con tendencia - PURINA Vitamina 200gm
+// Con estacionalidad - Protect Garrapaticida aerosol
+
 public class Main {
 
     /**

@@ -89,7 +89,7 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
         jLabel1 = new javax.swing.JLabel();
         tfFechaCierre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        tfAcumulado = new javax.swing.JTextField();
+        tfAcumuladoPerAbierto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -140,8 +140,8 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                     .addComponent(lbNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
-                    .addComponent(tfNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
+                    .addComponent(tfCodigoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                    .addComponent(tfNombreProducto, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminadoLayout.setVerticalGroup(
@@ -197,7 +197,7 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
 
         jLabel2.setText("Acumulado:");
 
-        tfAcumulado.setEditable(false);
+        tfAcumuladoPerAbierto.setEditable(false);
 
         javax.swing.GroupLayout pPeriodoAbiertoLayout = new javax.swing.GroupLayout(pPeriodoAbierto);
         pPeriodoAbierto.setLayout(pPeriodoAbiertoLayout);
@@ -210,7 +210,7 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfAcumulado, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(tfAcumuladoPerAbierto, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(tfFechaCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -224,7 +224,7 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfAcumulado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfAcumuladoPerAbierto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -241,12 +241,12 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                             .addComponent(lbAlfa5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                            .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                            .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)))
+                            .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                            .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbPrediccion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(54, 54, 54)
                 .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -310,7 +310,7 @@ private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         ventas= GestorDemanda.getInstancia().calcularDemandaXPeriodo(producto);
         tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().calcularAcumulado(ventas)));
         tfPrediccion.setText(GestorDemanda.getInstancia().calcularESNew(alfa, ventas)+"");
-        GestorDemanda.getInstancia().mostrarXPantalla(ventas);
+ //       GestorDemanda.getInstancia().mostrarXPantalla(ventas);
         inicializarPanelPeriodoAbierto();
     }
 
@@ -344,7 +344,7 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JPanel pPeriodoAbierto;
     private javax.swing.JPanel pProducto;
     private javax.swing.JPanel pProductoTerminado;
-    private javax.swing.JTextField tfAcumulado;
+    private javax.swing.JTextField tfAcumuladoPerAbierto;
     private javax.swing.JTextField tfAlfa;
     private javax.swing.JTextField tfCodigoProducto;
     private javax.swing.JTextField tfDemandaAcumulada;
@@ -400,7 +400,7 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }
 
    private void inicializarPanelPeriodoAbierto(){
-        tfAcumulado.setText(String.valueOf(GestorDemanda.getInstancia().getVentasPeriodoAbierto()));
+        tfAcumuladoPerAbierto.setText(String.valueOf(GestorDemanda.getInstancia().getVentasPeriodoAbierto()));
         
         if(GestorDemanda.getInstancia().getFechaCierre() != null){
             tfFechaCierre.setText(formatearFecha(GestorDemanda.getInstancia().getFechaCierre()));

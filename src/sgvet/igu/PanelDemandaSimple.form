@@ -126,8 +126,8 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfCodigoProducto" pref="475" max="32767" attributes="3"/>
-                          <Component id="tfNombreProducto" alignment="0" pref="475" max="32767" attributes="3"/>
+                          <Component id="tfCodigoProducto" pref="479" max="32767" attributes="3"/>
+                          <Component id="tfNombreProducto" alignment="0" pref="479" max="32767" attributes="3"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -197,14 +197,14 @@
                           </Group>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="tfAlfa" alignment="0" pref="133" max="32767" attributes="2"/>
-                              <Component id="tfPrediccion" alignment="0" pref="133" max="32767" attributes="0"/>
-                              <Component id="tfDemandaAcumulada" alignment="0" pref="133" max="32767" attributes="0"/>
+                              <Component id="tfAlfa" alignment="0" pref="141" max="32767" attributes="2"/>
+                              <Component id="tfPrediccion" alignment="0" pref="141" max="32767" attributes="0"/>
+                              <Component id="tfDemandaAcumulada" alignment="0" pref="141" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lbPrediccion" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="189" max="-2" attributes="0"/>
+                          <EmptySpace pref="197" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -294,7 +294,7 @@
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfAcumulado" pref="107" max="32767" attributes="2"/>
+                          <Component id="tfAcumuladoPerAbierto" pref="107" max="32767" attributes="2"/>
                           <Component id="tfFechaCierre" alignment="0" pref="107" max="32767" attributes="2"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -312,7 +312,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tfAcumulado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfAcumuladoPerAbierto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -335,7 +335,7 @@
                 <Property name="text" type="java.lang.String" value="Acumulado:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tfAcumulado">
+            <Component class="javax.swing.JTextField" name="tfAcumuladoPerAbierto">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
