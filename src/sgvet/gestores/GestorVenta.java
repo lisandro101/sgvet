@@ -30,11 +30,21 @@ public class GestorVenta {
     private GestorVenta() {
     }
 
-    public void procesarOrden(Venta orden) {
+    /**
+     * Si existe stock suficiente, se descuenta el stock.
+     * @param venta 
+     * @return
+     */
+    public boolean procesarOrden(Venta venta) {
 
-        if (existenProductos(orden)) {
-            descontarStock(orden);
+        boolean resultado = false;
+
+        if (existenProductos(venta)) {
+            descontarStock(venta);
+            resultado = true;
         }
+
+        return resultado;
     }
 
     public boolean anularOrden(Venta orden) {
@@ -68,13 +78,14 @@ public class GestorVenta {
         return Integer.toString(ultimaOrden + 1);
     }
 
-    private void descontarStock(Venta orden) {
+    private void descontarStock(Venta venta) {
 
-        for (DetalleOrdenProduccion detalle : orden.getDetallesOrdenProduccion()) {
+        for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
             ProductoComponente prod = detalle.getProducto();
             prod.setStock(prod.getStock() - detalle.getCantidad());
             FachadaPersistencia.getInstancia().actualizar(prod, true);
         }
+
     }
 
     private boolean existenProductos(Venta venta) {
