@@ -68,6 +68,21 @@
                           <EmptySpace min="-2" pref="256" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="54" pref="54" max="54" attributes="0"/>
+                                  <Component id="tfEstado" min="-2" pref="125" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btEntregado" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="lbEstado" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace pref="238" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="532" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -91,7 +106,13 @@
                       <Component id="tfProveedor" alignment="2" min="-2" max="-2" attributes="0"/>
                       <Component id="btBuscar" alignment="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tfEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btEntregado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -145,6 +166,24 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Nro Orden"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lbEstado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Estado"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="tfEstado">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btEntregado">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Entregado"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEntregadoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

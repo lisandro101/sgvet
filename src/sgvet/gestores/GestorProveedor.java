@@ -2,14 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package sgvet.gestores;
-
 
 import java.util.List;
 import javax.persistence.Query;
-import sgvet.entidades.Componente;
-import sgvet.entidades.OrdenCompra;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.Proveedor;
 import sgvet.persistencia.FachadaPersistencia;
@@ -19,20 +15,20 @@ import sgvet.persistencia.FachadaPersistencia;
  * @author stafoxter
  */
 public class GestorProveedor {
-    
+
     private static GestorProveedor instancia;
-    
-    public synchronized static GestorProveedor getInstancia(){
-        if (instancia == null){
+
+    public synchronized static GestorProveedor getInstancia() {
+        if (instancia == null) {
             instancia = new GestorProveedor();
         }
-        return instancia;            
+        return instancia;
     }
-    private GestorProveedor(){
-        
+
+    private GestorProveedor() {
     }
-    
-    public boolean sePuedeEliminar(Proveedor proveedor){
+
+    public boolean sePuedeEliminar(Proveedor proveedor) {
         Query consulta;
         List<Proveedor> proveedores;
 //        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from OrdenCompra a where a.proveedor = :prov and a.borrado=false");
@@ -43,14 +39,16 @@ public class GestorProveedor {
 //            return false;
 //        }
 
-        consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from ProductoComponente a where a.borrado=false");
-        List<ProductoComponente> componentes = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
-        
+        consulta = FachadaPersistencia.getInstancia().crearConsulta(
+                "Select a from ProductoComponente a where a.borrado=false");
+        List<ProductoComponente> componentes = FachadaPersistencia.getInstancia().buscar(
+                ProductoComponente.class, consulta);
+
         for (ProductoComponente com : componentes) {
-            proveedores= com.getProveedores();
-            
+            proveedores = com.getProveedores();
+
             for (Proveedor prov : proveedores) {
-                if(prov.getNombre().equals(proveedor.getNombre())){
+                if (prov.getNombre().equals(proveedor.getNombre())) {
                     return false;
                 }
             }
@@ -64,15 +62,4 @@ public class GestorProveedor {
         return true;
     }
 
-    public boolean proveeComponente(Componente componente, Proveedor proveedor){
-        Query consulta;
-        ProductoComponente prodComp =  FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, (Object)componente.getId());
-        if(proveedor.getComponentes().contains(prodComp)){
-            return true;
-        }
-        
-        
-        return false;
-    }
-    
 }
