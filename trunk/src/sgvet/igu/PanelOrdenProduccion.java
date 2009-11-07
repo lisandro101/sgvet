@@ -24,27 +24,28 @@ import sgvet.utils.Util;
 public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidable {
 
     private static final long serialVersionUID = 1L;
-    
     private List<Component> componentesObligatorios;
-    
     private Venta venta;
     private OrdenProduccionTableModel tm;
     private ProductoComponente producto;
     private DetalleOrdenProduccion detalleOrdenProduccion;
-    
-    
+
     /** Creates new form OrdenCompra */
     public PanelOrdenProduccion() {
-        initComponents();
-        componentesObligatorios = Arrays.asList((Component)jdFecha);
-        inicializar();
-    }
 
-    private void inicializar() { 
-        tm = new OrdenProduccionTableModel(0);
-        jtProducto.setModel(tm);
+        initComponents();
+        componentesObligatorios = Arrays.asList((Component) jdFecha);
+        inicializar();
         
     }
+
+    private void inicializar() {
+
+        tm = new OrdenProduccionTableModel(0);
+        jtProducto.setModel(tm);
+
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -330,63 +331,71 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
     }// </editor-fold>//GEN-END:initComponents
 
     private void limpiarCampos() {
+
         Util.getInstancia().limpiarCampos(this);
         venta = null;
         btProcesarOrdenProduccion.setEnabled(true);
+
     }
 
 private void tfNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNumeroActionPerformed
-// TODO add your handling code here:
 }//GEN-LAST:event_tfNumeroActionPerformed
 
 private void btEliminarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarProductoActionPerformed
-    int filaSeleccionada = jtProducto.convertRowIndexToModel(jtProducto.getSelectedRow());
-    if(filaSeleccionada == -1){
+
+    int filaSeleccionada = jtProducto.convertRowIndexToModel(
+            jtProducto.getSelectedRow());
+    if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "No se ha seleccionado Producto");
-    }else{
+    } else {
         tm.eliminarFila(filaSeleccionada);
-        
+
     }
+
 }//GEN-LAST:event_btEliminarProductoActionPerformed
 
 private void btModificarOrdenProduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarOrdenProduccionActionPerformed
+
     int opcion = JOptionPane.showConfirmDialog(this,
-                "¿Seguro desea guardar los cambios?", "Aceptar",
-                JOptionPane.YES_NO_OPTION);
-        
-    if(opcion == JOptionPane.YES_OPTION) {
+            "¿Seguro desea guardar los cambios?", "Aceptar",
+            JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
         actualizarOrdenProduccion();
         FachadaPersistencia.getInstancia().actualizar(venta, true);
 //        Util.getInstancia().limpiarCampos(this);
 //        venta=null;            
         //inicializarBotones();
     }
+
 }//GEN-LAST:event_btModificarOrdenProduccionActionPerformed
 
 private void btAnularOrdenProduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnularOrdenProduccionActionPerformed
+
     int opcion = JOptionPane.showConfirmDialog(this,
-                "¿Seguro desea anular la Orden de Compra?", "Aceptar",
-                JOptionPane.YES_NO_OPTION);
-        
-    if(opcion == JOptionPane.YES_OPTION) {
+            "¿Seguro desea anular la Orden de Compra?", "Aceptar",
+            JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
         //venta.setBorrado(true);
-        if(GestorVenta.getInstancia().anularOrden(venta)){
+        if (GestorVenta.getInstancia().anularOrden(venta)) {
             FachadaPersistencia.getInstancia().actualizar(venta, true);
-        }else{
-            JOptionPane.showMessageDialog(this, "No es posible anular la orden."+"\nEsta en estado: "+venta.getEstado().toString());
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "No es posible anular la orden." + "\nEsta en estado: " + venta.getEstado().toString());
         }
-        
+
 //        Util.getInstancia().limpiarCampos(this);
 //        venta=null;
         //inicializarBotones();
-    }   
+    }
 }//GEN-LAST:event_btAnularOrdenProduccionActionPerformed
 
 private void tfProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProductoActionPerformed
-// TODO add your handling code here:
 }//GEN-LAST:event_tfProductoActionPerformed
 
 private void btBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarProductoActionPerformed
+
     PanelBuscarProductoGral panelBuscar = new PanelBuscarProductoGral(this);
     panelBuscar.setModal(true);
     panelBuscar.setVisible(true);
@@ -394,61 +403,72 @@ private void btBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_btBuscarProductoActionPerformed
 
 private void btAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarProductoActionPerformed
-    int cantidad = (Integer)spCantidad.getValue();
-        if(producto == null ||cantidad ==0){
-            JOptionPane.showMessageDialog(this, "Existen campos vacios");
-        }else{ 
-            
-                detalleOrdenProduccion = new DetalleOrdenProduccion();
-                detalleOrdenProduccion.setProducto(producto);
-                detalleOrdenProduccion.setCantidad(cantidad);
-                
-                if(ValidacionBuscar.getInstancia().componenteEstaCargadoOrdenProdEnTabla(tm, detalleOrdenProduccion)){
-                    JOptionPane.showMessageDialog(this, "El Producto ya se encuentra asignado");
-                }else{
-                    tm.agregarFila(detalleOrdenProduccion);
-                    //tfArticulo.setText("");
-                    spCantidad.setValue((Integer.valueOf("0")));
 
-                }
-            
+    int cantidad = (Integer) spCantidad.getValue();
+    if (producto == null || cantidad == 0) {
+        JOptionPane.showMessageDialog(this, "Existen campos vacios");
+    } else {
+
+        detalleOrdenProduccion = new DetalleOrdenProduccion();
+        detalleOrdenProduccion.setProducto(producto);
+        detalleOrdenProduccion.setCantidad(cantidad);
+
+        if (ValidacionBuscar.getInstancia().componenteEstaCargadoOrdenProdEnTabla(
+                tm, detalleOrdenProduccion)) {
+            JOptionPane.showMessageDialog(this,
+                    "El Producto ya se encuentra asignado");
+        } else {
+            tm.agregarFila(detalleOrdenProduccion);
+            //tfArticulo.setText("");
+            spCantidad.setValue((Integer.valueOf("0")));
+
         }
+
+    }
 }//GEN-LAST:event_btAgregarProductoActionPerformed
 
 private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProcesarOrdenProduccionActionPerformed
+
     crearOrdenProduccion();
+
     if (ValidacionBuscar.getInstancia().estaDuplicado(venta)) {
         JOptionPane.showMessageDialog(this, "Orden ya registrada");
     } else {
 //        if(ValidacionBuscar.getInstancia().existenCamposVacios(this)){
 //            JOptionPane.showMessageDialog(this, "Existen campos vacios");
 //        }else{
-        if(tfCliente.getText().trim().equals("") || !(tm.getRowCount() >= 1)){
+        if (tfCliente.getText().trim().equals("") || (tm.getRowCount() < 1)) {
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         } else {
-            GestorVenta.getInstancia().procesarOrden(venta);
-            tfNumero.setText(GestorVenta.getInstancia().obtenerNroOrden());
-            //venta.setEstado(venta.getEstado());
-            venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
-            FachadaPersistencia.getInstancia().actualizar(venta, true);
-       //  limpiarCampos();
+            if (GestorVenta.getInstancia().procesarOrden(venta)) {
+                tfNumero.setText(GestorVenta.getInstancia().obtenerNroOrden());
+                //venta.setEstado(venta.getEstado());
+                venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
+                FachadaPersistencia.getInstancia().actualizar(venta, true);
+                //  limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "No hay stock suficiente de algun producto para cubrir la venta.");
+            }
+
         }
 
     }
 }//GEN-LAST:event_btProcesarOrdenProduccionActionPerformed
 
 private void btBuscarOrdenProduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarOrdenProduccionActionPerformed
+
     PanelBuscarOrdenProduccion panelBuscar = new PanelBuscarOrdenProduccion(this);
     panelBuscar.setModal(true);
     panelBuscar.setVisible(true);
-            
+
 }//GEN-LAST:event_btBuscarOrdenProduccionActionPerformed
 
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+    
     limpiarCampos();
+    
 }//GEN-LAST:event_btLimpiarActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgregarProducto;
     private javax.swing.JButton btAnularOrdenProduccion;
@@ -477,61 +497,68 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private javax.swing.JTextField tfProducto;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-    
-     private Venta crearOrdenProduccion(){
+    private Venta crearOrdenProduccion() {
+
         venta = new Venta();
-        
-        //venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
+
         venta.setNombreCliente(tfCliente.getText());
         venta.setDetallesOrdenProduccion(tm.getFilas());
         venta.setFecha(jdFecha.getDate());
-        
-         for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
-             detalle.setVenta(venta);
-         }
-        
+
+        for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
+            detalle.setVenta(venta);
+        }
+
         return venta;
+
     }
 
-    private void cargarPantallaOrdenProduccion(Venta orden){
+    private void cargarPantallaOrdenProduccion(Venta orden) {
+
         Util.getInstancia().limpiarCampos(this);
         venta = orden;
-        
+
         tfNumero.setText(Integer.toString(orden.getNroOrdenProduccion()));
         tfCliente.setText(orden.getNombreCliente());
         tm.agregarFilas(orden.getDetallesOrdenProduccion());
         jdFecha.setDate(orden.getFecha());
         btProcesarOrdenProduccion.setEnabled(false);
+
     }
-    
-    private void actualizarOrdenProduccion(){
+
+    private void actualizarOrdenProduccion() {
+
         venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
         venta.setNombreCliente(tfCliente.getText());
         venta.setDetallesOrdenProduccion(tm.getFilas());
         venta.setFecha(jdFecha.getDate());
+
     }
-    
-    public void setProducto(ProductoComponente prod){
-        producto= prod;
+
+    public void setProducto(ProductoComponente prod) {
+
+        producto = prod;
         tfProducto.setText(prod.getNombre());
-        
+
+
     }
-    
-    public void setOrdenProduccion(Venta orden){
+
+    public void setOrdenProduccion(Venta orden) {
+
         cargarPantallaOrdenProduccion(orden);
-        
+
     }
-    
+
     @Override
     public List<Component> getComponentesObligatorios() {
+        
         return componentesObligatorios;
+
     }
 
     public Venta getOrdenProduccion() {
+        
         return venta;
+
     }
-    
-    
 }
