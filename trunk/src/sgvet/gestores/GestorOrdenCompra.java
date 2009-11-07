@@ -6,6 +6,7 @@ package sgvet.gestores;
 
 import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.OrdenCompra;
+import sgvet.entidades.OrdenCompra.EstadoOrdenCompra;
 import sgvet.entidades.ProductoComponente;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -16,7 +17,6 @@ import sgvet.persistencia.FachadaPersistencia;
 public class GestorOrdenCompra {
 
     private static GestorOrdenCompra instancia;
-
     private FachadaPersistencia gp;
 
     public synchronized static GestorOrdenCompra getInstancia() {
@@ -25,21 +25,42 @@ public class GestorOrdenCompra {
         }
         return instancia;
     }
-    
-    public GestorOrdenCompra(){
+
+    public GestorOrdenCompra() {
+
         inicializar();
+        
     }
 
     private void inicializar() {
+
         gp = FachadaPersistencia.getInstancia();
+
     }
 
-    public void terminarOrden(OrdenCompra orden) {
-            sumarMateriales(orden);
+    public void procesarOrden(OrdenCompra orden) {
+
+        orden.setEstado(EstadoOrdenCompra.PENDIENTE);
+        gp.actualizar(orden, true);
+
+    }
+
+    public boolean terminarOrden(OrdenCompra orden) {
+
+        boolean resultado = false;
+
+        if (orden.getEstado() == EstadoOrdenCompra.PENDIENTE) {
+            aumentarStock(orden);
+            orden.setEstado(EstadoOrdenCompra.TERMINADO);
             gp.actualizar(orden, true);
+            resultado = true;
+        }
+
+        return resultado;
+
     }
 
-    private void sumarMateriales(OrdenCompra orden) {
+    private void aumentarStock(OrdenCompra orden) {
 
         double cantStock;
         double cantNueva;

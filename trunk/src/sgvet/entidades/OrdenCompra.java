@@ -36,6 +36,24 @@ public class OrdenCompra implements Serializable, IPersistente {
     private List<DetalleOrdenCompra> detallesOrdenCompra;
     private int nroOrdenCompra;
     private boolean borrado;
+    private EstadoOrdenCompra estado;
+
+    public enum EstadoOrdenCompra {
+        PENDIENTE ("Pendiente"),
+        TERMINADO ("Terminado"),
+        ANULADO ("Anulado");
+
+        private String nombre;
+
+        private EstadoOrdenCompra(String nombre) {
+            this.nombre = nombre;
+        }
+
+        @Override
+        public String toString() {
+            return nombre;
+        }
+    }
  
     /**
      * Constructor
@@ -124,6 +142,15 @@ public class OrdenCompra implements Serializable, IPersistente {
     @Override
     public String toString() {
         return id;
+    }
+
+    @Column(name="estado")
+    public EstadoOrdenCompra getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoOrdenCompra estado) {
+        this.estado = estado;
     }
     
 }
