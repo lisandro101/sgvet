@@ -28,10 +28,15 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     public PanelConfiguracion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        initComponents();
+        //initComponents();
+        cargarFecha();
+
     }
 
 
+    private void cargarFecha(){
+        dpFechaActual.setDate(GestorFecha.getInstancia().getFechaHoy());
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -115,7 +120,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     }// </editor-fold>//GEN-END:initComponents
 
     private void dpFechaActualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dpFechaActualActionPerformed
-        GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
+//        GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
 }//GEN-LAST:event_dpFechaActualActionPerformed
 
     private void btAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAplicarActionPerformed

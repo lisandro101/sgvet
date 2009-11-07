@@ -37,8 +37,9 @@ public class GestorFecha {
     /**
      * @param fechaHoy the fechaHoy to set
      */
-    public void setFechaHoy(Date fechaHoy) {
-        this.fechaHoy = fechaHoy;
+    public void setFechaHoy(Date fecha) {
+        fechaHoy = fecha;
+
     }
 
     /**
