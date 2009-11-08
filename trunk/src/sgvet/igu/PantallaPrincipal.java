@@ -58,7 +58,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         salir = new javax.swing.JMenuItem();
         demanda = new javax.swing.JMenu();
         curvaABC = new javax.swing.JMenuItem();
-        Stock = new javax.swing.JMenuItem();
         jmiSenialRastreo = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -112,15 +111,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
         demanda.add(curvaABC);
-
-        Stock.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        Stock.setText("Stock");
-        Stock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StockActionPerformed(evt);
-            }
-        });
-        demanda.add(Stock);
 
         jmiSenialRastreo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jmiSenialRastreo.setText("Señal de Rastreo");
@@ -262,20 +252,13 @@ private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:e
     salir();
 }//GEN-LAST:event_salirActionPerformed
 
-private void StockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockActionPerformed
-    PanelStock pstock = new PanelStock();
-    pstock.setLocationRelativeTo(this);
-    pstock.setVisible(true);
-
-}//GEN-LAST:event_StockActionPerformed
-
 private void jmiSenialRastreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSenialRastreoActionPerformed
     PanelSenialRastreo panelSR = new PanelSenialRastreo(this, true);
     panelSR.setLocationRelativeTo(this);
     panelSR.setVisible(true);
 }//GEN-LAST:event_jmiSenialRastreoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem Stock;
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
     private javax.swing.JMenu configuracion;

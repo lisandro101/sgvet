@@ -51,6 +51,7 @@ public class GestorRevisionContinua {
 
     public double CTG(double costoEmision, double demandaAnual,
             double costoAnualMant, double tamanioLote) {
+
         A = costoEmision;
         D = demandaAnual;
         H = costoAnualMant;
@@ -58,14 +59,18 @@ public class GestorRevisionContinua {
         double CTG1, CTG2;
         CTG1 = A * (D / Q);
         CTG2 = H * (Q / 2);
+
         return CTG = CTG1 + CTG2;
 
     }
 
     public double N(double demandaAnual, double tamanioLote) {
+
         D = demandaAnual;
         Q = tamanioLote;
+
         return N = D / Q;
+
     }
 
     public double CostoTotalAnualEmision(double costoEmision,
@@ -74,62 +79,84 @@ public class GestorRevisionContinua {
         A = costoEmision;
         D = demandaAnual;
         Q = tamanioLote;
+
         return AN = A * (D / Q);
+
     }
 
     public double H(double tasaAnual, double costoUnitario) {
+
         r = tasaAnual;
         C = costoUnitario;
+
         return H = r * C;
 
     }
 
     public double QOptimo(double costoEmision, double demandaAnual,
             double costoAnualMant) {
+
         A = costoEmision;
         H = costoAnualMant;
         D = demandaAnual;
         QOptimo = Math.sqrt((2 * A * D) / (H));
+
         return QOptimo;
+
     }
 
     public double CTGOptimo(double costoEmision, double demandaAnual,
             double costoAnualMant) {
+
         A = costoEmision;
         D = demandaAnual;
         H = costoAnualMant;
         CTGOptimo = Math.sqrt(2 * A * D * H);
+
         return CTGOptimo;
+
     }
 
     public double NOptimo(double CostoEmision, double DemandaAnual,
             double CostoAnualMant) {
+
         A = CostoEmision;
         D = DemandaAnual;
         H = CostoAnualMant;
         NOptimo = Math.sqrt((D * H) / (2 * A));
+
         return NOptimo;
+
     }
 
     public double TAnual(double demandaAnual, double tamanioLote) {
+
         D = demandaAnual;
         Q = tamanioLote;
         TAnual = Q / D;
+
         return TAnual;
+
     }
 
     public double TMensual(double demandaAnual, double tamanioLote) {
+
         D = demandaAnual;
         Q = tamanioLote;
         double TMensual = (Q / D) * 12;
+
         return TMensual;
+
     }
 
     public double TSemanal(double demandaAnual, double tamanioLote) {
+
         D = demandaAnual;
         Q = tamanioLote;
         double TSemanal = (Q / D) * 12;
+
         return TSemanal;
+        
     }
 
     /**
