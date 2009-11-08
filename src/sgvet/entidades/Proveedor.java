@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +41,7 @@ public class Proveedor implements Serializable, IPersistente {
     private String telefono;
     private List<OrdenCompra> ordenesCompra;
     private List<Componente> componentes;
+    private Politica politica;
     private boolean borrado;
 
     /**
@@ -195,6 +197,21 @@ public class Proveedor implements Serializable, IPersistente {
     @Override
     public String toString() {
         return nombre;
+    }
+
+    /**
+     * @return the politica
+     */
+    @OneToOne(targetEntity=Politica.class, cascade=CascadeType.ALL)
+    public Politica getPolitica() {
+        return politica;
+    }
+
+    /**
+     * @param politica the politica to set
+     */
+    public void setPolitica(Politica politica) {
+        this.politica = politica;
     }
 
 }

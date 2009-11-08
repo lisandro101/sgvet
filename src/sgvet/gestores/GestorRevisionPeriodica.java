@@ -1,41 +1,17 @@
 package sgvet.gestores;
 
+import sgvet.entidades.PoliticaRevisionPeriodica;
+import sgvet.entidades.ProductoComponente;
+
 /**
  *
- * @author Luciano
+ * @author Luciano, Lisandro
  */
 public class GestorRevisionPeriodica {
 
-    /**********************************************************************************
-    StockDisponible = StockRealEnAlmacen + StockPendienteDeEntrega - StockComprometido
-    Q: Cantidad a Ordenar(ya esta determinada)
-    Punto de Pedido: Cuando llega a este punto hay que hacer el Pedido.
-    Tiempo de Demora(Hasta el Almacen): Faltante Esperado.
-    Te: Tiempo de Entrega.
-    s: Punto de Pedido.
-    SS: Stock de Seguridad.
-    Xe: Demanda Durante el tiempo de Espera.
-    f: Funcion Densidad.
-    Moo: Demanda Esperada durante el tiempo de Entrega.
-    Omega: Desviacion Estandar durante el Tiempo de entrega.
-    Cf: Costo Unitario por faltante.
-    CGE: Costo Anual de Gestion Esperado.
-    Nivel de Servicio: Tabla de doble entrada, la dio la Profe.
-     **********************************************************************************/
-    private double NumeroDeOrdenes;
-    private double D;
-    private double Q;
-    private double A;
-    private double CostoAnualEmision;
-    private double Moo;
-    private double s;
-    private double H;
-    private double CostoAnualAlmacenamiento;
-    private double DesviacionEstandar;
-    private double K;
-    private double SS;
-    private double R;
     private static GestorRevisionPeriodica instancia;
+    ProductoComponente producto;
+    PoliticaRevisionPeriodica politica;
 
     public synchronized static GestorRevisionPeriodica getInstancia() {
         if (instancia == null) {
@@ -47,76 +23,80 @@ public class GestorRevisionPeriodica {
     private GestorRevisionPeriodica() {
     }
 
-    public double NumeroDeOrdenes(double demandaAnual, double tamanioLote) {
-        D = demandaAnual;
-        Q = tamanioLote;
-        if (Q == 0) {
-            System.out.println("DIVISION Sobre ZERO");
-            Q = 999999999;
+    /**
+     * Carga el gestor con la informacion de la interfaz.
+     *
+     * @param prod
+     */
+    public void cargarGestorRevisionPeriodica(ProductoComponente prod) {
+
+        politica = (PoliticaRevisionPeriodica) prod.getProveedores().get(0).getPolitica();
+        producto = prod;
+
+    }
+
+    private double getStockDeSeguridad() {
+
+        GestorStock gs = GestorStock.getInstancia();
+        double stockSeguridad = 0;
+
+        stockSeguridad = getDesviacionEstandarDemanda() * gs.getFactorDeSeguridad(politica.getNivelServicio());
+
+        return stockSeguridad;
+
+    }
+
+    private double getDesviacionEstandarDemanda() {
+
+        double desviacion;
+        double periodoRevision;
+
+        if (politica.getPeridoDeRevision() > 0) {
+            periodoRevision = politica.getPeridoDeRevision();
         } else {
-            NumeroDeOrdenes = D / Q;
+            periodoRevision = getPeriodoDeRevision();
         }
-        return NumeroDeOrdenes;
+
+        desviacion = politica.getTiempoEntrega() * periodoRevision / politica.getDesviacionEstandarDemanda();
+
+        return desviacion;
     }
 
-    public double CostoAnualEmision(double costoEmision, double demandaAnual,
-            double tamanioLote) {
-        A = costoEmision;
-        D = demandaAnual;
-        Q = tamanioLote;
-        if (Q == 0) {
-            System.out.println("DIVISION Sobre ZERO");
-            Q = 999999999;
+    /**
+     * Devuelve el stock disponible. Si el perido de revision es mayor que cero lo utiliza pero si es menor lo calcula.
+     * 
+     * @return
+     */
+    public double getStockDisponible() {
+
+        GestorStock gs = GestorStock.getInstancia();
+        double stockDisponible;
+        double tiempoEntrega;
+        double periodoRevision;
+
+        tiempoEntrega = politica.getTiempoEntrega();
+
+        if (politica.getPeridoDeRevision() > 0) {
+            periodoRevision = politica.getPeridoDeRevision();
         } else {
-            CostoAnualEmision = A * (D / Q);
-
+            periodoRevision = getPeriodoDeRevision();
         }
-        return CostoAnualEmision;
-    }
 
-    public double CostoAnualAlmacenamiento(double tamanioLote,
-            double puntoDePedido, double demandaEsperada,
-            double costoAlmacenamiento) {
-        Q = tamanioLote;
-        s = puntoDePedido;
-        Moo = demandaEsperada;
-        H = costoAlmacenamiento;
-        CostoAnualAlmacenamiento = ((Q / 2) + s - Moo) * H;
-        return CostoAnualAlmacenamiento;
-    }
+        stockDisponible = gs.getPrediccionDemanda(producto, tiempoEntrega + periodoRevision) + getStockDeSeguridad();
 
-    public double SSSinDemoras(double KEsperada,
-            double desviacionEstandarEsperada) {
-        DesviacionEstandar = desviacionEstandarEsperada;
-        K = KEsperada;
-        SS = K * DesviacionEstandar;
-        return SS;
+        return stockDisponible;
 
     }
 
-    public double SSinDemorada(double demandaAnualEsperada,
-            double nivelDeServicio, double desviacionEstandarEsperada) {
-        Moo = demandaAnualEsperada;
-        K = nivelDeServicio;
-        DesviacionEstandar = desviacionEstandarEsperada;
-        s = Moo + (K * DesviacionEstandar);
-        return s;
-    }
+    private double getPeriodoDeRevision() {
 
-    public double SSConDemoras(double KEsperada, double desviacionEstandar_R_Te) {
-        K = KEsperada;
-        DesviacionEstandar = desviacionEstandar_R_Te;
-        SS = K * (DesviacionEstandar);
-        return SS;
+        GestorStock gs = GestorStock.getInstancia();
+        double periodoDeRevision;
 
-    }
+        periodoDeRevision = gs.getQOptimo(producto) / producto.getDemandaAnual();
 
-    public double SConDemorada(double demandaAnualEsperada_R_Te, double SS_R_Te) {
-        SS = SS_R_Te;
-        Moo = demandaAnualEsperada_R_Te;
+        return periodoDeRevision;
 
-        s = Moo + (SS);
-        return s;
     }
 }
 

@@ -18,7 +18,6 @@ import sgvet.entidades.Proveedor;
 import sgvet.igu.PanelOrdenCompra;
 import sgvet.igu.PanelOrdenProduccion;
 import sgvet.igu.PanelProductoComponente;
-import sgvet.igu.interfaces.iBuscaProductoGeneral;
 import sgvet.igu.model.ProductoGralTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 

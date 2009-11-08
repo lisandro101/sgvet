@@ -5,7 +5,6 @@
 package sgvet.entidades.auxiliares;
 
 import java.util.Date;
-import sgvet.entidades.ProductoComponente;
 
 /**
  *
