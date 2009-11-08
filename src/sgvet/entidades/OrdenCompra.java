@@ -53,6 +53,7 @@ public class OrdenCompra implements Serializable, IPersistente {
         public String toString() {
             return nombre;
         }
+ 
     }
  
     /**

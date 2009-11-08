@@ -4,18 +4,16 @@
  */
 package sgvet.gestores;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
-import sgvet.entidades.Demanda;
+import sgvet.entidades.DetalleOrdenCompra;
+import sgvet.entidades.OrdenCompra;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.Stock;
 import sgvet.persistencia.FachadaPersistencia;
 
 public class GestorStock {
 
     private static GestorStock instance;
-    // private Stock stock;
 
     public synchronized static GestorStock getInstancia() {
         if (instance == null) {
@@ -24,168 +22,34 @@ public class GestorStock {
         return instance;
     }
 
-    Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
-            "SELECT a " +
-            "FROM ProductoComponente a " +
-            "WHERE a.borrado = false");
+    private double calcularStockPendiente(ProductoComponente prod) {
 
-    List<ProductoComponente> productos = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
-    int cantElem = productos.size();
-    private Stock stock;
-    private int demandaReal;
+        double cantidadPendiente = 0;
+        List<DetalleOrdenCompra> detalles;
 
-    public List<ProductoComponente> calcularStockDisponible() {
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
+                "SELECT a FROM DetalleOrdenCompra a WHERE a.componente=:producto AND a.borrado=false");
+        consulta.setParameter("producto", prod);
+        detalles = FachadaPersistencia.getInstancia().buscar(DetalleOrdenCompra.class,
+                consulta);
 
-        List<ProductoComponente> prodOrd = new ArrayList<ProductoComponente>();
-        ProductoComponente stockMayor = null;
-
-        for (int i = 0; i < cantElem; i++) {
-            stockMayor = productos.get(0);
-
-            for (ProductoComponente producto : productos) {
-
-                if (producto.getStock() >= stockMayor.getStock()) {
-                    stockMayor = producto;        
-                }    
+        for (DetalleOrdenCompra detalle : detalles) {
+            if(!detalle.getOrdenCompra().isBorrado() && detalle.getOrdenCompra().getEstado().equals(
+                    OrdenCompra.EstadoOrdenCompra.PENDIENTE)) {
+                cantidadPendiente += detalle.getCantidad();
             }
-            prodOrd.add(stockMayor);
-            productos.remove(stockMayor);
-        // stock = producto.getStockProducto();
-        // System.out.println("El producto " + producto.getNombre() + " tiene " + /*stock.getDisponible()*/producto.getStock() + " unidades en disponibilidad");
-
         }
-        return prodOrd;
+
+        return cantidadPendiente;
     }
 
-    public List<ProductoComponente> calcularStockDemandaAnual() {
+    private double calcularStockDisponible(ProductoComponente prod){
 
-        List<ProductoComponente> prodOrd = new ArrayList<ProductoComponente>();
-        ProductoComponente prodAnualMayor = null;
+        double stockDisponible;
 
-        for (int i = 0; i < cantElem; i++) {
+        stockDisponible = prod.getStock() + calcularStockPendiente(prod); //- stockComprometido
 
-            prodAnualMayor = productos.get(0);
-
-            for (ProductoComponente producto : productos) {
-
-                if (producto.getDemandaAnual() >= prodAnualMayor.getDemandaAnual()) {
-                    prodAnualMayor = producto;
-                }
-            }
-
-            prodOrd.add(prodAnualMayor);
-            productos.remove(prodAnualMayor);
-
-
-
-
-        }
-        return prodOrd;
+        return stockDisponible;
+        
     }
-
-    public List<ProductoComponente> calcularStockDemandaReal() {
-
-        List<ProductoComponente> prodOrd = new ArrayList<ProductoComponente>();
-        ProductoComponente prod = null;
-
-        for (int i = 0; i < cantElem; i++) {
-            prod = productos.get(0);
-
-            for (ProductoComponente producto : productos) {
-                List<Demanda> demandas = producto.getDemandas();
-                int demandaRealMayor = 0;
-
-                for (Demanda demanda : demandas) {
-                    demandaReal = +demanda.getDemandaReal();
-                }
-
-                if (demandaReal >= demandaRealMayor) {
-                    demandaRealMayor = demandaReal;
-
-                    if (demandaReal == demandaRealMayor) {
-
-                        prodOrd.add(prod);
-                        productos.remove(prod);
-
-                    }
-
-                }
-            }
-
-
-
-        }
-        return prodOrd;
-    }
-/*
-    public List<ProductoComponente> calcularStockReserva() {
-
-        List<ProductoComponente> prodOrd = new ArrayList<ProductoComponente>();
-        ProductoComponente stockMayorReserva = null;
-
-        for (int i = 0; i < cantElem; i++) {
-            stockMayorReserva = productos.get(0);
-
-            for (ProductoComponente producto : productos) {
-
-                if (producto.getStockReserva() >= stockMayorReserva.getStockReserva()) {
-                    stockMayorReserva = producto;
-                }
-                prodOrd.add(stockMayorReserva);
-                productos.remove(stockMayorReserva);
-            }
-
-
-        }
-        return prodOrd;
-    }
-
-     public List<ProductoComponente> obtenerPuntoReposicion() {
-
-        List<ProductoComponente> prodOrd = new ArrayList<ProductoComponente>();
-        ProductoComponente puntoRepMayor = null;
-
-        for (int i = 0; i < cantElem; i++) {
-            puntoRepMayor = productos.get(0);
-
-            for (ProductoComponente producto : productos) {
-
-                if (producto.getStockProducto().getPuntoReposicion() >= puntoRepMayor.getStockProducto().getPuntoReposicion()) {
-                    puntoRepMayor = producto;
-                }
-                prodOrd.add(puntoRepMayor);
-                productos.remove(puntoRepMayor);
-            }
-
-
-        }
-        return prodOrd;
-    }
-
-      public List<ProductoComponente> MostrarFaltanteStock() {
-
-        List<ProductoComponente> prodOrd = new ArrayList<ProductoComponente>();
-        ProductoComponente faltanteMayor = null;
-
-        for (int i = 0; i < cantElem; i++) {
-            faltanteMayor = productos.get(0);
-
-            for (ProductoComponente producto : productos) {
-
-                if (producto.getStockProducto().getFaltante()>= faltanteMayor.getStockProducto().getFaltante()) {
-                    faltanteMayor = producto;
-                }
-                prodOrd.add(faltanteMayor);
-                productos.remove(faltanteMayor);
-            }
-
-
-        }
-        return prodOrd;
-    }
-      */
-
-
 }
-
-

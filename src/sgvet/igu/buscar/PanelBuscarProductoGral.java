@@ -18,7 +18,6 @@ import sgvet.entidades.Proveedor;
 import sgvet.igu.PanelOrdenCompra;
 import sgvet.igu.PanelOrdenProduccion;
 import sgvet.igu.PanelProductoComponente;
-import sgvet.igu.PanelStock;
 import sgvet.igu.interfaces.iBuscaProductoGeneral;
 import sgvet.igu.model.ProductoGralTableModel;
 import sgvet.persistencia.FachadaPersistencia;
@@ -39,7 +38,6 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
     private PanelOrdenProduccion panelOrdenProduccion;
     private iBuscaProductoGeneral iProducto;
     private Proveedor proveedor;
-    private PanelStock panelStock;
 
     public enum Tipo {
 
@@ -64,7 +62,9 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
     }
     private Tipo tipo;
 
-    /** Creates new form PanelBuscarProductoGral */
+    /** Creates new form PanelBuscarProductoGral
+     * @param tm1
+     */
     //Si es para rellenar un Un TableModel
     public PanelBuscarProductoGral(TableModel tm1) {
         initComponents();
@@ -111,13 +111,6 @@ public class PanelBuscarProductoGral extends javax.swing.JDialog {
 //        inicializar();
 //    }
 
-    public PanelBuscarProductoGral(PanelStock panel) {
-        //throw new UnsupportedOperationException("Not yet implemented");
-        initComponents();
-        tipo = Tipo.PANEL_STOCK;
-        panelStock = panel;
-        inicializar();
-    }
 
     private void inicializar() {
         tmBuscar = new ProductoGralTableModel(0);

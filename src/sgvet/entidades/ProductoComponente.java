@@ -24,7 +24,6 @@ public class ProductoComponente extends Intermedio implements Serializable {
     private List<Demanda> demandas;
     private double precioVenta;
     private String tipoPrediccion;
-    private Stock stockProducto;
     private ClaseDemanda categoria;
     
 
@@ -54,21 +53,6 @@ public class ProductoComponente extends Intermedio implements Serializable {
 
     public void setDemandas(List<Demanda> demandas) {
         this.demandas = demandas;
-    }
-    //@OneToMany(targetEntity = Stock.class, cascade = CascadeType.ALL, mappedBy = "Producto")
-    //@OneToOne(targetEntity=Stock.class, cascade=CascadeType.ALL,mappedBy = "Producto")
-   // @OneToOne(mappedBy = "productoComponente")
-    
-    
-
-
-    @OneToOne
-    public Stock getStockProducto() {
-        return stockProducto;
-    }
-
-    public void setStockProducto(Stock stock) {
-        this.stockProducto = stock;
     }
 
     /**
