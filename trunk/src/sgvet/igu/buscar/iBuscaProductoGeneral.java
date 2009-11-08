@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package sgvet.igu.interfaces;
+package sgvet.igu.buscar;
 
 import sgvet.entidades.Componente;
 
