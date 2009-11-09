@@ -11,6 +11,7 @@ import sgvet.entidades.Demanda;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
+import sgvet.gestores.GestorFecha;
 import sgvet.igu.model.DemandaSESTableModel;
 import sgvet.utils.*;
 
@@ -53,6 +54,7 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
  //       tDemandaSES.setModel(tmDemanda);
         cargarPantalla();
         btLimpiar.setEnabled(false);
+        tfFechaHoy.setText(GestorFecha.getInstancia().formatearFecha(GestorFecha.getInstancia().getFechaHoy()));
 //        tfCodigoProducto.setText(producto.getCodigo());
 //        tfNombreProducto.setText(producto.getNombre());
         
@@ -90,6 +92,8 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
         tfFechaCierre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tfAcumuladoPerAbierto = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        tfFechaHoy = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -199,6 +203,11 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
 
         tfAcumuladoPerAbierto.setEditable(false);
 
+        jLabel3.setText("Fecha Actual:");
+
+        tfFechaHoy.setEditable(false);
+        tfFechaHoy.setMinimumSize(new java.awt.Dimension(40, 20));
+
         javax.swing.GroupLayout pPeriodoAbiertoLayout = new javax.swing.GroupLayout(pPeriodoAbierto);
         pPeriodoAbierto.setLayout(pPeriodoAbiertoLayout);
         pPeriodoAbiertoLayout.setHorizontalGroup(
@@ -207,11 +216,13 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                 .addContainerGap()
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfFechaCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(tfAcumuladoPerAbierto, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                    .addComponent(tfFechaCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
+                    .addComponent(tfFechaHoy, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pPeriodoAbiertoLayout.setVerticalGroup(
@@ -225,6 +236,10 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfAcumuladoPerAbierto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(tfFechaHoy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -241,12 +256,12 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                             .addComponent(lbAlfa5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
-                            .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)))
+                            .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbPrediccion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(54, 54, 54)
                 .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -267,8 +282,8 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbPrediccion)
                             .addComponent(tfPrediccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,8 +306,8 @@ public class PanelDemandaSimple extends javax.swing.JDialog implements IValidabl
                 .addContainerGap()
                 .addComponent(pProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -334,6 +349,7 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.ButtonGroup errores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAlfa5;
     private javax.swing.JLabel lbCodigo;
@@ -349,6 +365,7 @@ private void tfAlfaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JTextField tfCodigoProducto;
     private javax.swing.JTextField tfDemandaAcumulada;
     private javax.swing.JTextField tfFechaCierre;
+    private javax.swing.JTextField tfFechaHoy;
     private javax.swing.JTextField tfNombreProducto;
     private javax.swing.JTextField tfPrediccion;
     // End of variables declaration//GEN-END:variables

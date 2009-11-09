@@ -499,6 +499,7 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     Util.getInstancia().limpiarCampos(this);
     ordenCompra = null;
+    proveedor = null;
     btProcesarOrdenCompra.setEnabled(true);
 
 }//GEN-LAST:event_btLimpiarActionPerformed

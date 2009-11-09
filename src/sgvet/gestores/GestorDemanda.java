@@ -25,6 +25,7 @@ public class GestorDemanda {
     private Date fechaCierre;
     private double[] indices;
     private int ventasDelMesAbierto;
+    private double tendencia;
     private static GestorDemanda instancia;
 
     public synchronized static GestorDemanda getInstancia() {
@@ -209,10 +210,14 @@ public class GestorDemanda {
         int temp = 0;
         int demandaReal = 0;
         int demandaPre = 0;
-        if (ventas.size() > 0) {
+
+        abrirPeriodoActualSiNoEstaFinalizado(ventas);
+        int cantPeriDeVentas = calcularCantidadPeriodosCerrados(ventas);
+
+        if (cantPeriDeVentas > 0) {
             ventas.get(0).setPrediccionVenta(ventas.get(0).getVentas());
 
-            for (int i = 1; i < ventas.size(); i++) {
+            for (int i = 1; i < cantPeriDeVentas; i++) {
                 if (ventas.get(i).getVentas() != 0) {
                     demandaReal = ventas.get(i).getVentas();
                 } else if (ventas.get(i).getVentas() == 0) {
@@ -223,7 +228,8 @@ public class GestorDemanda {
                 }
                 ventas.get(i).setPrediccionVenta((int) (alfa * demandaReal + (1 - alfa) * demandaPre));
             }
-            temp = ventas.get(ventas.size() - 1).getPrediccionVenta();
+//            temp = ventas.get(ventas.size() - 1).getPrediccionVenta();
+            temp = ventas.get(cantPeriDeVentas - 1).getPrediccionVenta();
         }
 
         return temp;
@@ -246,7 +252,13 @@ public class GestorDemanda {
 
         for (int i = 0; i < tModel.getRowCount(); i++) {
             for (int j = 1; j < tModel.getColumnCount() - 1; j++) {
-                demanPromedio1[i] += Double.parseDouble(tModel.getValueAt(i, j).toString());
+
+                if(vendido.get(i+j-1).isCerrado()){
+                    demanPromedio1[i] += Double.parseDouble(tModel.getValueAt(i, j).toString());
+                    
+                }
+
+
             }
             demanPromedio1[i] = demanPromedio1[i] / (tModel.getColumnCount() - 2);
 
@@ -259,25 +271,85 @@ public class GestorDemanda {
         }
 
         Integer cero = new Integer(0);
-        for (int i = 0; i < tModel.getRowCount(); i++) {
-            if (tModel.getValueAt(i, tModel.getColumnCount() - 1) != null && !tModel.getValueAt(i, tModel.getColumnCount() - 1).equals(cero)) {
 
-                temp = Double.parseDouble(tModel.getValueAt(i, tModel.getColumnCount() - 1).toString());
-                ultimoReal = temp / indiceEsta1[i] * alfa + (1 - alfa) * demanPromedio1[i];
-                demanPromedio2[i] = ultimoReal;
-            } else {
+//        for (int i = 0; i < tModel.getRowCount(); i++) {
+//            if (tModel.getValueAt(i, tModel.getColumnCount() - 1) != null && !tModel.getValueAt(i, tModel.getColumnCount() - 1).equals(cero)) {
+//
+//                temp = Double.parseDouble(tModel.getValueAt(i, tModel.getColumnCount() - 1).toString());
+//                ultimoReal = temp / indiceEsta1[i] * alfa + (1 - alfa) * demanPromedio1[i];
+//                demanPromedio2[i] = ultimoReal;
+//            } else {
+//
+//                demanPromedio2[i] = ultimoReal * indiceEsta1[i];
+//                tModel.setValueAt((int) demanPromedio2[i], i, tModel.getColumnCount() - 1);
+//
+//
+//                predicciones.add((int) demanPromedio2[i]);
+//            }
+//        }
+        int valor = 0;
+        boolean entrar = true;
 
-                demanPromedio2[i] = ultimoReal * indiceEsta1[i];
-                tModel.setValueAt((int) demanPromedio2[i], i, tModel.getColumnCount() - 1);
+        int cerrados = calcularCantidadPeriodosCerrados(vendido);
+
+        for (int j = 1; j < tModel.getColumnCount(); j++) {
+
+            //if (entrar) {
+                for (int i = 0; i < tModel.getRowCount(); i++) {
+
+                    //if (!String.valueOf(tModel.getValueAt(i, j)).equals("-1")) {
+                        if (valor < cerrados) {
+                            System.out.println("valor: "+ valor);
+                            //if (tModel.getValueAt(i, j) != null && !tModel.getValueAt(i, j).equals(cero)){
+                            temp = Double.parseDouble(tModel.getValueAt(i, j).toString());
+                            ultimoReal = temp / indiceEsta1[i] * alfa + (1 - alfa) * demanPromedio1[i];
+                            demanPromedio2[i] = ultimoReal;
+                            ++valor;
+                            //}
+
+                        }
+                        else {
+                            System.out.println("encontro una prediccion");
+                            demanPromedio2[i] = ultimoReal * indiceEsta1[i];
+                            tModel.setValueAt((int) demanPromedio2[i], i, j);
 
 
-                predicciones.add((int) demanPromedio2[i]);
+                            predicciones.add((int) demanPromedio2[i]);
+              //              entrar = false;
+                        }
+//                    } else if (String.valueOf(tModel.getValueAt(i, j)).equals("-1") && valor > 0) {
+//                            demanPromedio2[i] = ultimoReal * indiceEsta1[i];
+//                            tModel.setValueAt((int) demanPromedio2[i], i, j);
+//
+//
+//                            predicciones.add((int) demanPromedio2[i]);
+//                            entrar = false;
+//                    }
+                }
+            //}
+        }
+
+        indices = indiceEsta1;
+
+        //solo van las predicciones del periodo abierto en adelante
+        int periodoActual;
+        int sacar;
+        periodoActual = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(GestorFecha.getInstancia().getFechaHoy());
+
+        System.out.println("cant periodos cerrados: "+ cerrados);
+        System.out.println("cantidad de predicciones: "+ predicciones.size());
+
+        if(predicciones.size() > (13-periodoActual+1)){
+            sacar = predicciones.size() - (13-periodoActual+1);
+            for (int i = 0; i < sacar; i++) {
+                predicciones.remove(0);
             }
         }
-        indices = indiceEsta1;
+
 
         return predicciones;
     }
+
 
     //supone que las fechas de las ventas estan ordenadas ascendentemente
     private int calcularCantAniosDeVentas(List<DemandaXPeriodo> ventas) {
@@ -286,13 +358,17 @@ public class GestorDemanda {
         Date primerAnio; //= primerDiaDelAnio(ventas.get(0).getAnio());
         Date ultimoAnio;
 
-        if (ventas.size() > 0) {
+        abrirPeriodoActualSiNoEstaFinalizado(ventas);
+        int cantPeriDeVentas = calcularCantidadPeriodosCerrados(ventas);
+
+
+        if (cantPeriDeVentas > 0) {
             primerAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(0).getAnio());
-            ultimoAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(ventas.size() - 1).getAnio());
+            ultimoAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(cantPeriDeVentas - 1).getAnio());
 
             while (primerAnio.compareTo(ultimoAnio) < 0) {
 
-                if(periodo < ventas.size()){
+                if(periodo < cantPeriDeVentas){
                     primerAnio = GestorFecha.getInstancia().primerDiaDelAnio(ventas.get(periodo).getAnio());
                     periodo += 13;
                     ++resul;
@@ -405,9 +481,12 @@ public class GestorDemanda {
         List<Double> indice = new ArrayList<Double>();
         List<Double> estimacion = new ArrayList<Double>();
 
+        abrirPeriodoActualSiNoEstaFinalizado(ventas);
+        int cantPeriDeVentas = calcularCantidadPeriodosCerrados(ventas);
+
 //        indice.add(0.0);
 
-        for (int i = 0; i < ventas.size(); i++) {
+        for (int i = 0; i < cantPeriDeVentas; i++) {
             if (i == 0) {
                 indiceAnt = 0;
                 estimacionAnt = ventas.get(0).getVentas();
@@ -426,7 +505,8 @@ public class GestorDemanda {
             indice.add(temp);
         }
 
-        temp = estimacion.get(estimacion.size() - 1) + indice.get(indice.size() - 1);
+        temp = estimacion.get(estimacion.size()-1) + indice.get(indice.size()-1);
+        tendencia= indice.get(indice.size()-1);
         return temp;
     }
 
@@ -557,7 +637,8 @@ public class GestorDemanda {
     private List<DemandaXPeriodo> abrirPeriodoActualSiNoEstaFinalizado(List<DemandaXPeriodo> ventas) {
 //        int indice = ventas.size() - 1;
 //        DemandaXPeriodo demandete = ventas.get(indice);
-
+        Date hoy= GestorFecha.getInstancia().getFechaHoy();
+        int nroPeri = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(hoy);
 
         for (DemandaXPeriodo demandaXPeriodo : ventas) {
             if (GestorFecha.getInstancia().isFechaDelPeriodo(GestorFecha.getInstancia().getFechaHoy(), demandaXPeriodo)) {
@@ -566,12 +647,17 @@ public class GestorDemanda {
 //                fechaCierre = ventas.get(indice).getFechaFin();
                 demandaXPeriodo.setCerrado(false);
                 ventasDelMesAbierto = demandaXPeriodo.getVentas();
-                fechaCierre = demandaXPeriodo.getFechaFin();
+    //            fechaCierre = demandaXPeriodo.getFechaFin();
 
             }else if(demandaXPeriodo.getFechaInicio().compareTo(GestorFecha.getInstancia().getFechaHoy())>0){
                 demandaXPeriodo.setCerrado(false);
+
+   //            fechaCierre = GestorFecha.getInstancia().calcularLimiteSuperiorDelPeriodo(nroPeri, hoy);
+
             }
         }
+
+        fechaCierre = GestorFecha.getInstancia().calcularLimiteSuperiorDelPeriodo(nroPeri, hoy);
 
         return ventas;
     }
@@ -655,19 +741,29 @@ public class GestorDemanda {
         tabla.setRowCount(13);
         tabla.setColumnCount(calcularCantAniosDeVentas(ventas) + 1); // es mas 1 xq le sume la columna donde figura los nombres de los periodos
 
+        abrirPeriodoActualSiNoEstaFinalizado(ventas);
+        int cantPeriDeVentas = calcularCantidadPeriodosCerrados(ventas);
+        //int nroPrimerPeriodoVentas = ventas.get(0).getNroPeriodo()-1;
 
+        System.out.println("cant periodos cerrados:" +cantPeriDeVentas);
         for (int j = 1; j < tabla.getColumnCount(); j++) {
             for (int i = 0; i < tabla.getRowCount(); i++) {
-                if (indice < ventas.size()) {
+                if (indice < cantPeriDeVentas){ //&&  i==nroPrimerPeriodoVentas) {
                     tabla.setValueAt(ventas.get(indice).getVentas(), i, j);
+                    ++indice;
+//                    if(nroPrimerPeriodoVentas <=12){
+//                        ++nroPrimerPeriodoVentas;
+//                    }else{
+//                        nroPrimerPeriodoVentas=0;
+//                    }
+                    //nroPrimerPeriodoVentas=i+1;
                 } else {
                     tabla.setValueAt(0, i, j);
                 }
-
-
-                ++indice;
+           
             }
         }
+
         return tabla;
     }
 
@@ -770,4 +866,23 @@ public class GestorDemanda {
          }
          System.out.println("\n\n ---------------------------------------------------");
      }
+
+     private int calcularCantidadPeriodosCerrados(List<DemandaXPeriodo> periodos) {
+         int resul=0;
+         for (DemandaXPeriodo demandaXPeriodo : periodos) {
+             if(demandaXPeriodo.isCerrado()){
+                 ++resul;
+             }
+         }
+         return resul;
+     }
+
+    /**
+     * @return the tendencia
+     */
+    public double getTendencia() {
+        return tendencia;
+    }
+
+ 
 }
