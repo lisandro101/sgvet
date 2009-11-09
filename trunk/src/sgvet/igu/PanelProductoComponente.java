@@ -52,6 +52,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
 
         bgTipoProd = new javax.swing.ButtonGroup();
         pBotones = new javax.swing.JPanel();
+        btResumenVentas = new javax.swing.JButton();
         btDemanda = new javax.swing.JButton();
         btBuscar = new javax.swing.JButton();
         btAgregar = new javax.swing.JButton();
@@ -105,6 +106,14 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         jPanel2 = new javax.swing.JPanel();
         btAsignarProveedor = new javax.swing.JButton();
         btEliminarProv = new javax.swing.JButton();
+
+        btResumenVentas.setText("Resumen Ventas");
+        btResumenVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btResumenVentasActionPerformed(evt);
+            }
+        });
+        pBotones.add(btResumenVentas);
 
         btDemanda.setText("Demanda");
         btDemanda.addActionListener(new java.awt.event.ActionListener() {
@@ -200,9 +209,9 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                             .addComponent(tfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                             .addComponent(tfDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProductoTerminado2Layout.createSequentialGroup()
-                        .addComponent(lbDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                        .addComponent(lbDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
+                        .addComponent(tfDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pProductoTerminado2Layout.setVerticalGroup(
@@ -243,7 +252,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(tfDemandaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDemandaAnual))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         lbCodigo.setText("Código:");
@@ -328,7 +337,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                     .addGroup(pProductoTerminado1Layout.createSequentialGroup()
                         .addComponent(lbPrecioVenta)
                         .addGap(21, 21, 21)
-                        .addComponent(tfPrecioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)))
+                        .addComponent(tfPrecioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pProductoTerminado1Layout.setVerticalGroup(
@@ -426,8 +435,8 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pTablaProveedoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTablaProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 696, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pTablaProveedoresLayout.setVerticalGroup(
@@ -448,7 +457,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pCampos, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pTablaProveedores, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE))
+                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -583,6 +592,19 @@ private void btTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     GestorDemanda.getInstancia().calcularPrediccionDemandaXPeriodo(productoComponente);
 }//GEN-LAST:event_btTestActionPerformed
 
+private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResumenVentasActionPerformed
+
+    if (productoComponente == null) {
+
+        JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
+    } else {
+        PanelResumenVentas panel = new PanelResumenVentas(productoComponente);
+        panel.setVisible(true);
+    }
+
+
+}//GEN-LAST:event_btResumenVentasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoProd;
@@ -593,6 +615,7 @@ private void btTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEliminarProv;
     private javax.swing.JButton btModificar;
+    private javax.swing.JButton btResumenVentas;
     private javax.swing.JButton btTest;
     private javax.swing.JComboBox cbCategoria;
     private javax.swing.JComboBox cbEstado;
