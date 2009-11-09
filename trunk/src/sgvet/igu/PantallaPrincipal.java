@@ -61,8 +61,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jmiSenialRastreo = new javax.swing.JMenuItem();
         configuracion = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        reportes = new javax.swing.JMenu();
-        verReportes = new javax.swing.JMenuItem();
         ayuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -141,18 +139,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         menu.add(configuracion);
 
-        reportes.setText("Reportes");
-
-        verReportes.setText("Ver");
-        verReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verReportesActionPerformed(evt);
-            }
-        });
-        reportes.add(verReportes);
-
-        menu.add(reportes);
-
         ayuda.setText("Ayuda");
         menu.add(ayuda);
 
@@ -222,13 +208,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
     }
 }//GEN-LAST:event_jTabbedPane1MouseClicked
 
-private void verReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verReportesActionPerformed
-    DialogoReportes dialogoReportes = new DialogoReportes(this, true);
-
-    dialogoReportes.setLocationRelativeTo(null);
-    dialogoReportes.setVisible(true);
-}//GEN-LAST:event_verReportesActionPerformed
-
 private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demandaActionPerformed
 }//GEN-LAST:event_demandaActionPerformed
 
@@ -268,9 +247,7 @@ private void jmiSenialRastreoActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem jmiSenialRastreo;
     private javax.swing.JMenuBar menu;
-    private javax.swing.JMenu reportes;
     private javax.swing.JMenuItem salir;
-    private javax.swing.JMenuItem verReportes;
     // End of variables declaration//GEN-END:variables
 
     private void salir() {
