@@ -25,6 +25,7 @@ public class ProductoComponente extends Intermedio implements Serializable {
     private double precioVenta;
     private String tipoPrediccion;
     private ClaseDemanda categoria;
+    private boolean seRealizoPedido;
     
 
     @Column(name = "precio_venta")
@@ -68,5 +69,19 @@ public class ProductoComponente extends Intermedio implements Serializable {
      */
     public void setCategoria(ClaseDemanda categoria) {
         this.categoria = categoria;
+    }
+
+    /**
+     * @return the seRealizoPedido
+     */
+    public boolean isSeRealizoPedido() {
+        return seRealizoPedido;
+    }
+
+    /**
+     * @param seRealizoPedido the seRealizoPedido to set
+     */
+    public void setSeRealizoPedido(boolean seRealizoPedido) {
+        this.seRealizoPedido = seRealizoPedido;
     }
 }
