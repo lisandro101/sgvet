@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
+import sgvet.gestores.GestorFecha;
 import sgvet.utils.*;
 
 /**
@@ -25,6 +26,7 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
 //
 //    private int cantAnios;
 //    private Date anioInicial;
+    private double tendencia;
     private double alfa;
     private double beta;
 
@@ -54,6 +56,7 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
 //        tDemanda.setModel(tModel);
         cargarPantalla();
         btLimpiar.setEnabled(false);
+        tfFechaHoy.setText(GestorFecha.getInstancia().formatearFecha(GestorFecha.getInstancia().getFechaHoy()));
     }
 
     private void inicializarBotones(){
@@ -90,6 +93,10 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
         tfFechaCierre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tfAcumulado = new javax.swing.JTextField();
+        tfFechaHoy = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        tfTendencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Demanda");
@@ -140,8 +147,8 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
                     .addComponent(lbNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminadoLayout.setVerticalGroup(
@@ -198,7 +205,7 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
 
         lbDemandaAcumulada.setText("Demanda Acumulada:");
 
-        pPeriodoAbierto.setBorder(javax.swing.BorderFactory.createTitledBorder("Periodo Abierto"));
+        pPeriodoAbierto.setBorder(javax.swing.BorderFactory.createTitledBorder("Periodo Actual"));
 
         jLabel1.setText("Fecha de cierre:");
 
@@ -208,6 +215,11 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
 
         tfAcumulado.setEditable(false);
 
+        tfFechaHoy.setEditable(false);
+        tfFechaHoy.setMinimumSize(new java.awt.Dimension(40, 20));
+
+        jLabel3.setText("Fecha Actual:");
+
         javax.swing.GroupLayout pPeriodoAbiertoLayout = new javax.swing.GroupLayout(pPeriodoAbierto);
         pPeriodoAbierto.setLayout(pPeriodoAbiertoLayout);
         pPeriodoAbiertoLayout.setHorizontalGroup(
@@ -216,9 +228,11 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
                 .addContainerGap()
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfFechaHoy, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(tfAcumulado, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                     .addComponent(tfFechaCierre, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE))
                 .addContainerGap())
@@ -234,22 +248,32 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
                 .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfAcumulado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pPeriodoAbiertoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(tfFechaHoy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel4.setText("Tendencia:");
+
+        tfTendencia.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbPrediccion)
                     .addComponent(lbDemandaAcumulada)
                     .addComponent(lbAlfa)
-                    .addComponent(lbBeta))
+                    .addComponent(lbBeta)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfTendencia, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(tfPrediccion, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(tfAlfa, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
@@ -260,25 +284,29 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbAlfa)
-                    .addComponent(tfAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbBeta)
-                    .addComponent(tfBeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbDemandaAcumulada)
-                    .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPrediccion)
-                    .addComponent(tfPrediccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbAlfa)
+                            .addComponent(tfAlfa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbBeta)
+                            .addComponent(tfBeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbDemandaAcumulada)
+                            .addComponent(tfDemandaAcumulada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbPrediccion)
+                            .addComponent(tfPrediccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(tfTendencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(pPeriodoAbierto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -288,12 +316,11 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(pProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)))
         );
@@ -303,8 +330,8 @@ public class PanelDemandaConTendencia extends javax.swing.JDialog implements IVa
                 .addContainerGap()
                 .addComponent(pProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -317,13 +344,21 @@ private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 
 private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
 
+    
+    double prediccion;
+
     List <DemandaXPeriodo> ventas;
     if(validarYCargarDatosPantalla()){
         ventas= GestorDemanda.getInstancia().calcularDemandaXPeriodo(producto);
         tfDemandaAcumulada.setText(String.valueOf(GestorDemanda.getInstancia().calcularAcumulado(ventas)));
-        tfPrediccion.setText(GestorDemanda.getInstancia().calcularESNew(alfa, ventas)+"");
+        prediccion = GestorDemanda.getInstancia().calcularDemandaConTendenciaNew( ventas, alfa, beta);
+        tfPrediccion.setText(Math.floor(prediccion)+"");
         //GestorDemanda.getInstancia().mostrarXPantalla(ventas);
+        tendencia = GestorDemanda.getInstancia().getTendencia();
+        
         inicializarPanelPeriodoAbierto();
+        tfTendencia.setText(redondear(tendencia)+"");
+
     }
 
 
@@ -351,6 +386,8 @@ private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.ButtonGroup errores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lbAlfa;
     private javax.swing.JLabel lbBeta;
@@ -368,8 +405,10 @@ private void tfBetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfDemandaAcumulada;
     private javax.swing.JTextField tfFechaCierre;
+    private javax.swing.JTextField tfFechaHoy;
     private javax.swing.JTextField tfNombre;
     private javax.swing.JTextField tfPrediccion;
+    private javax.swing.JTextField tfTendencia;
     // End of variables declaration//GEN-END:variables
 
     @Override
