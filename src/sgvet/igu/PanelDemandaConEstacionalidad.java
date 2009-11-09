@@ -387,7 +387,7 @@ private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     if (validarYCargarDatosPantalla()) {
         ventas= GestorDemanda.getInstancia().calcularDemandaXPeriodo(producto);
-        resultados = GestorDemanda.getInstancia().calcularDemandaConEstacionalidad(alfa, gamma, ventas);
+        resultados = GestorDemanda.getInstancia().calcularDemandaConEstacionalidadNew(alfa, gamma, ventas);
         CargarTabla(resultados);
         btIndices.setEnabled(true);
         inicializarPanelPeriodoAbierto();
