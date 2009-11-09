@@ -46,16 +46,17 @@ public class PanelResumenVentas extends javax.swing.JDialog  {
         
 
         List<DemandaXPeriodo> demandas = GestorDemanda.getInstancia().calcularDemandaXPeriodo(producto);
-         List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();
-         for (DemandaXPeriodo demanda : demandas) {
-            if(demanda.isCerrado()){
-                demandasXPeriodo.add(demanda);
+        if(demandas != null && demandas.size()>0){
+            List<DemandaXPeriodo> demandasXPeriodo = new ArrayList<DemandaXPeriodo>();
+             for (DemandaXPeriodo demanda : demandas) {
+                if(demanda.isCerrado()){
+                    demandasXPeriodo.add(demanda);
+                }
             }
+            tModel.agregarFilas(demandasXPeriodo);
+            tfNombreProducto.setText(producto.getNombre());
+            tfCodigoProducto.setText(producto.getCodigo());
         }
-        tModel.agregarFilas(demandasXPeriodo);
-        tfNombreProducto.setText(producto.getNombre());
-        tfCodigoProducto.setText(producto.getCodigo());
-
     }
 
 

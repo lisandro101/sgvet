@@ -594,7 +594,6 @@ public class GestorDemanda {
         }
         detallesOrdenes = detallesTemp;
 
-        mostrarDetallesVentas(detallesTemp);
 
         return detallesOrdenes;
     }
