@@ -239,6 +239,7 @@ private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     PanelBuscarProveedor buscarProv = new PanelBuscarProveedor(this, Tipo.PANEL_PROVEEDOR);
     buscarProv.setModal(true);
     buscarProv.setVisible(true);
+
 }//GEN-LAST:event_btBuscarActionPerformed
 
 private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActionPerformed
@@ -297,7 +298,18 @@ private void dpInicioActividadesActionPerformed(java.awt.event.ActionEvent evt) 
 }//GEN-LAST:event_dpInicioActividadesActionPerformed
 
 private void btParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParametrosActionPerformed
-    JOptionPane.showMessageDialog(this, "Aca se configura la politica elegida");
+    
+    if(cbPolitica.getSelectedIndex() == 1) {
+        PanelRevisionContinua revisionContinua = new PanelRevisionContinua();
+        revisionContinua.setModal(true);
+        revisionContinua.setVisible(true);
+    }
+    else if (cbPolitica.getSelectedIndex() == 2){
+        PanelRevisionPeriodica revisionPeriodica = new PanelRevisionPeriodica();
+        revisionPeriodica.setModal(true);
+        revisionPeriodica.setVisible(true);
+    }
+
 }//GEN-LAST:event_btParametrosActionPerformed
 
 private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPoliticaItemStateChanged

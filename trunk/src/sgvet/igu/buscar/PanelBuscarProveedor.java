@@ -3,7 +3,6 @@
  *
  * Created on 26 de octubre de 2008, 17:15
  */
-
 package sgvet.igu.buscar;
 
 import sgvet.igu.*;
@@ -22,8 +21,8 @@ import sgvet.persistencia.FachadaPersistencia;
  * @author  stafoxter
  */
 public class PanelBuscarProveedor extends javax.swing.JDialog {
+
     private static final long serialVersionUID = 1L;
-    
     private ProveedorTableModel tmBuscar;
     private ProveedorTableModel tmOrigen;
     private List<Proveedor> proveedores;
@@ -32,38 +31,38 @@ public class PanelBuscarProveedor extends javax.swing.JDialog {
     private PanelOrdenCompra panelOrdenCompra;
     //private int tipoBusqueda;
     private Tipo tipo;
-    /** Creates new form PanelBuscarProveedor */
-    
+
+    /** Creates new form PanelBuscarProveedor
+     * @param tm1
+     */
     public PanelBuscarProveedor(ProveedorTableModel tm1) {
         initComponents();
         //tipoBusqueda=1;
-        tipo= Tipo.TABLE_MODEL;
+        tipo = Tipo.TABLE_MODEL;
         tmOrigen = tm1;
         inicializar();
-        
+
     }
-    
+
     //public PanelBuscarProveedor(PanelProveedor prov) {
-    
     public PanelBuscarProveedor(JPanel panel, Tipo tipo1) {
         initComponents();
-        tipo=tipo1;
-        if(tipo== Tipo.PANEL_PROVEEDOR){
-            panelProveedor= (PanelProveedor)panel;
-        }else if(tipo== Tipo.PANEL_ORDEN_COMPRA){
-            panelOrdenCompra= (PanelOrdenCompra)panel;
+        tipo = tipo1;
+        if (tipo == Tipo.PANEL_PROVEEDOR) {
+            panelProveedor = (PanelProveedor) panel;
+        } else if (tipo == Tipo.PANEL_ORDEN_COMPRA) {
+            panelOrdenCompra = (PanelOrdenCompra) panel;
         }
-        
+
         inicializar();
     }
-    
+
     private void inicializar() {
         tmBuscar = new ProveedorTableModel(0);
         tProveedores.setModel(tmBuscar);
-        tProveedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
+        tProveedores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -199,51 +198,53 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
 private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
     tmBuscar.limpiarTableModel();
-    
-    Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from Proveedor a where (a.nombre) LIKE :nombre and a.borrado=false" );
-    consulta.setParameter("nombre", "%"+tfNombre.getText()+"%");
-     
-    proveedores= FachadaPersistencia.getInstancia().buscar(Proveedor.class, consulta);
 
-    
+    Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
+            "Select a from Proveedor a where (a.nombre) LIKE :nombre and a.borrado=false");
+    consulta.setParameter("nombre", "%" + tfNombre.getText() + "%");
+
+    proveedores = FachadaPersistencia.getInstancia().buscar(Proveedor.class,
+            consulta);
+
+
     for (int i = 0; i < proveedores.size(); i++) {
         tmBuscar.agregarFila(proveedores.get(i));
     }
-  
+
 }//GEN-LAST:event_btBuscarActionPerformed
 
 private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
-    int indice = tProveedores.convertRowIndexToModel(tProveedores.getSelectedRow());
+    int indice = tProveedores.convertRowIndexToModel(
+            tProveedores.getSelectedRow());
     Proveedor resultado;
 
-    if(indice ==-1 ){
+    if (indice == -1) {
         JOptionPane.showMessageDialog(this, "No se ha seleccionado Proveedor");
-    }else{
-        resultado=tmBuscar.getFila(indice);
-        if(tipo== Tipo.TABLE_MODEL){
-            if(tmOrigen.getRowCount()<1){
-                tmOrigen.agregarFila(resultado);       
+    } else {
+        resultado = tmBuscar.getFila(indice);
+        if (tipo == Tipo.TABLE_MODEL) {
+            if (tmOrigen.getRowCount() < 1) {
+                tmOrigen.agregarFila(resultado);
                 dispose();
-            }else{
-                if(ValidacionBuscar.getInstancia().proveedorEstaCargadoEnTabla(tmOrigen, resultado)){
-                    JOptionPane.showMessageDialog(this, "El proveedor ya se encuentra asignado");
-                }else{
-                    tmOrigen.agregarFila(resultado);       
+            } else {
+                if (ValidacionBuscar.getInstancia().proveedorEstaCargadoEnTabla(
+                        tmOrigen, resultado)) {
+                    JOptionPane.showMessageDialog(this,
+                            "El proveedor ya se encuentra asignado");
+                } else {
+                    tmOrigen.agregarFila(resultado);
                     dispose();
                 }
             }
-        }else if(tipo==Tipo.PANEL_PROVEEDOR){
+        } else if (tipo == Tipo.PANEL_PROVEEDOR) {
             panelProveedor.setProveedor(resultado);
             dispose();
-        }else if(tipo==Tipo.PANEL_ORDEN_COMPRA){
+        } else if (tipo == Tipo.PANEL_ORDEN_COMPRA) {
             panelOrdenCompra.setProveedor(resultado);
             dispose();
         }
     }
 }//GEN-LAST:event_btAceptarActionPerformed
-
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAceptar;
     private javax.swing.JButton btBuscar;
@@ -256,5 +257,4 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private org.jdesktop.swingx.JXTable tProveedores;
     private javax.swing.JTextField tfNombre;
     // End of variables declaration//GEN-END:variables
-
 }

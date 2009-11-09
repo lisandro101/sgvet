@@ -57,14 +57,14 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tfNombre" alignment="1" pref="312" max="32767" attributes="2"/>
-                      <Component id="tfContacto" alignment="1" pref="312" max="32767" attributes="2"/>
-                      <Component id="tfTelefono" alignment="1" pref="312" max="32767" attributes="2"/>
-                      <Component id="tfMail" alignment="1" pref="312" max="32767" attributes="2"/>
-                      <Component id="tfDireccion" alignment="1" pref="312" max="32767" attributes="2"/>
-                      <Component id="dpInicioActividades" alignment="1" pref="312" max="32767" attributes="2"/>
+                      <Component id="tfNombre" alignment="1" pref="351" max="32767" attributes="2"/>
+                      <Component id="tfContacto" alignment="1" pref="351" max="32767" attributes="2"/>
+                      <Component id="tfTelefono" alignment="1" pref="351" max="32767" attributes="2"/>
+                      <Component id="tfMail" alignment="1" pref="351" max="32767" attributes="2"/>
+                      <Component id="tfDireccion" alignment="1" pref="351" max="32767" attributes="2"/>
+                      <Component id="dpInicioActividades" alignment="1" pref="351" max="32767" attributes="2"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="cbPolitica" pref="253" max="32767" attributes="0"/>
+                          <Component id="cbPolitica" pref="282" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btParametros" min="-2" max="-2" attributes="0"/>
                       </Group>
