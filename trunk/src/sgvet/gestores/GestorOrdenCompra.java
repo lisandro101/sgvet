@@ -4,10 +4,13 @@
  */
 package sgvet.gestores;
 
+import java.util.ArrayList;
+import java.util.List;
 import sgvet.entidades.DetalleOrdenCompra;
 import sgvet.entidades.OrdenCompra;
 import sgvet.entidades.OrdenCompra.EstadoOrdenCompra;
 import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.auxiliares.DTOPedidos;
 import sgvet.persistencia.FachadaPersistencia;
 
 /**
@@ -29,7 +32,7 @@ public class GestorOrdenCompra {
     public GestorOrdenCompra() {
 
         inicializar();
-        
+
     }
 
     private void inicializar() {
@@ -65,14 +68,13 @@ public class GestorOrdenCompra {
         double cantStock;
         double cantNueva;
         ProductoComponente productoComponente;
-        Object id;
 
         for (DetalleOrdenCompra detalle : orden.getDetallesOrdenCompra()) {
             cantNueva = detalle.getCantidad();
-            id = (Object) detalle.getComponente().getId();
-            productoComponente = gp.buscar(ProductoComponente.class, id);
+            productoComponente = (ProductoComponente) detalle.getComponente();
             cantStock = productoComponente.getStock() + cantNueva;
             productoComponente.setStock(cantStock);
+            productoComponente.setSeRealizoPedido(false);
             gp.actualizar(productoComponente, true);
 
         }
@@ -87,4 +89,34 @@ public class GestorOrdenCompra {
 
         return Integer.toString(ultimaOrden + 1);
     }
+
+    public void comprarPedido(List<DTOPedidos> pedidos) {
+
+        OrdenCompra ordenCompra;
+        DetalleOrdenCompra detalleOC;
+        List<DetalleOrdenCompra> detalles;
+
+        for (DTOPedidos pedido : pedidos) {
+                ordenCompra = new OrdenCompra();
+                detalleOC = new DetalleOrdenCompra();
+                detalles = new ArrayList<DetalleOrdenCompra>();
+
+                detalleOC.setBorrado(false);
+                detalleOC.setCantidad(pedido.getCantidadOptima());
+                detalleOC.setComponente(pedido.getProducto());
+                detalleOC.setOrdenCompra(ordenCompra);
+                detalles.add(detalleOC);
+
+                ordenCompra.setProveedor(pedido.getProducto().getProveedores().get(0));
+                ordenCompra.setDetallesOrdenCompra(detalles);
+                ordenCompra.setFecha(GestorFecha.getInstancia().getFechaHoy());
+                ordenCompra.setNroOrdenCompra(Integer.parseInt(GestorOrdenCompra.getInstancia().obtenerNroOrden()));
+
+                GestorOrdenCompra.getInstancia().procesarOrden(ordenCompra);
+                pedido.getProducto().setSeRealizoPedido(true);
+                FachadaPersistencia.getInstancia().actualizar(ordenCompra, true);
+                FachadaPersistencia.getInstancia().actualizar(pedido.getProducto(), true);
+        }
+    }
+    
 }

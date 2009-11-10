@@ -9,6 +9,7 @@ import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.Venta;
 import sgvet.entidades.Venta.EstadoVenta;
 import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.auxiliares.DTOPedidos;
 import sgvet.persistencia.FachadaPersistencia;
 
 /**
@@ -115,4 +116,5 @@ public class GestorVenta {
         }
 
     }
+
 }

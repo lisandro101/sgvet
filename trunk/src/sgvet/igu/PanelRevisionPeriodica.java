@@ -150,6 +150,7 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         jLabel2.setText("Periodo de Revision:");
 
+        tfPeriodoRevision.setText("0");
         tfPeriodoRevision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPeriodoRevisionActionPerformed(evt);
@@ -179,6 +180,7 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         lbAlfa.setText("Costo de Emision:");
 
+        tfCostoEmision.setText("2");
         tfCostoEmision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCostoEmisionActionPerformed(evt);
@@ -187,6 +189,7 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         lbBeta.setText("Desviacion Demanda:");
 
+        tfDesviacionDemanda.setText("80");
         tfDesviacionDemanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDesviacionDemandaActionPerformed(evt);
@@ -195,9 +198,15 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         lbDemandaAcumulada.setText("Nivel de Servicio:");
 
+        tfNivelServicio.setText("0.99");
+
         lbPrediccion.setText("Tasa Almacenamiento:");
 
+        tfTasaAlmacenamiento.setText("0.2");
+
         jLabel4.setText("Tiempo de Entrega:");
+
+        tfTiempoEntrega.setText("3");
 
         javax.swing.GroupLayout jpPoliticaLayout = new javax.swing.GroupLayout(jpPolitica);
         jpPolitica.setLayout(jpPoliticaLayout);

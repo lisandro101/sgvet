@@ -506,10 +506,8 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
 private void btEntregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEntregadoActionPerformed
 
-    if (ordenCompra == null || !(tfEstado.getText().equals(
-            OrdenCompra.EstadoOrdenCompra.PENDIENTE.toString()))) {
-        JOptionPane.showMessageDialog(this,
-                "No se ha seleccionado una orden de compra.");
+    if (ordenCompra == null || !(tfEstado.getText().equals(OrdenCompra.EstadoOrdenCompra.PENDIENTE.toString()))) {
+        JOptionPane.showMessageDialog(this, "No se ha seleccionado una orden de compra.");
     } else {
         GestorOrdenCompra.getInstancia().terminarOrden(ordenCompra);
         tfEstado.setText(ordenCompra.getEstado().toString());
@@ -592,7 +590,7 @@ private void btEntregadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         ordenCompra = orden;
         proveedor = orden.getProveedor();
 
-        if(orden.getEstado() != null) {
+        if (orden.getEstado() != null) {
             tfEstado.setText(orden.getEstado().toString());
         }
         tfNumero.setText(Integer.toString(orden.getNroOrdenCompra()));

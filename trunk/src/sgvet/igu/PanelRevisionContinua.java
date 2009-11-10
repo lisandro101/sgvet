@@ -147,12 +147,14 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
         lbAlfa.setText("Costo de Emision:");
 
+        tfCostoEmision.setText("2");
         tfCostoEmision.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCostoEmisionActionPerformed(evt);
             }
         });
 
+        tfDesviacionDemanda.setText("80");
         tfDesviacionDemanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfDesviacionDemandaActionPerformed(evt);
@@ -163,12 +165,17 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
         lbPrediccion.setText("Tasa Almacenamiento:");
 
+        tfTasaAlmacenamiento.setText("0.2");
+
+        tfNivelServicio.setText("0.95");
+
         lbDemandaAcumulada.setText("Nivel de Servicio:");
 
         jpRevisionContinua.setBorder(javax.swing.BorderFactory.createTitledBorder("Revision Continua"));
 
         jLabel1.setText("Prediccion de la Demanda:");
 
+        tfPrediccionDemanda.setText("0");
         tfPrediccionDemanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPrediccionDemandaActionPerformed(evt);
@@ -197,6 +204,8 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         );
 
         jLabel4.setText("Tiempo de Entrega:");
+
+        tfTiempoEntrega.setText("3");
 
         javax.swing.GroupLayout jpPoliticaLayout = new javax.swing.GroupLayout(jpPolitica);
         jpPolitica.setLayout(jpPoliticaLayout);

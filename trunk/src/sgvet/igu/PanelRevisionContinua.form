@@ -247,11 +247,17 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfCostoEmision">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="2"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfCostoEmisionActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="tfDesviacionDemanda">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="80"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfDesviacionDemandaActionPerformed"/>
           </Events>
@@ -267,8 +273,14 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfTasaAlmacenamiento">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.2"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfNivelServicio">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="0.95"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbDemandaAcumulada">
           <Properties>
@@ -316,6 +328,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfPrediccionDemanda">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfPrediccionDemandaActionPerformed"/>
               </Events>
@@ -328,6 +343,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfTiempoEntrega">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="3"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

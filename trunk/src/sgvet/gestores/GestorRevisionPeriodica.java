@@ -7,7 +7,7 @@ import sgvet.entidades.ProductoComponente;
  *
  * @author Luciano, Lisandro
  */
-public class GestorRevisionPeriodica {
+public class GestorRevisionPeriodica extends GestorStock{
 
     private static GestorRevisionPeriodica instancia;
     ProductoComponente producto;
@@ -37,10 +37,9 @@ public class GestorRevisionPeriodica {
 
     private double getStockDeSeguridad() {
 
-        GestorStock gs = GestorStock.getInstancia();
         double stockSeguridad = 0;
 
-        stockSeguridad = getDesviacionEstandarDemanda() * gs.getFactorDeSeguridad(politica.getNivelServicio());
+        stockSeguridad = getDesviacionEstandarDemanda() * getFactorDeSeguridad(politica.getNivelServicio());
 
         return stockSeguridad;
 
@@ -60,6 +59,7 @@ public class GestorRevisionPeriodica {
         desviacion = politica.getTiempoEntrega() * periodoRevision / politica.getDesviacionEstandarDemanda();
 
         return desviacion;
+        
     }
 
     /**
@@ -69,7 +69,6 @@ public class GestorRevisionPeriodica {
      */
     public double getStockDisponible() {
 
-        GestorStock gs = GestorStock.getInstancia();
         double stockDisponible;
         double tiempoEntrega;
         double periodoRevision;
@@ -82,7 +81,7 @@ public class GestorRevisionPeriodica {
             periodoRevision = getPeriodoDeRevision();
         }
 
-        stockDisponible = gs.getPrediccionDemanda(producto, tiempoEntrega + periodoRevision) + getStockDeSeguridad();
+        stockDisponible = getPrediccionDemanda(producto, tiempoEntrega + periodoRevision) + getStockDeSeguridad();
 
         return stockDisponible;
 
@@ -90,10 +89,9 @@ public class GestorRevisionPeriodica {
 
     private double getPeriodoDeRevision() {
 
-        GestorStock gs = GestorStock.getInstancia();
         double periodoDeRevision;
 
-        periodoDeRevision = gs.getQOptimo(producto) / producto.getDemandaAnual();
+        periodoDeRevision = getQOptimo(producto) / producto.getDemandaAnual();
 
         return periodoDeRevision;
 
