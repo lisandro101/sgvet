@@ -18,6 +18,7 @@ import java.util.List;
 import javax.persistence.Query;
 import sgvet.entidades.PoliticaRevisionPeriodica;
 import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.auxiliares.DTOPedidos;
 import sgvet.gestores.GestorDemanda;
 import sgvet.gestores.GestorFecha;
 import sgvet.gestores.GestorRevisionPeriodica;
@@ -193,6 +194,15 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
             GestorRevisionPeriodica.getInstancia().getPeriodoDeRevision();
 
         }
+    }
+
+    private void realizarPedidos(List<DTOPedidos> pedidos){
+
+        PanelPedidosPeriodica panel = new PanelPedidosPeriodica(pedidos);
+        panel.setLocationRelativeTo(this);
+        panel.setModal(true);
+        panel.setVisible(true);
+
     }
 
 }

@@ -13,22 +13,22 @@ package sgvet.igu;
 import java.util.List;
 import sgvet.entidades.auxiliares.DTOPedidos;
 import sgvet.gestores.GestorOrdenCompra;
-import sgvet.igu.model.PedidosTableModel;
+import sgvet.igu.model.PedidosContinuaTableModel;
 
 /**
  *
  * @author lnieto
  */
-public class PanelPedidos extends javax.swing.JDialog {
+public class PanelPedidosContinua extends javax.swing.JDialog {
 
-    private PedidosTableModel tmPedidos;
+    private PedidosContinuaTableModel tmPedidos;
     private List<DTOPedidos> pedidos;
     private GestorOrdenCompra goc = GestorOrdenCompra.getInstancia();
 
     /** Creates new form PanelCurvaABC
      * @param pedidos
      */
-    public PanelPedidos(List<DTOPedidos> pedidos) {
+    public PanelPedidosContinua(List<DTOPedidos> pedidos) {
         super();
         initComponents();
         inicializar(pedidos);
@@ -186,7 +186,7 @@ public class PanelPedidos extends javax.swing.JDialog {
     private void inicializar(List<DTOPedidos> pedidos) {
 
         this.pedidos = pedidos;
-        tmPedidos = new PedidosTableModel(0);
+        tmPedidos = new PedidosContinuaTableModel(0);
         jtPedidos.setModel(tmPedidos);
         tmPedidos.agregarFilas(pedidos);
 

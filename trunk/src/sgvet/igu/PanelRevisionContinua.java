@@ -167,7 +167,7 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
         tfTasaAlmacenamiento.setText("0.2");
 
-        tfNivelServicio.setText("0.95");
+        tfNivelServicio.setText("99");
 
         lbDemandaAcumulada.setText("Nivel de Servicio:");
 
