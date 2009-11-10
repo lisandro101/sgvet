@@ -361,7 +361,7 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             politica = new PoliticaRevisionPeriodica();
             politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
             politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
-            politica.setNivelServicio(Integer.valueOf(tfNivelServicio.getText()));
+            politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
             politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
@@ -374,7 +374,7 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         if(verificarCampos()){
             politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
             politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
-            politica.setNivelServicio(Integer.valueOf(tfNivelServicio.getText()));
+            politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
             politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
