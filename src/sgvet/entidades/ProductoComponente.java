@@ -1,6 +1,7 @@
 package sgvet.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Lisandro
@@ -26,7 +29,7 @@ public class ProductoComponente extends Intermedio implements Serializable {
     private String tipoPrediccion;
     private ClaseDemanda categoria;
     private boolean seRealizoPedido;
-    
+    private Date fechaUltimaRevision;
 
     @Column(name = "precio_venta")
     public double getPrecioVenta() {
@@ -83,5 +86,21 @@ public class ProductoComponente extends Intermedio implements Serializable {
      */
     public void setSeRealizoPedido(boolean seRealizoPedido) {
         this.seRealizoPedido = seRealizoPedido;
+    }
+
+    /**
+     * @return the fechaUltimaRevision
+     */
+    @Column(name="fecha_ultima_revision")
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getFechaUltimaRevision() {
+        return fechaUltimaRevision;
+    }
+
+    /**
+     * @param fechaUltimaRevision the fechaUltimaRevision to set
+     */
+    public void setFechaUltimaRevision(Date fechaUltimaRevision) {
+        this.fechaUltimaRevision = fechaUltimaRevision;
     }
 }
