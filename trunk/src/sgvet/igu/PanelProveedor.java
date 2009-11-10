@@ -396,16 +396,15 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
         tfDireccion.setText(prov.getDireccion());
         dpInicioActividades.setDate(prov.getFechaInicioActividad());
 
-        System.out.println("el indice de politica es: "+ prov.getPolitica().toString());
+
         if(prov.getPolitica() != null){
             if(prov.getPolitica() instanceof PoliticaRevisionContinua){
                 cbPolitica.setSelectedIndex(1);
             }else if(prov.getPolitica() instanceof PoliticaRevisionPeriodica){
-                cbPolitica.setSelectedItem(2);
+                cbPolitica.setSelectedIndex(2);
+            }else{
+                cbPolitica.setSelectedIndex(0);
             }
-//            else{
-//                cbPolitica.setSelectedItem(0);
-//            }
         }else{
                 cbPolitica.setSelectedItem(0);
         }
