@@ -63,16 +63,31 @@ public class GestorRevisionPeriodica extends GestorStock {
      * 
      * @return
      */
-    public double getStockDisponible() {
+    public double getPuntoPedido() {
 
-        double stockDisponible;
+        double puntoPedido;
         double tiempoEntrega;
         double periodoRevision;
 
         tiempoEntrega = politica.getTiempoEntrega();
         periodoRevision = getPeriodoDeRevision();
 
-        stockDisponible = getPrediccionDemanda(producto, tiempoEntrega + periodoRevision) + getStockDeSeguridad();
+        puntoPedido = getPrediccionDemanda(producto, tiempoEntrega + periodoRevision) + getStockDeSeguridad();
+
+        return puntoPedido;
+
+    }
+
+        /**
+     * Devuelve el stock disponible (S).
+     *
+     * @return
+     */
+    public double getStockDisponible() {
+
+        double stockDisponible;
+
+        stockDisponible = producto.getStock() + getStockPendiente(producto); //- stockComprometido
 
         return stockDisponible;
 

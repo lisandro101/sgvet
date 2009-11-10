@@ -13,6 +13,7 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
@@ -132,7 +133,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
     private void btAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAplicarActionPerformed
         GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
-
+        buscarProductosConPoliticaSR();
 }//GEN-LAST:event_btAplicarActionPerformed
 
     private void btRetrocederPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetrocederPeriodoActionPerformed
@@ -166,7 +167,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     // End of variables declaration//GEN-END:variables
 
 
-    private List<ProductoComponente> buscarProductosConPoliticaSR() {
+    private void buscarProductosConPoliticaSR() {
         List<ProductoComponente> productos;
         List<ProductoComponente> resultado = new ArrayList<ProductoComponente>();
         Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from ProductoComponente a where a.borrado=false");
@@ -185,15 +186,44 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
             }
         }
 
-        return resultado;
+        calcularR(resultado);
     }
 
     private void calcularR(List<ProductoComponente> productos){
-        for (ProductoComponente producto : productos) {
-            GestorRevisionPeriodica.getInstancia().cargarGestorRevisionPeriodica(producto);
-            GestorRevisionPeriodica.getInstancia().getPeriodoDeRevision();
+        double r[]= new double[productos.size()];
+        for(int i = 0; i<productos.size(); i++) {
+            GestorRevisionPeriodica.getInstancia().cargarGestorRevisionPeriodica(productos.get(i));
+            r[i]=GestorRevisionPeriodica.getInstancia().getPeriodoDeRevision();
 
         }
+
+        List<DTOPedidos> pedidos = new ArrayList<DTOPedidos>();
+
+        for (int i = 0; i < productos.size(); i++) {
+            double diferencia;
+            Calendar fechaHoy = null;
+            Calendar fechaProd = null;
+            DTOPedidos ped;
+
+            if(productos.get(i).getFechaUltimaRevision()== null){
+                ped = new DTOPedidos(productos.get(i), GestorRevisionPeriodica.getInstancia().getQOptimo(productos.get(i)));
+                pedidos.add(ped);
+            }else{
+                if((GestorFecha.getInstancia().getFechaHoy().compareTo
+                        (productos.get(i).getFechaUltimaRevision())>0)){
+                    fechaHoy.setTime(GestorFecha.getInstancia().getFechaHoy());
+                    fechaProd.setTime(productos.get(i).getFechaUltimaRevision());
+                    diferencia=(fechaHoy.getTimeInMillis()- fechaProd.getTimeInMillis())/3600000;
+
+                    if(diferencia >= r[i]){
+                        ped = new DTOPedidos(productos.get(i), GestorRevisionPeriodica.getInstancia().getQOptimo(productos.get(i)));
+                        pedidos.add(ped);
+                    }
+                }
+            }
+        }
+
+        realizarPedidos(pedidos);
     }
 
     private void realizarPedidos(List<DTOPedidos> pedidos){
