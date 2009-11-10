@@ -574,7 +574,7 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void realizarPedidos(List<DTOPedidos> pedidos){
         
-        PanelPedidos panel = new PanelPedidos(pedidos);
+        PanelPedidosContinua panel = new PanelPedidosContinua(pedidos);
         panel.setLocationRelativeTo(this);
         panel.setModal(true);
         panel.setVisible(true);

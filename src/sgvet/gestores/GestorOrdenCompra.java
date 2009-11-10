@@ -114,6 +114,7 @@ public class GestorOrdenCompra {
 
                 GestorOrdenCompra.getInstancia().procesarOrden(ordenCompra);
                 pedido.getProducto().setSeRealizoPedido(true);
+                pedido.getProducto().setFechaUltimaRevision(GestorFecha.getInstancia().getFechaHoy());
                 FachadaPersistencia.getInstancia().actualizar(ordenCompra, true);
                 FachadaPersistencia.getInstancia().actualizar(pedido.getProducto(), true);
         }

@@ -198,7 +198,7 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         lbDemandaAcumulada.setText("Nivel de Servicio:");
 
-        tfNivelServicio.setText("0.99");
+        tfNivelServicio.setText("99");
 
         lbPrediccion.setText("Tasa Almacenamiento:");
 

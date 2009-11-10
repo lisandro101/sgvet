@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import sgvet.entidades.auxiliares.DTOPedidos;
-import sgvet.gestores.GestorRevisionContinua;
+import sgvet.gestores.GestorRevisionPeriodica;
 
 /**
  *
  * @author Franco Catena, Mario Mariani, Lisandro Nieto, Sebastián Torres
  */
-public class PedidosTableModel extends AbstractTableModel implements IModeloReiniciable {
+public class PedidosPeriodicaTableModel extends AbstractTableModel implements IModeloReiniciable {
 
     private static final long serialVersionUID = 1L;
     private static final String[] NOMBRE_COLUMNAS = {
@@ -18,14 +18,14 @@ public class PedidosTableModel extends AbstractTableModel implements IModeloRein
     private static final boolean[] COLUMNAS_EDITABLES = {false, false, false};
     private static final Class[] CLASE_COLUMNAS = {String.class, Double.class, Double.class};
     private List<DTOPedidos> pedidos;
-    private GestorRevisionContinua grc = GestorRevisionContinua.getInstancia();
+    private GestorRevisionPeriodica grp = GestorRevisionPeriodica.getInstancia();
 
     /**
      * Constructor
      * 
      * @param filas Cantidad de filas iniciales
      */
-    public PedidosTableModel(int filas) {
+    public PedidosPeriodicaTableModel(int filas) {
         this.pedidos = new ArrayList<DTOPedidos>(filas > 0 ? filas : 0);
     }
 
@@ -94,17 +94,17 @@ public class PedidosTableModel extends AbstractTableModel implements IModeloRein
     public Object getValueAt(int fila, int columna) {
 
         Object resultado = null;
-        grc.cargarGestorRevisionContinua(pedidos.get(fila).getProducto());
+        grp.cargarGestorRevisionPeriodica(pedidos.get(fila).getProducto());
 
         switch (columna) {
             case 0:
                 resultado = pedidos.get(fila).getProducto().getNombre();
                 break;
             case 1:
-                resultado = grc.getStockDisponible();
+                resultado = grp.getStockDisponible();
                 break;
             case 32:
-                resultado = grc.getQOptimo(pedidos.get(fila).getProducto());
+                resultado = grp.getQOptimo(pedidos.get(fila).getProducto());
                 break;
         }
 
