@@ -87,7 +87,7 @@ public class GestorRevisionPeriodica extends GestorStock{
 
     }
 
-    private double getPeriodoDeRevision() {
+    public double getPeriodoDeRevision() {
 
         double periodoDeRevision;
 

@@ -16,9 +16,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import sgvet.entidades.PoliticaRevisionPeriodica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorDemanda;
 import sgvet.gestores.GestorFecha;
+import sgvet.gestores.GestorRevisionPeriodica;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.IValidable;
 
@@ -163,21 +165,34 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     // End of variables declaration//GEN-END:variables
 
 
-//    private List<ProductoComponente> buscarProductosConPoliticaSR() {
-//        List<ProductoComponente> productos;
-//        List<ProductoComponente> resultado = new ArrayList<ProductoComponente>();
-//        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from ProductoComponente a where a.borrado=false");
-//
-//        productos = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
-//
-//        if (productos.size() > 0) {
-//            System.out.println("\n Cant detalles de produccion encontrados:" + productos.size() + "\n");
-//        }
-//
-//        for (ProductoComponente producto : productos) {
-//            if(produc)
-//        }
-//
-//        return ordenarDetallesXFecha(detallesOrdenes);
-//    }
+    private List<ProductoComponente> buscarProductosConPoliticaSR() {
+        List<ProductoComponente> productos;
+        List<ProductoComponente> resultado = new ArrayList<ProductoComponente>();
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from ProductoComponente a where a.borrado=false");
+
+        productos = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
+
+        if (productos.size() > 0) {
+            System.out.println("\n Cant detalles de produccion encontrados:" + productos.size() + "\n");
+        }
+
+        for (ProductoComponente producto : productos) {
+            if(producto.getProveedores().get(0).getPolitica() != null){
+                if(producto.getProveedores().get(0).getPolitica() instanceof PoliticaRevisionPeriodica){
+                    resultado.add(producto);
+                }
+            }
+        }
+
+        return resultado;
+    }
+
+    private void calcularR(List<ProductoComponente> productos){
+        for (ProductoComponente producto : productos) {
+            GestorRevisionPeriodica.getInstancia().cargarGestorRevisionPeriodica(producto);
+            GestorRevisionPeriodica.getInstancia().getPeriodoDeRevision();
+
+        }
+    }
+
 }
