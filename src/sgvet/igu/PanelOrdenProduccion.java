@@ -8,6 +8,9 @@ import javax.swing.JOptionPane;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.Venta;
 import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.auxiliares.DTOPedidos;
+import sgvet.gestores.GestorProveedor;
+import sgvet.gestores.GestorRevisionContinua;
 import sgvet.gestores.GestorVenta;
 import sgvet.igu.buscar.PanelBuscarOrdenProduccion;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
@@ -29,6 +32,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
     private OrdenProduccionTableModel tm;
     private ProductoComponente producto;
     private DetalleOrdenProduccion detalleOrdenProduccion;
+    GestorVenta gv = GestorVenta.getInstancia();
 
     /** Creates new form OrdenCompra */
     public PanelOrdenProduccion() {
@@ -36,7 +40,7 @@ public class PanelOrdenProduccion extends javax.swing.JPanel implements IValidab
         initComponents();
         componentesObligatorios = Arrays.asList((Component) jdFecha);
         inicializar();
-        
+
     }
 
     private void inicializar() {
@@ -378,7 +382,7 @@ private void btAnularOrdenProduccionActionPerformed(java.awt.event.ActionEvent e
 
     if (opcion == JOptionPane.YES_OPTION) {
         //venta.setBorrado(true);
-        if (GestorVenta.getInstancia().anularOrden(venta)) {
+        if (gv.anularOrden(venta)) {
             FachadaPersistencia.getInstancia().actualizar(venta, true);
         } else {
             JOptionPane.showMessageDialog(this,
@@ -429,6 +433,8 @@ private void btAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {/
 
 private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProcesarOrdenProduccionActionPerformed
 
+    List<DTOPedidos> pedidos;
+    GestorRevisionContinua grc = GestorRevisionContinua.getInstancia();
     crearOrdenProduccion();
 
     if (ValidacionBuscar.getInstancia().estaDuplicado(venta)) {
@@ -440,12 +446,16 @@ private void btProcesarOrdenProduccionActionPerformed(java.awt.event.ActionEvent
         if (tfCliente.getText().trim().equals("") || (tm.getRowCount() < 1)) {
             JOptionPane.showMessageDialog(this, "Existen campos vacios");
         } else {
-            if (GestorVenta.getInstancia().procesarOrden(venta)) {
-                tfNumero.setText(GestorVenta.getInstancia().obtenerNroOrden());
-                //venta.setEstado(venta.getEstado());
+            if (gv.procesarOrden(venta)) {
+                tfNumero.setText(gv.obtenerNroOrden());
                 venta.setNroOrdenProduccion(Integer.parseInt(tfNumero.getText()));
                 FachadaPersistencia.getInstancia().actualizar(venta, true);
-                //  limpiarCampos();
+                pedidos = grc.getPedidosRevisionContinua(venta);
+                if(pedidos != null){
+                    if(pedidos.size() > 0) {
+                        realizarPedidos(pedidos);
+                    }
+                }
             } else {
                 JOptionPane.showMessageDialog(this,
                         "No hay stock suficiente de algun producto para cubrir la venta.");
@@ -465,9 +475,9 @@ private void btBuscarOrdenProduccionActionPerformed(java.awt.event.ActionEvent e
 }//GEN-LAST:event_btBuscarOrdenProduccionActionPerformed
 
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
-    
+
     limpiarCampos();
-    
+
 }//GEN-LAST:event_btLimpiarActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgregarProducto;
@@ -551,14 +561,24 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     @Override
     public List<Component> getComponentesObligatorios() {
-        
+
         return componentesObligatorios;
 
     }
 
     public Venta getOrdenProduccion() {
-        
+
         return venta;
 
     }
+
+    private void realizarPedidos(List<DTOPedidos> pedidos){
+        
+        PanelPedidos panel = new PanelPedidos(pedidos);
+        panel.setLocationRelativeTo(this);
+        panel.setModal(true);
+        panel.setVisible(true);
+        
+    }
+    
 }

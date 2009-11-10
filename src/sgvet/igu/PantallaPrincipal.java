@@ -95,11 +95,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         menu.add(archivo);
 
         demanda.setText("Demanda");
-        demanda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                demandaActionPerformed(evt);
-            }
-        });
 
         curvaABC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         curvaABC.setText("Calcular Curva ABC");
@@ -207,9 +202,6 @@ private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
         tabVieja = tabNueva;
     }
 }//GEN-LAST:event_jTabbedPane1MouseClicked
-
-private void demandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demandaActionPerformed
-}//GEN-LAST:event_demandaActionPerformed
 
 private void curvaABCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curvaABCActionPerformed
     PanelCurvaABC panelABC = new PanelCurvaABC(this, rootPaneCheckingEnabled);

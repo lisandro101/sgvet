@@ -13,18 +13,9 @@ import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
 import sgvet.persistencia.FachadaPersistencia;
 
-public class GestorStock {
+public abstract class GestorStock {
 
-    private static GestorStock instance;
-
-    public synchronized static GestorStock getInstancia() {
-        if (instance == null) {
-            instance = new GestorStock();
-        }
-        return instance;
-    }
-
-    public double getStockPendiente(ProductoComponente prod) {
+    protected double getStockPendiente(ProductoComponente prod) {
 
         double cantidadPendiente = 0;
         List<DetalleOrdenCompra> detalles;
@@ -47,28 +38,28 @@ public class GestorStock {
         return cantidadPendiente;
     }
 
-    public double getFactorDeSeguridad(int nivelServicio) {
+    protected double getFactorDeSeguridad(int nivelServicio) {
 
         double K = 0;
 
         switch (nivelServicio) {
-            case 5: {
+            case 50: {
                 K = 0;
                 break;
             }
-            case 6: {
+            case 60: {
                 K = 0.25;
                 break;
             }
-            case 7: {
+            case 70: {
                 K = 0.52;
                 break;
             }
-            case 8: {
+            case 80: {
                 K = 0.84;
                 break;
             }
-            case 9: {
+            case 90: {
                 K = 1.24;
                 break;
             }
@@ -88,7 +79,7 @@ public class GestorStock {
         return K;
     }
 
-    public double getPrediccionDemanda(ProductoComponente prod, double tiempoEntrega) {
+    protected double getPrediccionDemanda(ProductoComponente prod, double tiempoEntrega) {
 
         GestorDemanda gd = GestorDemanda.getInstancia();
         GestorFecha gf = GestorFecha.getInstancia();
@@ -133,7 +124,7 @@ public class GestorStock {
 
     }
 
-    private double getCostoAnualAlmacenamiento(ProductoComponente producto) {
+    protected double getCostoAnualAlmacenamiento(ProductoComponente producto) {
 
         double costoUnitario;
         double costoAnualAlmacenamiento;
@@ -147,4 +138,5 @@ public class GestorStock {
         return costoAnualAlmacenamiento;
 
     }
+
 }

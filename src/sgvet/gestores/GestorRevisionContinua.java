@@ -1,13 +1,19 @@
 package sgvet.gestores;
 
+import java.util.ArrayList;
+import java.util.List;
+import sgvet.entidades.DetalleOrdenProduccion;
+import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.PoliticaRevisionContinua;
+import sgvet.entidades.Venta;
+import sgvet.entidades.auxiliares.DTOPedidos;
 
 /**
  *
  * @author Luciano. Lisandro
  */
-public class GestorRevisionContinua {
+public class GestorRevisionContinua extends GestorStock {
 
     private static GestorRevisionContinua instancia;
     ProductoComponente producto;
@@ -34,13 +40,13 @@ public class GestorRevisionContinua {
         producto = prod;
 
     }
-    
+
     private double getStockDeSeguridad() {
 
-        GestorStock gs = GestorStock.getInstancia();
         double stockSeguridad = 0;
 
-        stockSeguridad = politica.getDesviacionEstandarDemanda() * gs.getFactorDeSeguridad(politica.getNivelServicio());
+        stockSeguridad = politica.getDesviacionEstandarDemanda() * getFactorDeSeguridad(
+                politica.getNivelServicio());
 
         return stockSeguridad;
 
@@ -53,29 +59,58 @@ public class GestorRevisionContinua {
      */
     public double getPuntoDePedido() {
 
-        GestorStock gs = GestorStock.getInstancia();
         double puntoDePedido = 0;
 
         if (politica.getPrediccionDemanda() > 0) {
             puntoDePedido = politica.getPrediccionDemanda() + getStockDeSeguridad();
         } else {
-            puntoDePedido = gs.getPrediccionDemanda(producto, politica.getTiempoEntrega()) + getStockDeSeguridad();
+            puntoDePedido = getPrediccionDemanda(producto,
+                    politica.getTiempoEntrega()) + getStockDeSeguridad();
         }
 
         return puntoDePedido;
     }
 
     /**
+     *
+     * @param venta
+     * @return
+     */
+    public List<DTOPedidos> getPedidosRevisionContinua(Venta venta) {
+
+        Politica pol;
+        List<DTOPedidos> pedidos = new ArrayList<DTOPedidos>();
+        DTOPedidos pedido;
+
+        for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
+            pol = detalle.getProducto().getProveedores().get(0).getPolitica();
+            if (pol != null) {
+                if (pol instanceof PoliticaRevisionContinua) {
+                    cargarGestorRevisionContinua(detalle.getProducto());
+                    if (getStockDisponible() <= getPuntoDePedido()) {
+                        if (!detalle.getProducto().isSeRealizoPedido()) {
+                            pedido = new DTOPedidos(detalle.getProducto(), getQOptimo(producto));
+                            pedidos.add(pedido);
+                        }
+                    }
+                }
+            }
+        }
+
+        return pedidos;
+
+    }
+
+    /**
      * Devuelve el stock disponible (S).
-     * 
+     *
      * @return
      */
     public double getStockDisponible() {
 
-        GestorStock gs = GestorStock.getInstancia();
         double stockDisponible;
 
-        stockDisponible = producto.getStock() + gs.getStockPendiente(producto); //- stockComprometido
+        stockDisponible = producto.getStock() + getStockPendiente(producto); //- stockComprometido
 
         return stockDisponible;
 
