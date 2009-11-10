@@ -38,45 +38,31 @@ public abstract class GestorStock {
         return cantidadPendiente;
     }
 
-    protected double getFactorDeSeguridad(int nivelServicio) {
+    protected double getFactorDeSeguridad(double nivelServicio) {
 
-        double K = 0;
+        double factorSeguridad = 0;
 
-        switch (nivelServicio) {
-            case 50: {
-                K = 0;
-                break;
-            }
-            case 60: {
-                K = 0.25;
-                break;
-            }
-            case 70: {
-                K = 0.52;
-                break;
-            }
-            case 80: {
-                K = 0.84;
-                break;
-            }
-            case 90: {
-                K = 1.24;
-                break;
-            }
-            case 95: {
-                K = 1.64;
-                break;
-            }
-            case 99: {
-                K = 0.84;
-                break;
-            }
-            default: {
-                K = 99999999;
-                System.out.println("PORCENTAJE FUERA DE RANGO");
-            }
+        if (nivelServicio <= 50) {
+            factorSeguridad = 0;
+        } else if (nivelServicio <= 60) {
+            factorSeguridad = 0.25;
+        } else if (nivelServicio <= 70) {
+            factorSeguridad = 0.52;
+        } else if (nivelServicio <= 80) {
+            factorSeguridad = 0.84;
+        } else if (nivelServicio <= 90) {
+            factorSeguridad = 1.28;
+        } else if (nivelServicio <= 95) {
+            factorSeguridad = 1.64;
+        } else if (nivelServicio <= 97.5) {
+            factorSeguridad = 1.96;
+        } else if (nivelServicio <= 99.9) {
+            factorSeguridad = 3.08;
+        } else if (nivelServicio <= 100) {
+            factorSeguridad = 3.6;
         }
-        return K;
+        
+        return factorSeguridad;
     }
 
     protected double getPrediccionDemanda(ProductoComponente prod, double tiempoEntrega) {
@@ -138,5 +124,4 @@ public abstract class GestorStock {
         return costoAnualAlmacenamiento;
 
     }
-
 }

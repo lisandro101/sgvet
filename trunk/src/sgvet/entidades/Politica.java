@@ -28,7 +28,7 @@ public abstract class Politica implements Serializable {
 
     private String id;
     private Proveedor proveedor;
-    private int nivelServicio;
+    private double nivelServicio;
     private int tiempoEntrega;
     private double desviacionEstandarDemanda;
     private double costoEmision;
@@ -68,14 +68,14 @@ public abstract class Politica implements Serializable {
     /**
      * @return the nivelServicio
      */
-    public int getNivelServicio() {
+    public double getNivelServicio() {
         return nivelServicio;
     }
 
     /**
      * @param nivelServicio the nivelServicio to set
      */
-    public void setNivelServicio(int nivelServicio) {
+    public void setNivelServicio(double nivelServicio) {
         this.nivelServicio = nivelServicio;
     }
 
