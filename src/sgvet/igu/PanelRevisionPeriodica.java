@@ -2,7 +2,11 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.util.List;
-import sgvet.entidades.ProductoComponente;
+import javax.swing.JOptionPane;
+import sgvet.entidades.PoliticaRevisionPeriodica;
+import sgvet.entidades.Proveedor;
+import sgvet.gestores.GestorValidacion;
+import sgvet.igu.buscar.ValidacionBuscar;
 import sgvet.utils.*;
 
 /**
@@ -12,46 +16,32 @@ import sgvet.utils.*;
 public class PanelRevisionPeriodica extends javax.swing.JDialog implements IValidable {
 
     private static final long serialVersionUID = 1L;
-//    private DemandaSESTableModel tmDemanda;
-//    private DefaultTableModel tModel;
-    private ProductoComponente producto;
-//    private List<Demanda> demandas;
-//
-//    private int cantAnios;
-//    private Date anioInicial;
-    private double tendencia;
-    private double alfa;
-    private double beta;
+    PoliticaRevisionPeriodica politica;
+    Proveedor proveedor;
 
-    /** Creates new form PanelCargoEmpleado */
-    public PanelRevisionPeriodica(ProductoComponente productoNuevo) {
-
-        producto = productoNuevo;
+    /** Creates new form PanelCargoEmpleado
+     * @param prov
+     */
+    public PanelRevisionPeriodica(Proveedor prov) {
 
         initComponents();
+        proveedor = prov;
+
+        if(prov.getPolitica() instanceof PoliticaRevisionPeriodica ){
+            politica= (PoliticaRevisionPeriodica)prov.getPolitica();
+        }else{
+            politica= null;
+        }
+        
         inicializar();
 
-        inicializarBotones();
-
-    }
-
-    public PanelRevisionPeriodica() {
-        initComponents();
-        inicializar();
-
-        inicializarBotones();
 
     }
 
     private void inicializar() {
-//        tModel = new DefaultTableModel();
-//        tDemanda.setModel(tModel);
         cargarPantalla();
-        btLimpiar.setEnabled(false);
-    }
-
-    private void inicializarBotones() {
-        //btCalcular.setEnabled(false);
+        tfNombre.setText(proveedor.getNombre());
+        tfCodigo.setText(proveedor.getCodigo());
     }
 
     @SuppressWarnings("unchecked")
@@ -60,9 +50,8 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         errores = new javax.swing.ButtonGroup();
         pBotones = new javax.swing.JPanel();
-        btCalcular = new javax.swing.JButton();
-        btGuardar = new javax.swing.JButton();
-        btLimpiar = new javax.swing.JButton();
+        btAceptar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
         pProducto = new javax.swing.JPanel();
         jpProveedor = new javax.swing.JPanel();
         lbCodigo = new javax.swing.JLabel();
@@ -88,29 +77,21 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
         setTitle("Demanda");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btCalcular.setText("Guardar");
-        btCalcular.addActionListener(new java.awt.event.ActionListener() {
+        btAceptar.setText("Aceptar");
+        btAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCalcularActionPerformed(evt);
+                btAceptarActionPerformed(evt);
             }
         });
-        pBotones.add(btCalcular);
+        pBotones.add(btAceptar);
 
-        btGuardar.setText("Cerrar");
-        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btGuardarActionPerformed(evt);
+                btCancelarActionPerformed(evt);
             }
         });
-        pBotones.add(btGuardar);
-
-        btLimpiar.setText("Limpiar");
-        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLimpiarActionPerformed(evt);
-            }
-        });
-        pBotones.add(btLimpiar);
+        pBotones.add(btCancelar);
 
         jpProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor"));
 
@@ -169,7 +150,11 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         jLabel2.setText("Periodo de Revision:");
 
-        tfPeriodoRevision.setEditable(false);
+        tfPeriodoRevision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPeriodoRevisionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpRevisionPeriodicaLayout = new javax.swing.GroupLayout(jpRevisionPeriodica);
         jpRevisionPeriodica.setLayout(jpRevisionPeriodicaLayout);
@@ -293,19 +278,6 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-    dispose();
-}//GEN-LAST:event_btGuardarActionPerformed
-
-private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-}//GEN-LAST:event_btCalcularActionPerformed
-
-private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
-    sgvet.utils.Util.getInstancia().limpiarCampos(this);
-    //producto=null;
-    btGuardar.setEnabled(false);
-}//GEN-LAST:event_btLimpiarActionPerformed
-
 private void tfCostoEmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCostoEmisionActionPerformed
     // TODO add your handling code here:
 }//GEN-LAST:event_tfCostoEmisionActionPerformed
@@ -313,10 +285,39 @@ private void tfCostoEmisionActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDesviacionDemandaActionPerformed
     // TODO add your handling code here:
 }//GEN-LAST:event_tfDesviacionDemandaActionPerformed
+
+private void tfPeriodoRevisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPeriodoRevisionActionPerformed
+    if(tfPeriodoRevision.getText().trim().equals("0")){
+        tfCostoEmision.setEditable(true);
+        tfTasaAlmacenamiento.setEnabled(true);
+    }else{
+        tfCostoEmision.setEditable(false);
+        tfTasaAlmacenamiento.setEnabled(false);
+    }
+
+}//GEN-LAST:event_tfPeriodoRevisionActionPerformed
+
+private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+    if (verificarCampos()) {
+        if (politica == null) {
+            crearPolitica();
+        } else {
+            actualizarPolitica();
+        }
+
+        dispose();
+    }else{
+        JOptionPane.showMessageDialog(this, "Campos Erroneos o Incompletos");
+    }
+}//GEN-LAST:event_btAceptarActionPerformed
+
+private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+    dispose();
+}//GEN-LAST:event_btCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCalcular;
-    private javax.swing.JButton btGuardar;
-    private javax.swing.JButton btLimpiar;
+    private javax.swing.JButton btAceptar;
+    private javax.swing.JButton btCancelar;
     private javax.swing.ButtonGroup errores;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -346,24 +347,59 @@ private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) 
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public ProductoComponente getProductoTerminado() {
-        return producto;
+   private void crearPolitica(){
+        //if(verificarCampos()){
+            politica = new PoliticaRevisionPeriodica();
+            politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
+            politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
+            politica.setNivelServicio(Integer.valueOf(tfNivelServicio.getText()));
+            politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
+            politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
+            politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
+            politica.setProveedor(proveedor);
+            proveedor.setPolitica(politica);
+        //}
     }
 
-    public void setProductoTerminado(ProductoComponente producton) {
-        producto = producton;
-        cargarPantalla();
+    private void actualizarPolitica(){
+        if(verificarCampos()){
+            politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
+            politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
+            politica.setNivelServicio(Integer.valueOf(tfNivelServicio.getText()));
+            politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
+            politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
+            politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
+            politica.setProveedor(proveedor);
+            proveedor.setPolitica(politica);
+        }
     }
 
-    private void cargarPantalla() {
-//        sgvet.utils.Util.getInstancia().limpiarCampos(this);
 
-        tfCodigo.setText(producto.getCodigo());
-        tfNombre.setText(producto.getNombre());
-
+    private boolean verificarCampos(){
+        int resul = 0;
+        if(!ValidacionBuscar.getInstancia().existenCamposVacios(this)){
+            if(!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)){
+                ++resul;
+            }
+        }else{
+            ++resul;
+        }
+        if(resul>0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
-    private double redondear(double valor) {
-        return (Math.floor(valor * 100) / 100);
+    private void cargarPantalla(){
+        if(politica != null){
+            tfCostoEmision.setText(politica.getCostoEmision()+"");
+            tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda()+"");
+            tfNivelServicio.setText(politica.getNivelServicio()+"");
+            tfPeriodoRevision.setText(politica.getPeridoDeRevision()+"");
+            tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento()+"");
+            tfTiempoEntrega.setText(politica.getTiempoEntrega()+"");
+
+        }
     }
 }

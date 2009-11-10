@@ -246,7 +246,10 @@ private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     if (ValidacionBuscar.getInstancia().existenCamposVacios(this)) {
         JOptionPane.showMessageDialog(this, "Existen campos sin completar");
     } else {
-        proveedor = crearProveedor();
+        if(proveedor == null){
+            proveedor = crearProveedor();
+        }
+        
         if (ValidacionBuscar.getInstancia().estaDuplicado(proveedor)) {
             JOptionPane.showMessageDialog(this, "El proveedor ya se encuentra registrado");
         } else {
@@ -270,11 +273,26 @@ private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             FachadaPersistencia.getInstancia().borrar(proveedor, true);
             Util.getInstancia().limpiarCampos(this);
             proveedor = null;
+            cbPolitica.setSelectedIndex(0);
             inicializarBotones();
         }
     }
 
 }//GEN-LAST:event_btEliminarActionPerformed
+
+
+//temporalmente no lo voy a usar Seba
+private void persistirPolitica(){
+        if(proveedor.getPolitica() != null){
+            if(proveedor.getPolitica() instanceof PoliticaRevisionContinua){
+                FachadaPersistencia.getInstancia().grabar((PoliticaRevisionContinua)proveedor.getPolitica(), true);
+            }else{
+                FachadaPersistencia.getInstancia().grabar((PoliticaRevisionPeriodica)proveedor.getPolitica(), true);
+            }
+
+
+        }
+    }
 
 private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
 
@@ -287,6 +305,7 @@ private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         FachadaPersistencia.getInstancia().actualizar(proveedor, true);
         Util.getInstancia().limpiarCampos(pCampos);
         proveedor = null;
+        cbPolitica.setSelectedIndex(0);
         inicializarBotones();
     }
 
@@ -298,14 +317,17 @@ private void dpInicioActividadesActionPerformed(java.awt.event.ActionEvent evt) 
 }//GEN-LAST:event_dpInicioActividadesActionPerformed
 
 private void btParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParametrosActionPerformed
-    
+
+    if(proveedor == null){
+        crearProveedor();
+    }
     if(cbPolitica.getSelectedIndex() == 1) {
-        PanelRevisionContinua revisionContinua = new PanelRevisionContinua();
+        PanelRevisionContinua revisionContinua = new PanelRevisionContinua(proveedor);
         revisionContinua.setModal(true);
         revisionContinua.setVisible(true);
     }
     else if (cbPolitica.getSelectedIndex() == 2){
-        PanelRevisionPeriodica revisionPeriodica = new PanelRevisionPeriodica();
+        PanelRevisionPeriodica revisionPeriodica = new PanelRevisionPeriodica(proveedor);
         revisionPeriodica.setModal(true);
         revisionPeriodica.setVisible(true);
     }
@@ -357,11 +379,11 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
         proveedor.setDireccion(tfDireccion.getText());
         proveedor.setFechaInicioActividad(dpInicioActividades.getDate());
 
-        if (cbPolitica.getSelectedItem().toString().equals("Politica (s,Q)")) {
-            proveedor.setPolitica(new PoliticaRevisionContinua());
-        } else if (cbPolitica.getSelectedItem().toString().equals("Politica (S,R)")) {
-            proveedor.setPolitica(new PoliticaRevisionPeriodica());
-        }
+//        if (cbPolitica.getSelectedItem().toString().equals("Politica (s,Q)")) {
+//            proveedor.setPolitica(new PoliticaRevisionContinua());
+//        } else if (cbPolitica.getSelectedItem().toString().equals("Politica (S,R)")) {
+//            proveedor.setPolitica(new PoliticaRevisionPeriodica());
+//        }
 
         return proveedor;
     }
@@ -374,11 +396,27 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
         tfDireccion.setText(prov.getDireccion());
         dpInicioActividades.setDate(prov.getFechaInicioActividad());
 
+        System.out.println("el indice de politica es: "+ prov.getPolitica().toString());
+        if(prov.getPolitica() != null){
+            if(prov.getPolitica() instanceof PoliticaRevisionContinua){
+                cbPolitica.setSelectedIndex(1);
+            }else if(prov.getPolitica() instanceof PoliticaRevisionPeriodica){
+                cbPolitica.setSelectedItem(2);
+            }
+//            else{
+//                cbPolitica.setSelectedItem(0);
+//            }
+        }else{
+                cbPolitica.setSelectedItem(0);
+        }
+
+
         pantallaCargadaBotones();
 
     }
 
     public void setProveedor(Proveedor prov) {
+        cbPolitica.setSelectedIndex(0);
         proveedor = prov;
         cargarPantallaProveedor(prov);
 

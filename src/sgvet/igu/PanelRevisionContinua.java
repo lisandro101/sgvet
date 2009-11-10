@@ -2,6 +2,12 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.util.List;
+import javax.swing.JOptionPane;
+import sgvet.entidades.PoliticaRevisionContinua;
+import sgvet.entidades.Proveedor;
+import sgvet.gestores.GestorValidacion;
+import sgvet.igu.buscar.ValidacionBuscar;
+import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.*;
 
 /**
@@ -11,25 +17,31 @@ import sgvet.utils.*;
 public class PanelRevisionContinua extends javax.swing.JDialog implements IValidable {
 
     private static final long serialVersionUID = 1L;
+    PoliticaRevisionContinua politica;
+    Proveedor proveedor;
 
-    public PanelRevisionContinua() {
+    public PanelRevisionContinua(Proveedor prov) {
 
         initComponents();
-        inicializar();
-        inicializarBotones();
+        proveedor = prov;
+        
+        if(prov.getPolitica() instanceof PoliticaRevisionContinua ){
+            politica= (PoliticaRevisionContinua)prov.getPolitica();
+        }else{
+            politica= null;
+        }
 
+        inicializar();
     }
 
     private void inicializar() {
 
         cargarPantalla();
-        btLimpiar.setEnabled(false);
+        tfNombre.setText(proveedor.getNombre());
+        tfCodigo.setText(proveedor.getCodigo());
 
     }
 
-    private void inicializarBotones() {
-        
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -37,9 +49,8 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
         errores = new javax.swing.ButtonGroup();
         pBotones = new javax.swing.JPanel();
-        btGuardar = new javax.swing.JButton();
-        btCerrar = new javax.swing.JButton();
-        btLimpiar = new javax.swing.JButton();
+        btAceptar = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
         pProducto = new javax.swing.JPanel();
         pProveedor = new javax.swing.JPanel();
         lbCodigo = new javax.swing.JLabel();
@@ -65,29 +76,21 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         setTitle("Demanda");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btGuardar.setText("Guardar");
-        btGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btAceptar.setText("Aceptar");
+        btAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btGuardarActionPerformed(evt);
+                btAceptarActionPerformed(evt);
             }
         });
-        pBotones.add(btGuardar);
+        pBotones.add(btAceptar);
 
-        btCerrar.setText("Cerrar");
-        btCerrar.addActionListener(new java.awt.event.ActionListener() {
+        btCancelar.setText("Cancelar");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCerrarActionPerformed(evt);
+                btCancelarActionPerformed(evt);
             }
         });
-        pBotones.add(btCerrar);
-
-        btLimpiar.setText("Limpiar");
-        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLimpiarActionPerformed(evt);
-            }
-        });
-        pBotones.add(btLimpiar);
+        pBotones.add(btCancelar);
 
         pProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor"));
 
@@ -110,8 +113,8 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
                     .addComponent(lbNombre))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProveedorLayout.setVerticalGroup(
@@ -165,6 +168,12 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         jpRevisionContinua.setBorder(javax.swing.BorderFactory.createTitledBorder("Revision Continua"));
 
         jLabel1.setText("Prediccion de la Demanda:");
+
+        tfPrediccionDemanda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPrediccionDemandaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpRevisionContinuaLayout = new javax.swing.GroupLayout(jpRevisionContinua);
         jpRevisionContinua.setLayout(jpRevisionContinuaLayout);
@@ -252,7 +261,7 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(pProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)))
+                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,19 +277,19 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarActionPerformed
-    dispose();
-}//GEN-LAST:event_btCerrarActionPerformed
+private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
+    if (verificarCampos()) {
+        if (politica == null) {
+            crearPolitica();
+        } else {
+            actualizarPolitica();
+        }
 
-private void btGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuardarActionPerformed
-
-}//GEN-LAST:event_btGuardarActionPerformed
-
-private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
-    sgvet.utils.Util.getInstancia().limpiarCampos(this);
-    //producto=null;
-    btGuardar.setEnabled(false);
-}//GEN-LAST:event_btLimpiarActionPerformed
+        dispose();
+    }else{
+        JOptionPane.showMessageDialog(this, "Campos Erroneos o Incompletos");
+    }
+}//GEN-LAST:event_btAceptarActionPerformed
 
 private void tfCostoEmisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCostoEmisionActionPerformed
     // TODO add your handling code here:
@@ -289,10 +298,22 @@ private void tfCostoEmisionActionPerformed(java.awt.event.ActionEvent evt) {//GE
 private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDesviacionDemandaActionPerformed
     // TODO add your handling code here:
 }//GEN-LAST:event_tfDesviacionDemandaActionPerformed
+
+private void tfPrediccionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrediccionDemandaActionPerformed
+    if(tfPrediccionDemanda.getText().trim().equals("0")){
+        tfTiempoEntrega.setEditable(true);
+    }else{
+        tfTiempoEntrega.setEditable(false);
+    }
+}//GEN-LAST:event_tfPrediccionDemandaActionPerformed
+
+private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+    dispose();
+}//GEN-LAST:event_btCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCerrar;
-    private javax.swing.JButton btGuardar;
-    private javax.swing.JButton btLimpiar;
+    private javax.swing.JButton btAceptar;
+    private javax.swing.JButton btCancelar;
     private javax.swing.ButtonGroup errores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -322,12 +343,64 @@ private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) 
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private void cargarPantalla() {
-
-    }
-
     private double redondear(double valor) {
         return (Math.floor(valor * 100) / 100);
     }
 
+    private void crearPolitica(){
+        //if(verificarCampos()){
+            politica = new PoliticaRevisionContinua();
+            politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
+            politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
+            politica.setNivelServicio(Integer.valueOf(tfNivelServicio.getText()));
+            politica.setPrediccionDemanda(Double.parseDouble(tfPrediccionDemanda.getText()));            
+            politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
+            politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
+            politica.setProveedor(proveedor);
+            proveedor.setPolitica(politica);
+        //}
+    }
+
+    private void actualizarPolitica(){
+        if(verificarCampos()){
+            politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
+            politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
+            politica.setNivelServicio(Integer.valueOf(tfNivelServicio.getText()));
+            politica.setPrediccionDemanda(Double.parseDouble(tfPrediccionDemanda.getText()));
+            politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
+            politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
+            politica.setProveedor(proveedor);
+            proveedor.setPolitica(politica);
+        }
+    }
+
+    
+    private boolean verificarCampos(){
+        int resul = 0;
+        if(!ValidacionBuscar.getInstancia().existenCamposVacios(this)){
+            if(!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)){
+                ++resul;
+            }            
+        }else{
+            ++resul;
+        }
+        if(resul>0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private void cargarPantalla(){
+        if(politica != null){
+            tfCostoEmision.setText(politica.getCostoEmision()+"");
+            tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda()+"");
+            tfNivelServicio.setText(politica.getNivelServicio()+"");
+            tfPrediccionDemanda.setText(politica.getPrediccionDemanda()+"");
+            tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento()+"");
+            tfTiempoEntrega.setText(politica.getTiempoEntrega()+"");
+            
+        }
+    }
 }
+
