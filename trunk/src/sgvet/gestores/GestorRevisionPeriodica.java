@@ -7,7 +7,7 @@ import sgvet.entidades.ProductoComponente;
  *
  * @author Luciano, Lisandro
  */
-public class GestorRevisionPeriodica extends GestorStock {
+public class GestorRevisionPeriodica extends GestorStock implements IObservadorFecha{
 
     private static GestorRevisionPeriodica instancia;
     ProductoComponente producto;
@@ -78,7 +78,7 @@ public class GestorRevisionPeriodica extends GestorStock {
 
     }
 
-        /**
+    /**
      * Devuelve el stock disponible (S).
      *
      * @return
@@ -104,6 +104,20 @@ public class GestorRevisionPeriodica extends GestorStock {
 
         return periodoDeRevision;
 
+    }
+
+    public double getCantidadAPedir() {
+        double cantidad;
+
+        cantidad = getPuntoPedido() - getStockDisponible();
+
+        return cantidad;
+
+    }
+
+    @Override
+    public void actualizar() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
 

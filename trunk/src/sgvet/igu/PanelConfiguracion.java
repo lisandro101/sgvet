@@ -8,7 +8,6 @@
  *
  * Created on 30/09/2009, 16:19:46
  */
-
 package sgvet.igu;
 
 import java.awt.Component;
@@ -20,9 +19,9 @@ import javax.persistence.Query;
 import sgvet.entidades.PoliticaRevisionPeriodica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DTOPedidos;
-import sgvet.gestores.GestorDemanda;
 import sgvet.gestores.GestorFecha;
 import sgvet.gestores.GestorRevisionPeriodica;
+import sgvet.gestores.IObservadorFecha;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.IValidable;
 
@@ -32,19 +31,27 @@ import sgvet.utils.IValidable;
  */
 public class PanelConfiguracion extends javax.swing.JDialog implements IValidable {
 
-    /** Creates new form PanelConfiguracion */
+    List<IObservadorFecha> observadores;
+
+    /** Creates new form PanelConfiguracion
+     * @param parent
+     * @param modal 
+     */
     public PanelConfiguracion(java.awt.Frame parent, boolean modal) {
+
         super(parent, modal);
         initComponents();
-        //initComponents();
-        cargarFecha();
+        inicializar();
 
     }
 
+    private void inicializar() {
 
-    private void cargarFecha(){
+        observadores = new ArrayList<IObservadorFecha>();
         dpFechaActual.setDate(GestorFecha.getInstancia().getFechaHoy());
+
     }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -132,12 +139,15 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 }//GEN-LAST:event_dpFechaActualActionPerformed
 
     private void btAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAplicarActionPerformed
+
         GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
-        buscarProductosConPoliticaSR();
+        notificar();
+        buscarProductosConPoliticaSR(); //La logica de este metodo se va a pasar al gestor.
+
 }//GEN-LAST:event_btAplicarActionPerformed
 
     private void btRetrocederPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRetrocederPeriodoActionPerformed
-        
+
         Date nuevaFecha = GestorFecha.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), -28);
         dpFechaActual.setDate(nuevaFecha);
 
@@ -147,16 +157,13 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
         Date nuevaFecha = GestorFecha.getInstancia().sumarDiasALaFecha(dpFechaActual.getDate(), 28);
         dpFechaActual.setDate(nuevaFecha);
-        
-    }//GEN-LAST:event_btAvanzarPeriodoActionPerformed
 
-   
+    }//GEN-LAST:event_btAvanzarPeriodoActionPerformed
 
     @Override
     public List<Component> getComponentesObligatorios() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAplicar;
     private javax.swing.JButton btAvanzarPeriodo;
@@ -166,11 +173,12 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
     private javax.swing.JLabel lbFechaActual;
     // End of variables declaration//GEN-END:variables
 
-
+    @Deprecated
     private void buscarProductosConPoliticaSR() {
         List<ProductoComponente> productos;
         List<ProductoComponente> resultado = new ArrayList<ProductoComponente>();
-        Query consulta = FachadaPersistencia.getInstancia().crearConsulta("Select a from ProductoComponente a where a.borrado=false");
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
+                "Select a from ProductoComponente a where a.borrado=false");
 
         productos = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
 
@@ -179,8 +187,8 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
         }
 
         for (ProductoComponente producto : productos) {
-            if(producto.getProveedores().get(0).getPolitica() != null){
-                if(producto.getProveedores().get(0).getPolitica() instanceof PoliticaRevisionPeriodica){
+            if (producto.getProveedores().get(0).getPolitica() != null) {
+                if (producto.getProveedores().get(0).getPolitica() instanceof PoliticaRevisionPeriodica) {
                     resultado.add(producto);
                 }
             }
@@ -189,11 +197,12 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
         calcularR(resultado);
     }
 
-    private void calcularR(List<ProductoComponente> productos){
-        double r[]= new double[productos.size()];
-        for(int i = 0; i<productos.size(); i++) {
+    @Deprecated
+    private void calcularR(List<ProductoComponente> productos) {
+        double r[] = new double[productos.size()];
+        for (int i = 0; i < productos.size(); i++) {
             GestorRevisionPeriodica.getInstancia().cargarGestorRevisionPeriodica(productos.get(i));
-            r[i]=GestorRevisionPeriodica.getInstancia().getPeriodoDeRevision();
+            r[i] = GestorRevisionPeriodica.getInstancia().getPeriodoDeRevision();
 
         }
 
@@ -205,18 +214,20 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
             Calendar fechaProd = null;
             DTOPedidos ped;
 
-            if(productos.get(i).getFechaUltimaRevision()== null){
-                ped = new DTOPedidos(productos.get(i), GestorRevisionPeriodica.getInstancia().getQOptimo(productos.get(i)));
+            if (productos.get(i).getFechaUltimaRevision() == null) {
+                GestorRevisionPeriodica.getInstancia().cargarGestorRevisionPeriodica(productos.get(i));
+                ped = new DTOPedidos(productos.get(i), GestorRevisionPeriodica.getInstancia().getCantidadAPedir());
                 pedidos.add(ped);
-            }else{
-                if((GestorFecha.getInstancia().getFechaHoy().compareTo
-                        (productos.get(i).getFechaUltimaRevision())>0)){
+            } else {
+                if ((GestorFecha.getInstancia().getFechaHoy().compareTo(productos.get(i).getFechaUltimaRevision()) > 0)) {
                     fechaHoy.setTime(GestorFecha.getInstancia().getFechaHoy());
                     fechaProd.setTime(productos.get(i).getFechaUltimaRevision());
-                    diferencia=(fechaHoy.getTimeInMillis()- fechaProd.getTimeInMillis())/3600000;
+                    diferencia = (fechaHoy.getTimeInMillis() - fechaProd.getTimeInMillis()) / 3600000;
 
-                    if(diferencia >= r[i]){
-                        ped = new DTOPedidos(productos.get(i), GestorRevisionPeriodica.getInstancia().getQOptimo(productos.get(i)));
+                    if (diferencia >= r[i]) {
+                        GestorRevisionPeriodica.getInstancia().cargarGestorRevisionPeriodica(productos.get(i));
+                        ped = new DTOPedidos(productos.get(i),
+                                GestorRevisionPeriodica.getInstancia().getCantidadAPedir());
                         pedidos.add(ped);
                     }
                 }
@@ -226,7 +237,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
         realizarPedidos(pedidos);
     }
 
-    private void realizarPedidos(List<DTOPedidos> pedidos){
+    private void realizarPedidos(List<DTOPedidos> pedidos) {
 
         PanelPedidosPeriodica panel = new PanelPedidosPeriodica(pedidos);
         panel.setLocationRelativeTo(this);
@@ -235,4 +246,18 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
     }
 
+    private void notificar() {
+        for (IObservadorFecha obs : observadores) {
+            obs.actualizar();
+        }
+    }
+
+    /**
+     * Este metodo agrega a cualquier clase interesada en saber cuando cambia la fecha actual, esta clase debe
+     * implementar la interfaz IObservadorFecha.
+     * @param obs
+     */
+    public void agregarObservador(IObservadorFecha obs) {
+        observadores.add(obs);
+    }
 }

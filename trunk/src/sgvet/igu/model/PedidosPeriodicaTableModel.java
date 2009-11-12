@@ -101,10 +101,10 @@ public class PedidosPeriodicaTableModel extends AbstractTableModel implements IM
                 resultado = pedidos.get(fila).getProducto().getNombre();
                 break;
             case 1:
-                resultado = grp.getPuntoPedido();
+                resultado = grp.getStockDisponible();
                 break;
             case 32:
-                resultado = grp.getQOptimo(pedidos.get(fila).getProducto());
+                resultado = grp.getCantidadAPedir();
                 break;
         }
 
