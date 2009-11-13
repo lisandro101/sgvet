@@ -62,10 +62,6 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         pCampos = new javax.swing.JPanel();
         pProductoTerminado2 = new javax.swing.JPanel();
         tfCostoUnitario = new javax.swing.JTextField();
-        lbCondEmbalaje = new javax.swing.JLabel();
-        tfCondEmbalaje = new javax.swing.JTextField();
-        lbCostoPedio = new javax.swing.JLabel();
-        tfCostoPedido = new javax.swing.JTextField();
         lbTamanioLoteEstandar = new javax.swing.JLabel();
         lbStock = new javax.swing.JLabel();
         tfDescripcion = new javax.swing.JTextField();
@@ -84,13 +80,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         lbNombre = new javax.swing.JLabel();
         lbCategoria = new javax.swing.JLabel();
         lbEstado = new javax.swing.JLabel();
-        lbNroPlano = new javax.swing.JLabel();
-        lbPrecioBase = new javax.swing.JLabel();
-        lbPesoUnidad = new javax.swing.JLabel();
         lbUnidadMedida = new javax.swing.JLabel();
-        tfPesoUnidad = new javax.swing.JTextField();
-        tfPrecioBase = new javax.swing.JTextField();
-        tfNroPlano = new javax.swing.JTextField();
         tfNombre = new javax.swing.JTextField();
         tfCodigo = new javax.swing.JTextField();
         cbEstado = new javax.swing.JComboBox();
@@ -163,10 +153,6 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         });
         pBotones.add(btTest);
 
-        lbCondEmbalaje.setText("Condiciones Embalaje:");
-
-        lbCostoPedio.setText("Costo Pedido:");
-
         lbTamanioLoteEstandar.setText("Tamaño Lote Estandar:");
 
         lbStock.setText("Stock:");
@@ -186,73 +172,57 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         pProductoTerminado2Layout.setHorizontalGroup(
             pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pProductoTerminado2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pProductoTerminado2Layout.createSequentialGroup()
-                        .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTamanioLoteEstandar)
-                            .addComponent(lbCondEmbalaje)
-                            .addComponent(lbStock)
-                            .addComponent(lbCostoUnitario)
-                            .addComponent(lbDescripcion)
-                            .addComponent(lbCostoPedio)
-                            .addComponent(lbCostoAlmacenamiento)
-                            .addComponent(lbStockReserva))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                        .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfStockReserva, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfCostoAlmacenamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfCostoPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfCostoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfTamanioLoteEstandar, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfCondEmbalaje, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfStock, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
-                            .addComponent(tfDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pProductoTerminado2Layout.createSequentialGroup()
-                        .addComponent(lbDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfDemandaAnual, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)))
+                    .addComponent(lbCostoUnitario)
+                    .addComponent(lbCostoAlmacenamiento)
+                    .addComponent(lbTamanioLoteEstandar)
+                    .addComponent(lbStock)
+                    .addComponent(lbDescripcion)
+                    .addComponent(lbStockReserva)
+                    .addComponent(lbDemandaAnual))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfDemandaAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(tfCostoAlmacenamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(tfCostoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(tfTamanioLoteEstandar, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(tfStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(tfDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(tfStockReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminado2Layout.setVerticalGroup(
             pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pProductoTerminado2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCostoAlmacenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbCostoAlmacenamiento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbCostoPedio)
-                    .addComponent(tfCostoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfCostoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbCostoUnitario))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbCostoUnitario)
-                    .addComponent(tfCostoUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfTamanioLoteEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTamanioLoteEstandar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbTamanioLoteEstandar)
-                    .addComponent(tfTamanioLoteEstandar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbCondEmbalaje)
-                    .addComponent(tfCondEmbalaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbStock))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lbDescripcion)
-                    .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbDescripcion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbStockReserva)
-                    .addComponent(tfStockReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfStockReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbStockReserva))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfDemandaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDemandaAnual))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         lbCodigo.setText("Código:");
@@ -263,15 +233,9 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
 
         lbEstado.setText("Estado:");
 
-        lbNroPlano.setText("Nro Plano:");
-
-        lbPrecioBase.setText("Precio Base:");
-
-        lbPesoUnidad.setText("Peso Unidad:");
-
         lbUnidadMedida.setText("Unidad Medida:");
 
-        tfCodigo.setInputVerifier(new ValidarCodigo(2));
+        tfCodigo.setEditable(false);
 
         cbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Activo", "Suspendido", "Inactivo" }));
 
@@ -308,37 +272,23 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pProductoTerminado1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pProductoTerminado1Layout.createSequentialGroup()
-                        .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbUnidadMedida)
-                            .addComponent(lbPesoUnidad)
-                            .addComponent(lbPrecioBase)
-                            .addComponent(lbNroPlano)
-                            .addComponent(lbEstado)
-                            .addComponent(lbCategoria)
-                            .addComponent(lbNombre)
-                            .addComponent(lbCodigo))
-                        .addGap(9, 9, 9)
-                        .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfPesoUnidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(tfPrecioBase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(tfNroPlano, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(cbEstado, javax.swing.GroupLayout.Alignment.LEADING, 0, 181, Short.MAX_VALUE)
-                            .addComponent(cbCategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 181, Short.MAX_VALUE)
-                            .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(tfCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pProductoTerminado1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pProductoTerminado1Layout.createSequentialGroup()
-                        .addComponent(lbTipoPrediccion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbTipoPrediccion, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pProductoTerminado1Layout.createSequentialGroup()
-                        .addComponent(lbPrecioVenta)
-                        .addGap(21, 21, 21)
-                        .addComponent(tfPrecioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbEstado)
+                    .addComponent(lbCategoria)
+                    .addComponent(lbNombre)
+                    .addComponent(lbCodigo)
+                    .addComponent(lbUnidadMedida)
+                    .addComponent(lbTipoPrediccion)
+                    .addComponent(lbPrecioVenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfPrecioVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE)
+                    .addComponent(cbCategoria, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                    .addComponent(cbUnidadMedida, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE)
+                    .addComponent(cbTipoPrediccion, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pProductoTerminado1Layout.setVerticalGroup(
             pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,18 +311,6 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                     .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbNroPlano)
-                    .addComponent(tfNroPlano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPrecioBase)
-                    .addComponent(tfPrecioBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbPesoUnidad)
-                    .addComponent(tfPesoUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbUnidadMedida)
                     .addComponent(cbUnidadMedida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -393,18 +331,16 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pCamposLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(70, 70, 70)
                 .addComponent(pProductoTerminado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(99, 99, 99))
         );
         pCamposLayout.setVerticalGroup(
             pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCamposLayout.createSequentialGroup()
                 .addGroup(pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pCamposLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(pProductoTerminado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pProductoTerminado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -435,8 +371,8 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pTablaProveedoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTablaProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pTablaProveedoresLayout.setVerticalGroup(
@@ -455,15 +391,15 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pCampos, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pCampos, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pTablaProveedores, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE))
+                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(pCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pTablaProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -625,17 +561,12 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCategoria;
     private javax.swing.JLabel lbCodigo;
-    private javax.swing.JLabel lbCondEmbalaje;
     private javax.swing.JLabel lbCostoAlmacenamiento;
-    private javax.swing.JLabel lbCostoPedio;
     private javax.swing.JLabel lbCostoUnitario;
     private javax.swing.JLabel lbDemandaAnual;
     private javax.swing.JLabel lbDescripcion;
     private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbNombre;
-    private javax.swing.JLabel lbNroPlano;
-    private javax.swing.JLabel lbPesoUnidad;
-    private javax.swing.JLabel lbPrecioBase;
     private javax.swing.JLabel lbPrecioVenta;
     private javax.swing.JLabel lbStock;
     private javax.swing.JLabel lbStockReserva;
@@ -649,16 +580,11 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JPanel pTablaProveedores;
     private org.jdesktop.swingx.JXTable tProveedor;
     private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfCondEmbalaje;
     private javax.swing.JTextField tfCostoAlmacenamiento;
-    private javax.swing.JTextField tfCostoPedido;
     private javax.swing.JTextField tfCostoUnitario;
     private javax.swing.JTextField tfDemandaAnual;
     private javax.swing.JTextField tfDescripcion;
     private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfNroPlano;
-    private javax.swing.JTextField tfPesoUnidad;
-    private javax.swing.JTextField tfPrecioBase;
     private javax.swing.JTextField tfPrecioVenta;
     private javax.swing.JTextField tfStock;
     private javax.swing.JTextField tfStockReserva;
@@ -676,15 +602,15 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
         productoComponente.setNombre(tfNombre.getText());
         productoComponente.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
         productoComponente.setEstado(cbEstado.getSelectedItem().toString());
-        productoComponente.setNumeroPlano(tfNroPlano.getText());
-        productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
-        productoComponente.setPesoUnidad(Double.parseDouble(tfPesoUnidad.getText()));
+//        productoComponente.setNumeroPlano(tfNroPlano.getText());
+//        productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
+//        productoComponente.setPesoUnidad(Double.parseDouble(tfPesoUnidad.getText()));
         productoComponente.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
         productoComponente.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
-        productoComponente.setCostoPedido(Double.parseDouble(tfCostoPedido.getText()));
+//        productoComponente.setCostoPedido(Double.parseDouble(tfCostoPedido.getText()));
         productoComponente.setCostoUnitario(Double.parseDouble(tfCostoUnitario.getText()));
         productoComponente.setTamanioLoteEstandar(Double.parseDouble(tfTamanioLoteEstandar.getText()));
-        productoComponente.setCondicionesEmbalaje(tfCondEmbalaje.getText());
+//        productoComponente.setCondicionesEmbalaje(tfCondEmbalaje.getText());
         productoComponente.setStock(Double.parseDouble(tfStock.getText()));
         productoComponente.setDescripcion(tfDescripcion.getText());
         productoComponente.setStockReserva(Double.parseDouble(tfStockReserva.getText()));
@@ -711,15 +637,15 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
         productoComponente.setNombre(tfNombre.getText());
         productoComponente.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
         productoComponente.setEstado(cbEstado.getSelectedItem().toString());
-        productoComponente.setNumeroPlano(tfNroPlano.getText());
-        productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
-        productoComponente.setPesoUnidad(Double.parseDouble(tfPesoUnidad.getText()));
+//        productoComponente.setNumeroPlano(tfNroPlano.getText());
+//        productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
+//        productoComponente.setPesoUnidad(Double.parseDouble(tfPesoUnidad.getText()));
         productoComponente.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
         productoComponente.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
-        productoComponente.setCostoPedido(Double.parseDouble(tfCostoPedido.getText()));
+//        productoComponente.setCostoPedido(Double.parseDouble(tfCostoPedido.getText()));
         productoComponente.setCostoUnitario(Double.parseDouble(tfCostoUnitario.getText()));
         productoComponente.setTamanioLoteEstandar(Double.parseDouble(tfTamanioLoteEstandar.getText()));
-        productoComponente.setCondicionesEmbalaje(tfCondEmbalaje.getText());
+//        productoComponente.setCondicionesEmbalaje(tfCondEmbalaje.getText());
         productoComponente.setStock(Double.parseDouble(tfStock.getText()));
         productoComponente.setDescripcion(tfDescripcion.getText());
         productoComponente.setStockReserva(Double.parseDouble(tfStockReserva.getText()));
@@ -738,15 +664,15 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
         tfNombre.setText(prod.getNombre());
         cbCategoria.setSelectedItem(prod.getCategoria().toString());
         cbEstado.setSelectedItem(prod.getEstado());
-        tfNroPlano.setText(prod.getNumeroPlano());
-        tfPrecioBase.setText(String.valueOf(prod.getPrecioBase())); 
-        tfPesoUnidad.setText(String.valueOf(prod.getPesoUnidad()));
+//        tfNroPlano.setText(prod.getNumeroPlano());
+//        tfPrecioBase.setText(String.valueOf(prod.getPrecioBase()));
+//        tfPesoUnidad.setText(String.valueOf(prod.getPesoUnidad()));
         cbUnidadMedida.setSelectedItem(prod.getUnidadMedida());
         tfCostoAlmacenamiento.setText(String.valueOf(prod.getCostoAlmacenamiento()));
-        tfCostoPedido.setText(String.valueOf(prod.getCostoPedido()));
+//        tfCostoPedido.setText(String.valueOf(prod.getCostoPedido()));
         tfCostoUnitario.setText(String.valueOf(prod.getCostoUnitario()));
         tfTamanioLoteEstandar.setText(String.valueOf(prod.getTamanioLoteEstandar()));
-        tfCondEmbalaje.setText(prod.getCondicionesEmbalaje());
+//        tfCondEmbalaje.setText(prod.getCondicionesEmbalaje());
         tfStock.setText(String.valueOf(prod.getStock()));
         tfDescripcion.setText(prod.getDescripcion());
         tfStockReserva.setText(String.valueOf(prod.getStockReserva()));
