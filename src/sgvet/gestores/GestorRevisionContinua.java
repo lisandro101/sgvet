@@ -36,7 +36,7 @@ public class GestorRevisionContinua extends GestorStock {
      */
     public void cargarGestorRevisionContinua(ProductoComponente prod) {
 
-        politica = (PoliticaRevisionContinua) prod.getProveedores().get(0).getPolitica();
+        politica = (PoliticaRevisionContinua) prod.getPolitica();
         producto = prod;
 
     }
@@ -45,8 +45,7 @@ public class GestorRevisionContinua extends GestorStock {
 
         double stockSeguridad = 0;
 
-        stockSeguridad = politica.getDesviacionEstandarDemanda() * getFactorDeSeguridad(
-                politica.getNivelServicio());
+        stockSeguridad = politica.getDesviacionEstandarDemanda() * getFactorDeSeguridad(politica.getNivelServicio());
 
         return stockSeguridad;
 
@@ -64,8 +63,7 @@ public class GestorRevisionContinua extends GestorStock {
         if (politica.getPrediccionDemanda() > 0) {
             puntoDePedido = politica.getPrediccionDemanda() + getStockDeSeguridad();
         } else {
-            puntoDePedido = getPrediccionDemanda(producto,
-                    politica.getTiempoEntrega()) + getStockDeSeguridad();
+            puntoDePedido = getPrediccionDemanda(producto, politica.getTiempoEntrega()) + getStockDeSeguridad();
         }
 
         return puntoDePedido;
@@ -83,7 +81,7 @@ public class GestorRevisionContinua extends GestorStock {
         DTOPedidos pedido;
 
         for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
-            pol = detalle.getProducto().getProveedores().get(0).getPolitica();
+            pol = detalle.getProducto().getPolitica();
             if (pol != null) {
                 if (pol instanceof PoliticaRevisionContinua) {
                     cargarGestorRevisionContinua(detalle.getProducto());

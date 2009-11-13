@@ -99,7 +99,7 @@ public abstract class GestorStock {
         double QOptimo;
         Politica politica;
 
-        politica = producto.getProveedores().get(0).getPolitica();
+        politica = producto.getPolitica();
 
 
         demandaAnual = producto.getDemandaAnual();
@@ -116,7 +116,7 @@ public abstract class GestorStock {
         double costoAnualAlmacenamiento;
         Politica politica;
 
-        politica = producto.getProveedores().get(0).getPolitica();
+        politica = producto.getPolitica();
 
         costoUnitario = producto.getCostoUnitario();
         costoAnualAlmacenamiento = politica.getTasaAnualAlmacenamiento() * costoUnitario;

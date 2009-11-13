@@ -30,7 +30,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
      */
     public void cargarGestorRevisionPeriodica(ProductoComponente prod) {
 
-        politica = (PoliticaRevisionPeriodica) prod.getProveedores().get(0).getPolitica();
+        politica = (PoliticaRevisionPeriodica) prod.getPolitica();
         producto = prod;
 
     }
@@ -117,7 +117,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
     @Override
     public void actualizar() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }
 

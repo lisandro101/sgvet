@@ -17,7 +17,6 @@ import sgvet.igu.model.ProveedorTableModel;
 import sgvet.igu.model.UnidadMedidaTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.IValidable;
-import sgvet.utils.ValidarCodigo;
 
 /**
  *
@@ -27,7 +26,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
 
     private static final long serialVersionUID = 1L;
     
-    private ProductoComponente productoComponente;
+    private ProductoComponente producto;
     private List<Component> componentesObligatorios;
     
     private ProveedorTableModel tm;
@@ -53,12 +52,14 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         bgTipoProd = new javax.swing.ButtonGroup();
         pBotones = new javax.swing.JPanel();
         btResumenVentas = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JSeparator();
         btDemanda = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
         btBuscar = new javax.swing.JButton();
         btAgregar = new javax.swing.JButton();
         btModificar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
-        btTest = new javax.swing.JButton();
         pCampos = new javax.swing.JPanel();
         pProductoTerminado2 = new javax.swing.JPanel();
         tfCostoUnitario = new javax.swing.JTextField();
@@ -96,6 +97,10 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         jPanel2 = new javax.swing.JPanel();
         btAsignarProveedor = new javax.swing.JButton();
         btEliminarProv = new javax.swing.JButton();
+        pBotones1 = new javax.swing.JPanel();
+        btParametros = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cbPolitica = new javax.swing.JComboBox();
 
         btResumenVentas.setText("Resumen Ventas");
         btResumenVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +109,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             }
         });
         pBotones.add(btResumenVentas);
+        pBotones.add(jSeparator3);
 
         btDemanda.setText("Demanda");
         btDemanda.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +118,8 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             }
         });
         pBotones.add(btDemanda);
+        pBotones.add(jSeparator2);
+        pBotones.add(jSeparator1);
 
         btBuscar.setText("Buscar");
         btBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -145,14 +153,6 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         });
         pBotones.add(btEliminar);
 
-        btTest.setText("Test");
-        btTest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btTestActionPerformed(evt);
-            }
-        });
-        pBotones.add(btTest);
-
         lbTamanioLoteEstandar.setText("Tamaño Lote Estandar:");
 
         lbStock.setText("Stock:");
@@ -182,13 +182,13 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                     .addComponent(lbDemandaAnual))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfDemandaAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(tfCostoAlmacenamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(tfCostoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(tfTamanioLoteEstandar, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(tfStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(tfDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(tfStockReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addComponent(tfDemandaAnual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(tfCostoAlmacenamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(tfCostoUnitario, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(tfTamanioLoteEstandar, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(tfStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(tfDescripcion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                    .addComponent(tfStockReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminado2Layout.setVerticalGroup(
@@ -222,7 +222,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                 .addGroup(pProductoTerminado2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfDemandaAnual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbDemandaAnual))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         lbCodigo.setText("Código:");
@@ -281,13 +281,13 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                     .addComponent(lbPrecioVenta))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfPrecioVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                    .addComponent(cbEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE)
-                    .addComponent(cbCategoria, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                    .addComponent(tfCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                    .addComponent(cbUnidadMedida, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE)
-                    .addComponent(cbTipoPrediccion, javax.swing.GroupLayout.Alignment.TRAILING, 0, 186, Short.MAX_VALUE))
+                    .addComponent(tfPrecioVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.Alignment.TRAILING, 0, 192, Short.MAX_VALUE)
+                    .addComponent(cbCategoria, javax.swing.GroupLayout.Alignment.TRAILING, 0, 192, Short.MAX_VALUE)
+                    .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                    .addComponent(cbUnidadMedida, javax.swing.GroupLayout.Alignment.TRAILING, 0, 192, Short.MAX_VALUE)
+                    .addComponent(cbTipoPrediccion, javax.swing.GroupLayout.Alignment.TRAILING, 0, 192, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pProductoTerminado1Layout.setVerticalGroup(
@@ -321,7 +321,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
                 .addGroup(pProductoTerminado1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPrecioVenta)
                     .addComponent(tfPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pCamposLayout = new javax.swing.GroupLayout(pCampos);
@@ -330,16 +330,17 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCamposLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(pProductoTerminado2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99))
+                .addComponent(pProductoTerminado1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(63, 63, 63)
+                .addComponent(pProductoTerminado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pCamposLayout.setVerticalGroup(
             pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pCamposLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pProductoTerminado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pProductoTerminado1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pProductoTerminado2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -371,36 +372,78 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             .addGroup(pTablaProveedoresLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pTablaProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pTablaProveedoresLayout.setVerticalGroup(
             pTablaProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pTablaProveedoresLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        btParametros.setText("Definir");
+        btParametros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btParametrosActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Politica de Stock:");
+
+        cbPolitica.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Politica (s,Q)", "Politica (S,R)" }));
+        cbPolitica.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbPoliticaItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pBotones1Layout = new javax.swing.GroupLayout(pBotones1);
+        pBotones1.setLayout(pBotones1Layout);
+        pBotones1Layout.setHorizontalGroup(
+            pBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBotones1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbPolitica, 0, 450, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btParametros, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        pBotones1Layout.setVerticalGroup(
+            pBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pBotones1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(pBotones1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cbPolitica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btParametros)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pTablaProveedores, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
-                    .addComponent(pCampos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pTablaProveedores, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pBotones1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pBotones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 677, Short.MAX_VALUE)
+                    .addComponent(pCampos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pCampos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pBotones1, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pTablaProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -417,9 +460,9 @@ private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
     if(opcion == JOptionPane.YES_OPTION) {
         actualizarProductoComponente();
-        FachadaPersistencia.getInstancia().actualizar(productoComponente, true);
+        FachadaPersistencia.getInstancia().actualizar(producto, true);
         Util.getInstancia().limpiarCampos(this);
-        productoComponente=null;            
+        producto = null;
         inicializarBotones();
     }
 }//GEN-LAST:event_btModificarActionPerformed
@@ -436,14 +479,14 @@ private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     if(!Util.getInstancia().validar(this)){
         JOptionPane.showMessageDialog(this, "Existen campos sin completar");
     }else{
-        productoComponente= crearProductoComponente();
-        if(ValidacionBuscar.getInstancia().estaDuplicado(productoComponente)){
+        producto = crearProductoComponente();
+        if(ValidacionBuscar.getInstancia().estaDuplicado(producto)){
             JOptionPane.showMessageDialog(this, "El producto componente ya se encuentra registrado");
         }else{
-            FachadaPersistencia.getInstancia().actualizar(productoComponente, true);
+            FachadaPersistencia.getInstancia().actualizar(producto, true);
             Util.getInstancia().limpiarCampos(this);
             
-            productoComponente=null;
+            producto = null;
         }
     }
     
@@ -472,10 +515,10 @@ private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 JOptionPane.YES_NO_OPTION);
 
     if(opcion == JOptionPane.YES_OPTION) {
-        productoComponente.setBorrado(true);
-        FachadaPersistencia.getInstancia().actualizar(productoComponente, true);
+        producto.setBorrado(true);
+        FachadaPersistencia.getInstancia().actualizar(producto, true);
         Util.getInstancia().limpiarCampos(this);
-        productoComponente=null;
+        producto=null;
         inicializarBotones();
     }
 
@@ -493,13 +536,13 @@ private void cbTipoPrediccionActionPerformed(java.awt.event.ActionEvent evt) {//
 private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDemandaActionPerformed
    String tipoDemanda = cbTipoPrediccion.getModel().getSelectedItem().toString();
 
-   if(productoComponente == null){
+   if(producto == null){
        JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
    }else{
        if (tipoDemanda.equalsIgnoreCase("SE Simple")) {
 
 //           PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
-           PanelDemandaSimple panel = new PanelDemandaSimple(productoComponente);
+           PanelDemandaSimple panel = new PanelDemandaSimple(producto);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
 
@@ -507,12 +550,12 @@ private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
        else if(tipoDemanda.equalsIgnoreCase("SE Estacionalidad")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
            
            //PanelDemandaExpoConEsta panel = new PanelDemandaExpoConEsta(productoComponente);
-           PanelDemandaConEstacionalidad panel = new PanelDemandaConEstacionalidad(productoComponente);
+           PanelDemandaConEstacionalidad panel = new PanelDemandaConEstacionalidad(producto);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
        }
        else if(tipoDemanda.equalsIgnoreCase("SE Tendencia")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-           PanelDemandaConTendencia panel = new PanelDemandaConTendencia(productoComponente);
+           PanelDemandaConTendencia panel = new PanelDemandaConTendencia(producto);
            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
            panel.setVisible(true);
        }
@@ -525,22 +568,43 @@ private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     // TODO add your handling code here:
 }//GEN-LAST:event_cbCategoriaActionPerformed
 
-private void btTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTestActionPerformed
-    GestorDemanda.getInstancia().calcularPrediccionDemandaXPeriodo(productoComponente);
-}//GEN-LAST:event_btTestActionPerformed
-
 private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btResumenVentasActionPerformed
 
-    if (productoComponente == null) {
+    if (producto == null) {
 
         JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
     } else {
-        PanelResumenVentas panel = new PanelResumenVentas(productoComponente);
+        PanelResumenVentas panel = new PanelResumenVentas(producto);
         panel.setVisible(true);
     }
 
 
 }//GEN-LAST:event_btResumenVentasActionPerformed
+
+private void btParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParametrosActionPerformed
+
+    if(producto == null){
+        crearProductoComponente();
+    }
+    if(cbPolitica.getSelectedIndex() == 1) {
+        PanelRevisionContinua revisionContinua = new PanelRevisionContinua(producto);
+        revisionContinua.setModal(true);
+        revisionContinua.setVisible(true);
+    } else if (cbPolitica.getSelectedIndex() == 2){
+        PanelRevisionPeriodica revisionPeriodica = new PanelRevisionPeriodica(producto);
+        revisionPeriodica.setModal(true);
+        revisionPeriodica.setVisible(true);
+    }
+}//GEN-LAST:event_btParametrosActionPerformed
+
+private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPoliticaItemStateChanged
+
+    if(cbPolitica.getSelectedIndex() == 0) {
+        btParametros.setVisible(false);
+    } else {
+        btParametros.setVisible(true);
+    }
+}//GEN-LAST:event_cbPoliticaItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -552,14 +616,19 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEliminarProv;
     private javax.swing.JButton btModificar;
+    private javax.swing.JButton btParametros;
     private javax.swing.JButton btResumenVentas;
-    private javax.swing.JButton btTest;
     private javax.swing.JComboBox cbCategoria;
     private javax.swing.JComboBox cbEstado;
+    private javax.swing.JComboBox cbPolitica;
     private javax.swing.JComboBox cbTipoPrediccion;
     private javax.swing.JComboBox cbUnidadMedida;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lbCategoria;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbCostoAlmacenamiento;
@@ -575,6 +644,7 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JLabel lbTipoPrediccion;
     private javax.swing.JLabel lbUnidadMedida;
     private javax.swing.JPanel pBotones;
+    private javax.swing.JPanel pBotones1;
     private javax.swing.JPanel pCampos;
     private javax.swing.JPanel pProductoTerminado1;
     private javax.swing.JPanel pProductoTerminado2;
@@ -592,88 +662,71 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JTextField tfTamanioLoteEstandar;
     // End of variables declaration//GEN-END:variables
 
-    
-    
-    
-    
     private ProductoComponente crearProductoComponente() {
-        productoComponente = new ProductoComponente();
+
+        producto = new ProductoComponente();
         
-        productoComponente.setCodigo(tfCodigo.getText());
-        productoComponente.setNombre(tfNombre.getText());
-        productoComponente.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
-        productoComponente.setEstado(cbEstado.getSelectedItem().toString());
-//        productoComponente.setNumeroPlano(tfNroPlano.getText());
-//        productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
-//        productoComponente.setPesoUnidad(Double.parseDouble(tfPesoUnidad.getText()));
-        productoComponente.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
-        productoComponente.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
-//        productoComponente.setCostoPedido(Double.parseDouble(tfCostoPedido.getText()));
-        productoComponente.setCostoUnitario(Double.parseDouble(tfCostoUnitario.getText()));
-        productoComponente.setTamanioLoteEstandar(Double.parseDouble(tfTamanioLoteEstandar.getText()));
-//        productoComponente.setCondicionesEmbalaje(tfCondEmbalaje.getText());
-        productoComponente.setStock(Double.parseDouble(tfStock.getText()));
-        productoComponente.setDescripcion(tfDescripcion.getText());
-        productoComponente.setStockReserva(Double.parseDouble(tfStockReserva.getText()));
-        productoComponente.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
-        productoComponente.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
-        productoComponente.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
+        producto.setCodigo(tfCodigo.getText());
+        producto.setNombre(tfNombre.getText());
+        producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
+        producto.setEstado(cbEstado.getSelectedItem().toString());
+        producto.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
+        producto.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
+        producto.setCostoUnitario(Double.parseDouble(tfCostoUnitario.getText()));
+        producto.setTamanioLoteEstandar(Double.parseDouble(tfTamanioLoteEstandar.getText()));
+        producto.setStock(Double.parseDouble(tfStock.getText()));
+        producto.setDescripcion(tfDescripcion.getText());
+        producto.setStockReserva(Double.parseDouble(tfStockReserva.getText()));
+        producto.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
+        producto.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
+        producto.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
         
-        productoComponente.setProveedores(tm.getFilas());
+        producto.setProveedores(tm.getFilas());
         
-        return productoComponente;
+        return producto;
+
     }
     
     public void setComponente(ProductoComponente prod){
-        productoComponente = prod;
+        
+        producto = prod;
         cargarPantallaProductoComponente(prod);
         
     }
     
-    
-    
     private void actualizarProductoComponente(){
         
-        productoComponente.setCodigo(tfCodigo.getText());
-        productoComponente.setNombre(tfNombre.getText());
-        productoComponente.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
-        productoComponente.setEstado(cbEstado.getSelectedItem().toString());
-//        productoComponente.setNumeroPlano(tfNroPlano.getText());
-//        productoComponente.setPrecioBase(Double.parseDouble(tfPrecioBase.getText()));
-//        productoComponente.setPesoUnidad(Double.parseDouble(tfPesoUnidad.getText()));
-        productoComponente.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
-        productoComponente.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
-//        productoComponente.setCostoPedido(Double.parseDouble(tfCostoPedido.getText()));
-        productoComponente.setCostoUnitario(Double.parseDouble(tfCostoUnitario.getText()));
-        productoComponente.setTamanioLoteEstandar(Double.parseDouble(tfTamanioLoteEstandar.getText()));
-//        productoComponente.setCondicionesEmbalaje(tfCondEmbalaje.getText());
-        productoComponente.setStock(Double.parseDouble(tfStock.getText()));
-        productoComponente.setDescripcion(tfDescripcion.getText());
-        productoComponente.setStockReserva(Double.parseDouble(tfStockReserva.getText()));
-        productoComponente.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
-        productoComponente.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
-        productoComponente.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
+        producto.setCodigo(tfCodigo.getText());
+        producto.setNombre(tfNombre.getText());
+        producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
+        producto.setEstado(cbEstado.getSelectedItem().toString());
+        producto.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
+        producto.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
+        producto.setCostoUnitario(Double.parseDouble(tfCostoUnitario.getText()));
+        producto.setTamanioLoteEstandar(Double.parseDouble(tfTamanioLoteEstandar.getText()));
+        producto.setStock(Double.parseDouble(tfStock.getText()));
+        producto.setDescripcion(tfDescripcion.getText());
+        producto.setStockReserva(Double.parseDouble(tfStockReserva.getText()));
+        producto.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
+        producto.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
+        producto.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
         
-        productoComponente.setProveedores(tm.getFilas());
+        producto.setProveedores(tm.getFilas());
         
     }
     
     
     private void cargarPantallaProductoComponente(ProductoComponente prod){
+
         Util.getInstancia().limpiarCampos(this);
         tfCodigo.setText(prod.getCodigo());
         tfNombre.setText(prod.getNombre());
         cbCategoria.setSelectedItem(prod.getCategoria().toString());
         cbEstado.setSelectedItem(prod.getEstado());
-//        tfNroPlano.setText(prod.getNumeroPlano());
-//        tfPrecioBase.setText(String.valueOf(prod.getPrecioBase()));
-//        tfPesoUnidad.setText(String.valueOf(prod.getPesoUnidad()));
         cbUnidadMedida.setSelectedItem(prod.getUnidadMedida());
         tfCostoAlmacenamiento.setText(String.valueOf(prod.getCostoAlmacenamiento()));
-//        tfCostoPedido.setText(String.valueOf(prod.getCostoPedido()));
         tfCostoUnitario.setText(String.valueOf(prod.getCostoUnitario()));
         tfTamanioLoteEstandar.setText(String.valueOf(prod.getTamanioLoteEstandar()));
-//        tfCondEmbalaje.setText(prod.getCondicionesEmbalaje());
         tfStock.setText(String.valueOf(prod.getStock()));
         tfDescripcion.setText(prod.getDescripcion());
         tfStockReserva.setText(String.valueOf(prod.getStockReserva()));
@@ -684,12 +737,15 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
         for (int i = 0; i < prod.getProveedores().size(); i++) {
             tm.agregarFila(prod.getProveedores().get(i));        
         }
+
         pantallaCargadaBotones();
+
     }
     private void inicializarBotones(){
         btAgregar.setEnabled(true);
         btEliminar.setEnabled(false);
         btModificar.setEnabled(false);
+        btParametros.setVisible(false);
     }
     
     private void pantallaCargadaBotones(){
@@ -704,7 +760,7 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
     }
 
     public ProductoComponente getProductoComponente() {
-        return productoComponente;
+        return producto;
     }
     
 }

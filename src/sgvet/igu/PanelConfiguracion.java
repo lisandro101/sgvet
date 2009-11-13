@@ -187,8 +187,8 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
         }
 
         for (ProductoComponente producto : productos) {
-            if (producto.getProveedores().get(0).getPolitica() != null) {
-                if (producto.getProveedores().get(0).getPolitica() instanceof PoliticaRevisionPeriodica) {
+            if (producto.getPolitica() != null) {
+                if (producto.getPolitica() instanceof PoliticaRevisionPeriodica) {
                     resultado.add(producto);
                 }
             }

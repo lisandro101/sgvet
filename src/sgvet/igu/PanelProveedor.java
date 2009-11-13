@@ -4,8 +4,6 @@ import java.awt.Component;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
-import sgvet.entidades.PoliticaRevisionContinua;
-import sgvet.entidades.PoliticaRevisionPeriodica;
 import sgvet.igu.buscar.PanelBuscarProveedor;
 import sgvet.utils.Util;
 import sgvet.entidades.Proveedor;
@@ -37,7 +35,6 @@ public class PanelProveedor extends javax.swing.JPanel implements IValidable {
         btAgregar.setEnabled(true);
         btEliminar.setEnabled(false);
         btModificar.setEnabled(false);
-        btParametros.setVisible(false);
         
     }
 
@@ -64,9 +61,6 @@ public class PanelProveedor extends javax.swing.JPanel implements IValidable {
         jLabel5 = new javax.swing.JLabel();
         dpInicioActividades = new org.jdesktop.swingx.JXDatePicker();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        cbPolitica = new javax.swing.JComboBox();
-        btParametros = new javax.swing.JButton();
         pBotones = new javax.swing.JPanel();
         btBuscar = new javax.swing.JButton();
         btAgregar = new javax.swing.JButton();
@@ -98,22 +92,6 @@ public class PanelProveedor extends javax.swing.JPanel implements IValidable {
 
         jLabel6.setText("Inicio Actividades ");
 
-        jLabel7.setText("Politica de Stock:");
-
-        cbPolitica.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "Politica (s,Q)", "Politica (S,R)" }));
-        cbPolitica.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbPoliticaItemStateChanged(evt);
-            }
-        });
-
-        btParametros.setText("Definir");
-        btParametros.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btParametrosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout pCamposLayout = new javax.swing.GroupLayout(pCampos);
         pCampos.setLayout(pCamposLayout);
         pCamposLayout.setHorizontalGroup(
@@ -126,20 +104,15 @@ public class PanelProveedor extends javax.swing.JPanel implements IValidable {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addComponent(tfContacto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addComponent(tfTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addComponent(tfMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addComponent(tfDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addComponent(dpInicioActividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pCamposLayout.createSequentialGroup()
-                        .addComponent(cbPolitica, 0, 253, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btParametros)))
+                    .addComponent(tfNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(tfContacto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(tfTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(tfMail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(tfDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(dpInicioActividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pCamposLayout.setVerticalGroup(
@@ -168,12 +141,7 @@ public class PanelProveedor extends javax.swing.JPanel implements IValidable {
                 .addGroup(pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dpInicioActividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbPolitica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btParametros))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         btBuscar.setText("Buscar");
@@ -243,6 +211,7 @@ private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_btBuscarActionPerformed
 
 private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActionPerformed
+
     if (ValidacionBuscar.getInstancia().existenCamposVacios(this)) {
         JOptionPane.showMessageDialog(this, "Existen campos sin completar");
     } else {
@@ -258,6 +227,7 @@ private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             proveedor = null;
         }
     }
+
 }//GEN-LAST:event_btAgregarActionPerformed
 
 private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
@@ -273,26 +243,11 @@ private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             FachadaPersistencia.getInstancia().borrar(proveedor, true);
             Util.getInstancia().limpiarCampos(this);
             proveedor = null;
-            cbPolitica.setSelectedIndex(0);
             inicializarBotones();
         }
     }
 
 }//GEN-LAST:event_btEliminarActionPerformed
-
-
-//temporalmente no lo voy a usar Seba
-private void persistirPolitica(){
-        if(proveedor.getPolitica() != null){
-            if(proveedor.getPolitica() instanceof PoliticaRevisionContinua){
-                FachadaPersistencia.getInstancia().grabar((PoliticaRevisionContinua)proveedor.getPolitica(), true);
-            }else{
-                FachadaPersistencia.getInstancia().grabar((PoliticaRevisionPeriodica)proveedor.getPolitica(), true);
-            }
-
-
-        }
-    }
 
 private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
 
@@ -305,10 +260,8 @@ private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         FachadaPersistencia.getInstancia().actualizar(proveedor, true);
         Util.getInstancia().limpiarCampos(pCampos);
         proveedor = null;
-        cbPolitica.setSelectedIndex(0);
         inicializarBotones();
     }
-
 
 }//GEN-LAST:event_btModificarActionPerformed
 
@@ -316,42 +269,11 @@ private void dpInicioActividadesActionPerformed(java.awt.event.ActionEvent evt) 
 // TODO add your handling code here:
 }//GEN-LAST:event_dpInicioActividadesActionPerformed
 
-private void btParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParametrosActionPerformed
-
-    if(proveedor == null){
-        crearProveedor();
-    }
-    if(cbPolitica.getSelectedIndex() == 1) {
-        PanelRevisionContinua revisionContinua = new PanelRevisionContinua(proveedor);
-        revisionContinua.setModal(true);
-        revisionContinua.setVisible(true);
-    }
-    else if (cbPolitica.getSelectedIndex() == 2){
-        PanelRevisionPeriodica revisionPeriodica = new PanelRevisionPeriodica(proveedor);
-        revisionPeriodica.setModal(true);
-        revisionPeriodica.setVisible(true);
-    }
-
-}//GEN-LAST:event_btParametrosActionPerformed
-
-private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPoliticaItemStateChanged
-
-    if(cbPolitica.getSelectedIndex() == 0) {
-        btParametros.setVisible(false);
-    }
-    else {
-        btParametros.setVisible(true);
-    }
-    
-}//GEN-LAST:event_cbPoliticaItemStateChanged
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAgregar;
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btModificar;
-    private javax.swing.JButton btParametros;
-    private javax.swing.JComboBox cbPolitica;
     private org.jdesktop.swingx.JXDatePicker dpInicioActividades;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -359,7 +281,6 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel pBotones;
     private javax.swing.JPanel pCampos;
     private javax.swing.JTextField tfContacto;
@@ -370,6 +291,7 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     // End of variables declaration//GEN-END:variables
 
     private Proveedor crearProveedor() {
+
         proveedor = new Proveedor();
 
         proveedor.setNombre(tfNombre.getText());
@@ -379,13 +301,8 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
         proveedor.setDireccion(tfDireccion.getText());
         proveedor.setFechaInicioActividad(dpInicioActividades.getDate());
 
-//        if (cbPolitica.getSelectedItem().toString().equals("Politica (s,Q)")) {
-//            proveedor.setPolitica(new PoliticaRevisionContinua());
-//        } else if (cbPolitica.getSelectedItem().toString().equals("Politica (S,R)")) {
-//            proveedor.setPolitica(new PoliticaRevisionPeriodica());
-//        }
-
         return proveedor;
+
     }
 
     private void cargarPantallaProveedor(Proveedor prov) {
@@ -396,26 +313,12 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
         tfDireccion.setText(prov.getDireccion());
         dpInicioActividades.setDate(prov.getFechaInicioActividad());
 
-
-        if(prov.getPolitica() != null){
-            if(prov.getPolitica() instanceof PoliticaRevisionContinua){
-                cbPolitica.setSelectedIndex(1);
-            }else if(prov.getPolitica() instanceof PoliticaRevisionPeriodica){
-                cbPolitica.setSelectedIndex(2);
-            }else{
-                cbPolitica.setSelectedIndex(0);
-            }
-        }else{
-                cbPolitica.setSelectedItem(0);
-        }
-
-
         pantallaCargadaBotones();
 
     }
 
     public void setProveedor(Proveedor prov) {
-        cbPolitica.setSelectedIndex(0);
+
         proveedor = prov;
         cargarPantallaProveedor(prov);
 
