@@ -45,11 +45,11 @@ public class Componente implements Serializable, IPersistente {
     private double stock;
     private double stockReserva;
     private double costoAlmacenamiento;
-    private double costoPedido;
+//    private double costoPedido;
     private double costoUnitario;
     private double tamanioLoteEstandar;
-    private double precioBase;
-    private double pesoUnidad;
+    //private double precioBase;
+//    private double pesoUnidad;
     private String descripcion;
     private double demandaAnual;
 
@@ -196,20 +196,20 @@ public class Componente implements Serializable, IPersistente {
         this.costoAlmacenamiento = costoAlmacenamiento;
     }
 
-    /**
-     * @return the costoEmision
-     */
-    @Column(name="costo_pedido")
-    public double getCostoPedido() {
-        return costoPedido;
-    }
-
-    /**
-     * @param costoPedido 
-     */
-    public void setCostoPedido(double costoPedido) {
-        this.costoPedido = costoPedido;
-    }
+//    /**
+//     * @return the costoEmision
+//     */
+//    @Column(name="costo_pedido")
+//    public double getCostoPedido() {
+//        return costoPedido;
+//    }
+//
+//    /**
+//     * @param costoPedido
+//     */
+//    public void setCostoPedido(double costoPedido) {
+//        this.costoPedido = costoPedido;
+//    }
 
     /**
      * @return the costoUnitarioOmision
@@ -241,35 +241,35 @@ public class Componente implements Serializable, IPersistente {
         this.tamanioLoteEstandar = tamanioLoteEstandar;
     }
 
-    /**
-     * @return the precioBase
-     */
-    @Column(name="precio_base")
-    public double getPrecioBase() {
-        return precioBase;
-    }
+//    /**
+//     * @return the precioBase
+//     */
+//    @Column(name="precio_base")
+//    public double getPrecioBase() {
+//        return precioBase;
+//    }
+//
+//    /**
+//     * @param precioBase the precioBase to set
+//     */
+//    public void setPrecioBase(double precioBase) {
+//        this.precioBase = precioBase;
+//    }
 
-    /**
-     * @param precioBase the precioBase to set
-     */
-    public void setPrecioBase(double precioBase) {
-        this.precioBase = precioBase;
-    }
-
-    /**
-     * @return the pesoUnidad
-     */
-    @Column(name="peso_unidad")
-    public double getPesoUnidad() {
-        return pesoUnidad;
-    }
-
-    /**
-     * @param pesoUnidad the pesoUnidad to set
-     */
-    public void setPesoUnidad(double pesoUnidad) {
-        this.pesoUnidad = pesoUnidad;
-    }
+//    /**
+//     * @return the pesoUnidad
+//     */
+//    @Column(name="peso_unidad")
+//    public double getPesoUnidad() {
+//        return pesoUnidad;
+//    }
+//
+//    /**
+//     * @param pesoUnidad the pesoUnidad to set
+//     */
+//    public void setPesoUnidad(double pesoUnidad) {
+//        this.pesoUnidad = pesoUnidad;
+//    }
 
     /**
      * @return the descripcion

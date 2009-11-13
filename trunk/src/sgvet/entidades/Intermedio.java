@@ -18,31 +18,31 @@ import javax.persistence.Table;
 public abstract class Intermedio extends Componente implements Serializable {
     private static final long serialVersionUID = 1L;
     
-    private String condicionesEmbalaje;
-    private String numeroPlano;
+//    private String condicionesEmbalaje;
+    //private String numeroPlano;
     private String politicaCompra;
     private String unidadMedida;
     private String estado;
     
     private boolean borrado;
 
-    @Column(name="condiciones_embalaje", length=255)
-    public String getCondicionesEmbalaje() {
-        return condicionesEmbalaje;
-    }
+//    @Column(name="condiciones_embalaje", length=255)
+//    public String getCondicionesEmbalaje() {
+//        return condicionesEmbalaje;
+//    }
+//
+//    public void setCondicionesEmbalaje(String condicionesEmbalaje) {
+//        this.condicionesEmbalaje = condicionesEmbalaje;
+//    }
 
-    public void setCondicionesEmbalaje(String condicionesEmbalaje) {
-        this.condicionesEmbalaje = condicionesEmbalaje;
-    }
-
-    @Column(name="numero_plano", length=20)
-    public String getNumeroPlano() {
-        return numeroPlano;
-    }
-
-    public void setNumeroPlano(String numeroPlano) {
-        this.numeroPlano = numeroPlano;
-    }
+//    @Column(name="numero_plano", length=20)
+//    public String getNumeroPlano() {
+//        return numeroPlano;
+//    }
+//
+//    public void setNumeroPlano(String numeroPlano) {
+//        this.numeroPlano = numeroPlano;
+//    }
 
     @Column(name="politica_compra", length=255)
     public String getPoliticaCompra() {
