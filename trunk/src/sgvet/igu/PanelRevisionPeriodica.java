@@ -4,7 +4,7 @@ import java.awt.Component;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.PoliticaRevisionPeriodica;
-import sgvet.entidades.Proveedor;
+import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorValidacion;
 import sgvet.igu.buscar.ValidacionBuscar;
 import sgvet.utils.*;
@@ -17,18 +17,18 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
     private static final long serialVersionUID = 1L;
     PoliticaRevisionPeriodica politica;
-    Proveedor proveedor;
+    ProductoComponente producto;
 
     /** Creates new form PanelCargoEmpleado
-     * @param prov
+     * @param prod
      */
-    public PanelRevisionPeriodica(Proveedor prov) {
+    public PanelRevisionPeriodica(ProductoComponente prod) {
 
         initComponents();
-        proveedor = prov;
+        producto = prod;
 
-        if(prov.getPolitica() instanceof PoliticaRevisionPeriodica ){
-            politica= (PoliticaRevisionPeriodica)prov.getPolitica();
+        if(prod.getPolitica() instanceof PoliticaRevisionPeriodica ){
+            politica= (PoliticaRevisionPeriodica)prod.getPolitica();
         }else{
             politica= null;
         }
@@ -40,8 +40,8 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
     private void inicializar() {
         cargarPantalla();
-        tfNombre.setText(proveedor.getNombre());
-        tfCodigo.setText(proveedor.getCodigo());
+        tfNombre.setText(producto.getNombre());
+        tfCodigo.setText(producto.getCodigo());
     }
 
     @SuppressWarnings("unchecked")
@@ -93,7 +93,7 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
         });
         pBotones.add(btCancelar);
 
-        jpProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor"));
+        jpProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto"));
 
         lbCodigo.setText("Código:");
 
@@ -365,8 +365,7 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
-            politica.setProveedor(proveedor);
-            proveedor.setPolitica(politica);
+            producto.setPolitica(politica);
         //}
     }
 
@@ -378,15 +377,14 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
-            politica.setProveedor(proveedor);
-            proveedor.setPolitica(politica);
+            producto.setPolitica(politica);
         }
     }
 
 
     private boolean verificarCampos(){
         int resul = 0;
-        if(!ValidacionBuscar.getInstancia().existenCamposVacios(this)){
+        if(!ValidacionBuscar.getInstancia().existenCamposVacios(jpPolitica)){
             if(!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)){
                 ++resul;
             }

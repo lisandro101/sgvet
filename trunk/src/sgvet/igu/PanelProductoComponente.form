@@ -20,27 +20,30 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pTablaProveedores" alignment="2" max="32767" attributes="0"/>
-                  <Component id="pBotones" alignment="1" pref="669" max="32767" attributes="1"/>
-                  <Component id="pCampos" alignment="1" min="-2" pref="669" max="-2" attributes="1"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="pTablaProveedores" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pBotones1" alignment="1" max="32767" attributes="1"/>
+                  <Component id="pBotones" alignment="0" pref="677" max="32767" attributes="1"/>
+                  <Component id="pCampos" alignment="0" max="32767" attributes="2"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pCampos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="pBotones1" pref="44" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pTablaProveedores" min="-2" max="-2" attributes="2"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pBotones" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -58,6 +61,8 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btResumenVentasActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator3">
+        </Component>
         <Component class="javax.swing.JButton" name="btDemanda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Demanda"/>
@@ -65,6 +70,10 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDemandaActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator2">
+        </Component>
+        <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
         <Component class="javax.swing.JButton" name="btBuscar">
           <Properties>
@@ -98,14 +107,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEliminarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btTest">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Test"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btTestActionPerformed"/>
-          </Events>
-        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="pCampos">
@@ -115,18 +116,19 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="pProductoTerminado1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                  <Component id="pProductoTerminado2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  <Component id="pProductoTerminado1" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                  <Component id="pProductoTerminado2" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="pProductoTerminado1" min="-2" max="-2" attributes="1"/>
+                      <Component id="pProductoTerminado1" alignment="0" max="32767" attributes="1"/>
                       <Component id="pProductoTerminado2" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -152,13 +154,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfDemandaAnual" alignment="1" pref="170" max="32767" attributes="1"/>
-                          <Component id="tfCostoAlmacenamiento" alignment="0" pref="170" max="32767" attributes="1"/>
-                          <Component id="tfCostoUnitario" alignment="0" pref="170" max="32767" attributes="1"/>
-                          <Component id="tfTamanioLoteEstandar" alignment="0" pref="170" max="32767" attributes="1"/>
-                          <Component id="tfStock" alignment="1" pref="170" max="32767" attributes="1"/>
-                          <Component id="tfDescripcion" alignment="1" pref="170" max="32767" attributes="1"/>
-                          <Component id="tfStockReserva" alignment="1" pref="170" max="32767" attributes="1"/>
+                          <Component id="tfDemandaAnual" alignment="1" pref="176" max="32767" attributes="1"/>
+                          <Component id="tfCostoAlmacenamiento" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="tfCostoUnitario" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="tfTamanioLoteEstandar" alignment="0" pref="176" max="32767" attributes="1"/>
+                          <Component id="tfStock" alignment="1" pref="176" max="32767" attributes="1"/>
+                          <Component id="tfDescripcion" alignment="1" pref="176" max="32767" attributes="1"/>
+                          <Component id="tfStockReserva" alignment="1" pref="176" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -202,7 +204,7 @@
                           <Component id="tfDemandaAnual" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lbDemandaAnual" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -277,13 +279,13 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="tfPrecioVenta" alignment="1" pref="186" max="32767" attributes="1"/>
-                          <Component id="cbEstado" alignment="1" pref="186" max="32767" attributes="1"/>
-                          <Component id="cbCategoria" alignment="1" pref="186" max="32767" attributes="1"/>
-                          <Component id="tfNombre" alignment="1" pref="186" max="32767" attributes="1"/>
-                          <Component id="tfCodigo" alignment="1" pref="186" max="32767" attributes="1"/>
-                          <Component id="cbUnidadMedida" alignment="1" pref="186" max="32767" attributes="0"/>
-                          <Component id="cbTipoPrediccion" alignment="1" pref="186" max="32767" attributes="0"/>
+                          <Component id="tfPrecioVenta" alignment="1" pref="192" max="32767" attributes="1"/>
+                          <Component id="cbEstado" alignment="1" pref="192" max="32767" attributes="1"/>
+                          <Component id="cbCategoria" alignment="1" pref="192" max="32767" attributes="1"/>
+                          <Component id="tfNombre" alignment="1" pref="192" max="32767" attributes="1"/>
+                          <Component id="tfCodigo" alignment="1" pref="192" max="32767" attributes="1"/>
+                          <Component id="cbUnidadMedida" alignment="1" pref="192" max="32767" attributes="0"/>
+                          <Component id="cbTipoPrediccion" alignment="1" pref="192" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -327,7 +329,7 @@
                           <Component id="lbPrecioVenta" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="tfPrecioVenta" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="12" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -449,8 +451,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" alignment="1" pref="637" max="32767" attributes="0"/>
-                      <Component id="jPanel2" alignment="1" pref="637" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="645" max="32767" attributes="0"/>
+                      <Component id="jPanel2" alignment="1" pref="645" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -459,10 +461,10 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jScrollPane1" pref="95" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="107" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -501,6 +503,65 @@
             </Component>
           </SubComponents>
         </Container>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="pBotones1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="cbPolitica" pref="450" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btParametros" min="-2" pref="110" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="6" pref="6" max="6" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbPolitica" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btParametros" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btParametros">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Definir"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btParametrosActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel7">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Politica de Stock:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cbPolitica">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value=" "/>
+                <StringItem index="1" value="Politica (s,Q)"/>
+                <StringItem index="2" value="Politica (S,R)"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cbPoliticaItemStateChanged"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

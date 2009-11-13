@@ -27,7 +27,6 @@ import javax.persistence.OneToOne;
 public abstract class Politica implements Serializable {
 
     private String id;
-    private Proveedor proveedor;
     private double nivelServicio;
     private int tiempoEntrega;
     private double desviacionEstandarDemanda;
@@ -48,21 +47,6 @@ public abstract class Politica implements Serializable {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    /**
-     * @return the proveedor
-     */
-    @OneToOne(targetEntity = Proveedor.class, cascade = CascadeType.ALL)
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    /**
-     * @param proveedor the proveedor to set
-     */
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
     }
 
     /**

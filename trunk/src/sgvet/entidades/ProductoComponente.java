@@ -30,6 +30,7 @@ public class ProductoComponente extends Intermedio implements Serializable {
     private ClaseDemanda categoria;
     private boolean seRealizoPedido;
     private Date fechaUltimaRevision;
+    private Politica politica;
 
     @Column(name = "precio_venta")
     public double getPrecioVenta() {
@@ -102,5 +103,20 @@ public class ProductoComponente extends Intermedio implements Serializable {
      */
     public void setFechaUltimaRevision(Date fechaUltimaRevision) {
         this.fechaUltimaRevision = fechaUltimaRevision;
+    }
+
+    /**
+     * @return the politica
+     */
+    @OneToOne(targetEntity=Politica.class, cascade=CascadeType.ALL)
+    public Politica getPolitica() {
+        return politica;
+    }
+
+    /**
+     * @param politica the politica to set
+     */
+    public void setPolitica(Politica politica) {
+        this.politica = politica;
     }
 }

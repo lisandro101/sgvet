@@ -4,10 +4,9 @@ import java.awt.Component;
 import java.util.List;
 import javax.swing.JOptionPane;
 import sgvet.entidades.PoliticaRevisionContinua;
-import sgvet.entidades.Proveedor;
+import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorValidacion;
 import sgvet.igu.buscar.ValidacionBuscar;
-import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.*;
 
 /**
@@ -18,15 +17,15 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
     private static final long serialVersionUID = 1L;
     PoliticaRevisionContinua politica;
-    Proveedor proveedor;
+    ProductoComponente producto;
 
-    public PanelRevisionContinua(Proveedor prov) {
+    public PanelRevisionContinua(ProductoComponente prod) {
 
         initComponents();
-        proveedor = prov;
+        producto = prod;
         
-        if(prov.getPolitica() instanceof PoliticaRevisionContinua ){
-            politica= (PoliticaRevisionContinua)prov.getPolitica();
+        if(prod.getPolitica() instanceof PoliticaRevisionContinua ){
+            politica= (PoliticaRevisionContinua)prod.getPolitica();
         }else{
             politica= null;
         }
@@ -37,8 +36,8 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
     private void inicializar() {
 
         cargarPantalla();
-        tfNombre.setText(proveedor.getNombre());
-        tfCodigo.setText(proveedor.getCodigo());
+        tfNombre.setText(producto.getNombre());
+        tfCodigo.setText(producto.getCodigo());
 
     }
 
@@ -92,7 +91,7 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         });
         pBotones.add(btCancelar);
 
-        pProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor"));
+        pProveedor.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto"));
 
         lbCodigo.setText("Código:");
 
@@ -365,8 +364,7 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             politica.setPrediccionDemanda(Double.parseDouble(tfPrediccionDemanda.getText()));            
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
-            politica.setProveedor(proveedor);
-            proveedor.setPolitica(politica);
+            producto.setPolitica(politica);
         //}
     }
 
@@ -378,15 +376,14 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             politica.setPrediccionDemanda(Double.parseDouble(tfPrediccionDemanda.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
-            politica.setProveedor(proveedor);
-            proveedor.setPolitica(politica);
+            producto.setPolitica(politica);
         }
     }
 
     
     private boolean verificarCampos(){
         int resul = 0;
-        if(!ValidacionBuscar.getInstancia().existenCamposVacios(this)){
+        if(!ValidacionBuscar.getInstancia().existenCamposVacios(jpPolitica)){
             if(!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)){
                 ++resul;
             }            
