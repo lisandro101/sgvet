@@ -3,7 +3,7 @@ package sgvet.igu;
 import java.awt.Component;
 import java.util.List;
 import javax.swing.JOptionPane;
-import sgvet.entidades.PoliticaRevisionContinua;
+import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorValidacion;
 import sgvet.igu.buscar.ValidacionBuscar;
@@ -16,7 +16,7 @@ import sgvet.utils.*;
 public class PanelRevisionContinua extends javax.swing.JDialog implements IValidable {
 
     private static final long serialVersionUID = 1L;
-    PoliticaRevisionContinua politica;
+    Politica politica;
     ProductoComponente producto;
 
     public PanelRevisionContinua(ProductoComponente prod) {
@@ -24,10 +24,15 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         initComponents();
         producto = prod;
         
-        if(prod.getPolitica() instanceof PoliticaRevisionContinua ){
-            politica= (PoliticaRevisionContinua)prod.getPolitica();
-        }else{
-            politica= null;
+        if(prod.getPolitica() != null) {
+            if(prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)){
+                politica = prod.getPolitica();
+            }else{
+                politica = null;
+            }
+        }
+        else {
+            politica = null;
         }
 
         inicializar();
@@ -65,9 +70,6 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         tfTasaAlmacenamiento = new javax.swing.JTextField();
         tfNivelServicio = new javax.swing.JTextField();
         lbDemandaAcumulada = new javax.swing.JLabel();
-        jpRevisionContinua = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        tfPrediccionDemanda = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         tfTiempoEntrega = new javax.swing.JTextField();
 
@@ -170,38 +172,6 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
         lbDemandaAcumulada.setText("Nivel de Servicio:");
 
-        jpRevisionContinua.setBorder(javax.swing.BorderFactory.createTitledBorder("Revision Continua"));
-
-        jLabel1.setText("Prediccion de la Demanda:");
-
-        tfPrediccionDemanda.setText("0");
-        tfPrediccionDemanda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPrediccionDemandaActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpRevisionContinuaLayout = new javax.swing.GroupLayout(jpRevisionContinua);
-        jpRevisionContinua.setLayout(jpRevisionContinuaLayout);
-        jpRevisionContinuaLayout.setHorizontalGroup(
-            jpRevisionContinuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevisionContinuaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfPrediccionDemanda, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jpRevisionContinuaLayout.setVerticalGroup(
-            jpRevisionContinuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevisionContinuaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpRevisionContinuaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(tfPrediccionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-
         jLabel4.setText("Tiempo de Entrega:");
 
         tfTiempoEntrega.setText("3");
@@ -225,34 +195,30 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
                     .addComponent(tfTasaAlmacenamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(tfCostoEmision, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                     .addComponent(tfDesviacionDemanda, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
-                .addGap(81, 81, 81)
-                .addComponent(jpRevisionContinua, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(350, 350, 350))
         );
         jpPoliticaLayout.setVerticalGroup(
             jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPoliticaLayout.createSequentialGroup()
-                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpPoliticaLayout.createSequentialGroup()
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbAlfa)
-                            .addComponent(tfCostoEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbBeta)
-                            .addComponent(tfDesviacionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbDemandaAcumulada)
-                            .addComponent(tfNivelServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbPrediccion)
-                            .addComponent(tfTasaAlmacenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(tfTiempoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jpRevisionContinua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbAlfa)
+                    .addComponent(tfCostoEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbBeta)
+                    .addComponent(tfDesviacionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDemandaAcumulada)
+                    .addComponent(tfNivelServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPrediccion)
+                    .addComponent(tfTasaAlmacenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfTiempoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -307,14 +273,6 @@ private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) 
     // TODO add your handling code here:
 }//GEN-LAST:event_tfDesviacionDemandaActionPerformed
 
-private void tfPrediccionDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPrediccionDemandaActionPerformed
-    if(tfPrediccionDemanda.getText().trim().equals("0")){
-        tfTiempoEntrega.setEditable(true);
-    }else{
-        tfTiempoEntrega.setEditable(false);
-    }
-}//GEN-LAST:event_tfPrediccionDemandaActionPerformed
-
 private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
     dispose();
 }//GEN-LAST:event_btCancelarActionPerformed
@@ -323,10 +281,8 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton btAceptar;
     private javax.swing.JButton btCancelar;
     private javax.swing.ButtonGroup errores;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jpPolitica;
-    private javax.swing.JPanel jpRevisionContinua;
     private javax.swing.JLabel lbAlfa;
     private javax.swing.JLabel lbBeta;
     private javax.swing.JLabel lbCodigo;
@@ -341,7 +297,6 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JTextField tfDesviacionDemanda;
     private javax.swing.JTextField tfNivelServicio;
     private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfPrediccionDemanda;
     private javax.swing.JTextField tfTasaAlmacenamiento;
     private javax.swing.JTextField tfTiempoEntrega;
     // End of variables declaration//GEN-END:variables
@@ -357,11 +312,10 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 
     private void crearPolitica(){
         //if(verificarCampos()){
-            politica = new PoliticaRevisionContinua();
+            politica = new Politica();
             politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
             politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
-            politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
-            politica.setPrediccionDemanda(Double.parseDouble(tfPrediccionDemanda.getText()));            
+            politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));    
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
             producto.setPolitica(politica);
@@ -373,7 +327,6 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
             politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
             politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
-            politica.setPrediccionDemanda(Double.parseDouble(tfPrediccionDemanda.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
             producto.setPolitica(politica);
@@ -402,7 +355,6 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             tfCostoEmision.setText(politica.getCostoEmision()+"");
             tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda()+"");
             tfNivelServicio.setText(politica.getNivelServicio()+"");
-            tfPrediccionDemanda.setText(politica.getPrediccionDemanda()+"");
             tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento()+"");
             tfTiempoEntrega.setText(politica.getTiempoEntrega()+"");
             

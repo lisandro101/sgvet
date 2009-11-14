@@ -3,7 +3,7 @@ package sgvet.igu;
 import java.awt.Component;
 import java.util.List;
 import javax.swing.JOptionPane;
-import sgvet.entidades.PoliticaRevisionPeriodica;
+import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorValidacion;
 import sgvet.igu.buscar.ValidacionBuscar;
@@ -16,7 +16,7 @@ import sgvet.utils.*;
 public class PanelRevisionPeriodica extends javax.swing.JDialog implements IValidable {
 
     private static final long serialVersionUID = 1L;
-    PoliticaRevisionPeriodica politica;
+    Politica politica;
     ProductoComponente producto;
 
     /** Creates new form PanelCargoEmpleado
@@ -27,12 +27,16 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
         initComponents();
         producto = prod;
 
-        if(prod.getPolitica() instanceof PoliticaRevisionPeriodica ){
-            politica= (PoliticaRevisionPeriodica)prod.getPolitica();
-        }else{
-            politica= null;
+        if (prod.getPolitica() != null) {
+            if (prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.PERIODICA)) {
+                politica = prod.getPolitica();
+            } else {
+                politica = null;
+            }
+        } else {
+            politica = null;
         }
-        
+
         inicializar();
 
 
@@ -59,9 +63,6 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
         tfCodigo = new javax.swing.JTextField();
         tfNombre = new javax.swing.JTextField();
         jpPolitica = new javax.swing.JPanel();
-        jpRevisionPeriodica = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        tfPeriodoRevision = new javax.swing.JTextField();
         lbAlfa = new javax.swing.JLabel();
         tfCostoEmision = new javax.swing.JTextField();
         lbBeta = new javax.swing.JLabel();
@@ -146,38 +147,6 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
 
         jpPolitica.setBorder(javax.swing.BorderFactory.createTitledBorder("Politica"));
 
-        jpRevisionPeriodica.setBorder(javax.swing.BorderFactory.createTitledBorder("Revision Periodica"));
-
-        jLabel2.setText("Periodo de Revision:");
-
-        tfPeriodoRevision.setText("0");
-        tfPeriodoRevision.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfPeriodoRevisionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jpRevisionPeriodicaLayout = new javax.swing.GroupLayout(jpRevisionPeriodica);
-        jpRevisionPeriodica.setLayout(jpRevisionPeriodicaLayout);
-        jpRevisionPeriodicaLayout.setHorizontalGroup(
-            jpRevisionPeriodicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevisionPeriodicaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfPeriodoRevision, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jpRevisionPeriodicaLayout.setVerticalGroup(
-            jpRevisionPeriodicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpRevisionPeriodicaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpRevisionPeriodicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfPeriodoRevision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
-        );
-
         lbAlfa.setText("Costo de Emision:");
 
         tfCostoEmision.setText("2");
@@ -227,34 +196,30 @@ public class PanelRevisionPeriodica extends javax.swing.JDialog implements IVali
                     .addComponent(tfTasaAlmacenamiento, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                     .addComponent(tfCostoEmision, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                     .addComponent(tfDesviacionDemanda, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                .addGap(111, 111, 111)
-                .addComponent(jpRevisionPeriodica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(349, 349, 349))
         );
         jpPoliticaLayout.setVerticalGroup(
             jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPoliticaLayout.createSequentialGroup()
-                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpRevisionPeriodica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jpPoliticaLayout.createSequentialGroup()
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbAlfa)
-                            .addComponent(tfCostoEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbBeta)
-                            .addComponent(tfDesviacionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbDemandaAcumulada)
-                            .addComponent(tfNivelServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbPrediccion)
-                            .addComponent(tfTasaAlmacenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(tfTiempoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbAlfa)
+                    .addComponent(tfCostoEmision, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbBeta)
+                    .addComponent(tfDesviacionDemanda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbDemandaAcumulada)
+                    .addComponent(tfNivelServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPrediccion)
+                    .addComponent(tfTasaAlmacenamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jpPoliticaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(tfTiempoEntrega, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -295,17 +260,6 @@ private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) 
     // TODO add your handling code here:
 }//GEN-LAST:event_tfDesviacionDemandaActionPerformed
 
-private void tfPeriodoRevisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPeriodoRevisionActionPerformed
-    if(tfPeriodoRevision.getText().trim().equals("0")){
-        tfCostoEmision.setEditable(true);
-        tfTasaAlmacenamiento.setEnabled(true);
-    }else{
-        tfCostoEmision.setEditable(false);
-        tfTasaAlmacenamiento.setEnabled(false);
-    }
-
-}//GEN-LAST:event_tfPeriodoRevisionActionPerformed
-
 private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAceptarActionPerformed
     if (verificarCampos()) {
         if (politica == null) {
@@ -315,7 +269,7 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
 
         dispose();
-    }else{
+    } else {
         JOptionPane.showMessageDialog(this, "Campos Erroneos o Incompletos");
     }
 }//GEN-LAST:event_btAceptarActionPerformed
@@ -323,16 +277,13 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
     dispose();
 }//GEN-LAST:event_btCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAceptar;
     private javax.swing.JButton btCancelar;
     private javax.swing.ButtonGroup errores;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jpPolitica;
     private javax.swing.JPanel jpProveedor;
-    private javax.swing.JPanel jpRevisionPeriodica;
     private javax.swing.JLabel lbAlfa;
     private javax.swing.JLabel lbBeta;
     private javax.swing.JLabel lbCodigo;
@@ -346,7 +297,6 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JTextField tfDesviacionDemanda;
     private javax.swing.JTextField tfNivelServicio;
     private javax.swing.JTextField tfNombre;
-    private javax.swing.JTextField tfPeriodoRevision;
     private javax.swing.JTextField tfTasaAlmacenamiento;
     private javax.swing.JTextField tfTiempoEntrega;
     // End of variables declaration//GEN-END:variables
@@ -356,56 +306,53 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-   private void crearPolitica(){
+    private void crearPolitica() {
         //if(verificarCampos()){
-            politica = new PoliticaRevisionPeriodica();
-            politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
-            politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
-            politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
-            politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
-            politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
-            politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
-            producto.setPolitica(politica);
+        politica = new Politica();
+        politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
+        politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
+        politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
+        politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
+        politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
+        producto.setPolitica(politica);
+        politica.setTipoPolitica(Politica.TipoPolitica.PERIODICA);
         //}
     }
 
-    private void actualizarPolitica(){
-        if(verificarCampos()){
+    private void actualizarPolitica() {
+        if (verificarCampos()) {
             politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
             politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
             politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
-            politica.setPeridoDeRevision(Integer.parseInt(tfPeriodoRevision.getText()));
             politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
             politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
             producto.setPolitica(politica);
         }
     }
 
-
-    private boolean verificarCampos(){
+    private boolean verificarCampos() {
         int resul = 0;
-        if(!ValidacionBuscar.getInstancia().existenCamposVacios(jpPolitica)){
-            if(!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)){
+        if (!ValidacionBuscar.getInstancia().existenCamposVacios(jpPolitica)) {
+            if (!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)) {
                 ++resul;
             }
-        }else{
+        } else {
             ++resul;
         }
-        if(resul>0){
+        if (resul > 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    private void cargarPantalla(){
-        if(politica != null){
-            tfCostoEmision.setText(politica.getCostoEmision()+"");
-            tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda()+"");
-            tfNivelServicio.setText(politica.getNivelServicio()+"");
-            tfPeriodoRevision.setText(politica.getPeridoDeRevision()+"");
-            tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento()+"");
-            tfTiempoEntrega.setText(politica.getTiempoEntrega()+"");
+    private void cargarPantalla() {
+        if (politica != null) {
+            tfCostoEmision.setText(politica.getCostoEmision() + "");
+            tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda() + "");
+            tfNivelServicio.setText(politica.getNivelServicio() + "");
+            tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento() + "");
+            tfTiempoEntrega.setText(politica.getTiempoEntrega() + "");
 
         }
     }

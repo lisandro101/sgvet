@@ -6,32 +6,56 @@ package sgvet.entidades;
 
 import java.io.Serializable;
 import java.util.UUID;
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
 
 /**
  *
  * @author stafoxter
  */
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.CHAR)
-@DiscriminatorValue("X")
-public abstract class Politica implements Serializable {
+public class Politica implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String id;
     private double nivelServicio;
     private int tiempoEntrega;
     private double desviacionEstandarDemanda;
     private double costoEmision;
     private double tasaAnualAlmacenamiento;
+    private TipoPolitica politica;
+
+    /**
+     * Representa el tipo de politica
+     */
+    public enum TipoPolitica {
+
+        CONTINUA("Continua"),
+        PERIODICA("Periodica");
+        private String nombre;
+
+        private TipoPolitica(String nombre) {
+            this.nombre = nombre;
+        }
+    }
+
+    /**
+     * Devuelve el Tipo de Politica correspondiente a la cadena recibida
+     * @param estado
+     * @return
+     */
+    public TipoPolitica obtenerEstado(String estado) {
+
+        TipoPolitica resultado = null;
+
+        if (estado.equals("Continua")) {
+            resultado = TipoPolitica.CONTINUA;
+        } else if (estado.equals("Periodica")) {
+            resultado = TipoPolitica.PERIODICA;
+        }
+
+        return resultado;
+    }
 
     /**
      * Constructor
@@ -105,7 +129,6 @@ public abstract class Politica implements Serializable {
         this.costoEmision = costoEmision;
     }
 
-
     /**
      * @return the tasaAnualAlmacenamiento
      */
@@ -119,5 +142,12 @@ public abstract class Politica implements Serializable {
     public void setTasaAnualAlmacenamiento(double tasaAnualAlmacenamiento) {
         this.tasaAnualAlmacenamiento = tasaAnualAlmacenamiento;
     }
-    
+
+    public TipoPolitica getTipoPolitica() {
+        return politica;
+    }
+
+    public void setTipoPolitica(TipoPolitica politica) {
+        this.politica = politica;
+    }
 }

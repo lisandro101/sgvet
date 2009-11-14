@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
-import sgvet.entidades.PoliticaRevisionPeriodica;
+import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DTOPedidos;
 import sgvet.gestores.GestorFecha;
@@ -31,6 +31,7 @@ import sgvet.utils.IValidable;
  */
 public class PanelConfiguracion extends javax.swing.JDialog implements IValidable {
 
+    private static final long serialVersionUID = 1L;
     List<IObservadorFecha> observadores;
 
     /** Creates new form PanelConfiguracion
@@ -49,6 +50,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
         observadores = new ArrayList<IObservadorFecha>();
         dpFechaActual.setDate(GestorFecha.getInstancia().getFechaHoy());
+        agregarObservador(GestorRevisionPeriodica.getInstancia());
 
     }
 
@@ -142,7 +144,6 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
         GestorFecha.getInstancia().setFechaHoy(dpFechaActual.getDate());
         notificar();
-        buscarProductosConPoliticaSR(); //La logica de este metodo se va a pasar al gestor.
 
 }//GEN-LAST:event_btAplicarActionPerformed
 
@@ -188,7 +189,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
         for (ProductoComponente producto : productos) {
             if (producto.getPolitica() != null) {
-                if (producto.getPolitica() instanceof PoliticaRevisionPeriodica) {
+                if (producto.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.PERIODICA)) {
                     resultado.add(producto);
                 }
             }
