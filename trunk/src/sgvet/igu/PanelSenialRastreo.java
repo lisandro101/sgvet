@@ -66,6 +66,7 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         pBotones = new javax.swing.JPanel();
         btCalcular = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
+        btCerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -161,6 +162,14 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         });
         pBotones.add(btLimpiar);
 
+        btCerrar.setText("Cerrar");
+        btCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCerrarActionPerformed(evt);
+            }
+        });
+        pBotones.add(btCerrar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -206,6 +215,7 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
                 ProductoComponente.class, consulta);
 
         tmSenialRastreo.limpiarTableModel();
+
         if (tmSenialRastreo.agregarFilas(productos)) {
             JOptionPane.showMessageDialog(this, "No existen ventas para algunos productos.", "WARNING", JOptionPane.ERROR_MESSAGE);
         }
@@ -219,6 +229,10 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         sgvet.utils.Util.getInstancia().limpiarCampos(this);
         btLimpiar.setEnabled(false);
 }//GEN-LAST:event_btLimpiarActionPerformed
+
+    private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btCerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,6 +256,7 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCalcular;
+    private javax.swing.JButton btCerrar;
     private javax.swing.JButton btLimpiar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
@@ -271,7 +286,7 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         tmSenialRastreo.limpiarTableModel();
 
         if (tmSenialRastreo.agregarFilas(productos)) {
-            JOptionPane.showMessageDialog(this, "No existen ventas para algunos productos.", "WARNING", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No existen ventas para algunos productos.", "ADVERTENCIA", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -280,6 +295,8 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
 
         tfCantidadAvisos.setVisible(true);
         lbCantidadAvisos.setVisible(true);
+        btCalcular.setVisible(false);
+        btLimpiar.setVisible(false);
         cantidad = cant;
         tfCantidadAvisos.setText(cantidad + "");
     }

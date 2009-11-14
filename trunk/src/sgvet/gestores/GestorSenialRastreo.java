@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Query;
 import sgvet.entidades.Configuracion;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
-import sgvet.igu.PanelConfiguracion;
 import sgvet.igu.PanelSenialRastreo;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -233,11 +233,11 @@ public class GestorSenialRastreo implements IObservadorFecha {
                 resultado = senial[senial.length - 1];
 
             } else {
-                resultado = Double.NaN;
+                resultado = Double.MAX_VALUE;
             }
 
         } else {
-            resultado = Double.NaN;
+            resultado = Double.MAX_VALUE;
         }
 
 
@@ -270,7 +270,7 @@ public class GestorSenialRastreo implements IObservadorFecha {
             }
 
 
-            if (cantidad > 0) {
+            if (cantidad > 0 && verificarSenial()) {
                 
                 conf.get(0).setUltimaSenialRastreo(gf.getFechaHoy());
                 FachadaPersistencia.getInstancia().actualizar(conf.get(0), true);
@@ -284,5 +284,26 @@ public class GestorSenialRastreo implements IObservadorFecha {
 
         }
 
+    }
+
+    private boolean verificarSenial() {
+
+        boolean resultado = false;
+
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
+                "SELECT a " +
+                "FROM ProductoComponente a " +
+                "WHERE a.borrado = false");
+
+        List<ProductoComponente> productos = FachadaPersistencia.getInstancia().buscar(
+                ProductoComponente.class, consulta);
+
+        for (ProductoComponente prod : productos) {
+            if (calcularSenialRastreo(prod) != 0 && Math.abs(calcularSenialRastreo(prod)) < Double.MAX_VALUE){
+                resultado = resultado || true;
+            }
+        }
+
+        return resultado;
     }
 }

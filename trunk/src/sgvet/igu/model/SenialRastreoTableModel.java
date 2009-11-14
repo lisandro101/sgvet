@@ -2,7 +2,6 @@ package sgvet.igu.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorSenialRastreo;
@@ -179,9 +178,10 @@ public class SenialRastreoTableModel extends AbstractTableModel implements IMode
         limpiarTableModel();
         if (prod != null) {
             for (ProductoComponente productoComponente : prod) {
-                if (gsr.calcularSenialRastreo(productoComponente) != Double.NaN) {
+                if (Math.abs(gsr.calcularSenialRastreo(productoComponente)) < Double.MAX_VALUE) {
                     productos.add(productoComponente);
-                } else {
+                }
+                else {
                     faltanFilas = true;
                 }
             }
