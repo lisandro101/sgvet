@@ -33,7 +33,7 @@ import sgvet.persistencia.IPersistente;
 public class Componente implements Serializable, IPersistente {
     private static final long serialVersionUID = 1L;
     private static final List<String> CAMPOS_UNICOS = Arrays.asList(
-            "nombre", "codigo");
+            "nombre");
     
     private String id;
     private String codigo;

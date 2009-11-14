@@ -58,7 +58,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Dog Chow");
         prov.setBorrado(false);
-        prov.setCodigo("3-1-44-11");
+        prov.setCodigo("3-1");
         prov.setDireccion("Luis Braille 456 -Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("Dog_Chow@gmail.com");
@@ -70,7 +70,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Top Nutrition");
         prov.setBorrado(false);
-        prov.setCodigo("3-2-44-22");
+        prov.setCodigo("3-2");
         prov.setDireccion("Alberdi 345 -Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("TopNu_Mza@gmail.com");
@@ -82,7 +82,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Vital Can");
         prov.setBorrado(false);
-        prov.setCodigo("3-3-44-33");
+        prov.setCodigo("3-3");
         prov.setDireccion("Vicente Zapata 212 -Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("Vital_Can@gmail.com");
@@ -94,7 +94,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Eukanuba");
         prov.setBorrado(false);
-        prov.setCodigo("3-4-44-44");
+        prov.setCodigo("3-4");
         prov.setDireccion("San Martin 456 - Godoy Cruz");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("euka@gmail.com");
@@ -106,7 +106,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Royal");
         prov.setBorrado(false);
-        prov.setCodigo("3-5-44-55");
+        prov.setCodigo("3-5");
         prov.setDireccion("Jorge a calle 618-Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("Royal@gmail.com");
@@ -118,7 +118,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("EXACT");
         prov.setBorrado(false);
-        prov.setCodigo("3-6-44-66");
+        prov.setCodigo("3-6");
         prov.setDireccion("Italia 618-Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("EXACT@gmail.com");
@@ -130,7 +130,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Kongo");
         prov.setBorrado(false);
-        prov.setCodigo("3-7-44-77");
+        prov.setCodigo("3-7");
         prov.setDireccion("Junin 618-Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("Kongo@gmail.com");
@@ -142,7 +142,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Purina");
         prov.setBorrado(false);
-        prov.setCodigo("3-8-44-88");
+        prov.setCodigo("3-8");
         prov.setDireccion("Lavalle 234 -Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("Purina@gmail.com");
@@ -154,7 +154,7 @@ public class GestorCargaInicial {
         prov = new Proveedor();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prov.setNombre("Dog Selection");
         prov.setBorrado(false);
-        prov.setCodigo("3-9-44-99");
+        prov.setCodigo("3-9");
         prov.setDireccion("Mexico 234 -Mendoza");
         prov.setFechaInicioActividad(new Date());
         prov.setMail("Dog Selection@gmail.com");
@@ -184,7 +184,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-1");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -214,7 +214,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-2");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -244,7 +244,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-3");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -274,7 +274,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Chow Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-4");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -304,7 +304,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-5");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -334,7 +334,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-6");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -364,7 +364,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-7");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -394,7 +394,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Top Nutrition Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-8");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -424,7 +424,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-9");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -454,7 +454,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-10");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -484,7 +484,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-11");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -514,7 +514,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Vital Can Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-12");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -544,7 +544,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-13");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -574,7 +574,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-14");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -604,7 +604,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-15");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -634,7 +634,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Eukanuba Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-16");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -664,7 +664,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-17");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -694,7 +694,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-18");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -724,7 +724,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-19");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -754,7 +754,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Royal Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-20");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -784,7 +784,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-21");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -814,7 +814,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-22");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -844,7 +844,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-23");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -874,7 +874,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("EXACT Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-24");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -904,7 +904,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-25");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -934,7 +934,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-26");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -964,7 +964,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-27");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -994,7 +994,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("KONGO Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-28");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1024,7 +1024,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-29");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1054,7 +1054,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-30");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1084,7 +1084,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 30Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-31");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1114,7 +1114,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA Vitamina 200gm");
         prod.setBorrado(false);
-        prod.setCodigo("2-4-44-44");
+        prod.setCodigo("2-32");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1144,7 +1144,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Dog Selection 2Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-1-44-44");
+        prod.setCodigo("2-33");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1174,7 +1174,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("PURINA 15Kg");
         prod.setBorrado(false);
-        prod.setCodigo("2-2-44-44");
+        prod.setCodigo("2-34");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1204,7 +1204,7 @@ public class GestorCargaInicial {
         prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
         prod.setNombre("Protect Garrapaticida aerosol");
         prod.setBorrado(false);
-        prod.setCodigo("2-3-44-44");
+        prod.setCodigo("2-35");
 //        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
 //        prod.setCostoPedido(10);
@@ -1230,36 +1230,6 @@ public class GestorCargaInicial {
         persistentes.add(prod);
         productos.put(prod.getNombre(), prod);
 
-//Esta supuestamente repetido
-//        prod = new ProductoComponente();   //Recordar siempre hacer el new para que genere un nuevo UID!
-//        prod.setNombre("PURINA Vitamina 200gm");
-//        prod.setBorrado(false);
-//        prod.setCodigo("2-4-44-44");
-//        prod.setCondicionesEmbalaje("");
-//        prod.setCostoAlmacenamiento(10);
-//        prod.setCostoPedido(10);
-//        prod.setCostoUnitario(15);
-//        prod.setDemandaAnual(500);
-//        prod.setDescripcion("Complejo Vitaminico Polvo 200gm PURINA");
-//        prod.setEstado("Activo");
-//        prod.setNumeroPlano("");
-//        prod.setPesoUnidad(10);
-//        prod.setPoliticaCompra("");
-//        prod.setPrecioBase(10);
-//        prod.setPrecioVenta(100);
-//        prod.setStock(10);
-//        prod.setStockReserva(5);
-//        prod.setTamanioLoteEstandar(5);
-//        prod.setTipoPrediccion("SE Simple");
-//        prod.setUnidadMedida("unid");
-//
-//        prov = new ArrayList<Proveedor>();
-//        prov.add(proveedores.get("Dog Selection")); //Se pueden ir agregando todos los proveedores que hagan falta segun el nombre con el que se cargaron
-//        prod.setProveedores(prov);
-//
-//        persistentes.add(prod);
-//        productos.put(prod.getNombre(), prod);
-//        /* ------------------------------------------------------------------- */
 
         /* Llama al método que persiste la lista de proveedores */
         persistir(persistentes);
