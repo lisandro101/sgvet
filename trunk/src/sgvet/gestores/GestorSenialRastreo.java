@@ -1,15 +1,22 @@
 package sgvet.gestores;
 
+import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import sgvet.entidades.Configuracion;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
+import sgvet.igu.PanelConfiguracion;
+import sgvet.igu.PanelSenialRastreo;
+import sgvet.persistencia.FachadaPersistencia;
 
 /**
  *
  * @author Luciano, Lisandro
  */
-public class GestorSenialRastreo {
+public class GestorSenialRastreo implements IObservadorFecha {
 
     private double[] demandaReal;
     private double[] pronostico;
@@ -116,7 +123,7 @@ public class GestorSenialRastreo {
         desviacionEstandar = new double[demandaReal.length];
         senialRastreo = new double[demandaReal.length];
 
-        alfa=0.3;
+        alfa = 0.3;
 
         for (int i = 0; i < demandaReal.length; i++) {
             if (i == 0) {
@@ -220,21 +227,62 @@ public class GestorSenialRastreo {
             }
 
             double[] senial = SenialRastreoFinalFull(demandaReal, pronostico);
-            
 
-            if(senial.length > 0){
-                resultado= senial[senial.length - 1];
-                
-            }else{
-                resultado= Double.NaN;
+
+            if (senial.length > 0) {
+                resultado = senial[senial.length - 1];
+
+            } else {
+                resultado = Double.NaN;
             }
 
         } else {
-            resultado= Double.NaN;
+            resultado = Double.NaN;
         }
 
-        
+
 
         return resultado;
+    }
+
+    @Override
+    public void actualizar(Frame panel) {
+
+        Date fecha;
+        List<Configuracion> conf = null;
+        GestorFecha gf = GestorFecha.getInstancia();
+        Calendar cal = Calendar.getInstance();
+        int cantidad = 0;
+
+        conf = FachadaPersistencia.getInstancia().buscar(Configuracion.class, "SELECT a FROM Configuracion a");
+
+        if (conf.size() > 0) {
+
+            fecha = conf.get(0).getUltimaSenialRastreo();
+            cal.setTime(fecha);
+            cal.add(Calendar.DAY_OF_YEAR, 28);
+            fecha = cal.getTime();
+
+            while (gf.getFechaHoy().compareTo(fecha) > 0) {
+                cantidad++;
+                cal.add(Calendar.DAY_OF_YEAR, 28);
+                fecha = cal.getTime();
+            }
+
+
+            if (cantidad > 0) {
+                
+                conf.get(0).setUltimaSenialRastreo(gf.getFechaHoy());
+                FachadaPersistencia.getInstancia().actualizar(conf.get(0), true);
+
+
+                PanelSenialRastreo panelSR = new PanelSenialRastreo(panel);
+                panelSR.setCantidadAvisos(cantidad);
+                panelSR.setVisible(true);
+
+            }
+
+        }
+
     }
 }

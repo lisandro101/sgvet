@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import sgvet.entidades.ClaseDemanda;
+import sgvet.entidades.Configuracion;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.Proveedor;
@@ -40,9 +41,24 @@ public class GestorCargaInicial {
 
         cargarVentas(cargarProductos(cargarProveedores()));
         cargarClasesDemanda();
+        cargarConfiguracion();
         GestorABC.getInstancia().calcularCurvaABC();
 
         System.out.println("Finalizada Carga Inicial.");
+
+    }
+
+    public void cargarConfiguracion(){
+        
+        Configuracion conf;
+        List<IPersistente> persistentes = new ArrayList<IPersistente>();
+
+        conf = new Configuracion();
+        conf.setId("1");
+        conf.setUltimaSenialRastreo(GestorFecha.getInstancia().getFecha(1, 1, 2009));
+        persistentes.add(conf);
+
+        persistir(persistentes);
 
     }
 

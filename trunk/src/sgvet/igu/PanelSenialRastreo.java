@@ -10,11 +10,11 @@
  */
 package sgvet.igu;
 
+import java.awt.Frame;
 import java.util.List;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import sgvet.entidades.ProductoComponente;
-import sgvet.gestores.GestorSenialRastreo;
 import sgvet.igu.model.SenialRastreoTableModel;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.Util;
@@ -27,12 +27,22 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
 
     private SenialRastreoTableModel tmSenialRastreo;
     private List<ProductoComponente> productos;
+    int cantidad = 0;
+
+    /** Creates new form PanelCurvaABC
+     * @param parent
+     */
+    public PanelSenialRastreo(Frame parent) {
+        super(parent, true);
+        initComponents();
+        inicializar();
+    }
 
     /** Creates new form PanelCurvaABC
      * @param parent
      * @param modal
      */
-    public PanelSenialRastreo(java.awt.Frame parent, boolean modal) {
+    public PanelSenialRastreo(Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         inicializar();
@@ -48,30 +58,16 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        pBotones = new javax.swing.JPanel();
-        btCalcular = new javax.swing.JButton();
-        btLimpiar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtABC = new org.jdesktop.swingx.JXTable();
+        lbCantidadAvisos = new javax.swing.JLabel();
+        tfCantidadAvisos = new javax.swing.JTextField();
+        pBotones = new javax.swing.JPanel();
+        btCalcular = new javax.swing.JButton();
+        btLimpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        btCalcular.setText("Calcular");
-        btCalcular.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCalcularActionPerformed(evt);
-            }
-        });
-        pBotones.add(btCalcular);
-
-        btLimpiar.setText("Limpiar");
-        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLimpiarActionPerformed(evt);
-            }
-        });
-        pBotones.add(btLimpiar);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -102,19 +98,34 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(jtABC);
 
+        lbCantidadAvisos.setText("Cantidad de avisos:");
+
+        tfCantidadAvisos.setEditable(false);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(lbCantidadAvisos)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfCantidadAvisos, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbCantidadAvisos)
+                    .addComponent(tfCantidadAvisos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -122,29 +133,42 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(pBotones, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        btCalcular.setText("Calcular");
+        btCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCalcularActionPerformed(evt);
+            }
+        });
+        pBotones.add(btCalcular);
+
+        btLimpiar.setText("Limpiar");
+        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimpiarActionPerformed(evt);
+            }
+        });
+        pBotones.add(btLimpiar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 788, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(pBotones, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
+                .addGap(31, 31, 31))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -153,12 +177,15 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 629, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(587, Short.MAX_VALUE)
+                .addComponent(pBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(41, Short.MAX_VALUE)))
+                    .addContainerGap(43, Short.MAX_VALUE)))
         );
 
         pack();
@@ -220,10 +247,15 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private org.jdesktop.swingx.JXTable jtABC;
+    private javax.swing.JLabel lbCantidadAvisos;
     private javax.swing.JPanel pBotones;
+    private javax.swing.JTextField tfCantidadAvisos;
     // End of variables declaration//GEN-END:variables
 
     private void inicializar() {
+
+        tfCantidadAvisos.setVisible(false);
+        lbCantidadAvisos.setVisible(false);
 
         tmSenialRastreo = new SenialRastreoTableModel(0);
         jtABC.setModel(tmSenialRastreo);
@@ -237,10 +269,18 @@ public class PanelSenialRastreo extends javax.swing.JDialog {
                 ProductoComponente.class, consulta);
 
         tmSenialRastreo.limpiarTableModel();
-        
+
         if (tmSenialRastreo.agregarFilas(productos)) {
             JOptionPane.showMessageDialog(this, "No existen ventas para algunos productos.", "WARNING", JOptionPane.ERROR_MESSAGE);
         }
 
+    }
+
+    public void setCantidadAvisos(int cant) {
+
+        tfCantidadAvisos.setVisible(true);
+        lbCantidadAvisos.setVisible(true);
+        cantidad = cant;
+        tfCantidadAvisos.setText(cantidad + "");
     }
 }

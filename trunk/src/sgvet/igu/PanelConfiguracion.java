@@ -11,6 +11,7 @@
 package sgvet.igu;
 
 import java.awt.Component;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,8 +20,10 @@ import javax.persistence.Query;
 import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DTOPedidos;
+import sgvet.gestores.GestorABC;
 import sgvet.gestores.GestorFecha;
 import sgvet.gestores.GestorRevisionPeriodica;
+import sgvet.gestores.GestorSenialRastreo;
 import sgvet.gestores.IObservadorFecha;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.utils.IValidable;
@@ -51,6 +54,8 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
         observadores = new ArrayList<IObservadorFecha>();
         dpFechaActual.setDate(GestorFecha.getInstancia().getFechaHoy());
         agregarObservador(GestorRevisionPeriodica.getInstancia());
+        agregarObservador(GestorSenialRastreo.getInstancia());
+        agregarObservador(GestorABC.getInstancia());
 
     }
 
@@ -249,7 +254,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
 
     private void notificar() {
         for (IObservadorFecha obs : observadores) {
-            obs.actualizar();
+            obs.actualizar((Frame) this.getParent());
         }
     }
 
