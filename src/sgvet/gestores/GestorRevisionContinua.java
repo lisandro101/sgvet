@@ -78,12 +78,14 @@ public class GestorRevisionContinua extends GestorStock {
         for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
             pol = detalle.getProducto().getPolitica();
             if (pol != null) {
-                if (pol.getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)) {
-                    cargarGestorRevisionContinua(detalle.getProducto());
-                    if (getStockDisponible() <= getPuntoDePedido()) {
-                        if (!detalle.getProducto().isSeRealizoPedido()) {
-                            pedido = new DTOPedidos(detalle.getProducto(), getQOptimo(producto));
-                            pedidos.add(pedido);
+                if (pol.getTipoPolitica() != null) {
+                    if (pol.getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)) {
+                        cargarGestorRevisionContinua(detalle.getProducto());
+                        if (getStockDisponible() <= getPuntoDePedido()) {
+                            if (!detalle.getProducto().isSeRealizoPedido()) {
+                                pedido = new DTOPedidos(detalle.getProducto(), getQOptimo(producto));
+                                pedidos.add(pedido);
+                            }
                         }
                     }
                 }

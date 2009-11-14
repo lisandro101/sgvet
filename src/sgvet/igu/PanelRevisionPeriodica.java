@@ -309,6 +309,7 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private void crearPolitica() {
         //if(verificarCampos()){
         politica = new Politica();
+        politica.setTipoPolitica(Politica.TipoPolitica.PERIODICA);
         politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
         politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
         politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));

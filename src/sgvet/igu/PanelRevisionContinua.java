@@ -23,15 +23,16 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
 
         initComponents();
         producto = prod;
-        
-        if(prod.getPolitica() != null) {
-            if(prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)){
-                politica = prod.getPolitica();
-            }else{
-                politica = null;
+
+        if (prod.getPolitica() != null) {
+            if (prod.getPolitica().getTipoPolitica() != null) {
+                if (prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)) {
+                    politica = prod.getPolitica();
+                } else {
+                    politica = null;
+                }
             }
-        }
-        else {
+        } else {
             politica = null;
         }
 
@@ -45,7 +46,6 @@ public class PanelRevisionContinua extends javax.swing.JDialog implements IValid
         tfCodigo.setText(producto.getCodigo());
 
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -260,7 +260,7 @@ private void btAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
 
         dispose();
-    }else{
+    } else {
         JOptionPane.showMessageDialog(this, "Campos Erroneos o Incompletos");
     }
 }//GEN-LAST:event_btAceptarActionPerformed
@@ -276,7 +276,6 @@ private void tfDesviacionDemandaActionPerformed(java.awt.event.ActionEvent evt) 
 private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
     dispose();
 }//GEN-LAST:event_btCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAceptar;
     private javax.swing.JButton btCancelar;
@@ -310,20 +309,21 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         return (Math.floor(valor * 100) / 100);
     }
 
-    private void crearPolitica(){
+    private void crearPolitica() {
         //if(verificarCampos()){
-            politica = new Politica();
-            politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
-            politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
-            politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));    
-            politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
-            politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
-            producto.setPolitica(politica);
+        politica = new Politica();
+        politica.setTipoPolitica(Politica.TipoPolitica.CONTINUA);
+        politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
+        politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
+        politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
+        politica.setTasaAnualAlmacenamiento(Double.parseDouble(tfTasaAlmacenamiento.getText()));
+        politica.setTiempoEntrega(Integer.parseInt(tfTiempoEntrega.getText()));
+        producto.setPolitica(politica);
         //}
     }
 
-    private void actualizarPolitica(){
-        if(verificarCampos()){
+    private void actualizarPolitica() {
+        if (verificarCampos()) {
             politica.setCostoEmision(Double.valueOf(tfCostoEmision.getText()));
             politica.setDesviacionEstandarDemanda(Double.valueOf(tfDesviacionDemanda.getText()));
             politica.setNivelServicio(Double.parseDouble(tfNivelServicio.getText()));
@@ -333,31 +333,30 @@ private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         }
     }
 
-    
-    private boolean verificarCampos(){
+    private boolean verificarCampos() {
         int resul = 0;
-        if(!ValidacionBuscar.getInstancia().existenCamposVacios(jpPolitica)){
-            if(!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)){
+        if (!ValidacionBuscar.getInstancia().existenCamposVacios(jpPolitica)) {
+            if (!GestorValidacion.getInstancia().isCamposNumericosValidos(jpPolitica)) {
                 ++resul;
-            }            
-        }else{
+            }
+        } else {
             ++resul;
         }
-        if(resul>0){
+        if (resul > 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    private void cargarPantalla(){
-        if(politica != null){
-            tfCostoEmision.setText(politica.getCostoEmision()+"");
-            tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda()+"");
-            tfNivelServicio.setText(politica.getNivelServicio()+"");
-            tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento()+"");
-            tfTiempoEntrega.setText(politica.getTiempoEntrega()+"");
-            
+    private void cargarPantalla() {
+        if (politica != null) {
+            tfCostoEmision.setText(politica.getCostoEmision() + "");
+            tfDesviacionDemanda.setText(politica.getDesviacionEstandarDemanda() + "");
+            tfNivelServicio.setText(politica.getNivelServicio() + "");
+            tfTasaAlmacenamiento.setText(politica.getTasaAnualAlmacenamiento() + "");
+            tfTiempoEntrega.setText(politica.getTiempoEntrega() + "");
+
         }
     }
 }

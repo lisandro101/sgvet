@@ -7,6 +7,7 @@ import java.util.List;
 import javax.swing.ComboBoxModel;
 import sgvet.igu.buscar.PanelBuscarProveedor;
 import javax.swing.JOptionPane;
+import sgvet.entidades.Politica;
 import sgvet.utils.Util;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorConfiguracion;
@@ -689,6 +690,16 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         producto.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
         producto.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
         producto.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
+
+        if (cbPolitica.getSelectedItem().toString().equals("Politica (s,Q)")) {
+            Politica pol = new Politica();
+            pol.setTipoPolitica(Politica.TipoPolitica.CONTINUA);
+            producto.setPolitica(pol);
+        } else if (cbPolitica.getSelectedItem().toString().equals("Politica (S,R)")) {
+            Politica pol = new Politica();
+            pol.setTipoPolitica(Politica.TipoPolitica.PERIODICA);
+            producto.setPolitica(pol);
+        }
 
         producto.setProveedores(tm.getFilas());
 
