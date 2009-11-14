@@ -11,6 +11,7 @@ import sgvet.utils.Util;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorConfiguracion;
 import sgvet.gestores.GestorDemanda;
+import sgvet.gestores.GestorValidacion;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
 import sgvet.igu.buscar.ValidacionBuscar;
 import sgvet.igu.model.ProveedorTableModel;
@@ -36,13 +37,15 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         tmUnidadMedida=  new UnidadMedidaTableModel();
         initComponents();
         inicializar();
-        inicializarBotones();
+
     }
 
     private void inicializar() {
         tm = new ProveedorTableModel(0);
         tProveedor.setModel(tm);
         componentesObligatorios = Arrays.asList((Component)tfCodigo);
+        btModificar.setEnabled(false);
+        btEliminar.setEnabled(false);
     }
         
     @SuppressWarnings("unchecked")
@@ -60,6 +63,7 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
         btAgregar = new javax.swing.JButton();
         btModificar = new javax.swing.JButton();
         btEliminar = new javax.swing.JButton();
+        btLimpiar = new javax.swing.JButton();
         pCampos = new javax.swing.JPanel();
         pProductoTerminado2 = new javax.swing.JPanel();
         tfCostoUnitario = new javax.swing.JTextField();
@@ -152,6 +156,14 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
             }
         });
         pBotones.add(btEliminar);
+
+        btLimpiar.setText("Limpiar");
+        btLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimpiarActionPerformed(evt);
+            }
+        });
+        pBotones.add(btLimpiar);
 
         lbTamanioLoteEstandar.setText("Tamaño Lote Estandar:");
 
@@ -461,9 +473,8 @@ private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     if(opcion == JOptionPane.YES_OPTION) {
         actualizarProductoComponente();
         FachadaPersistencia.getInstancia().actualizar(producto, true);
-        Util.getInstancia().limpiarCampos(this);
-        producto = null;
-        inicializarBotones();
+        limpiarPantalla();
+
     }
 }//GEN-LAST:event_btModificarActionPerformed
 
@@ -475,7 +486,8 @@ private void btAsignarProveedorActionPerformed(java.awt.event.ActionEvent evt) {
 }//GEN-LAST:event_btAsignarProveedorActionPerformed
 
 private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActionPerformed
-    tfStock.setText("0");
+//    tfStock.setText("0");
+    tfCodigo.setText(GestorValidacion.getInstancia().generarCodigoProducto());
     if(!Util.getInstancia().validar(this)){
         JOptionPane.showMessageDialog(this, "Existen campos sin completar");
     }else{
@@ -484,9 +496,7 @@ private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             JOptionPane.showMessageDialog(this, "El producto componente ya se encuentra registrado");
         }else{
             FachadaPersistencia.getInstancia().actualizar(producto, true);
-            Util.getInstancia().limpiarCampos(this);
-            
-            producto = null;
+            limpiarPantalla();
         }
     }
     
@@ -517,9 +527,8 @@ private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     if(opcion == JOptionPane.YES_OPTION) {
         producto.setBorrado(true);
         FachadaPersistencia.getInstancia().actualizar(producto, true);
-        Util.getInstancia().limpiarCampos(this);
-        producto=null;
-        inicializarBotones();
+        limpiarPantalla();
+
     }
 
     
@@ -606,6 +615,10 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     }
 }//GEN-LAST:event_cbPoliticaItemStateChanged
 
+private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+    limpiarPantalla();
+}//GEN-LAST:event_btLimpiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoProd;
@@ -615,6 +628,7 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     private javax.swing.JButton btDemanda;
     private javax.swing.JButton btEliminar;
     private javax.swing.JButton btEliminarProv;
+    private javax.swing.JButton btLimpiar;
     private javax.swing.JButton btModificar;
     private javax.swing.JButton btParametros;
     private javax.swing.JButton btResumenVentas;
@@ -665,7 +679,7 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     private ProductoComponente crearProductoComponente() {
 
         producto = new ProductoComponente();
-        
+
         producto.setCodigo(tfCodigo.getText());
         producto.setNombre(tfNombre.getText());
         producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
@@ -688,7 +702,7 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     }
     
     public void setComponente(ProductoComponente prod){
-        
+        limpiarPantalla();
         producto = prod;
         cargarPantallaProductoComponente(prod);
         
@@ -718,7 +732,6 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
     
     private void cargarPantallaProductoComponente(ProductoComponente prod){
 
-        Util.getInstancia().limpiarCampos(this);
         tfCodigo.setText(prod.getCodigo());
         tfNombre.setText(prod.getNombre());
         cbCategoria.setSelectedItem(prod.getCategoria().toString());
@@ -752,6 +765,7 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
         btAgregar.setEnabled(false);
         btModificar.setEnabled(true);
         btEliminar.setEnabled(true);
+        tfStock.setEnabled(false);
     }
     
     @Override
@@ -761,6 +775,12 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
 
     public ProductoComponente getProductoComponente() {
         return producto;
+    }
+    private void limpiarPantalla(){
+        Util.getInstancia().limpiarCampos(this);
+        tfStock.setEnabled(true);
+        producto=null;
+        inicializarBotones();
     }
     
 }

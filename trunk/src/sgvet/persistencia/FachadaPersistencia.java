@@ -2,6 +2,8 @@ package sgvet.persistencia;
 
 import java.util.List;
 import javax.persistence.Query;
+import sgvet.entidades.ProductoComponente;
+import sgvet.gestores.GestorValidacion;
 
 /**
  * Fachada para acceder a los métodos de la persistencia
@@ -29,6 +31,9 @@ public class FachadaPersistencia {
     }
     
     public void grabar(IPersistente obj, boolean transaccion) {
+        if(obj instanceof ProductoComponente && ((ProductoComponente)obj).getCodigo().equals("")){
+            ((ProductoComponente)obj).setCodigo(GestorValidacion.getInstancia().generarCodigoProducto());
+        }
         FabricaManejadores.getInstancia().getManejador().grabar(obj, transaccion);
     }
     
