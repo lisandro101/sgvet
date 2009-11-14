@@ -1,13 +1,15 @@
 package sgvet.gestores;
 
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import sgvet.entidades.auxiliares.ItemABC;
 import sgvet.entidades.ProductoComponente;
+import sgvet.igu.PanelConfiguracion;
 import sgvet.persistencia.FachadaPersistencia;
 
-public class GestorABC {
+public class GestorABC implements IObservadorFecha{
 
     private static GestorABC instance;
     private static GestorConfiguracion gc;
@@ -243,5 +245,10 @@ public class GestorABC {
         }
 
         FachadaPersistencia.getInstancia().finalizarTransaccion();
+    }
+
+    @Override
+    public void actualizar(Frame panel) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

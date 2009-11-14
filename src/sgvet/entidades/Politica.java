@@ -5,16 +5,18 @@
 package sgvet.entidades;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import sgvet.persistencia.IPersistente;
 
 /**
  *
  * @author stafoxter
  */
 @Entity
-public class Politica implements Serializable {
+public class Politica implements Serializable,IPersistente {
 
     private static final long serialVersionUID = 1L;
     private String id;
@@ -24,6 +26,16 @@ public class Politica implements Serializable {
     private double costoEmision;
     private double tasaAnualAlmacenamiento;
     private TipoPolitica politica;
+
+    @Override
+    public List<String> getCamposUnicos() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void setBorrado(boolean borrado) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     /**
      * Representa el tipo de politica

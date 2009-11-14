@@ -1,5 +1,6 @@
 package sgvet.gestores;
 
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +8,7 @@ import javax.persistence.Query;
 import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DTOPedidos;
+import sgvet.igu.PanelConfiguracion;
 import sgvet.igu.PanelPedidosPeriodica;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -120,7 +122,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar(Frame panel) {
 
         List<DTOPedidos> pedidos;
         pedidos = getPedidosRevisionPeriodica();
