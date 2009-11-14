@@ -470,10 +470,18 @@ private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             JOptionPane.YES_NO_OPTION);
 
     if (opcion == JOptionPane.YES_OPTION) {
-        actualizarProductoComponente();
-        FachadaPersistencia.getInstancia().actualizar(producto, true);
-        limpiarPantalla();
+        if (!validarDefinicionPolitica()) {
+            JOptionPane.showMessageDialog(this, "No se han definido los parametros de la politica");
+        } else {
+            if(!validarCambioTipoPolitica()){
+                JOptionPane.showMessageDialog(this, "Debe redefinir los parametros de la politica");
+            }else{
 
+                actualizarProductoComponente();
+                FachadaPersistencia.getInstancia().actualizar(producto, true);
+                limpiarPantalla();
+            }
+        }
     }
 }//GEN-LAST:event_btModificarActionPerformed
 
@@ -485,17 +493,22 @@ private void btAsignarProveedorActionPerformed(java.awt.event.ActionEvent evt) {
 }//GEN-LAST:event_btAsignarProveedorActionPerformed
 
 private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActionPerformed
-//    tfStock.setText("0");
+
     tfCodigo.setText(GestorValidacion.getInstancia().generarCodigoProducto());
-    if (!Util.getInstancia().validar(this)) {
+    if (!Util.getInstancia().validar(this) || ValidacionBuscar.getInstancia().existenCamposVacios(this)) {
         JOptionPane.showMessageDialog(this, "Existen campos sin completar");
     } else {
-        producto = crearProductoComponente();
-        if (ValidacionBuscar.getInstancia().estaDuplicado(producto)) {
-            JOptionPane.showMessageDialog(this, "El producto componente ya se encuentra registrado");
+
+        if (!validarDefinicionPolitica()) {
+            JOptionPane.showMessageDialog(this, "No se han definido los parametros de la politica");
         } else {
-            FachadaPersistencia.getInstancia().actualizar(producto, true);
-            limpiarPantalla();
+            producto = crearProductoComponente();
+            if (ValidacionBuscar.getInstancia().estaDuplicado(producto)) {
+                JOptionPane.showMessageDialog(this, "El producto componente ya se encuentra registrado");
+            } else {
+                FachadaPersistencia.getInstancia().actualizar(producto, true);
+                limpiarPantalla();
+            }
         }
     }
 
@@ -757,6 +770,12 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             tm.agregarFila(prod.getProveedores().get(i));
         }
 
+        if(producto.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)){
+            cbPolitica.setSelectedIndex(1);
+        }else{
+            cbPolitica.setSelectedIndex(2);
+        }
+
         pantallaCargadaBotones();
 
     }
@@ -790,4 +809,25 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         producto = null;
         inicializarBotones();
     }
+
+    private boolean validarDefinicionPolitica(){
+        if(cbPolitica.getSelectedIndex() != 0 && producto.getPolitica() == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    private boolean validarCambioTipoPolitica(){
+        boolean resul=true;
+        if(cbPolitica.getSelectedIndex() == 1 && producto.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.PERIODICA)){
+            resul = false;
+        }
+        if(cbPolitica.getSelectedIndex() == 2 && producto.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)){
+            resul = false;
+        }
+        return resul;
+    }
+
+
 }
