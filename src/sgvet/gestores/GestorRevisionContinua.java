@@ -5,7 +5,6 @@ import java.util.List;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
-import sgvet.entidades.PoliticaRevisionContinua;
 import sgvet.entidades.Venta;
 import sgvet.entidades.auxiliares.DTOPedidos;
 
@@ -17,7 +16,7 @@ public class GestorRevisionContinua extends GestorStock {
 
     private static GestorRevisionContinua instancia;
     ProductoComponente producto;
-    PoliticaRevisionContinua politica;
+    Politica politica;
 
     public synchronized static GestorRevisionContinua getInstancia() {
         if (instancia == null) {
@@ -36,7 +35,7 @@ public class GestorRevisionContinua extends GestorStock {
      */
     public void cargarGestorRevisionContinua(ProductoComponente prod) {
 
-        politica = (PoliticaRevisionContinua) prod.getPolitica();
+        politica = prod.getPolitica();
         producto = prod;
 
     }
@@ -60,11 +59,7 @@ public class GestorRevisionContinua extends GestorStock {
 
         double puntoDePedido = 0;
 
-        if (politica.getPrediccionDemanda() > 0) {
-            puntoDePedido = politica.getPrediccionDemanda() + getStockDeSeguridad();
-        } else {
-            puntoDePedido = getPrediccionDemanda(producto, politica.getTiempoEntrega()) + getStockDeSeguridad();
-        }
+        puntoDePedido = getPrediccionDemanda(producto, politica.getTiempoEntrega()) + getStockDeSeguridad();
 
         return puntoDePedido;
     }
@@ -83,7 +78,7 @@ public class GestorRevisionContinua extends GestorStock {
         for (DetalleOrdenProduccion detalle : venta.getDetallesOrdenProduccion()) {
             pol = detalle.getProducto().getPolitica();
             if (pol != null) {
-                if (pol instanceof PoliticaRevisionContinua) {
+                if (pol.getTipoPolitica().equals(Politica.TipoPolitica.CONTINUA)) {
                     cargarGestorRevisionContinua(detalle.getProducto());
                     if (getStockDisponible() <= getPuntoDePedido()) {
                         if (!detalle.getProducto().isSeRealizoPedido()) {

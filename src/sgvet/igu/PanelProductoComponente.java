@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import sgvet.utils.Util;
 import sgvet.entidades.ProductoComponente;
 import sgvet.gestores.GestorConfiguracion;
-import sgvet.gestores.GestorDemanda;
 import sgvet.gestores.GestorValidacion;
 import sgvet.igu.buscar.PanelBuscarProductoGral;
 import sgvet.igu.buscar.ValidacionBuscar;
@@ -26,15 +25,14 @@ import sgvet.utils.IValidable;
 public class PanelProductoComponente extends javax.swing.JPanel implements IValidable {
 
     private static final long serialVersionUID = 1L;
-    
     private ProductoComponente producto;
     private List<Component> componentesObligatorios;
-    
     private ProveedorTableModel tm;
     private ComboBoxModel tmUnidadMedida;
+
     /** Creates new form PanelProductoComponente */
     public PanelProductoComponente() {
-        tmUnidadMedida=  new UnidadMedidaTableModel();
+        tmUnidadMedida = new UnidadMedidaTableModel();
         initComponents();
         inicializar();
 
@@ -43,11 +41,11 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
     private void inicializar() {
         tm = new ProveedorTableModel(0);
         tProveedor.setModel(tm);
-        componentesObligatorios = Arrays.asList((Component)tfCodigo);
+        componentesObligatorios = Arrays.asList((Component) tfCodigo);
         btModificar.setEnabled(false);
         btEliminar.setEnabled(false);
     }
-        
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -467,10 +465,10 @@ public class PanelProductoComponente extends javax.swing.JPanel implements IVali
 private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModificarActionPerformed
 
     int opcion = JOptionPane.showConfirmDialog(this,
-                "¿Seguro desea guardar los cambios?", "Aceptar",
-                JOptionPane.YES_NO_OPTION);
-        
-    if(opcion == JOptionPane.YES_OPTION) {
+            "¿Seguro desea guardar los cambios?", "Aceptar",
+            JOptionPane.YES_NO_OPTION);
+
+    if (opcion == JOptionPane.YES_OPTION) {
         actualizarProductoComponente();
         FachadaPersistencia.getInstancia().actualizar(producto, true);
         limpiarPantalla();
@@ -479,59 +477,59 @@ private void btModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_btModificarActionPerformed
 
 private void btAsignarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAsignarProveedorActionPerformed
-    PanelBuscarProveedor panelProv =new PanelBuscarProveedor(tm);
+    PanelBuscarProveedor panelProv = new PanelBuscarProveedor(tm);
     panelProv.setModal(true);
     panelProv.setVisible(true);
-    
+
 }//GEN-LAST:event_btAsignarProveedorActionPerformed
 
 private void btAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAgregarActionPerformed
 //    tfStock.setText("0");
     tfCodigo.setText(GestorValidacion.getInstancia().generarCodigoProducto());
-    if(!Util.getInstancia().validar(this)){
+    if (!Util.getInstancia().validar(this)) {
         JOptionPane.showMessageDialog(this, "Existen campos sin completar");
-    }else{
+    } else {
         producto = crearProductoComponente();
-        if(ValidacionBuscar.getInstancia().estaDuplicado(producto)){
+        if (ValidacionBuscar.getInstancia().estaDuplicado(producto)) {
             JOptionPane.showMessageDialog(this, "El producto componente ya se encuentra registrado");
-        }else{
+        } else {
             FachadaPersistencia.getInstancia().actualizar(producto, true);
             limpiarPantalla();
         }
     }
-    
+
 }//GEN-LAST:event_btAgregarActionPerformed
 
 private void btEliminarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarProvActionPerformed
-        int filaSeleccionada = tProveedor.convertRowIndexToModel(tProveedor.getSelectedRow());
-    if(filaSeleccionada == -1){
+    int filaSeleccionada = tProveedor.convertRowIndexToModel(tProveedor.getSelectedRow());
+    if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "No se ha seleccionado Proveedor");
-    }else{
+    } else {
         tm.eliminarFila(filaSeleccionada);
         tm.imprimirModel();
     }
 }//GEN-LAST:event_btEliminarProvActionPerformed
 
 private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-     PanelBuscarProductoGral buscarProv = new PanelBuscarProductoGral(this);   
-     buscarProv.setModal(true);
-     buscarProv.setVisible(true);
+    PanelBuscarProductoGral buscarProv = new PanelBuscarProductoGral(this);
+    buscarProv.setModal(true);
+    buscarProv.setVisible(true);
 }//GEN-LAST:event_btBuscarActionPerformed
 
 private void btEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEliminarActionPerformed
 
     int opcion = JOptionPane.showConfirmDialog(this,
-                "¿Seguro desea eliminar el Producto Componente?", "Aceptar",
-                JOptionPane.YES_NO_OPTION);
+            "¿Seguro desea eliminar el Producto Componente?", "Aceptar",
+            JOptionPane.YES_NO_OPTION);
 
-    if(opcion == JOptionPane.YES_OPTION) {
+    if (opcion == JOptionPane.YES_OPTION) {
         producto.setBorrado(true);
         FachadaPersistencia.getInstancia().actualizar(producto, true);
         limpiarPantalla();
 
     }
 
-    
+
 }//GEN-LAST:event_btEliminarActionPerformed
 
 private void cbUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbUnidadMedidaActionPerformed
@@ -543,34 +541,32 @@ private void cbTipoPrediccionActionPerformed(java.awt.event.ActionEvent evt) {//
 }//GEN-LAST:event_cbTipoPrediccionActionPerformed
 
 private void btDemandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDemandaActionPerformed
-   String tipoDemanda = cbTipoPrediccion.getModel().getSelectedItem().toString();
+    String tipoDemanda = cbTipoPrediccion.getModel().getSelectedItem().toString();
 
-   if(producto == null){
-       JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
-   }else{
-       if (tipoDemanda.equalsIgnoreCase("SE Simple")) {
+    if (producto == null) {
+        JOptionPane.showMessageDialog(this, "Debe seleccionar un producto");
+    } else {
+        if (tipoDemanda.equalsIgnoreCase("SE Simple")) {
 
 //           PanelDemandaExpoSimple panel = new PanelDemandaExpoSimple(productoComponente);
-           PanelDemandaSimple panel = new PanelDemandaSimple(producto);
-           panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
-           panel.setVisible(true);
+            PanelDemandaSimple panel = new PanelDemandaSimple(producto);
+            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+            panel.setVisible(true);
 
-       }
-       else if(tipoDemanda.equalsIgnoreCase("SE Estacionalidad")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-           
-           //PanelDemandaExpoConEsta panel = new PanelDemandaExpoConEsta(productoComponente);
-           PanelDemandaConEstacionalidad panel = new PanelDemandaConEstacionalidad(producto);
-           panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
-           panel.setVisible(true);
-       }
-       else if(tipoDemanda.equalsIgnoreCase("SE Tendencia")){ //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-           PanelDemandaConTendencia panel = new PanelDemandaConTendencia(producto);
-           panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
-           panel.setVisible(true);
-       }
+        } else if (tipoDemanda.equalsIgnoreCase("SE Estacionalidad")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
 
-   }
-   
+            //PanelDemandaExpoConEsta panel = new PanelDemandaExpoConEsta(productoComponente);
+            PanelDemandaConEstacionalidad panel = new PanelDemandaConEstacionalidad(producto);
+            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+            panel.setVisible(true);
+        } else if (tipoDemanda.equalsIgnoreCase("SE Tendencia")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+            PanelDemandaConTendencia panel = new PanelDemandaConTendencia(producto);
+            panel.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+            panel.setVisible(true);
+        }
+
+    }
+
 }//GEN-LAST:event_btDemandaActionPerformed
 
 private void cbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCategoriaActionPerformed
@@ -592,14 +588,14 @@ private void btResumenVentasActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 private void btParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btParametrosActionPerformed
 
-    if(producto == null){
+    if (producto == null) {
         crearProductoComponente();
     }
-    if(cbPolitica.getSelectedIndex() == 1) {
+    if (cbPolitica.getSelectedIndex() == 1) {
         PanelRevisionContinua revisionContinua = new PanelRevisionContinua(producto);
         revisionContinua.setModal(true);
         revisionContinua.setVisible(true);
-    } else if (cbPolitica.getSelectedIndex() == 2){
+    } else if (cbPolitica.getSelectedIndex() == 2) {
         PanelRevisionPeriodica revisionPeriodica = new PanelRevisionPeriodica(producto);
         revisionPeriodica.setModal(true);
         revisionPeriodica.setVisible(true);
@@ -608,7 +604,7 @@ private void btParametrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 
 private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPoliticaItemStateChanged
 
-    if(cbPolitica.getSelectedIndex() == 0) {
+    if (cbPolitica.getSelectedIndex() == 0) {
         btParametros.setVisible(false);
     } else {
         btParametros.setVisible(true);
@@ -618,8 +614,6 @@ private void cbPoliticaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIR
 private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
     limpiarPantalla();
 }//GEN-LAST:event_btLimpiarActionPerformed
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoProd;
     private javax.swing.JButton btAgregar;
@@ -682,7 +676,8 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
         producto.setCodigo(tfCodigo.getText());
         producto.setNombre(tfNombre.getText());
-        producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
+        producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(
+                cbCategoria.getSelectedItem().toString()));
         producto.setEstado(cbEstado.getSelectedItem().toString());
         producto.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
         producto.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
@@ -694,25 +689,26 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         producto.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
         producto.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
         producto.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
-        
+
         producto.setProveedores(tm.getFilas());
-        
+
         return producto;
 
     }
-    
-    public void setComponente(ProductoComponente prod){
+
+    public void setComponente(ProductoComponente prod) {
         limpiarPantalla();
         producto = prod;
         cargarPantallaProductoComponente(prod);
-        
+
     }
-    
-    private void actualizarProductoComponente(){
-        
+
+    private void actualizarProductoComponente() {
+
         producto.setCodigo(tfCodigo.getText());
         producto.setNombre(tfNombre.getText());
-        producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(cbCategoria.getSelectedItem().toString()));
+        producto.setCategoria(GestorConfiguracion.getInstancia().getClaseDemanda(
+                cbCategoria.getSelectedItem().toString()));
         producto.setEstado(cbEstado.getSelectedItem().toString());
         producto.setUnidadMedida((String) cbUnidadMedida.getSelectedItem());
         producto.setCostoAlmacenamiento(Double.parseDouble(tfCostoAlmacenamiento.getText()));
@@ -724,13 +720,12 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         producto.setDemandaAnual(Double.parseDouble(tfDemandaAnual.getText()));
         producto.setTipoPrediccion((String) cbTipoPrediccion.getSelectedItem());
         producto.setPrecioVenta(Double.parseDouble(tfPrecioVenta.getText()));
-        
+
         producto.setProveedores(tm.getFilas());
-        
+
     }
-    
-    
-    private void cargarPantallaProductoComponente(ProductoComponente prod){
+
+    private void cargarPantallaProductoComponente(ProductoComponente prod) {
 
         tfCodigo.setText(prod.getCodigo());
         tfNombre.setText(prod.getNombre());
@@ -746,28 +741,29 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         tfDemandaAnual.setText(String.valueOf(prod.getDemandaAnual()));
         cbTipoPrediccion.setSelectedItem(prod.getTipoPrediccion());
         tfPrecioVenta.setText(String.valueOf(prod.getPrecioVenta()));
-        
+
         for (int i = 0; i < prod.getProveedores().size(); i++) {
-            tm.agregarFila(prod.getProveedores().get(i));        
+            tm.agregarFila(prod.getProveedores().get(i));
         }
 
         pantallaCargadaBotones();
 
     }
-    private void inicializarBotones(){
+
+    private void inicializarBotones() {
         btAgregar.setEnabled(true);
         btEliminar.setEnabled(false);
         btModificar.setEnabled(false);
         btParametros.setVisible(false);
     }
-    
-    private void pantallaCargadaBotones(){
+
+    private void pantallaCargadaBotones() {
         btAgregar.setEnabled(false);
         btModificar.setEnabled(true);
         btEliminar.setEnabled(true);
         tfStock.setEnabled(false);
     }
-    
+
     @Override
     public List<Component> getComponentesObligatorios() {
         return componentesObligatorios;
@@ -776,11 +772,11 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     public ProductoComponente getProductoComponente() {
         return producto;
     }
-    private void limpiarPantalla(){
+
+    private void limpiarPantalla() {
         Util.getInstancia().limpiarCampos(this);
         tfStock.setEnabled(true);
-        producto=null;
+        producto = null;
         inicializarBotones();
     }
-    
 }

@@ -1,17 +1,24 @@
 package sgvet.gestores;
 
-import sgvet.entidades.PoliticaRevisionPeriodica;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Query;
+import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
+import sgvet.entidades.auxiliares.DTOPedidos;
+import sgvet.igu.PanelPedidosPeriodica;
+import sgvet.persistencia.FachadaPersistencia;
 
 /**
  *
  * @author Luciano, Lisandro
  */
-public class GestorRevisionPeriodica extends GestorStock implements IObservadorFecha{
+public class GestorRevisionPeriodica extends GestorStock implements IObservadorFecha {
 
     private static GestorRevisionPeriodica instancia;
     ProductoComponente producto;
-    PoliticaRevisionPeriodica politica;
+    Politica politica;
 
     public synchronized static GestorRevisionPeriodica getInstancia() {
         if (instancia == null) {
@@ -30,7 +37,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
      */
     public void cargarGestorRevisionPeriodica(ProductoComponente prod) {
 
-        politica = (PoliticaRevisionPeriodica) prod.getPolitica();
+        politica = prod.getPolitica();
         producto = prod;
 
     }
@@ -93,14 +100,11 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
     }
 
-    public double getPeriodoDeRevision() {
+    public int getPeriodoDeRevision() {
 
-        double periodoDeRevision;
-        if (politica.getPeridoDeRevision() > 0) {
-            periodoDeRevision = politica.getPeridoDeRevision();
-        } else {
-            periodoDeRevision = getQOptimo(producto) / producto.getDemandaAnual();
-        }
+        int periodoDeRevision;
+
+        periodoDeRevision = (int) (getQOptimo(producto) / producto.getDemandaAnual());
 
         return periodoDeRevision;
 
@@ -117,7 +121,62 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
     @Override
     public void actualizar() {
-        
+
+        List<DTOPedidos> pedidos;
+        pedidos = getPedidosRevisionPeriodica();
+        realizarPedidos(pedidos);
+
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<DTOPedidos> getPedidosRevisionPeriodica() {
+
+        List<DTOPedidos> pedidos = new ArrayList<DTOPedidos>();
+        DTOPedidos pedido;
+        List<ProductoComponente> productos;
+        GestorFecha gf = GestorFecha.getInstancia();
+        Date ultimaRevision;
+
+        Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
+                "SELECT a FROM ProductoComponente a WHERE a.borrado=false");
+
+        productos = FachadaPersistencia.getInstancia().buscar(ProductoComponente.class, consulta);
+
+        for (ProductoComponente prod : productos) {
+            if (prod.getPolitica() != null) {
+                if (prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.PERIODICA)) {
+                    cargarGestorRevisionPeriodica(prod);
+
+                    if (prod.getFechaUltimaRevision() == null) {
+                        pedido = new DTOPedidos(producto, getCantidadAPedir());
+                        pedidos.add(pedido);
+                    } else {
+
+                        ultimaRevision = gf.sumarDiasALaFecha(prod.getFechaUltimaRevision(), getPeriodoDeRevision());
+
+                        if (gf.getFechaHoy().compareTo(ultimaRevision) >= 0) { /* Si fecha de hoy - fecha revision es >= R */
+                            pedido = new DTOPedidos(producto, getCantidadAPedir());
+                            pedidos.add(pedido);
+                        }
+
+                    }
+                }
+            }
+        }
+
+        return pedidos;
+
+    }
+
+    private void realizarPedidos(List<DTOPedidos> pedidos) {
+
+        PanelPedidosPeriodica panel = new PanelPedidosPeriodica(pedidos);
+        panel.setModal(true);
+        panel.setVisible(true);
+
     }
 }
 

@@ -35,7 +35,7 @@ public class GestorFecha {
     }
 
     /**
-     * @param fechaHoy the fechaHoy to set
+     * @param fecha
      */
     public void setFechaHoy(Date fecha) {
         fechaHoy = fecha;
@@ -258,10 +258,13 @@ public class GestorFecha {
     }
 
     public Date sumarDiasALaFecha(Date fecha, int cantDias) {
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(fecha);
         cal.add(Calendar.DAY_OF_YEAR, cantDias);
+        
         return cal.getTime();
+
     }
 
     public Date primerDiaDelAnio(Date fecha) {
