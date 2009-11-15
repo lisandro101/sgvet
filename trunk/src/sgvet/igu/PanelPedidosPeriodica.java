@@ -188,7 +188,7 @@ public class PanelPedidosPeriodica extends javax.swing.JDialog {
         this.pedidos = pedidos;
         tmPedidos = new PedidosPeriodicaTableModel(0);
         jtPedidos.setModel(tmPedidos);
-        tmPedidos.agregarFilas(pedidos);
+        tmPedidos.agregarFilas(this.pedidos);
 
     }
 }

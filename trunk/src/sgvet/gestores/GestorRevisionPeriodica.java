@@ -117,6 +117,11 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
         cantidad = getPuntoPedido() - getStockDisponible();
 
+        if(cantidad < 0){
+            cantidad = 0;
+        }
+        System.out.println("punto pedido: "+ getPuntoPedido());
+        System.out.println("Stock disponible: "+ getStockDisponible());
         return cantidad;
 
     }
@@ -149,21 +154,23 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
         for (ProductoComponente prod : productos) {
             if (prod.getPolitica() != null) {
-                if (prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.PERIODICA)) {
-                    cargarGestorRevisionPeriodica(prod);
+                if (prod.getPolitica().getTipoPolitica() != null) {
+                    if (prod.getPolitica().getTipoPolitica().equals(Politica.TipoPolitica.PERIODICA)) {
+                        cargarGestorRevisionPeriodica(prod);
 
-                    if (prod.getFechaUltimaRevision() == null) {
-                        pedido = new DTOPedidos(producto, getCantidadAPedir());
-                        pedidos.add(pedido);
-                    } else {
-
-                        ultimaRevision = gf.sumarDiasALaFecha(prod.getFechaUltimaRevision(), getPeriodoDeRevision());
-
-                        if (gf.getFechaHoy().compareTo(ultimaRevision) >= 0) { /* Si fecha de hoy - fecha revision es >= R */
+                        if (prod.getFechaUltimaRevision() == null) {
                             pedido = new DTOPedidos(producto, getCantidadAPedir());
                             pedidos.add(pedido);
-                        }
+                        } else {
 
+                            ultimaRevision = gf.sumarDiasALaFecha(prod.getFechaUltimaRevision(), getPeriodoDeRevision());
+
+                            if (gf.getFechaHoy().compareTo(ultimaRevision) >= 0) { /* Si fecha de hoy - fecha revision es >= R */
+                                pedido = new DTOPedidos(producto, getCantidadAPedir());
+                                pedidos.add(pedido);
+                            }
+
+                        }
                     }
                 }
             }
