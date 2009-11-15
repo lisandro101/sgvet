@@ -188,7 +188,7 @@ public class PanelPedidosContinua extends javax.swing.JDialog {
         this.pedidos = pedidos;
         tmPedidos = new PedidosContinuaTableModel(0);
         jtPedidos.setModel(tmPedidos);
-        tmPedidos.agregarFilas(pedidos);
+        tmPedidos.agregarFilas(this.pedidos);
 
     }
 }

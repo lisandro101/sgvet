@@ -17,7 +17,7 @@ public abstract class GestorStock {
 
     protected double getStockPendiente(ProductoComponente prod) {
 
-        double cantidadPendiente = 0;
+        double cantidadPendiente = 0.0;
         List<DetalleOrdenCompra> detalles;
 
         Query consulta = FachadaPersistencia.getInstancia().crearConsulta(
@@ -44,22 +44,25 @@ public abstract class GestorStock {
 
         if (nivelServicio <= 50) {
             factorSeguridad = 0;
-        } else if (nivelServicio <= 60) {
+        } else if (nivelServicio > 50 && nivelServicio <= 60) {
             factorSeguridad = 0.25;
-        } else if (nivelServicio <= 70) {
+        } else if (nivelServicio > 60 && nivelServicio <= 70) {
             factorSeguridad = 0.52;
-        } else if (nivelServicio <= 80) {
+        } else if (nivelServicio > 70 && nivelServicio <= 80) {
             factorSeguridad = 0.84;
-        } else if (nivelServicio <= 90) {
+        } else if (nivelServicio > 80 && nivelServicio <= 90) {
             factorSeguridad = 1.28;
-        } else if (nivelServicio <= 95) {
+        } else if (nivelServicio > 90 && nivelServicio <= 95) {
             factorSeguridad = 1.64;
-        } else if (nivelServicio <= 97.5) {
+        } else if (nivelServicio > 95 && nivelServicio <= 97.5) {
             factorSeguridad = 1.96;
-        } else if (nivelServicio <= 99.9) {
+        } else if (nivelServicio > 97.5 && nivelServicio <= 99.9) {
             factorSeguridad = 3.08;
-        } else if (nivelServicio <= 100) {
+        } else if (nivelServicio > 99.9 && nivelServicio <= 100) {
             factorSeguridad = 3.6;
+        }
+        if(nivelServicio < 0 || nivelServicio >100){
+            System.out.println("\n\n\n Nivel de servicio fuera de rango \n\n");
         }
         
         return factorSeguridad;
@@ -71,23 +74,39 @@ public abstract class GestorStock {
         GestorFecha gf = GestorFecha.getInstancia();
         List<DemandaXPeriodo> demandas;
         int periodoSiguiente;
-        int anio;
-        double prediccion = 0;
+        int anio=0;
+        double prediccion = 0.0;
         double prediccionDemanda;
 
-        demandas = gd.calcularPrediccionDemandaXPeriodo(prod);
-        periodoSiguiente = gf.aQuePeriodoCorrespondeLaFecha(gf.getFechaHoy()) + 1;
+//        demandas = gd.calcularPrediccionDemandaXPeriodo(prod);
+        
         anio = gf.getAnio(gf.getFechaHoy());
-
-        for (DemandaXPeriodo demanda : demandas) {
-
-            if (gf.getAnio(demanda.getAnio()) == anio && demanda.getNroPeriodo() == periodoSiguiente) {
-                prediccion = demanda.getPrediccionVenta();
-            }
-
+        if(gf.aQuePeriodoCorrespondeLaFecha(gf.getFechaHoy()) != 13){
+            periodoSiguiente = gf.aQuePeriodoCorrespondeLaFecha(gf.getFechaHoy()) + 1;
+        }else{
+            periodoSiguiente = 1;
+            ++anio;
         }
 
+//        for (DemandaXPeriodo demanda : demandas) {
+//
+//            if (gf.getAnio(demanda.getAnio()) == anio && demanda.getNroPeriodo() == periodoSiguiente) {
+//                prediccion = demanda.getPrediccionVenta();
+//            }
+//            if(periodoSiguiente == 1 && (gf.getAnio(demanda.getAnio())+1) == anio
+//                    && demanda.getNroPeriodo() == periodoSiguiente){
+//                prediccion = demanda.getPrediccionVenta();
+//            }
+//
+//        }
+
+        prediccion = gd.predecirDemanda(prod, anio, periodoSiguiente);
+
+        System.out.println("Resultado de la prediccion: "+ prediccion );
+
         prediccionDemanda = prediccion / 28 * tiempoEntrega;
+
+        System.out.println("Resultado de la prediccion demanda: "+ prediccionDemanda );
 
         return prediccionDemanda;
 

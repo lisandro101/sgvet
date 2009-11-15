@@ -103,7 +103,7 @@ public class PedidosPeriodicaTableModel extends AbstractTableModel implements IM
             case 1:
                 resultado = grp.getStockDisponible();
                 break;
-            case 32:
+            case 2:
                 resultado = grp.getCantidadAPedir();
                 break;
         }
@@ -184,7 +184,7 @@ public class PedidosPeriodicaTableModel extends AbstractTableModel implements IM
 
         if (pedidos != null) {
             this.pedidos.addAll(pedidos);
-            fireTableRowsInserted(this.pedidos.size() - pedidos.size(), pedidos.size());
+            fireTableRowsInserted(this.pedidos.size() - pedidos.size(), this.pedidos.size());
         }
 
     }

@@ -42,7 +42,7 @@ public class GestorRevisionContinua extends GestorStock {
 
     private double getStockDeSeguridad() {
 
-        double stockSeguridad = 0;
+        double stockSeguridad = 0.0;
 
         stockSeguridad = politica.getDesviacionEstandarDemanda() * getFactorDeSeguridad(politica.getNivelServicio());
 
@@ -57,7 +57,7 @@ public class GestorRevisionContinua extends GestorStock {
      */
     public double getPuntoDePedido() {
 
-        double puntoDePedido = 0;
+        double puntoDePedido = 0.0;
 
         puntoDePedido = getPrediccionDemanda(producto, politica.getTiempoEntrega()) + getStockDeSeguridad();
 

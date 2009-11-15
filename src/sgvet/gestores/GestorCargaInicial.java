@@ -215,7 +215,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -245,7 +245,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -275,7 +275,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -305,7 +305,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -335,7 +335,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -365,7 +365,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -395,7 +395,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -425,7 +425,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -455,7 +455,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -485,7 +485,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -515,7 +515,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -545,7 +545,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -575,7 +575,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -605,7 +605,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -635,7 +635,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -665,7 +665,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -695,7 +695,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -725,7 +725,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -755,7 +755,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -785,7 +785,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -815,7 +815,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -845,7 +845,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -875,7 +875,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -905,7 +905,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -935,7 +935,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -965,7 +965,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -995,7 +995,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1025,7 +1025,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1055,7 +1055,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1085,7 +1085,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1115,7 +1115,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1145,7 +1145,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Tendencia");
         prod.setUnidadMedida("unid");
 
@@ -1175,7 +1175,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1205,7 +1205,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -1235,7 +1235,7 @@ public class GestorCargaInicial {
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-        prod.setTamanioLoteEstandar(5);
+//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Estacionalidad");
         prod.setUnidadMedida("unid");
 

@@ -47,7 +47,7 @@ public class Componente implements Serializable, IPersistente {
     private double costoAlmacenamiento;
 //    private double costoPedido;
     private double costoUnitario;
-    private double tamanioLoteEstandar;
+//    private double tamanioLoteEstandar;
     //private double precioBase;
 //    private double pesoUnidad;
     private String descripcion;
@@ -226,20 +226,20 @@ public class Componente implements Serializable, IPersistente {
         this.costoUnitario = costoUnitario;
     }
 
-    /**
-     * @return the tamanioLoteEstandar
-     */
-    @Column(name="tamanio_lote_estandar")
-    public double getTamanioLoteEstandar() {
-        return tamanioLoteEstandar;
-    }
-
-    /**
-     * @param tamanioLoteEstandar the tamanioLoteEstandar to set
-     */
-    public void setTamanioLoteEstandar(double tamanioLoteEstandar) {
-        this.tamanioLoteEstandar = tamanioLoteEstandar;
-    }
+//    /**
+//     * @return the tamanioLoteEstandar
+//     */
+//    @Column(name="tamanio_lote_estandar")
+//    public double getTamanioLoteEstandar() {
+//        return tamanioLoteEstandar;
+//    }
+//
+//    /**
+//     * @param tamanioLoteEstandar the tamanioLoteEstandar to set
+//     */
+//    public void setTamanioLoteEstandar(double tamanioLoteEstandar) {
+//        this.tamanioLoteEstandar = tamanioLoteEstandar;
+//    }
 
 //    /**
 //     * @return the precioBase

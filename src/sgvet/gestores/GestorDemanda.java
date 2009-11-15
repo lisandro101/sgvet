@@ -4,6 +4,7 @@
  */
 package sgvet.gestores;
 
+import java.lang.UnsupportedOperationException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ public class GestorDemanda {
 
     private Date fechaCierre;
     private double[] indices;
+    private  double[] demandasPromTendencia;
     private int ventasDelMesAbierto;
     private double tendencia;
     private static GestorDemanda instancia;
@@ -260,6 +262,8 @@ public class GestorDemanda {
             predicciones.add(resultado);
             
         }
+
+        demandasPromTendencia = demanPromedioXPeriodo;
         indices= indiceEstacionalidad;
 
         return predicciones;
@@ -469,9 +473,10 @@ public class GestorDemanda {
             //indice.set(i, temp);
             indice.add(temp);
         }
-
-        temp = estimacion.get(estimacion.size()-1) + indice.get(indice.size()-1);
         tendencia= indice.get(indice.size()-1);
+
+        temp = estimacion.get(estimacion.size()-1) + tendencia;
+        
         return temp;
     }
 
@@ -781,7 +786,6 @@ public class GestorDemanda {
 
         List<DemandaXPeriodo> demandas = calcularDemandaXPeriodo(producto);
         List<DemandaXPeriodo> temporal = new ArrayList<DemandaXPeriodo>();
-        int valor;
 
         //variables q tiene q venir como parametros
         double alfa = 0.4;
@@ -811,7 +815,7 @@ public class GestorDemanda {
                     for (int i = 1; i < demandas.size(); i++) {
 
                         temporal.add(demandas.get(i));
-                        resultado = calcularDemandaConEstacionalidad(alfa, gamma, temporal);
+                        resultado = calcularDemandaConEstacionalidadNew(alfa, gamma, temporal);
 
                         if(resultado.size()>0){
                             demandas.get(i).setPrediccionVenta(resultado.get(0));
@@ -870,5 +874,60 @@ public class GestorDemanda {
         return tendencia;
     }
 
+    public int predecirDemanda(ProductoComponente producto, int anio, int nroPeriodo){
+
+        //variables q tiene q venir como parametros
+        double alfa = 0.4;
+        double gamma = 0.2;
+        double beta = 0.2;
+
+        List<DemandaXPeriodo> demandas = calcularDemandaXPeriodo(producto);
+
+        int resultado = 0;
+        GestorFecha gf = GestorFecha.getInstancia();
+
+        if (producto == null || producto.getTipoPrediccion().equalsIgnoreCase(" ")) {
+            System.out.println("\n\n\n Debe seleccionar un producto y/o el producto seleccionado debe tener un tipo de prediccion asociado \n\n\n");
+        } else {
+            if (demandas.size() > 0) {
+
+                if (producto.getTipoPrediccion().trim().equalsIgnoreCase("SE Simple")) {
+
+                    for (int i = 1; i < demandas.size(); i++) {
+                        resultado = calcularESNew(alfa, demandas);
+                    }
+
+                } else if (producto.getTipoPrediccion().trim().equalsIgnoreCase("SE Estacionalidad")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+                    calcularDemandaConEstacionalidadNew(alfa, gamma, demandas);
+
+                    resultado = (int)(demandasPromTendencia[nroPeriodo-1]* indices[nroPeriodo-1]);
+
+                } else if (producto.getTipoPrediccion().trim().equalsIgnoreCase("SE Tendencia")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
+
+                    double resulTend;
+                    int h;
+
+                    if(gf.getAnio(demandas.get(demandas.size()-1).getAnio()) == anio){
+                        h = nroPeriodo - demandas.get(demandas.size()-1).getNroPeriodo();
+                    }else{
+                        h = (anio-gf.getAnio(demandas.get(demandas.size()-1).getAnio()))-
+                                demandas.get(demandas.size()-1).getNroPeriodo()+nroPeriodo;
+                    }
+                    resulTend = calcularDemandaConTendenciaNew(demandas, alfa, beta)- tendencia;
+
+                    //resultado = Integer.parseInt(String.valueOf(Math.floor(resulTend + h * tendencia)));
+                    resultado = (int)Math.floor(resulTend + h * tendencia);
+                }
+
+            } else {
+                System.out.println("\n\n\n No se han registrado ventas del producto seleccionado \n\n\n");
+            }
+
+
+        }
+
+
+        return resultado;
+    }
  
 }

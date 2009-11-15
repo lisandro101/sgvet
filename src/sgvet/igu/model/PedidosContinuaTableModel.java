@@ -103,7 +103,7 @@ public class PedidosContinuaTableModel extends AbstractTableModel implements IMo
             case 1:
                 resultado = grc.getStockDisponible();
                 break;
-            case 32:
+            case 2:
                 resultado = grc.getQOptimo(pedidos.get(fila).getProducto());
                 break;
         }
@@ -184,7 +184,7 @@ public class PedidosContinuaTableModel extends AbstractTableModel implements IMo
 
         if (pedidos != null) {
             this.pedidos.addAll(pedidos);
-            fireTableRowsInserted(this.pedidos.size() - pedidos.size(), pedidos.size());
+            fireTableRowsInserted(this.pedidos.size() - pedidos.size(), this.pedidos.size());
         }
 
     }
