@@ -184,6 +184,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
         PanelPedidosPeriodica panel = new PanelPedidosPeriodica(pedidos);
         panel.setModal(true);
+        panel.setTitle("Politica de Revision Periodica de Stock");
         panel.setVisible(true);
 
     }

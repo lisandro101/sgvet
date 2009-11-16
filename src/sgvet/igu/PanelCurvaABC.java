@@ -1,17 +1,13 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * PanelCurvaABC.java
  *
  * Created on Sep 28, 2009, 11:47:21 AM
  */
-
 package sgvet.igu;
 
+import java.awt.Frame;
 import java.util.List;
+import javax.swing.JDialog;
 import sgvet.entidades.auxiliares.ItemABC;
 import sgvet.gestores.GestorABC;
 import sgvet.igu.model.CurvaABCTableModel;
@@ -21,17 +17,37 @@ import sgvet.utils.Util;
  *
  * @author lnieto
  */
-public class PanelCurvaABC extends javax.swing.JDialog {
+public class PanelCurvaABC extends JDialog {
 
     private CurvaABCTableModel tmCurvaABC;
     private List<ItemABC> curvaABC;
     String clase = "Todas";
 
-    /** Creates new form PanelCurvaABC */
-    public PanelCurvaABC(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    /** Creates new form PanelCurvaABC
+     * @param parent
+     */
+    public PanelCurvaABC(Frame parent) {
+
+        super(parent, true);
+
         initComponents();
         inicializar();
+        esconderBotones();
+        calcularABC();
+
+    }
+
+    /** Creates new form PanelCurvaABC
+     * @param parent
+     * @param modal
+     */
+    public PanelCurvaABC(Frame parent, boolean modal) {
+
+        super(parent, modal);
+
+        initComponents();
+        inicializar();
+
     }
 
     /** This method is called from within the constructor to
@@ -48,6 +64,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
         btCalcular = new javax.swing.JButton();
         btBuscar = new javax.swing.JButton();
         btLimpiar = new javax.swing.JButton();
+        btCerrar = new javax.swing.JButton();
         pProducto = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         lbDemandaAnualTotal = new javax.swing.JLabel();
@@ -103,6 +120,14 @@ public class PanelCurvaABC extends javax.swing.JDialog {
         });
         pBotones.add(btLimpiar);
 
+        btCerrar.setText("Cerrar");
+        btCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCerrarActionPerformed(evt);
+            }
+        });
+        pBotones.add(btCerrar);
+
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         lbDemandaAnualTotal.setText("Demanda Anual Total");
@@ -125,15 +150,15 @@ public class PanelCurvaABC extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lbDemandaAnualTotal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfDemandaAnualTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                .addComponent(tfDemandaAnualTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lbDemandaValorizadaTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfDemandaValorizadaTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+                .addComponent(tfDemandaValorizadaTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lbCantidadProductos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCantidadProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                .addComponent(tfCantidadProductos, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -172,15 +197,15 @@ public class PanelCurvaABC extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(lbCantidadProdA, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfCantidadProdA, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addComponent(tfCantidadProdA, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lbCantidadProdB, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfCantidadProdB, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                .addComponent(tfCantidadProdB, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(lbCantidadProdC)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfCantidadProdC, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                .addComponent(tfCantidadProdC, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
         jPanel6Layout.setVerticalGroup(
@@ -219,7 +244,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbDemanda90)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfDemanda90, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addComponent(tfDemanda90, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addGap(115, 115, 115))
         );
         jPanel3Layout.setVerticalGroup(
@@ -329,11 +354,11 @@ public class PanelCurvaABC extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
+                .addComponent(jpCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,7 +381,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
                         .addComponent(pProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(pBotones, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)))
+                        .addComponent(pBotones, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -375,46 +400,45 @@ public class PanelCurvaABC extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 701, Short.MAX_VALUE)
+            .addGap(0, 788, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(16, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 614, Short.MAX_VALUE)
+            .addGap(0, 629, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(41, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcularActionPerformed
-        
+
         Util.getInstancia().limpiarCampos(this);
 
         inicializar();
 
-        curvaABC = GestorABC.getInstancia().calcularCurvaABC();
-        tmCurvaABC.limpiarTableModel();
-        tmCurvaABC.agregarFilas(curvaABC);
+        calcularABC();
 
         btLimpiar.setEnabled(true);
 
 }//GEN-LAST:event_btCalcularActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+
         Util.getInstancia().limpiarCampos(this);
 
         inicializar();
 
-        if(clase != null) {
+        if (clase != null) {
             curvaABC = GestorABC.getInstancia().buscarCurvaABC(clase);
             tmCurvaABC.limpiarTableModel();
             tmCurvaABC.agregarFilas(curvaABC);
@@ -425,12 +449,14 @@ public class PanelCurvaABC extends javax.swing.JDialog {
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpiarActionPerformed
+
         sgvet.utils.Util.getInstancia().limpiarCampos(this);
-        //        productoTerminado=null;
         btLimpiar.setEnabled(false);
+
 }//GEN-LAST:event_btLimpiarActionPerformed
 
     private void rbTodas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTodas1ActionPerformed
+
         clase = "Todas";
 
         rbClaseA1.setSelected(false);
@@ -441,6 +467,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
 }//GEN-LAST:event_rbTodas1ActionPerformed
 
     private void rbClaseA1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClaseA1ActionPerformed
+
         clase = "Clase A";
 
         rbClaseA1.setSelected(true);
@@ -451,6 +478,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
 }//GEN-LAST:event_rbClaseA1ActionPerformed
 
     private void rbClaseB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClaseB1ActionPerformed
+
         clase = "Clase B";
 
         rbClaseA1.setSelected(false);
@@ -461,6 +489,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
 }//GEN-LAST:event_rbClaseB1ActionPerformed
 
     private void rbClaseC1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbClaseC1ActionPerformed
+
         clase = "Clase C";
 
         rbClaseA1.setSelected(false);
@@ -470,15 +499,23 @@ public class PanelCurvaABC extends javax.swing.JDialog {
 
 }//GEN-LAST:event_rbClaseC1ActionPerformed
 
+    private void btCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCerrarActionPerformed
+        
+        dispose();
+
+    }//GEN-LAST:event_btCerrarActionPerformed
+
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             @Override
             public void run() {
                 PanelCurvaABC dialog = new PanelCurvaABC(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -488,10 +525,10 @@ public class PanelCurvaABC extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCalcular;
+    private javax.swing.JButton btCerrar;
     private javax.swing.JButton btLimpiar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -524,7 +561,7 @@ public class PanelCurvaABC extends javax.swing.JDialog {
     private javax.swing.JTextField tfDemandaAnualTotal;
     private javax.swing.JTextField tfDemandaValorizadaTotal;
     // End of variables declaration//GEN-END:variables
-    
+
     private void inicializar() {
 
         GestorABC gestor = GestorABC.getInstancia();
@@ -543,6 +580,23 @@ public class PanelCurvaABC extends javax.swing.JDialog {
         tfDemanda90.setText("" + gestor.getDemanda90());
         tfDemandaAnualTotal.setText("" + gestor.getDemandaAnualTotal());
         tfDemandaValorizadaTotal.setText("" + gestor.getDemandaValorizadaTotal());
+
+    }
+
+    private void esconderBotones() {
+
+        btBuscar.setVisible(false);
+        btCalcular.setVisible(false);
+        btLimpiar.setVisible(false);
+        jpCategoria.setVisible(false);
+
+    }
+
+    private void calcularABC() {
+
+        curvaABC = GestorABC.getInstancia().calcularCurvaABC();
+        tmCurvaABC.limpiarTableModel();
+        tmCurvaABC.agregarFilas(curvaABC);
 
     }
 }
