@@ -70,7 +70,7 @@ public class GestorOrdenCompra {
         ProductoComponente productoComponente;
 
         for (DetalleOrdenCompra detalle : orden.getDetallesOrdenCompra()) {
-            cantNueva = detalle.getCantidad();
+            cantNueva = Math.floor(detalle.getCantidad());
             productoComponente = (ProductoComponente) detalle.getComponente();
             cantStock = productoComponente.getStock() + cantNueva;
             productoComponente.setStock(cantStock);
