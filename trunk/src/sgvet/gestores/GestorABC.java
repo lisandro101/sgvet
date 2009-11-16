@@ -2,14 +2,18 @@ package sgvet.gestores;
 
 import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import sgvet.entidades.Configuracion;
 import sgvet.entidades.auxiliares.ItemABC;
 import sgvet.entidades.ProductoComponente;
 import sgvet.igu.PanelConfiguracion;
+import sgvet.igu.PanelCurvaABC;
 import sgvet.persistencia.FachadaPersistencia;
 
-public class GestorABC implements IObservadorFecha{
+public class GestorABC implements IObservadorFecha {
 
     private static GestorABC instance;
     private static GestorConfiguracion gc;
@@ -249,6 +253,29 @@ public class GestorABC implements IObservadorFecha{
 
     @Override
     public void actualizar(Frame panel) {
-        throw new UnsupportedOperationException("Not supported yet.");
+
+        Date fecha;
+        List<Configuracion> conf = null;
+        GestorFecha gf = GestorFecha.getInstancia();
+        Calendar cal = Calendar.getInstance();
+
+        conf = FachadaPersistencia.getInstancia().buscar(Configuracion.class, "SELECT a FROM Configuracion a");
+
+        if (conf.size() > 0) {
+
+            fecha = conf.get(0).getUltimaABC();
+            cal.setTime(fecha);
+            cal.add(Calendar.YEAR, 1);
+            fecha = cal.getTime();
+
+            if (gf.getFechaHoy().compareTo(fecha) >= 0) {
+                conf.get(0).setUltimaABC(gf.getFechaHoy());
+                FachadaPersistencia.getInstancia().actualizar(conf.get(0), true);
+
+                PanelCurvaABC panelABC = new PanelCurvaABC(panel);
+                panelABC.setTitle("Ajuste Automatico de Clasificacion ABC");
+                panelABC.setVisible(true);
+            }
+        }
     }
 }

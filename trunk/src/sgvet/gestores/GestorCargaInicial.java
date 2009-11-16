@@ -56,6 +56,7 @@ public class GestorCargaInicial {
         conf = new Configuracion();
         conf.setId("1");
         conf.setUltimaSenialRastreo(GestorFecha.getInstancia().getFecha(1, 1, 2009));
+        conf.setUltimaABC(GestorFecha.getInstancia().getFecha(1, 1, 2009));
         persistentes.add(conf);
 
         persistir(persistentes);

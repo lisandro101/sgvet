@@ -24,6 +24,7 @@ public class Configuracion implements Serializable, IPersistente {
 
     private String id;    
     private Date ultimaSenialRastreo;
+    private Date ultimaABC;
 
     @Id
     public String getId() {
@@ -57,6 +58,21 @@ public class Configuracion implements Serializable, IPersistente {
     @Override
     public void setBorrado(boolean borrado) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * @return the ultimaABC
+     */
+    @Temporal(javax.persistence.TemporalType.DATE)
+    public Date getUltimaABC() {
+        return ultimaABC;
+    }
+
+    /**
+     * @param ultimaABC the ultimaABC to set
+     */
+    public void setUltimaABC(Date ultimaABC) {
+        this.ultimaABC = ultimaABC;
     }
 
 }

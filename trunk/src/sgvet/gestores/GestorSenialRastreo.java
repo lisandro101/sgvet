@@ -278,6 +278,7 @@ public class GestorSenialRastreo implements IObservadorFecha {
 
                 PanelSenialRastreo panelSR = new PanelSenialRastreo(panel);
                 panelSR.setCantidadAvisos(cantidad);
+                panelSR.setTitle("Aviso de Ajuste de Metodos de Prediccion.");
                 panelSR.setVisible(true);
 
             }
