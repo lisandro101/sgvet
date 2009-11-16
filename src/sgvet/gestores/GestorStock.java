@@ -108,7 +108,7 @@ public abstract class GestorStock {
 
         System.out.println("Resultado de la prediccion demanda: "+ prediccionDemanda );
 
-        return prediccionDemanda;
+        return Math.floor(prediccionDemanda);
 
     }
 
@@ -125,7 +125,7 @@ public abstract class GestorStock {
 
         QOptimo = Math.sqrt((2 * politica.getCostoEmision() * demandaAnual) / getCostoAnualAlmacenamiento(producto));
 
-        return QOptimo;
+        return Math.floor(QOptimo);
 
     }
 

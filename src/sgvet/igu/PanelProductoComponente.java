@@ -747,7 +747,6 @@ private void btLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         cbUnidadMedida.setSelectedItem(prod.getUnidadMedida());
         tfCostoAlmacenamiento.setText(String.valueOf(prod.getCostoAlmacenamiento()));
         tfCostoUnitario.setText(String.valueOf(prod.getCostoUnitario()));
-//        tfTamanioLoteEstandar.setText(String.valueOf(prod.getTamanioLoteEstandar()));
         tfStock.setText(String.valueOf(prod.getStock()));
         tfDescripcion.setText(prod.getDescripcion());
         tfStockReserva.setText(String.valueOf(prod.getStockReserva()));

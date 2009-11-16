@@ -122,7 +122,7 @@ public class OrdenCompraTableModel extends AbstractTableModel implements IModelo
     /**
      * Agrega Proveedor al modelo
      * 
-     * @param proveedor Proveedor a agregar
+     * @param hora
 
      */
     public void agregarFila(DetalleOrdenCompra hora) {

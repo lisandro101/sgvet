@@ -202,21 +202,15 @@ public class GestorCargaInicial {
         prod.setNombre("Dog Chow 2Kg");
         prod.setBorrado(false);
         prod.setCodigo("2-1");
-//        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
-//        prod.setCostoPedido(10);
         prod.setCostoUnitario(10);
         prod.setDemandaAnual(1000);
         prod.setDescripcion("Una Bolsa de 2 kg Dog Chow");
         prod.setEstado("Activo");
-//        prod.setNumeroPlano("");
-//        prod.setPesoUnidad(10);
         prod.setPoliticaCompra("");
-//        prod.setPrecioBase(10);
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -232,21 +226,15 @@ public class GestorCargaInicial {
         prod.setNombre("Dog Chow 15Kg");
         prod.setBorrado(false);
         prod.setCodigo("2-2");
-//        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
-//        prod.setCostoPedido(10);
         prod.setCostoUnitario(40);
         prod.setDemandaAnual(400);
         prod.setDescripcion("Una Bolsa de 15 kg Dog Chow");
         prod.setEstado("Activo");
-//        prod.setNumeroPlano("");
-//        prod.setPesoUnidad(10);
         prod.setPoliticaCompra("");
-//        prod.setPrecioBase(10);
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 
@@ -262,21 +250,15 @@ public class GestorCargaInicial {
         prod.setNombre("Dog Chow 30Kg");
         prod.setBorrado(false);
         prod.setCodigo("2-3");
-//        prod.setCondicionesEmbalaje("");
         prod.setCostoAlmacenamiento(10);
-//        prod.setCostoPedido(10);
         prod.setCostoUnitario(80);
         prod.setDemandaAnual(200);
         prod.setDescripcion("Una Bolsa de 30 kg Dog Chow");
         prod.setEstado("Activo");
-//        prod.setNumeroPlano("");
-//        prod.setPesoUnidad(10);
         prod.setPoliticaCompra("");
-//        prod.setPrecioBase(10);
         prod.setPrecioVenta(100);
         prod.setStock(10);
         prod.setStockReserva(5);
-//        prod.setTamanioLoteEstandar(5);
         prod.setTipoPrediccion("SE Simple");
         prod.setUnidadMedida("unid");
 

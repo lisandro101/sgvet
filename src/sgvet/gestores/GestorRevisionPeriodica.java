@@ -8,7 +8,6 @@ import javax.persistence.Query;
 import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DTOPedidos;
-import sgvet.igu.PanelConfiguracion;
 import sgvet.igu.PanelPedidosPeriodica;
 import sgvet.persistencia.FachadaPersistencia;
 
@@ -113,16 +112,16 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
     }
 
     public double getCantidadAPedir() {
+
         double cantidad;
 
         cantidad = getPuntoPedido() - getStockDisponible();
 
-        if(cantidad < 0){
+        if (cantidad < 0) {
             cantidad = 0;
         }
-        System.out.println("punto pedido: "+ getPuntoPedido());
-        System.out.println("Stock disponible: "+ getStockDisponible());
-        return cantidad;
+        
+        return Math.floor(cantidad);
 
     }
 
@@ -131,7 +130,9 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
         List<DTOPedidos> pedidos;
         pedidos = getPedidosRevisionPeriodica();
-        realizarPedidos(pedidos);
+        if (pedidos.size() > 0) {
+            realizarPedidos(pedidos);
+        }
 
     }
 
@@ -188,5 +189,6 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
         panel.setVisible(true);
 
     }
+    
 }
 
