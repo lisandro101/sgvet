@@ -10,6 +10,7 @@
  */
 package sgvet.igu;
 
+import java.util.ArrayList;
 import java.util.List;
 import sgvet.entidades.auxiliares.DTOPedidos;
 import sgvet.gestores.GestorOrdenCompra;
@@ -183,9 +184,16 @@ public class PanelPedidosPeriodica extends javax.swing.JDialog {
     private javax.swing.JPanel pBotones;
     // End of variables declaration//GEN-END:variables
 
-    private void inicializar(List<DTOPedidos> pedidos) {
+    private void inicializar(List<DTOPedidos> pedidos1) {
 
-        this.pedidos = pedidos;
+        List<DTOPedidos> pedidosConCant = new ArrayList<DTOPedidos>();
+
+        for (DTOPedidos pedido : pedidos1) {
+            if(pedido.getCantidadOptima()>0){
+                pedidosConCant.add(pedido);
+            }
+        }
+        pedidos = pedidosConCant;
         tmPedidos = new PedidosPeriodicaTableModel(0);
         jtPedidos.setModel(tmPedidos);
         tmPedidos.agregarFilas(this.pedidos);
