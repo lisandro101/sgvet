@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
 import sgvet.entidades.ClaseDemanda;
 import sgvet.entidades.Configuracion;
 import sgvet.entidades.DetalleOrdenProduccion;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.Proveedor;
 import sgvet.entidades.Venta;
+import sgvet.igu.PantallaPrincipal;
 import sgvet.persistencia.FachadaPersistencia;
 import sgvet.persistencia.IPersistente;
 
@@ -35,15 +37,17 @@ public class GestorCargaInicial {
         return instance;
     }
 
-    public void cargarTodo() {
+    public void cargarTodo(PantallaPrincipal p) {
 
+        p.setStatus("Realizando Carga Inicial....");
         System.out.println("Realizando Carga Inicial....");
-
+        
         cargarVentas(cargarProductos(cargarProveedores()));
         cargarClasesDemanda();
         cargarConfiguracion();
         GestorABC.getInstancia().calcularCurvaABC();
 
+        p.setStatus("Finalizada Carga Inicial.");
         System.out.println("Finalizada Carga Inicial.");
 
     }

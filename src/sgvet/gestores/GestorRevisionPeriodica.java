@@ -120,7 +120,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
         if (cantidad < 0) {
             cantidad = 0;
         }
-        
+
         return Math.floor(cantidad);
 
     }
@@ -130,9 +130,7 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
 
         List<DTOPedidos> pedidos;
         pedidos = getPedidosRevisionPeriodica();
-        if (pedidos.size() > 0) {
-            realizarPedidos(pedidos);
-        }
+        realizarPedidos(pedidos);
 
     }
 
@@ -187,15 +185,14 @@ public class GestorRevisionPeriodica extends GestorStock implements IObservadorF
         for (DTOPedidos pedido : pedidos) {
             totalCantOp += pedido.getCantidadOptima();
         }
-        if(totalCantOp > 0){
+        if (totalCantOp > 0) {
             PanelPedidosPeriodica panel = new PanelPedidosPeriodica(pedidos);
             panel.setModal(true);
             panel.setTitle("Politica de Revision Periodica de Stock");
             panel.setVisible(true);
         }
-        
+
 
     }
-    
 }
 
