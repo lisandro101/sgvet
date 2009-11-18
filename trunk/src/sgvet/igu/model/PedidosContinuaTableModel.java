@@ -14,9 +14,9 @@ public class PedidosContinuaTableModel extends AbstractTableModel implements IMo
 
     private static final long serialVersionUID = 1L;
     private static final String[] NOMBRE_COLUMNAS = {
-        "Producto", "Stock Disponible", "Cantidad a Pedir"};
+        "Producto", "Stock Disponible", "Punto De Pedido", "Cantidad a Pedir"};
     private static final boolean[] COLUMNAS_EDITABLES = {false, false, false};
-    private static final Class[] CLASE_COLUMNAS = {String.class, Double.class, Double.class};
+    private static final Class[] CLASE_COLUMNAS = {String.class, Double.class, Double.class, Double.class};
     private List<DTOPedidos> pedidos;
     private GestorRevisionContinua grc = GestorRevisionContinua.getInstancia();
 
@@ -104,7 +104,11 @@ public class PedidosContinuaTableModel extends AbstractTableModel implements IMo
                 resultado = grc.getStockDisponible();
                 break;
             case 2:
+                resultado = grc.getPuntoDePedido();
+                break;
+            case 3:
                 resultado = grc.getQOptimo(pedidos.get(fila).getProducto());
+
                 break;
         }
 

@@ -61,7 +61,7 @@ public class GestorRevisionContinua extends GestorStock {
 
         puntoDePedido = getPrediccionDemanda(producto, politica.getTiempoEntrega()) + getStockDeSeguridad();
 
-        return puntoDePedido;
+        return Math.round(puntoDePedido);
     }
 
     /**
