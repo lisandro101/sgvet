@@ -263,7 +263,7 @@ public class GestorSenialRastreo implements IObservadorFecha {
             cal.add(Calendar.DAY_OF_YEAR, 28);
             fecha = cal.getTime();
 
-            while (gf.getFechaHoy().compareTo(fecha) > 0) {
+            while (gf.getFechaHoy().compareTo(fecha) >= 0) {
                 cantidad++;
                 cal.add(Calendar.DAY_OF_YEAR, 28);
                 fecha = cal.getTime();
@@ -300,7 +300,7 @@ public class GestorSenialRastreo implements IObservadorFecha {
                 ProductoComponente.class, consulta);
 
         for (ProductoComponente prod : productos) {
-            if (calcularSenialRastreo(prod) != 0 && Math.abs(calcularSenialRastreo(prod)) < Double.MAX_VALUE){
+            if (Math.abs(calcularSenialRastreo(prod)) > prod.getCategoria().getL() && Math.abs(calcularSenialRastreo(prod)) < Double.MAX_VALUE){
                 resultado = resultado || true;
             }
         }
