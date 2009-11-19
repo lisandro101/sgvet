@@ -64,6 +64,17 @@ public class GestorFecha {
         return cal.get(Calendar.MONTH) + 1;
     }
 
+        /**
+     * Devuelve el dia del mes de un Date.
+     * @param fecha
+     * @return dia
+     */
+    public int getDia(Date fecha) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(fecha);
+        return cal.get(Calendar.DAY_OF_MONTH);
+    }
+
     /**
      * Devuelve un Date creado a partir del dia, mes y anio pasados como
      * parametros.

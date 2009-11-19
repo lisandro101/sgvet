@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * PanelConfiguracion.java
  *
  * Created on 30/09/2009, 16:19:46
@@ -17,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Query;
+import javax.swing.JFrame;
 import sgvet.entidades.Politica;
 import sgvet.entidades.ProductoComponente;
 import sgvet.entidades.auxiliares.DTOPedidos;
@@ -41,7 +37,7 @@ public class PanelConfiguracion extends javax.swing.JDialog implements IValidabl
      * @param parent
      * @param modal 
      */
-    public PanelConfiguracion(java.awt.Frame parent, boolean modal) {
+    public PanelConfiguracion(Frame parent, boolean modal) {
 
         super(parent, modal);
         initComponents();

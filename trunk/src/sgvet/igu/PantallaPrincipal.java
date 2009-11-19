@@ -2,20 +2,25 @@ package sgvet.igu;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Frame;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdesktop.swingx.JXDatePicker;
 import org.jdesktop.swingx.JXList;
 import org.jdesktop.swingx.JXTable;
+import sgvet.gestores.GestorFecha;
+import sgvet.gestores.IObservadorFecha;
 import sgvet.igu.model.IModeloReiniciable;
 
 /**
  *
  * @author  stafoxter
  */
-public class PantallaPrincipal extends javax.swing.JFrame {
+public class PantallaPrincipal extends JFrame implements IObservadorFecha {
 
     private static final long serialVersionUID = 0;
     private int tabVieja = 0;
@@ -41,6 +46,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTabbedPane1.add("      Producto     ", panelProductoComponente);
         jTabbedPane1.add("       Venta       ", panelOrdenProduccion);
         jTabbedPane1.add("    Orden Compra   ", panelOrdenCompra);
+
+        actualizarFecha();
+
     }
 
     /** This method is called from within the constructor to
@@ -55,6 +63,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         lbStatus = new javax.swing.JLabel();
+        tfFecha = new javax.swing.JFormattedTextField();
         menu = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         salir = new javax.swing.JMenuItem();
@@ -85,18 +94,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        tfFecha.setEditable(false);
+        tfFecha.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(tfFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addComponent(tfFecha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+            .addComponent(lbStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
         );
 
         archivo.setText("Archivo");
@@ -167,7 +181,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -240,6 +254,7 @@ private void configuracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
     PanelConfiguracion panelConf = new PanelConfiguracion(this, true);
     panelConf.setLocationRelativeTo(this);
+    panelConf.agregarObservador(this);
     panelConf.setVisible(true);
 }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -252,7 +267,6 @@ private void jmiSenialRastreoActionPerformed(java.awt.event.ActionEvent evt) {//
     panelSR.setLocationRelativeTo(this);
     panelSR.setVisible(true);
 }//GEN-LAST:event_jmiSenialRastreoActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu archivo;
     private javax.swing.JMenu ayuda;
@@ -266,6 +280,7 @@ private void jmiSenialRastreoActionPerformed(java.awt.event.ActionEvent evt) {//
     private javax.swing.JLabel lbStatus;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenuItem salir;
+    private javax.swing.JFormattedTextField tfFecha;
     // End of variables declaration//GEN-END:variables
 
     private void salir() {
@@ -333,5 +348,25 @@ private void jmiSenialRastreoActionPerformed(java.awt.event.ActionEvent evt) {//
     public void setStatus(String st) {
         lbStatus.setText(st);
         lbStatus.setVisible(true);
+    }
+
+    @Override
+    public void actualizar(Frame panel) {
+        actualizarFecha();
+    }
+
+    private void actualizarFecha() {
+
+        GestorFecha gf = GestorFecha.getInstancia();
+        Date f = GestorFecha.getInstancia().getFechaHoy();
+        String fechaHoy;
+
+        if (gf.getDia(f) < 10) fechaHoy = "0" + gf.getDia(f);
+        else fechaHoy = "" + gf.getDia(f);
+        if (gf.getMes(f) < 10)  fechaHoy += "/0" + gf.getMes(f);
+        else fechaHoy += "/" + gf.getMes(f);
+        fechaHoy += "/" + gf.getAnio(f);
+        
+        tfFecha.setText(fechaHoy);
     }
 }
