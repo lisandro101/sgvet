@@ -223,9 +223,9 @@ public class GestorABC implements IObservadorFecha {
 
             if (itemABC.getProducto().getCategoria().toString() != null) {
 
-                if (itemABC.getProducto().getCategoria().toString().equals("Curva A")) {
+                if (itemABC.getProducto().getCategoria().toString().equals("Clase A")) {
                     cantidadProductosA++;
-                } else if (itemABC.getProducto().getCategoria().toString().equals("Curva B")) {
+                } else if (itemABC.getProducto().getCategoria().toString().equals("Clase B")) {
                     cantidadProductosB++;
                 } else {
                     cantidadProductosC++;

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import sgvet.entidades.auxiliares.DemandaXPeriodo;
 
@@ -84,9 +85,8 @@ public class GestorFecha {
      * @return
      */
     public Date getFecha(int dia, int mes, int anio) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(anio, mes, dia);
-        return cal.getTime();
+        Calendar cal = new GregorianCalendar(anio, mes-1, dia);
+        return cal.getTime();        
     }
 
     /**
