@@ -55,75 +55,7 @@ public class GestorDemanda {
         return false;
     }
 
-//    public double[] calcularErrores(List<Demanda> demandasHist, Demanda demandaPred, double demandaReal, PanelDemanda.Error error) {
-//        double[] errores = new double[3];
-//        int n = 0;
-////        double resultado=0;
-//
-//        if (error == PanelDemanda.Error.ERROR_MEDIO) {
-//            errores[0] = Math.abs(demandaReal - demandaPred.getPM());
-//            errores[1] = Math.abs(demandaReal - demandaPred.getPMP());
-//            errores[2] = Math.abs(demandaReal - demandaPred.getPMSE());
-//        } else if (error == PanelDemanda.Error.ERROR_MEDIO_ABSOLUTO) {
-//            for (Demanda dema : demandasHist) {
-//                errores[0] += Math.abs(dema.getDemandaReal() - dema.getPM());
-//                errores[1] += Math.abs(dema.getDemandaReal() - dema.getPMP());
-//                errores[2] += Math.abs(dema.getDemandaReal() - dema.getPMSE());
-//                ++n;
-//            }
-//            errores[0] = errores[0] / n;
-//            errores[1] = errores[1] / n;
-//            errores[2] = errores[2] / n;
-//
-//        } else if (error == PanelDemanda.Error.ERROR_CUADRADO_MEDIO) {
-//            for (Demanda dema : demandasHist) {
-//                errores[0] += Math.pow((dema.getDemandaReal() - dema.getPM()), 2);
-//                errores[1] += Math.pow((dema.getDemandaReal() - dema.getPMP()), 2);
-//                errores[2] += Math.pow((dema.getDemandaReal() - dema.getPMSE()), 2);
-//                ++n;
-//            }
-//            errores[0] = errores[0] / n;
-//            errores[1] = errores[1] / n;
-//            errores[2] = errores[2] / n;
-//        } else {
-//            for (Demanda dema : demandasHist) {
-//                errores[0] += (Math.abs(dema.getDemandaReal() - dema.getPM())) / dema.getDemandaReal();
-//                errores[1] += (Math.abs(dema.getDemandaReal() - dema.getPMP())) / dema.getDemandaReal();
-//                errores[2] += (Math.abs(dema.getDemandaReal() - dema.getPMSE())) / dema.getDemandaReal();
-//                ++n;
-//            }
-//            errores[0] = (errores[0] / n) * 100;
-//            errores[1] = (errores[1] / n) * 100;
-//            errores[2] = (errores[2] / n) * 100;
-//        }
-//        return errores;
-//    }
-//
-//    // Calcula el suavizamiento exponencial simple para un arreglo de demandas a predecir
-//    @Deprecated
-//    public List<Demanda> calcularES(double alfa, List<Demanda> demandas) {
-//        int temp = 0;
-//        int demandaReal = 0;
-//        int demandaPre = 0;
-//        //demandas.get(0).setPrediccionSES(demandaEspActual);
-//        demandas.get(0).setPrediccionSES(demandas.get(0).getDemandaReal());
-//
-//        for (int i = 1; i < demandas.size(); i++) {
-//            if (demandas.get(i).getDemandaReal() != 0) {
-//                demandaReal = demandas.get(i).getDemandaReal();
-//
-//            } else if (demandas.get(i).getDemandaReal() == 0) {
-//                ++temp;
-//            }
-//            if (temp <= 1) {
-//                demandaPre = (int) demandas.get(i - 1).getPrediccionSES();
-//            }
-//
-//            demandas.get(i).setPrediccionSES((int) (alfa * demandaReal + (1 - alfa) * demandaPre));
-//        }
-//
-//        return demandas;
-//    }
+
     public int calcularESNew(double alfa, List<DemandaXPeriodo> ventas) {
         int temp = 0;
         int demandaReal = 0;
@@ -171,7 +103,7 @@ public class GestorDemanda {
         //inicializar indices estacionalidad
         for (int i = 0; i < cantPeriodos; i++) {
             indiceEstacionalidad[i]=1;
-            System.out.println("indice "+i+" vale: "+indiceEstacionalidad[i]);
+//            System.out.println("indice "+i+" vale: "+indiceEstacionalidad[i]);
         }
         
 
@@ -244,13 +176,13 @@ public class GestorDemanda {
         int cantPredicciones=0;
         int resultado;
 
-        if(indiceNroPeriodo<12){
+        if(indiceNroPeriodo<13){
             cantPredicciones = (cantPeriodos-1)-indiceNroPeriodo;
         }
-        if(indiceNroPeriodo==12){
+        if(indiceNroPeriodo==13){
             cantPredicciones = cantPeriodos;
         }
-        if(indiceNroPeriodo>12){
+        if(indiceNroPeriodo>13){
             System.out.println("\n\n\n Error en el indice de periodos en el " +
                     "calculo de prediccion de demanda con estacionalidad\n\n");
         }
@@ -307,21 +239,6 @@ public class GestorDemanda {
 
         Integer cero = new Integer(0);
 
-//        for (int i = 0; i < tModel.getRowCount(); i++) {
-//            if (tModel.getValueAt(i, tModel.getColumnCount() - 1) != null && !tModel.getValueAt(i, tModel.getColumnCount() - 1).equals(cero)) {
-//
-//                temp = Double.parseDouble(tModel.getValueAt(i, tModel.getColumnCount() - 1).toString());
-//                ultimoReal = temp / indiceEsta1[i] * alfa + (1 - alfa) * demanPromedio1[i];
-//                demanPromedio2[i] = ultimoReal;
-//            } else {
-//
-//                demanPromedio2[i] = ultimoReal * indiceEsta1[i];
-//                tModel.setValueAt((int) demanPromedio2[i], i, tModel.getColumnCount() - 1);
-//
-//
-//                predicciones.add((int) demanPromedio2[i]);
-//            }
-//        }
         int valor = 0;
         boolean entrar = true;
         int periodoActual;
@@ -329,44 +246,6 @@ public class GestorDemanda {
         periodoActual = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(GestorFecha.getInstancia().getFechaHoy());
 
         int cerrados = calcularCantidadPeriodosCerrados(vendido);
-
-//        for (int j = 1; j < tModel.getColumnCount(); j++) {
-//
-//            //if (entrar) {
-//                for (int i = 0; i < tModel.getRowCount(); i++) {
-//
-//                    //if (!String.valueOf(tModel.getValueAt(i, j)).equals("-1")) {
-//                        if (valor < cerrados) {
-//
-//                            //if (tModel.getValueAt(i, j) != null && !tModel.getValueAt(i, j).equals(cero)){
-//                            temp = Double.parseDouble(tModel.getValueAt(i, j).toString());
-//                            ultimoReal = temp / indiceEsta1[i] * alfa + (1 - alfa) * demanPromedio1[i];
-//                            demanPromedio2[i] = ultimoReal;
-//                            ++valor;
-//                            //}
-//
-//                        }
-//                        if(j == (tModel.getColumnCount()-1) && i >= periodoActual) {
-//
-//                            //demanPromedio2[i] = ultimoReal * indiceEsta1[i];
-//                            demanPromedio2[i] = demanPromedio2[i] * indiceEsta1[i];
-//                            tModel.setValueAt((int) demanPromedio2[i], i, j);
-//
-//
-//                            predicciones.add((int) demanPromedio2[i]);
-//              //              entrar = false;
-//                        }
-////                    } else if (String.valueOf(tModel.getValueAt(i, j)).equals("-1") && valor > 0) {
-////                            demanPromedio2[i] = ultimoReal * indiceEsta1[i];
-////                            tModel.setValueAt((int) demanPromedio2[i], i, j);
-////
-////
-////                            predicciones.add((int) demanPromedio2[i]);
-////                            entrar = false;
-////                    }
-//                }
-//            //}
-//        }
 
         for (int i = 0; i < tModel.getRowCount(); i++) {
             if (tModel.getValueAt(i, tModel.getColumnCount() - 1) != null && !tModel.getValueAt(i, tModel.getColumnCount() - 1).equals(cero)) {
@@ -390,20 +269,9 @@ public class GestorDemanda {
         indices = indiceEsta1;
 
         //solo van las predicciones del periodo abierto en adelante
-//        int periodoActual;
-        int sacar;
-//        periodoActual = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(GestorFecha.getInstancia().getFechaHoy());
 
         System.out.println("cant periodos cerrados: "+ cerrados);
         System.out.println("cantidad de predicciones: "+ predicciones.size());
-
-//        if(predicciones.size() > (13-periodoActual+1)){
-//            sacar = predicciones.size() - (13-periodoActual+1);
-//            for (int i = 0; i < sacar; i++) {
-//                predicciones.remove(0);
-//            }
-//        }
-
 
         return predicciones;
     }
@@ -603,24 +471,19 @@ public class GestorDemanda {
     }
 
     private List<DemandaXPeriodo> abrirPeriodoActualSiNoEstaFinalizado(List<DemandaXPeriodo> ventas) {
-//        int indice = ventas.size() - 1;
-//        DemandaXPeriodo demandete = ventas.get(indice);
+
         Date hoy= GestorFecha.getInstancia().getFechaHoy();
         int nroPeri = GestorFecha.getInstancia().aQuePeriodoCorrespondeLaFecha(hoy);
 
         for (DemandaXPeriodo demandaXPeriodo : ventas) {
             if (GestorFecha.getInstancia().isFechaDelPeriodo(GestorFecha.getInstancia().getFechaHoy(), demandaXPeriodo)) {
-//                ventas.get(indice).setCerrado(false);
-//                ventasDelMesAbierto = ventas.get(indice).getVentas();
-//                fechaCierre = ventas.get(indice).getFechaFin();
+
                 demandaXPeriodo.setCerrado(false);
                 ventasDelMesAbierto = demandaXPeriodo.getVentas();
-    //            fechaCierre = demandaXPeriodo.getFechaFin();
+
 
             }else if(demandaXPeriodo.getFechaInicio().compareTo(GestorFecha.getInstancia().getFechaHoy())>0){
                 demandaXPeriodo.setCerrado(false);
-
-   //            fechaCierre = GestorFecha.getInstancia().calcularLimiteSuperiorDelPeriodo(nroPeri, hoy);
 
             }
         }
@@ -716,7 +579,6 @@ public class GestorDemanda {
             if (demandaXPeriodo.getVentas() == 0 && demandaXPeriodo.isCerrado()) {
                 ++resul;
             }
-
         }
 
         if (resul > 0) {
@@ -733,7 +595,7 @@ public class GestorDemanda {
 
         abrirPeriodoActualSiNoEstaFinalizado(ventas);
         int cantPeriDeVentas = calcularCantidadPeriodosCerrados(ventas);
-        //int nroPrimerPeriodoVentas = ventas.get(0).getNroPeriodo()-1;
+
 
         System.out.println("cant periodos cerrados:" +cantPeriDeVentas);
         for (int j = 1; j < tabla.getColumnCount(); j++) {
@@ -741,12 +603,7 @@ public class GestorDemanda {
                 if (indice < cantPeriDeVentas){ //&&  i==nroPrimerPeriodoVentas) {
                     tabla.setValueAt(ventas.get(indice).getVentas(), i, j);
                     ++indice;
-//                    if(nroPrimerPeriodoVentas <=12){
-//                        ++nroPrimerPeriodoVentas;
-//                    }else{
-//                        nroPrimerPeriodoVentas=0;
-//                    }
-                    //nroPrimerPeriodoVentas=i+1;
+
                 } else {
                     tabla.setValueAt(0, i, j);
                 }
@@ -786,12 +643,6 @@ public class GestorDemanda {
         List<DemandaXPeriodo> demandas = calcularDemandaXPeriodo(producto);
         List<DemandaXPeriodo> temporal = new ArrayList<DemandaXPeriodo>();
 
-        //variables q tiene q venir como parametros
-        double alfa = 0.4;
-        double gamma = 0.2;
-        double beta = 0.2;
-
-
         if (producto == null || producto.getTipoPrediccion().equalsIgnoreCase(" ")) {
             System.out.println("\n\n\n Debe seleccionar un producto y/o el producto seleccionado debe tener un tipo de prediccion asociado \n\n\n");
         } else {
@@ -805,7 +656,7 @@ public class GestorDemanda {
                     for (int i = 1; i < demandas.size(); i++) {
 
                         temporal.add(demandas.get(i));
-                        demandas.get(i).setPrediccionVenta(calcularESNew(alfa, temporal));
+                        demandas.get(i).setPrediccionVenta(calcularESNew(getAlfa(), temporal));
                     }
 
 
@@ -814,7 +665,7 @@ public class GestorDemanda {
                     for (int i = 1; i < demandas.size(); i++) {
 
                         temporal.add(demandas.get(i));
-                        resultado = calcularDemandaConEstacionalidadNew(alfa, gamma, temporal);
+                        resultado = calcularDemandaConEstacionalidadNew(getAlfa(), getGamma(), temporal);
 
                         if(resultado.size()>0){
                             demandas.get(i).setPrediccionVenta(resultado.get(0));
@@ -830,16 +681,13 @@ public class GestorDemanda {
                     for (int i = 1; i < demandas.size(); i++) {
 
                         temporal.add(demandas.get(i));
-                        demandas.get(i).setPrediccionVenta(truncar(calcularDemandaConTendenciaNew(temporal, alfa, beta)));
+                        demandas.get(i).setPrediccionVenta(truncar(calcularDemandaConTendenciaNew(temporal, getAlfa(), getBeta())));
                     }
                 }
 
             } else {
                 System.out.println("\n\n\n No se han registrado ventas del producto seleccionado \n\n\n");
             }
-
-
-            //mostrarXPantalla(demandas);
 
         }
 
@@ -875,11 +723,6 @@ public class GestorDemanda {
 
     public int predecirDemanda(ProductoComponente producto, int anio, int nroPeriodo){
 
-        //variables q tiene q venir como parametros
-        double alfa = 0.4;
-        double gamma = 0.2;
-        double beta = 0.2;
-
         List<DemandaXPeriodo> demandas = calcularDemandaXPeriodo(producto);
 
         int resultado = 0;
@@ -893,11 +736,11 @@ public class GestorDemanda {
                 if (producto.getTipoPrediccion().trim().equalsIgnoreCase("SE Simple")) {
 
                     for (int i = 1; i < demandas.size(); i++) {
-                        resultado = calcularESNew(alfa, demandas);
+                        resultado = calcularESNew(getAlfa(), demandas);
                     }
 
                 } else if (producto.getTipoPrediccion().trim().equalsIgnoreCase("SE Estacionalidad")) { //Aca deberia haber otro codigo y mas ifs por cada tipo de prediccion o un switch
-                    calcularDemandaConEstacionalidadNew(alfa, gamma, demandas);
+                    calcularDemandaConEstacionalidadNew(getAlfa(), getGamma(), demandas);
 
                     resultado = (int)(demandasPromTendencia[nroPeriodo-1]* indices[nroPeriodo-1]);
 
@@ -912,9 +755,8 @@ public class GestorDemanda {
                         h = (anio-gf.getAnio(demandas.get(demandas.size()-1).getAnio()))-
                                 demandas.get(demandas.size()-1).getNroPeriodo()+nroPeriodo;
                     }
-                    resulTend = calcularDemandaConTendenciaNew(demandas, alfa, beta)- tendencia;
+                    resulTend = calcularDemandaConTendenciaNew(demandas, getAlfa(), getBeta())- tendencia;
 
-                    //resultado = Integer.parseInt(String.valueOf(Math.floor(resulTend + h * tendencia)));
                     resultado = (int)Math.floor(resulTend + h * tendencia);
                 }
 
@@ -928,5 +770,15 @@ public class GestorDemanda {
 
         return resultado;
     }
- 
+    
+    // para la señal de rastreo
+    private double getAlfa(){
+        return 0.4;
+    }
+    private double getGamma(){
+        return 0.2;
+    }
+    private double getBeta(){
+        return 0.2;
+    }    
 }

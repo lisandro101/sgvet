@@ -137,8 +137,8 @@ public class GestorRevisionPeriodicaTest {
     public void testActualizar() {
         System.out.println("actualizar");
         GestorRevisionPeriodica instance = null;
-        instance.actualizar();
-        // TODO review the generated test code and remove the default call to fail.
+//        instance.actualizar();
+        // TODO revisar linea superior comentada.
         fail("The test case is a prototype.");
     }
 
